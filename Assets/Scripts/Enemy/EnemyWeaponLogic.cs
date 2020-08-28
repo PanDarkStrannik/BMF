@@ -42,21 +42,24 @@ public class EnemyWeaponLogic : MonoBehaviour
 
     public bool SelectWeapon(WeaponType weaponType)
     {
-        var temp = currentWeapon;
-        foreach (var weapon in weapons)
+        if (!currentWeapon.Weapon.IsAttack)
         {
-            if (weapon.Weapon.WeaponType == weaponType)
+            var temp = currentWeapon;
+            foreach (var weapon in weapons)
             {
-                temp = weapon;
-                break;
+                if (weapon.Weapon.WeaponType == weaponType)
+                {
+                    temp = weapon;
+                    break;
+                }
             }
-        }
-        if (temp != null && !currentWeapon.Weapon.IsAttack)
-        {
-            currentWeapon.Weapon.WeaponObject.SetActive(false);
-            currentWeapon = temp;
-            currentWeapon.Weapon.WeaponObject.SetActive(true);
-            return true;
+            if (temp != null && !currentWeapon.Weapon.IsAttack)
+            {
+                currentWeapon.Weapon.WeaponObject.SetActive(false);
+                currentWeapon = temp;
+                currentWeapon.Weapon.WeaponObject.SetActive(true);
+                return true;
+            }
         }
         return false;
     }
@@ -64,7 +67,8 @@ public class EnemyWeaponLogic : MonoBehaviour
     public bool Attack()
     {
         if(Physics.SphereCast(currentWeapon.Point.position, currentWeapon.Radius,
-            currentWeapon.Point.forward, out RaycastHit hit, currentWeapon.Distance))
+            currentWeapon.Point.forward, out RaycastHit hit, currentWeapon.Distance) &&
+            !currentWeapon.Weapon.IsAttack)
         {
             if (hit.transform.GetComponent<IDamageble>() != null && !currentWeapon.Weapon.IsAttack)
             {
