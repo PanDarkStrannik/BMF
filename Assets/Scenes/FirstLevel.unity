@@ -9382,6 +9382,22 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.5504984
       objectReference: {fileID: 0}
+    - target: {fileID: 8516918903140248176, guid: 01be22f589717dd4e8a97acc08867130, type: 3}
+      propertyPath: CollisionModule.plane0
+      value: 
+      objectReference: {fileID: 53356195}
+    - target: {fileID: 8516918903140248176, guid: 01be22f589717dd4e8a97acc08867130, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516918903140248176, guid: 01be22f589717dd4e8a97acc08867130, type: 3}
+      propertyPath: CollisionModule.m_Bounce.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516918903140248176, guid: 01be22f589717dd4e8a97acc08867130, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8516918903140248177, guid: 01be22f589717dd4e8a97acc08867130, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.284515
