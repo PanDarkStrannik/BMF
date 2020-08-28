@@ -44,9 +44,9 @@ public class DamageblePlace : ADamageble
                 }
                 weak.ApplyDamage(damage);
 
-                Debug.Log(weak.Type + " " + weapon.DamageType + " " + damage);
+                DamageEventWithValue(damage, this);
 
-                PopupCreate(weak, weapon, damage);
+                //PopupCreate(weak, weapon, damage);
             }
 
             
@@ -58,13 +58,25 @@ public class DamageblePlace : ADamageble
     
 
 
-    private void PopupCreate(DamagebleParam param, DamageByType weapon, float damage)
-    {
+    //private void PopupCreate(DamagebleParam param, DamageByType weapon, float damage)
+    //{
 
-        var tmpPopup = Instantiate(popup, transform.position, Quaternion.identity);
-        tmpPopup.GetComponentInChildren<TextMesh>().text = $"{param.Type}: {weapon.Value} : {damage}";
-        Destroy(tmpPopup, popupDestroyTime);
-        Debug.Log("Слабость у " + param.Type + " " + weapon.DamageType + " " + damage);
+    //    var tmpPopup = Instantiate(popup, transform.position, Quaternion.identity);
+    //    if (damage <= 3f)
+    //    {
+    //        tmpPopup.GetComponentInChildren<TextMesh>().color = Color.white;
+    //    }
+    //    else if (damage <= 7f)
+    //    {
+    //        tmpPopup.GetComponentInChildren<TextMesh>().color = Color.yellow;
+    //    }
+    //    else if (damage <= 10f)
+    //    {
+    //        tmpPopup.GetComponentInChildren<TextMesh>().color = Color.green;
+    //    }
+    //    tmpPopup.GetComponentInChildren<TextMesh>().text = $"{damage}";
+    //    Destroy(tmpPopup, popupDestroyTime);
+    //    Debug.Log("Слабость у " + param.Type + " " + weapon.DamageType + " " + damage);
 
-    }
+    //}
 }
