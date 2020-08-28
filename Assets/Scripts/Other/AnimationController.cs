@@ -133,6 +133,8 @@ public class WeaponAnimTriggerName
             animator.SetFloat(animTriggerName, value);
         }
     }
+
+ 
     
 }
 

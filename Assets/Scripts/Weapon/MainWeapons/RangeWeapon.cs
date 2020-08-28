@@ -36,14 +36,17 @@ public class RangeWeapon : AWeapon
     private IEnumerator Shoot()
     {
         BeforeShoot();
-        yield return new WaitForSeconds(toShootTime);
+        yield return new WaitForSecondsRealtime(toShootTime);
+        //        yield return new WaitForSeconds(toShootTime);
         if (isAttack)
         {
             InShoot();
+         //   yield return new WaitForSeconds(attackTime);
             bulletSpawner.SpawnObject(gunPosition.position, gunPosition.rotation);
+
+            yield return new WaitForSecondsRealtime(attackTime);
+            isAttack = false;
         }
-        yield return new WaitForSeconds(attackTime);
-        isAttack = false;
     }
 
     protected virtual void BeforeShoot()
