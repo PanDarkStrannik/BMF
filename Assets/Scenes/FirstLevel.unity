@@ -1536,7 +1536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 589998218, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: toShootTime
-      value: 2.7
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 589998218, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: layer.m_Bits
