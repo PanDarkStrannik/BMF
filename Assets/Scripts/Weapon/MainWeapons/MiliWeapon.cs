@@ -8,7 +8,6 @@ public class MiliWeapon : AWeapon
     [SerializeField] private float timeWeaponColider=1f;
     [SerializeField] private float timeToWeaponAttack = 0f;
 
-    private bool weaponActive = false;
 
     private void Start()
     {
@@ -23,9 +22,8 @@ public class MiliWeapon : AWeapon
 
     public override void Attack()
     {
-        if (!weaponActive)
-        {
-            
+        if (!isAttack)
+        { 
             isAttack = true;
             StartCoroutine(ChangeColider());    
         }
@@ -33,23 +31,23 @@ public class MiliWeapon : AWeapon
 
     private IEnumerator ChangeColider()
     {
-        weaponActive = true;
-        yield return new WaitForSeconds(timeToWeaponAttack);
-
-        events.OnAnimEvent(AnimationController.AnimationType.MeleAttack);       
-
-        foreach (var weapon in miliWeapons)
+        yield return new WaitForSecondsRealtime(timeToWeaponAttack);
+        if (isAttack)
         {
-            weapon.enabled = weaponActive;
-        }
-        yield return new WaitForSeconds(timeWeaponColider);
-        foreach (var weapon in miliWeapons)
-        {
-            weapon.enabled = weaponActive;
-        }
-        weaponActive = false;
-        isAttack = false;
+            events.OnAnimEvent(AnimationController.AnimationType.MeleAttack);
 
+            foreach (var weapon in miliWeapons)
+            {
+                weapon.enabled = isAttack;
+            }
+            yield return new WaitForSecondsRealtime(timeWeaponColider);
+
+            isAttack = false;
+            foreach (var weapon in miliWeapons)
+            {
+                weapon.enabled = isAttack;
+            }
+        }
 
     }
 
@@ -57,7 +55,7 @@ public class MiliWeapon : AWeapon
     private void OnTriggerEnter(Collider other)
     {
     
-        if(weaponActive)
+        if(isAttack)
         {
             if(other.transform.GetComponent<IDamageble>()!=null)
             {

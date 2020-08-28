@@ -13,6 +13,7 @@ public class DamageArea : MonoBehaviour
 
     [SerializeField] private Transform parent = null;
 
+
     private Dictionary<Collider,bool> enterColiders;
 
     public Transform Parent
@@ -38,6 +39,8 @@ public class DamageArea : MonoBehaviour
         damageCollider.isTrigger = true;
     }
 
+
+  
 
     public void ChangeArea(Vector3 scale)
     {
