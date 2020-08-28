@@ -619,7 +619,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19876
+  m_Name: pb_Mesh103800
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1933,6 +1933,28 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 362187533, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+--- !u!114 &466314249 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2298525644290529866, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+  m_PrefabInstance: {fileID: 466314248}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a00b5814ea5353418e3d6785519b6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &466314250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2298525644913708635, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+  m_PrefabInstance: {fileID: 466314248}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a00b5814ea5353418e3d6785519b6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &485872763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2156,7 +2178,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-4328
+  m_Name: pb_Mesh23406
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9914,9 +9936,13 @@ MonoBehaviour:
       weakneses:
       - damageType: 1
         value: 0
+      - damageType: 0
+        value: 0
       strongs:
       - damageType: 1
         value: 2
+      - damageType: 0
+        value: 6
   layer:
     serializedVersion: 2
     m_Bits: 512
@@ -10082,7 +10108,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20000
+  m_Name: pb_Mesh103944
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10820,6 +10846,80 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8b9e37193d32fc840b941d5ea3cf8aed, type: 3}
+--- !u!1 &1888227054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1888227055}
+  - component: {fileID: 1888227056}
+  m_Layer: 0
+  m_Name: PopupController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1888227055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888227054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1888227056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888227054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a91dc2b5ec7894d87e692791b2cf18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner:
+    spawnObjects:
+    - {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
+    objectsValues: 04000000
+    spawned_objects: []
+  damagebles:
+  - {fileID: 466314250}
+  - {fileID: 466314249}
+  - {fileID: 1601813624}
+  popupValueColors:
+  - minDamage: 3
+    speed: 7
+    timeToChangeSize: 0.2
+    color: {r: 0.3773585, g: 0.36810255, b: 0.36810255, a: 1}
+    maxSize: 300
+    minSize: 40
+    minimizeSpeed: 25
+  - minDamage: 8
+    speed: 7
+    timeToChangeSize: 0.2
+    color: {r: 0.990566, g: 0.8808125, b: 0.022427881, a: 1}
+    maxSize: 100
+    minSize: 40
+    minimizeSpeed: 25
+  - minDamage: 15
+    speed: 7
+    timeToChangeSize: 0.2
+    color: {r: 0.1173296, g: 1, b: 0, a: 1}
+    maxSize: 100
+    minSize: 40
+    minimizeSpeed: 25
 --- !u!1001 &1896551308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11089,7 +11189,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19090
+  m_Name: pb_Mesh104080
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
