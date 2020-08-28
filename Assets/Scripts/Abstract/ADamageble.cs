@@ -10,6 +10,9 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
     public delegate void OnDamagedHelper();
     public event OnDamagedHelper OnDamaged;
 
+    public delegate void OnDamagedValueHelper(float damageValue, ADamageble damageblePlace);
+    public event OnDamagedValueHelper OnDamagedWithValue;
+
     public DamagebleParamDatas Datas
     {
         get
@@ -33,5 +36,10 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
     protected void DamageEvent()
     {
         OnDamaged?.Invoke();
+    }
+
+    protected void DamageEventWithValue(float value, ADamageble damageblePlace)
+    {
+        OnDamagedWithValue?.Invoke(value, damageblePlace);
     }
 }
