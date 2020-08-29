@@ -88,9 +88,7 @@ public class EnemyController : MonoBehaviour
         if (weapon.Attack(detection.DetectedColider.WeaponType))
         {
             isAttackRecently = true;
-            Debug.Log("Начали ждать");
             yield return new WaitForSeconds(attackDelay);
-            Debug.Log("Закончили ждать");
             isAttackRecently = false;
         }
     }

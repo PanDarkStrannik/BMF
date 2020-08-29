@@ -49,14 +49,17 @@ public class PopupCreater : MonoBehaviour
         {
             if (damage < e.MinDamage)
             {
-                foreach (var v in spawner.spawned_objects)
+                for (int i = 0; i < spawner.spawned_objects.Count; i++)
                 {
-                    v.GetComponent<POPUP>().Init(e, damage);
+                    var tmp = spawner.QueueObject;
+                    tmp.GetComponent<POPUP>().Init(e, damage);
+                    spawner.QueueObject = tmp;
                 }
                 break;
             }
-        }        
+        }
         spawner.SpawnObject(damageble.gameObject.transform.position, Quaternion.identity);
+        Debug.Log("Заспавнили попуп " + damage);
     }
 
 
@@ -67,7 +70,8 @@ public class PopupCreater : MonoBehaviour
 public struct PopupData
 {
     [SerializeField] private float minDamage;
-    [SerializeField] private float speed;
+    [SerializeField] private float minSpeed;
+    [SerializeField] private float maxSpeed;
     [SerializeField] private float timeToChangeSize;
     [SerializeField] private Color color;
     [SerializeField] private int maxSize;
@@ -90,11 +94,19 @@ public struct PopupData
         }
     }
 
-    public float Speed
+    public float MinSpeed
     {
         get
         {
-            return speed;
+            return minSpeed;
+        }
+    }
+
+    public float MaxSpeed
+    {
+        get
+        {
+            return maxSpeed;
         }
     }
 

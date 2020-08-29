@@ -21,7 +21,7 @@ public class Spawner
     /// <summary>
     /// Пул объектов (не используется)
     /// </summary>
-    protected GameObject QueueObject
+    public GameObject QueueObject
     {
         get
         {
