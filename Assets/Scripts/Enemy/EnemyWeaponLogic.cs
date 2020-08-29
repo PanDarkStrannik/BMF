@@ -45,14 +45,32 @@ public class EnemyWeaponLogic : MonoBehaviour
         if (!currentWeapon.Weapon.IsAttack)
         {
             var temp = currentWeapon;
+            List<WeaponDistance> weaponDistancesTemp = new List<WeaponDistance>();
+
             foreach (var weapon in weapons)
             {
                 if (weapon.Weapon.WeaponType == weaponType)
                 {
-                    temp = weapon;
-                    break;
+                    weaponDistancesTemp.Add(weapon);
+                    //temp = weapon;
+                    //break;
                 }
             }
+            if (weaponDistancesTemp.Count > 1)
+            {
+                var rand = Random.Range(0, weaponDistancesTemp.Count);
+                temp = weaponDistancesTemp[rand];
+            }
+            else if (weaponDistancesTemp.Count == 1)
+            {
+                temp = weaponDistancesTemp[0];
+            }
+            else
+            {
+                Debug.LogError("Нет подходящего оружия");
+                return false;
+            }
+
             if (temp != null && !currentWeapon.Weapon.IsAttack)
             {
                 currentWeapon.Weapon.WeaponObject.SetActive(false);
