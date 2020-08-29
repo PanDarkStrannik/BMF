@@ -52,11 +52,8 @@ public class PopupCreater : MonoBehaviour
                 for (int i = 0; i < spawner.spawned_objects.Count; i++)
                 {
                     var tmp = spawner.QueueObject;
-                    if (tmp != null)
-                    {
-                        tmp.GetComponent<POPUP>().Init(e, damage);
-                        spawner.QueueObject = tmp;
-                    }
+                    tmp.GetComponent<POPUP>().Init(e, damage);
+                    spawner.QueueObject = tmp;
                 }
                 break;
             }
