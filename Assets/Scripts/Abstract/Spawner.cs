@@ -25,7 +25,11 @@ public class Spawner
     {
         get
         {
-            return _objects_queue.Dequeue();
+            if (_objects_queue.Count > 0)
+            {
+                return _objects_queue.Dequeue();
+            }
+            return null;
         }
         set
         {

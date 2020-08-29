@@ -11498,40 +11498,40 @@ MonoBehaviour:
   - {fileID: 1596284949}
   popupValueColors:
   - minDamage: 1
-    minSpeed: 0
-    maxSpeed: 0
+    minSpeed: 1
+    maxSpeed: 3
     timeToChangeSize: 0.2
     color: {r: 0.3773585, g: 0.36810255, b: 0.36810255, a: 1}
     maxSize: 100
     minSize: 40
     minimizeSpeed: 25
   - minDamage: 5
-    minSpeed: 0
-    maxSpeed: 0
+    minSpeed: 3
+    maxSpeed: 7
     timeToChangeSize: 0.2
     color: {r: 0.15513381, g: 0.99215686, b: 0.023529433, a: 1}
     maxSize: 100
     minSize: 40
     minimizeSpeed: 25
   - minDamage: 10
-    minSpeed: 0
-    maxSpeed: 0
+    minSpeed: 7
+    maxSpeed: 10
     timeToChangeSize: 0.2
     color: {r: 1, g: 0.8835707, b: 0, a: 1}
     maxSize: 100
     minSize: 40
     minimizeSpeed: 25
   - minDamage: 15
-    minSpeed: 0
-    maxSpeed: 0
+    minSpeed: 10
+    maxSpeed: 14
     timeToChangeSize: 0.2
     color: {r: 1, g: 0.61922574, b: 0, a: 1}
     maxSize: 100
     minSize: 40
     minimizeSpeed: 25
   - minDamage: 50
-    minSpeed: 0
-    maxSpeed: 0
+    minSpeed: 14
+    maxSpeed: 17
     timeToChangeSize: 0.2
     color: {r: 1, g: 0, b: 0.029372692, a: 1}
     maxSize: 100
