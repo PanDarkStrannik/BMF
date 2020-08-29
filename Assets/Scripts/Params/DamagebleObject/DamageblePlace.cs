@@ -45,11 +45,7 @@ public class DamageblePlace : ADamageble
                 weak.ApplyDamage(damage);
 
                 DamageEventWithValue(damage, this);
-
-                //PopupCreate(weak, weapon, damage);
             }
-
-            
             DamageEvent();
         }
     }

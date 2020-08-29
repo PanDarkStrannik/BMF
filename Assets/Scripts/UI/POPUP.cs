@@ -16,7 +16,7 @@ public class POPUP : MonoBehaviour
     public event OnPopupDieHelper OnPopupDie;
 
 
-    private bool isInit = false;
+    public bool isInit = false;
 
     public void Init(PopupData data, float damageValue)
     {
@@ -25,7 +25,7 @@ public class POPUP : MonoBehaviour
         textMesh.fontSize = data.MaxSize;
         minSize = data.MinSize;
         speedMinim = data.MinimizeSpeed;
-        speed = data.Speed;
+        speed = Random.Range(data.MinSpeed, data.MaxSpeed);
         timeToChangeSize = data.TimeToChangeSize;
         isInit = true;
     }
