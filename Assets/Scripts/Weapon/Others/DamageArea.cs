@@ -91,10 +91,8 @@ public class DamageArea : MonoBehaviour
     }
     private void DeactiveArea()
     {
-        Debug.Log("Запустили Деактивацию");
         if (parent != null)
         {
-            Debug.Log("Родитель не ноль");
             gameObject.transform.position = parent.transform.position;
             gameObject.transform.parent = parent;
         }

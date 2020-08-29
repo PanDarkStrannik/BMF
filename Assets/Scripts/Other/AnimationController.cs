@@ -51,7 +51,6 @@ public class AnimationController : MonoBehaviour
         if (tmp != null)
         {
             var rand = Random.Range(0, tmp.Count);
-            Debug.Log("Активирован: "+rand);
             tmp[rand].ActivateAnimTrigger();
         }
     }

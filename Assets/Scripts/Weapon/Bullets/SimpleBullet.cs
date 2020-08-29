@@ -99,7 +99,6 @@ public class SimpleBullet : MonoBehaviour, IBullet
 
     protected virtual void OnDie()
     {
-        Debug.Log("Вызов основной симпл булет, она пуста");
         if (bulletDieEffect != null)
         {
             bulletDieEffect.transform.parent = null;
