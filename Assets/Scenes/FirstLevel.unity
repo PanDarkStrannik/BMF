@@ -876,6 +876,14 @@ PrefabInstance:
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 1943824893}
+    - target: {fileID: 1980489981647000724, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: datas.paramDatas.Array.data[0].weakneses.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1980489981647000724, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: datas.paramDatas.Array.data[0].weakneses.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4235801786339348486, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1630,6 +1638,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 6.61
       objectReference: {fileID: 0}
+    - target: {fileID: 362937209, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 525911988, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: layer.m_Bits
       value: 3328
@@ -1642,6 +1654,10 @@ PrefabInstance:
       propertyPath: timeToWeaponAttack
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 525911988, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: weaponData.Array.data[0].value
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 589998218, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: toShootTime
       value: 2.3
@@ -1653,6 +1669,10 @@ PrefabInstance:
     - target: {fileID: 589998218, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: attackTime
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 589998218, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: weaponData.Array.data[0].value
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 764768761, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: m_Layer
@@ -10094,6 +10114,10 @@ PrefabInstance:
       propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8516918903140248176, guid: 01be22f589717dd4e8a97acc08867130, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8516918903140248177, guid: 01be22f589717dd4e8a97acc08867130, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.284515
@@ -10362,9 +10386,11 @@ MonoBehaviour:
       weakneses:
       - damageType: 1
         value: 5
+      - damageType: 0
+        value: 0
       strongs:
       - damageType: 0
-        value: 2
+        value: 5
   layer:
     serializedVersion: 2
     m_Bits: 512
@@ -10421,6 +10447,10 @@ PrefabInstance:
     - target: {fileID: 1440822546527336777, guid: 5ebb27d35ae34314eae6727a6018f5ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1473922848859872933, guid: 5ebb27d35ae34314eae6727a6018f5ea, type: 3}
+      propertyPath: destructs.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1780334538364478451, guid: 5ebb27d35ae34314eae6727a6018f5ea, type: 3}
       propertyPath: m_Name
@@ -11401,45 +11431,45 @@ MonoBehaviour:
   - {fileID: 2043889826}
   - {fileID: 1596284949}
   popupValueColors:
-  - minDamage: 1
+  - minDamage: 2
     minSpeed: 0
-    maxSpeed: 0
+    maxSpeed: 7
     timeToChangeSize: 0.2
     color: {r: 0.3773585, g: 0.36810255, b: 0.36810255, a: 1}
-    maxSize: 100
-    minSize: 40
+    maxSize: 70
+    minSize: 20
     minimizeSpeed: 25
-  - minDamage: 5
+  - minDamage: 4
     minSpeed: 0
-    maxSpeed: 0
+    maxSpeed: 7
     timeToChangeSize: 0.2
     color: {r: 0.15513381, g: 0.99215686, b: 0.023529433, a: 1}
-    maxSize: 100
-    minSize: 40
+    maxSize: 75
+    minSize: 25
     minimizeSpeed: 25
-  - minDamage: 10
+  - minDamage: 7
     minSpeed: 0
-    maxSpeed: 0
+    maxSpeed: 7
     timeToChangeSize: 0.2
     color: {r: 1, g: 0.8835707, b: 0, a: 1}
-    maxSize: 100
-    minSize: 40
+    maxSize: 95
+    minSize: 35
     minimizeSpeed: 25
-  - minDamage: 15
+  - minDamage: 13
     minSpeed: 0
-    maxSpeed: 0
+    maxSpeed: 7
     timeToChangeSize: 0.2
     color: {r: 1, g: 0.61922574, b: 0, a: 1}
-    maxSize: 100
-    minSize: 40
+    maxSize: 105
+    minSize: 45
     minimizeSpeed: 25
   - minDamage: 50
     minSpeed: 0
-    maxSpeed: 0
+    maxSpeed: 7
     timeToChangeSize: 0.2
     color: {r: 1, g: 0, b: 0.029372692, a: 1}
-    maxSize: 100
-    minSize: 40
+    maxSize: 120
+    minSize: 70
     minimizeSpeed: 25
 --- !u!1001 &1896551308
 PrefabInstance:
