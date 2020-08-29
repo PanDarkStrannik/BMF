@@ -942,7 +942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385403144585974628, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: weaponData.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6385403144585974628, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: weaponData.Array.data[0].value
@@ -2028,11 +2028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2298525644290529866, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: datas.paramDatas.Array.data[0].weakneses.Array.data[0].damageType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2298525644290529866, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: datas.paramDatas.Array.data[0].weakneses.Array.data[0].value
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2298525644290529866, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: datas.paramDatas.Array.data[0].weakneses.Array.data[1].damageType
@@ -2044,7 +2044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2298525644290529866, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: datas.paramDatas.Array.data[0].strongs.Array.data[0].value
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2298525644315008610, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: paramSum.damagebles.Array.size
@@ -10313,8 +10313,12 @@ MonoBehaviour:
       maxValue: 50
       weakneses:
       - damageType: 1
-        value: 5
-      strongs: []
+        value: 1
+      - damageType: 0
+        value: 0
+      strongs:
+      - damageType: 0
+        value: 7
   layer:
     serializedVersion: 2
     m_Bits: 512
@@ -10385,7 +10389,7 @@ MonoBehaviour:
       maxValue: 100
       weakneses:
       - damageType: 1
-        value: 5
+        value: 0
       - damageType: 0
         value: 0
       strongs:
@@ -11758,8 +11762,12 @@ MonoBehaviour:
       maxValue: 50
       weakneses:
       - damageType: 1
-        value: 6
-      strongs: []
+        value: 1
+      - damageType: 0
+        value: 0
+      strongs:
+      - damageType: 0
+        value: 7
   layer:
     serializedVersion: 2
     m_Bits: 512
