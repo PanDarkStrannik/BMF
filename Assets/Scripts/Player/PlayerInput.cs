@@ -102,7 +102,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""26c8e5dc-00dc-4507-9bda-a9e7d3a3e05b"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

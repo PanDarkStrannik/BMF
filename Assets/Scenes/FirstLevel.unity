@@ -1017,6 +1017,14 @@ PrefabInstance:
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 1943824893}
+    - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: SensY
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: SensX
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7230216899918538134, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.03
@@ -1072,6 +1080,14 @@ PrefabInstance:
     - target: {fileID: 7903741847997919924, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: afterBlink
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903741847997919924, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: inLayerBlinkDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903741847997919924, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: layer.m_Bits
+      value: 2560
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
