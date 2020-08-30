@@ -1931,6 +1931,10 @@ PrefabInstance:
       propertyPath: weapons.Array.data[1].radius
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2298525643881898553, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: weapons.Array.data[1].weapon
+      value: 
+      objectReference: {fileID: 467117113}
     - target: {fileID: 2298525643881898554, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: forgeting
       value: 0
