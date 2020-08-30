@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toDieTime: 3
   body: {fileID: 6813687396225021029}
-  speed: 20
+  speed: 30
   bulletDatas:
   - damageType: 1
     value: 10

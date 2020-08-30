@@ -1822,7 +1822,7 @@ PrefabInstance:
     - target: {fileID: 2298525643881898553, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: weapons.Array.data[2].weapon
       value: 
-      objectReference: {fileID: 936883086}
+      objectReference: {fileID: 0}
     - target: {fileID: 2298525643881898553, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: weapons.Array.data[2].point
       value: 
@@ -2317,6 +2317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 362187533, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+    - {fileID: 589998218, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
 --- !u!114 &466314249 stripped
 MonoBehaviour:
@@ -2340,6 +2341,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a00b5814ea5353418e3d6785519b6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &467117111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 764768761, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+  m_PrefabInstance: {fileID: 466314248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &467117113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467117111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd875690b3800c4094ee0fcd95d4025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData:
+  - damageType: 1
+    value: 10
+  weaponType: 1
+  weaponObject: {fileID: 467117111}
+  events: {fileID: 1060612297}
+  layer:
+    serializedVersion: 2
+    m_Bits: 3329
+  bulletSpawner:
+    spawnObjects:
+    - {fileID: 8231068614330083602, guid: 6f34203db8bb1af41aea162d13be9bb1, type: 3}
+    - {fileID: 8788022190215252394, guid: 59488c16ed3d5ce4db24d2430b11dd77, type: 3}
+    - {fileID: 3635258739414794022, guid: b7ed649711007cb42982a78a5b80b6e0, type: 3}
+    - {fileID: 6813687396225021031, guid: ad9240dceea53b44e99c67f872b3a796, type: 3}
+    objectsValues: 01000000010000000100000001000000
+    spawned_objects: []
+  gunPosition: {fileID: 295755766}
+  attackTime: 3
+  toShootTime: 2.3
 --- !u!1 &470356679
 GameObject:
   m_ObjectHideFlags: 0
@@ -4094,17 +4132,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 455600, guid: 7710ce4a7ee932b4a86742119e3babae, type: 3}
   m_PrefabInstance: {fileID: 916299185}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &936883086 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 589998218, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
-  m_PrefabInstance: {fileID: 466314248}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba4c62e5e067a2c49a98649704f6329b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &953205432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11509,7 +11536,7 @@ MonoBehaviour:
     maxSize: 100
     minSize: 40
     minimizeSpeed: 25
-  - minDamage: 5
+  - minDamage: 4
     minSpeed: 3
     maxSpeed: 7
     timeToChangeSize: 0.2
@@ -11517,7 +11544,7 @@ MonoBehaviour:
     maxSize: 100
     minSize: 40
     minimizeSpeed: 25
-  - minDamage: 10
+  - minDamage: 8
     minSpeed: 7
     maxSpeed: 10
     timeToChangeSize: 0.2
@@ -11525,7 +11552,7 @@ MonoBehaviour:
     maxSize: 100
     minSize: 40
     minimizeSpeed: 25
-  - minDamage: 15
+  - minDamage: 13
     minSpeed: 10
     maxSpeed: 14
     timeToChangeSize: 0.2

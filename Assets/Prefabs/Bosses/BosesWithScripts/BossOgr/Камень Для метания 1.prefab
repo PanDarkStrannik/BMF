@@ -80,10 +80,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toDieTime: 3
   body: {fileID: 8231068614330083606}
-  speed: 20
+  speed: 30
   bulletDatas:
   - damageType: 1
-    value: 5
+    value: 10
   bulletDieEffect: {fileID: 258975840124471289}
   damageAreaObject: {fileID: 2416758473838444376}
   timeToDestroyArea: 1
