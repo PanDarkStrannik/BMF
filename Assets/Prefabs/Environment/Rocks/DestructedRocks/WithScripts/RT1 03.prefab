@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 65311945188935179}
   - component: {fileID: 6684261271620224954}
   - component: {fileID: 6684261271620224957}
-  - component: {fileID: 48916615}
   m_Layer: 0
   m_Name: Rock_Type1_03_mesh.001
   m_TagString: Untagged
@@ -96,7 +95,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -127,20 +126,6 @@ MonoBehaviour:
   popup: {fileID: 0}
   popupDestroyTime: 2
   popupRangeTime: 1
---- !u!64 &48916615
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2360225624863675747}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -685587531723789550, guid: ca8981ce55a27dd4299a65ad3b7fa0cd, type: 3}
 --- !u!1 &2554263388438773823
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +139,6 @@ GameObject:
   - component: {fileID: 1660722054062301925}
   - component: {fileID: 6684261271620224952}
   - component: {fileID: 6684261271620224955}
-  - component: {fileID: 846824111}
   m_Layer: 0
   m_Name: Rock_Type1_03_mesh
   m_TagString: Untagged
@@ -237,7 +221,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -268,20 +252,6 @@ MonoBehaviour:
   popup: {fileID: 0}
   popupDestroyTime: 2
   popupRangeTime: 1
---- !u!64 &846824111
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554263388438773823}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3355763593282513407, guid: ca8981ce55a27dd4299a65ad3b7fa0cd, type: 3}
 --- !u!1 &5688736946537164069
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +265,6 @@ GameObject:
   - component: {fileID: 7579070477955064007}
   - component: {fileID: 6684261271620224956}
   - component: {fileID: 6684261271620224959}
-  - component: {fileID: 2030963904}
   m_Layer: 0
   m_Name: Rock_Type1_03_mesh.002
   m_TagString: Untagged
@@ -378,7 +347,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -409,20 +378,6 @@ MonoBehaviour:
   popup: {fileID: 0}
   popupDestroyTime: 2
   popupRangeTime: 1
---- !u!64 &2030963904
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5688736946537164069}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8481458079579841498, guid: ca8981ce55a27dd4299a65ad3b7fa0cd, type: 3}
 --- !u!1 &5765220946853903074
 GameObject:
   m_ObjectHideFlags: 0
