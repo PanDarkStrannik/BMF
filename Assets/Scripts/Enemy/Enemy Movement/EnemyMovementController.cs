@@ -9,7 +9,7 @@ public class EnemyMovementController : MonoBehaviour
     [HideInInspector] public bool UponDistance = true;
     [HideInInspector] public Transform target = null;
     [SerializeReference] private List<AEnemyMovement> movements;
-    [SerializeReference] private List<Transform> lookingObject;
+   // [SerializeReference] private List<Transform> lookingObject;
     [SerializeReference] private NavMeshAgent meshAgent;
     [SerializeReference] private MainEvents mainEvents;
     [SerializeField] private float correctSpeedToAnim=10;
@@ -19,14 +19,14 @@ public class EnemyMovementController : MonoBehaviour
         Vector3 toTarget = target.position - transform.position;
         if (toTarget.magnitude <= detectionDistance)
         {
-            //var temp = target.position;
-            foreach (var lookObj in lookingObject)
-            {
-                //temp.y = lookObj.position.y;
-                //lookObj.LookAt(temp);
-                TargetRotationFixator.Looking(lookObj, target, TargetRotationFixator.LockRotationAngle.Pitch);
+            ////var temp = target.position;
+            //foreach (var lookObj in lookingObject)
+            //{
+            //    //temp.y = lookObj.position.y;
+            //    //lookObj.LookAt(temp);
+            //    TargetRotationFixator.Looking(lookObj, target, TargetRotationFixator.LockRotationAngle.Pitch);
 
-            }
+            //}
             mainEvents.OnAnimEvent(AnimationController.AnimationType.Movement, meshAgent.velocity.magnitude / correctSpeedToAnim);
             Move(currentType, target);
             return true;

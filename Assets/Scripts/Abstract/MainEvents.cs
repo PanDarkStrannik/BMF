@@ -19,4 +19,11 @@ public class MainEvents : MonoBehaviour
     }
 
 
+    public delegate void DetectedObjectHelper(Transform detectedObject);
+    public event DetectedObjectHelper OnDetectedObject;
+    public void DetectedObjectEvent(Transform point)
+    {
+        OnDetectedObject?.Invoke(point);
+    }
+
 }

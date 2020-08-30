@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
                 {
                     if (obj.CompareTag("Player"))
                     {
-                       
+                        mainEvents.DetectedObjectEvent(obj.transform);
                         if (!isAttackRecently)
                         {
                             StartCoroutine(AttackLogic());
@@ -87,6 +87,7 @@ public class EnemyController : MonoBehaviour
     {
         if (weapon.Attack(detection.DetectedColider.WeaponType))
         {
+
             isAttackRecently = true;
             yield return new WaitForSeconds(attackDelay);
             isAttackRecently = false;

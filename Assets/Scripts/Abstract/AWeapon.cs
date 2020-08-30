@@ -12,6 +12,7 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
     [SerializeField] protected LayerMask layer;
 
 
+
     protected bool isAttack = false;
 
     public WeaponType WeaponType
@@ -37,7 +38,6 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
             return isAttack;
         }
     }
-
 
     public abstract void Attack();
      
