@@ -61,9 +61,9 @@ public class EnemyController : MonoBehaviour
                         mainEvents.DetectedObjectEvent(obj.transform);
                         if (!isAttackRecently)
                         {
+                            MovementLogic(obj.transform);
                             StartCoroutine(AttackLogic());
                         }
-                        MovementLogic(obj.transform);
                         break;
                     }
                 }

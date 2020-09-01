@@ -20,7 +20,7 @@ public class EnemyNearMovement : AEnemyMovement
 
     private void Start()
     {
-        navAgent.speed = speed;
+        //navAgent.speed = speed;
     }
 
     public override void Move(Vector3 playerPosition)
@@ -34,9 +34,8 @@ public class EnemyNearMovement : AEnemyMovement
     private IEnumerator ChangePosition(Vector3 playerPosition)
     {
         isTimeStart = true;
-        navAgent.ResetPath();
+       // navAgent.ResetPath();
         int i = 0;
-        //near = false;
 
         while (i < 50)
         {
@@ -56,14 +55,15 @@ public class EnemyNearMovement : AEnemyMovement
             var checkNewPos = (playerPosition - newPosition).sqrMagnitude;
             if (checkNewPos <= maxDistance*maxDistance && checkNewPos >= minDistance*minDistance)
             {
-                if (warp)
-                {
-                    navAgent.Warp(newPosition);
-                }
-                else
-                {
-                    navAgent.destination = newPosition;
-                }
+                //if (warp)
+                //{
+                //    navAgent.Warp(newPosition);
+                //}
+                //else
+                //{
+                //    navAgent.destination = newPosition;
+                //}
+                MoveToPointEvent(newPosition, speed, warp);
                 break;
             }
             if(checkNewPos >= maxDistance*maxDistance)

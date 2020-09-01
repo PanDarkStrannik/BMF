@@ -8,12 +8,19 @@ public abstract class AEnemyMovement : MonoBehaviour, IMovement
 {
 
     [SerializeField] protected float speed = 10f;
-    [SerializeField] protected NavMeshAgent navAgent;
+   // [SerializeField] protected NavMeshAgent navAgent;
+
+    public delegate void MoveToPointHelper(Vector3 point, float speed, bool warp);
+    public event MoveToPointHelper MoveToPoint;
 
     public EnemyMoveType moveType;
 
     public abstract void Move(Vector3 direction);
         
+    protected void MoveToPointEvent(Vector3 point, float speed, bool warp)
+    {
+        MoveToPoint?.Invoke(point, speed,warp);
+    }
 
     public enum EnemyMoveType
     {

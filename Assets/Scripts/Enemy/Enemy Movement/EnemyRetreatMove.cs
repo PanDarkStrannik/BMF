@@ -10,23 +10,24 @@ public class EnemyRetreatMove : AEnemyMovement
 
     void Start()
     {
-        navAgent.speed = speed;
+        //navAgent.speed = speed;
     }
 
     public override void Move(Vector3 playerPosition)
     {
-        navAgent.ResetPath();
+        //navAgent.ResetPath();
         Vector3 retreatVector = (transform.position - playerPosition).normalized * distance;
         Vector3 newPosition = transform.position + retreatVector;
 
-        if (warp)
-        {
-            navAgent.Warp(newPosition);
-        }
-        else
-        {
-            navAgent.destination = newPosition;
-        }
+        //if (warp)
+        //{
+        //    navAgent.Warp(newPosition);
+        //}
+        //else
+        //{
+        //    navAgent.destination = newPosition;
+        //}
+        MoveToPointEvent(newPosition, speed, warp);
      
     }
 

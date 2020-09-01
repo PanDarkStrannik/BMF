@@ -106,6 +106,7 @@ public class WeaponAnimTriggerName
     [SerializeField] private Animator animator;
     [SerializeField] private string animTriggerName;
     [SerializeField] private AnimationController.AnimationType type;
+    [SerializeField] private bool rootMotion = false;
 
     public AnimationController.AnimationType Type
     {
@@ -117,18 +118,27 @@ public class WeaponAnimTriggerName
 
     public void ActivateAnimTrigger()
     {
-        animator.SetTrigger(animTriggerName);    
+        if (animator.isActiveAndEnabled)
+        {
+            animator.applyRootMotion = rootMotion;
+            animator.SetTrigger(animTriggerName);
+        }
     }
 
     public void SetAnimBool(bool setValue)
     {
-        animator.SetBool(animTriggerName, setValue);
+        if (animator.isActiveAndEnabled)
+        {
+            animator.applyRootMotion = rootMotion;
+            animator.SetBool(animTriggerName, setValue);
+        }
     }
 
     public void SetValue(float value)
     {
         if(animator.isActiveAndEnabled)
         {
+            animator.applyRootMotion = rootMotion;
             animator.SetFloat(animTriggerName, value);
         }
     }
