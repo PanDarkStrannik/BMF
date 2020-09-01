@@ -5,15 +5,6 @@ using UnityEngine;
 public class DamageblePlace : ADamageble
 {
 
-    [SerializeField] private GameObject popup;
-
-    [SerializeField] private float popupDestroyTime = 2f;
-
-    [SerializeField] private float popupRangeTime=1f;
-
-
-
-
     public override void ApplyDamage(DamageByType weapon)
     {
         var allWeak = datas.FindAllByWeak(weapon.DamageType);

@@ -16,6 +16,7 @@ public class EnemyMovementController : MonoBehaviour
 
     private Animator anim;
 
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -39,6 +40,11 @@ public class EnemyMovementController : MonoBehaviour
     //        meshAgent.gameObject.transform.position = transform.position; //+ 0.9f * worldDeltaPosition;
 
     //}
+
+    private void LateUpdate()
+    {
+        mainEvents.OnAnimEvent(AnimationController.AnimationType.Movement, meshAgent.velocity.magnitude / correctSpeedToAnim);
+    }
 
 
     private void Moving(Vector3 point, float speed, bool warp)
@@ -91,16 +97,16 @@ public class EnemyMovementController : MonoBehaviour
     }
 
 
-    //private void OnAnimatorMove()
-    //{
-    //    //Vector3 worldDeltaPosition = meshAgent.nextPosition - transform.position;
+    private void OnAnimatorMove()
+    {
+        //Vector3 worldDeltaPosition = meshAgent.nextPosition - transform.position;
 
-    //    //if (worldDeltaPosition.magnitude > meshAgent.radius)
-    //    //    meshAgent.gameObject.transform.position = transform.position + 0.9f * worldDeltaPosition;
+        //if (worldDeltaPosition.magnitude > meshAgent.radius)
+        //    meshAgent.gameObject.transform.position = transform.position + 0.9f * worldDeltaPosition;
 
-    //    //var position = meshAgent.nextPosition;
-    //    //position.y = anim.rootPosition.y;
-    //    //transform.position = position;
-    //}
+        //var position = meshAgent.nextPosition;
+        //position.y = anim.rootPosition.y;
+        //transform.position = position;
+    }
 
 }

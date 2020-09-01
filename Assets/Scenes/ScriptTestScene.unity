@@ -307,9 +307,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 0
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!1 &125718161
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,9 +694,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!1 &205017062
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,9 +833,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 0
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!4 &231564451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4235801786339773478, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
@@ -1084,9 +1075,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 0
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!1 &313909924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,6 +1174,42 @@ Transform:
   m_Father: {fileID: 1533040932}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &342132489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6385403144310076579, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+  m_PrefabInstance: {fileID: 885063584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &342132490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342132489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!114 &366768329 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1898800178, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
@@ -2000,9 +2024,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &687614974
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2210,9 +2231,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &773851845
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2587,11 +2605,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 256710891, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 885063586, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 182006304}
     - target: {fileID: 5505282187759526130, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505282187759526130, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -2604,6 +2630,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5505282188296421022, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505282188296421022, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -2616,6 +2646,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5505282188364177210, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505282188364177210, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -2626,6 +2660,10 @@ PrefabInstance:
     - target: {fileID: 5505282188364177210, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385403144310076579, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: playerUI
@@ -2924,9 +2962,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &904289747
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3163,9 +3198,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &930325191
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3522,9 +3554,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 0
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!1 &1131552597
 GameObject:
   m_ObjectHideFlags: 0
@@ -3839,9 +3868,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &1150898048
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4286,9 +4312,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!1 &1357726037
 GameObject:
   m_ObjectHideFlags: 0
@@ -4414,9 +4437,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &1357726043
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4658,9 +4678,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &1411046909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4903,9 +4920,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &1522225849
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5412,9 +5426,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!1 &1640633705
 GameObject:
   m_ObjectHideFlags: 0
@@ -10416,9 +10427,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &1728832028
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15813,9 +15821,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &2054739766
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15962,9 +15967,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &2058821692
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16139,9 +16141,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  popup: {fileID: 8516776377480055771, guid: 96a84c9f80b8fcc4096bd7e98ce57531, type: 3}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!54 &2093246263
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16497,6 +16496,10 @@ PrefabInstance:
       propertyPath: movement
       value: 
       objectReference: {fileID: 748463759}
+    - target: {fileID: 2298525643881898555, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: moveDelay
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2298525644315008610, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: bossUI
       value: 

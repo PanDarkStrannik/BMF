@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float timeAfterDetect=1f;
 
     [SerializeField] private float attackDelay = 1f;
+    [SerializeField] private float moveDelay = 1f;
 
     [SerializeReference] private EnemyMovementController movement;
     [SerializeReference] private EnemyDetection detection;
@@ -19,6 +20,7 @@ public class EnemyController : MonoBehaviour
     [SerializeReference] private MainEvents mainEvents;
 
     private bool isAttackRecently = false;
+    private bool isMovementRecently = false;
 
     public void Start()
     {
@@ -59,9 +61,12 @@ public class EnemyController : MonoBehaviour
                     if (obj.CompareTag("Player"))
                     {
                         mainEvents.DetectedObjectEvent(obj.transform);
+                        if(!isMovementRecently)
+                        {
+                            StartCoroutine(MovementLogic(obj.transform));
+                        }
                         if (!isAttackRecently)
                         {
-                            MovementLogic(obj.transform);
                             StartCoroutine(AttackLogic());
                         }
                         break;
@@ -73,12 +78,15 @@ public class EnemyController : MonoBehaviour
     }
 
 
-  
-    private void MovementLogic(Transform objTransform)
+
+    private IEnumerator MovementLogic(Transform objTransform)
     {
-        if (!movement.MoveUponDistance(objTransform, detection.DetectedColider.Radius, detection.DetectedColider.MoveType))
+        if (movement.MoveUponDistance(objTransform, detection.DetectedColider.Radius, detection.DetectedColider.MoveType))
         {
-            movement.MoveUponDistance(objTransform, detection.DetectedColider.Radius * 2, detection.DetectedColider.MoveType);
+            isMovementRecently = true;
+            yield return new WaitForSeconds(moveDelay);
+            isMovementRecently = false;
+            //movement.MoveUponDistance(objTransform, detection.DetectedColider.Radius * 2, detection.DetectedColider.MoveType);
         }
     }
 
@@ -87,7 +95,6 @@ public class EnemyController : MonoBehaviour
     {
         if (weapon.Attack(detection.DetectedColider.WeaponType))
         {
-
             isAttackRecently = true;
             yield return new WaitForSeconds(attackDelay);
             isAttackRecently = false;
