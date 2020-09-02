@@ -6,14 +6,14 @@ public class MainEvents : MonoBehaviour
 {
     public delegate void AnimTypeEventHandler(AnimationController.AnimationType animationType);
     public event AnimTypeEventHandler AnimTypeEvent;
-    public virtual void OnAnimEvent(AnimationController.AnimationType animationType)
+    public void OnAnimEvent(AnimationController.AnimationType animationType)
     {
         AnimTypeEvent?.Invoke(animationType);
     }
 
     public delegate void AnimTypeFloatEventHandler(AnimationController.AnimationType animationType, float value);
     public event AnimTypeFloatEventHandler AnimTypeEventWithFloat;
-    public virtual void OnAnimEvent(AnimationController.AnimationType animationType, float value)
+    public void OnAnimEvent(AnimationController.AnimationType animationType, float value)
     {
         AnimTypeEventWithFloat?.Invoke(animationType, value);
     }
@@ -26,4 +26,11 @@ public class MainEvents : MonoBehaviour
         OnDetectedObject?.Invoke(point);
     }
 
+
+    public delegate void EffectTypeHandler(EffectsController.EffectType effectType, bool activ);
+    public event EffectTypeHandler EffectTypeEvent;
+    public void OnEffectEvent(EffectsController.EffectType effectType, bool activ)
+    {
+        EffectTypeEvent?.Invoke(effectType, activ);
+    }
 }

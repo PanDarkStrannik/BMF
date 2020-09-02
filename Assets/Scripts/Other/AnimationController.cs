@@ -18,9 +18,6 @@ public class AnimationController : MonoBehaviour
     }
 
 
-
-
-
     public void ActivateAllTriggerByType(AnimationType animationType)
     {
         var tmp = FindAllAnimByType(animationType);
@@ -88,7 +85,6 @@ public class AnimationController : MonoBehaviour
             return null;
         }
     }
-
 
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Animator))]
+//[RequireComponent(typeof(Animator))]
 public class EnemyMovementController : MonoBehaviour
 {
 
@@ -14,12 +14,14 @@ public class EnemyMovementController : MonoBehaviour
     [SerializeReference] private MainEvents mainEvents;
     [SerializeField] private float correctSpeedToAnim=10;
 
-    private Animator anim;
+    //private Animator anim;
 
+    //private Vector3 startPosition;
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
+        //startPosition = transform.localPosition;
         foreach(var e in movements)
         {
             e.MoveToPoint += Moving;
@@ -97,16 +99,28 @@ public class EnemyMovementController : MonoBehaviour
     }
 
 
-    private void OnAnimatorMove()
-    {
-        //Vector3 worldDeltaPosition = meshAgent.nextPosition - transform.position;
+    //private void OnAnimatorMove()
+    //{
+    //    //Vector3 worldDeltaPosition = meshAgent.nextPosition - transform.position;
 
-        //if (worldDeltaPosition.magnitude > meshAgent.radius)
-        //    meshAgent.gameObject.transform.position = transform.position + 0.9f * worldDeltaPosition;
+    //    //if (worldDeltaPosition.magnitude > meshAgent.radius)
+    //    //    meshAgent.gameObject.transform.position = transform.position + 0.9f * worldDeltaPosition;
 
-        //var position = meshAgent.nextPosition;
-        //position.y = anim.rootPosition.y;
-        //transform.position = position;
-    }
+    //    //var position = meshAgent.nextPosition;
+    //    //position.y = anim.rootPosition.y;
+    //    //transform.position = position;
+    //   // transform.position = anim.rootPosition;
+
+    //    //if (anim.hasRootMotion)
+    //    //{
+    //        transform.position = anim.rootPosition;
+    //    //    Debug.Log("У анимации есть рут моушин");
+    //    //}
+    //    //else
+    //    //{
+    //    //    transform.localPosition = startPosition;
+    //    //}
+
+    //}
 
 }
