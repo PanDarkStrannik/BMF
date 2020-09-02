@@ -5560,8 +5560,7 @@ MonoBehaviour:
   enemyMoveEvents: []
   playerMoveEvents: []
   timeAfterDetect: 2.5
-  attackDelay: 15
-  moveDelay: 3
+  attackDelay: 5
   movement: {fileID: 2017565599}
   detection: {fileID: 2298525643881898554}
   weapon: {fileID: 2298525643881898553}
@@ -5596,7 +5595,7 @@ MonoBehaviour:
     center: {fileID: 2298525643881898551}
     radius: 16
     moveType: 2
-    weaponType: 0
+    weaponType: 1
   - chance: 100
     layerMask:
       serializedVersion: 2
@@ -5698,7 +5697,7 @@ MonoBehaviour:
   - {fileID: 2298525643881898555}
   - {fileID: 2298525643881898554}
   - {fileID: 2298525643881898553}
-  - {fileID: 0}
+  - {fileID: 2298525643881898555}
   bossName: Ogr
   bossIcon: {fileID: 21300000, guid: 5165697236c96c741940248bc290977f, type: 3}
   bossUI: {fileID: 0}
