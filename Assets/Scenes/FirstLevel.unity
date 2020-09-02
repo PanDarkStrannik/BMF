@@ -1013,6 +1013,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6385403144585974628, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: weaponData.Array.data[0].value
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: playerUI
       value: 
@@ -1641,6 +1645,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 525911988, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: weaponData.Array.data[0].value
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2298525643881898550, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: m_Name
       value: BossOgr
@@ -1693,6 +1701,14 @@ PrefabInstance:
       propertyPath: bossUI
       value: 
       objectReference: {fileID: 1943824894}
+    - target: {fileID: 2298525644913708635, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: datas.paramDatas.Array.data[0].value
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298525644913708635, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: datas.paramDatas.Array.data[0].maxValue
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
 --- !u!114 &466314249 stripped
