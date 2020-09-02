@@ -113,6 +113,10 @@ public class PlayerController : MonoBehaviour
                 isShiftNotInput = true;
 
             }
+            if(weaponChanger.CurrentWeapon.WeaponType == WeaponType.Range)
+            {
+                movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
+            }
         };
 
         input.ButtonInputs.Blink.performed += context =>

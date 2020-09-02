@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class APlayerMovement : MonoBehaviour, IMovement
 {
     public PlayerMoveType moveType;
-    public enum PlayerMoveType {Slow, Fast}
+    public enum PlayerMoveType {Slow, Fast, RangeMove}
     public abstract void Move(Vector3 direction);
 
 }

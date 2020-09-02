@@ -12,7 +12,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float timeAfterDetect=1f;
 
     [SerializeField] private float attackDelay = 1f;
-    [SerializeField] private float moveDelay = 1f;
 
     [SerializeReference] private EnemyMovementController movement;
     [SerializeReference] private EnemyDetection detection;
@@ -20,7 +19,6 @@ public class EnemyController : MonoBehaviour
     [SerializeReference] private MainEvents mainEvents;
 
     private bool isAttackRecently = false;
-    private bool isMovementRecently = false;
 
     public void Start()
     {
@@ -61,10 +59,9 @@ public class EnemyController : MonoBehaviour
                     if (obj.CompareTag("Player"))
                     {
                         mainEvents.DetectedObjectEvent(obj.transform);
-                        if(!isMovementRecently)
-                        {
-                            StartCoroutine(MovementLogic(obj.transform));
-                        }
+
+                        MovementLogic(obj.transform);
+
                         if (!isAttackRecently)
                         {
                             StartCoroutine(AttackLogic());
@@ -77,18 +74,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-
-
-    private IEnumerator MovementLogic(Transform objTransform)
+    private void MovementLogic(Transform objTransform)
     {
         if (movement.MoveUponDistance(objTransform, detection.DetectedColider.Radius, detection.DetectedColider.MoveType))
         {
-            isMovementRecently = true;
-            yield return new WaitForSeconds(moveDelay);
-            isMovementRecently = false;
-            //movement.MoveUponDistance(objTransform, detection.DetectedColider.Radius * 2, detection.DetectedColider.MoveType);
+           
         }
     }
+
 
 
     private IEnumerator AttackLogic()
@@ -117,7 +110,6 @@ public class EnemyController : MonoBehaviour
                     break;
                 }
             }
-           // StartCoroutine(ActivateDetectionBeforeTime(3));
         }
     }
 
@@ -136,16 +128,9 @@ public class EnemyController : MonoBehaviour
                     break;
                 }
             }
-           // StartCoroutine(ActivateDetectionBeforeTime(3));
         }
     }
 
-
-    //private IEnumerator ActivateDetectionBeforeTime(float time)
-    //{
-    //    yield return new WaitForSeconds(time);
-    //    //movement.IsDetectingPlayer = true;
-    //}
     #endregion
 
 

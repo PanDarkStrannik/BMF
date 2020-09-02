@@ -69,13 +69,8 @@ public class EnemyMovementController : MonoBehaviour
         Vector3 toTarget = target.position - transform.position;
         if (toTarget.magnitude <= detectionDistance)
         {
-            mainEvents.OnAnimEvent(AnimationController.AnimationType.Movement, meshAgent.velocity.magnitude / correctSpeedToAnim);
             Move(currentType, target);
             return true;
-        }
-        else
-        {
-            mainEvents.OnAnimEvent(AnimationController.AnimationType.Movement, 0);
         }
         return false;
     }

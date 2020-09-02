@@ -5585,7 +5585,7 @@ MonoBehaviour:
       m_Bits: 256
     gizmosColor: {r: 0.9150943, g: 0.06474723, b: 0.06474723, a: 0.9137255}
     center: {fileID: 2298525643881898551}
-    radius: 3.5
+    radius: 4
     moveType: 1
     weaponType: 0
   - chance: 100
@@ -5594,7 +5594,7 @@ MonoBehaviour:
       m_Bits: 256
     gizmosColor: {r: 0.5224131, g: 0.7529412, b: 0.22352941, a: 0.7372549}
     center: {fileID: 2298525643881898551}
-    radius: 9.3
+    radius: 16
     moveType: 2
     weaponType: 0
   - chance: 100
@@ -5615,6 +5615,15 @@ MonoBehaviour:
     radius: 30
     moveType: 0
     weaponType: 1
+  - chance: 50
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 256
+    gizmosColor: {r: 0.03534854, g: 0.035030235, b: 0.03773582, a: 0.30588236}
+    center: {fileID: 2298525643881898551}
+    radius: 10
+    moveType: 0
+    weaponType: 0
   timeToCheck: 1
   timeToForget: 0.2
   detecting: 1
@@ -5689,7 +5698,7 @@ MonoBehaviour:
   - {fileID: 2298525643881898555}
   - {fileID: 2298525643881898554}
   - {fileID: 2298525643881898553}
-  - {fileID: 1898800174, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+  - {fileID: 0}
   bossName: Ogr
   bossIcon: {fileID: 21300000, guid: 5165697236c96c741940248bc290977f, type: 3}
   bossUI: {fileID: 0}
@@ -5840,6 +5849,22 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &748463755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801521346723755133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7342b5d691ff9e847a945244ed247dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects:
+  - particleSystem: {fileID: 1446474320}
+    effectType: 0
+  mainEvents: {fileID: 126490850}
 --- !u!114 &896034266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5879,22 +5904,6 @@ MonoBehaviour:
     rootMotion: 0
   animationEvents:
   - {fileID: 126490850}
---- !u!114 &748463755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6801521346723755133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7342b5d691ff9e847a945244ed247dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effects:
-  - particleSystem: {fileID: 1446474320}
-    effectType: 0
-  mainEvents: {fileID: 126490850}
 --- !u!65 &816547711
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyDetection : MonoBehaviour
@@ -91,6 +92,9 @@ public class EnemyDetection : MonoBehaviour
     private void Start()
     {
         detections = new List<GameObject>();
+
+        colliderChances = colliderChances.OrderBy(colliderChances=>colliderChances.Radius).ToList();
+
         StartCoroutine(Detection());
  
     }
