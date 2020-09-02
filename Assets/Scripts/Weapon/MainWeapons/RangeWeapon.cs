@@ -8,8 +8,10 @@ public class RangeWeapon : AWeapon
     [SerializeField] protected Transform gunPosition;
     [SerializeField] protected float attackTime;
     [SerializeField] protected float toShootTime=0f;
+    [SerializeField] protected float timeToReload = 0f;
+    [SerializeField] protected int bulletsValue=3;
 
-
+    protected int bulletsCount = 0;
 
     private void Awake()
     {
@@ -22,11 +24,17 @@ public class RangeWeapon : AWeapon
     }
 
 
+
+    private void OnDisable()
+    {
+        state = WeaponState.Serenity;
+    }
+
     public override void Attack()
     {
-        if (!isAttack)
+        if (/*!isAttack && !isReload*/ state == WeaponState.Serenity)
         {
-            isAttack = true;
+            state = WeaponState.Attack;
             StartCoroutine(Shoot());
         }
     }
@@ -37,25 +45,45 @@ public class RangeWeapon : AWeapon
     {
         BeforeShoot();
         yield return new WaitForSecondsRealtime(toShootTime);
-        //        yield return new WaitForSeconds(toShootTime);
-        if (isAttack)
+        if (state==WeaponState.Attack)
         {
             InShoot();
-         //   yield return new WaitForSeconds(attackTime);
             bulletSpawner.SpawnObject(gunPosition.position, gunPosition.rotation);
-
             yield return new WaitForSecondsRealtime(attackTime);
-            isAttack = false;
+            state = WeaponState.Serenity;
         }
     }
 
     protected virtual void BeforeShoot()
     {
         events.OnAnimEvent(AnimationController.AnimationType.RangeAttack);
+        BulletCounter();
     }
 
     protected virtual void InShoot()
     {
+        
+    }
 
+    protected virtual void BulletCounter()
+    {
+
+        if (bulletsCount >= bulletsValue)
+        {
+            StopCoroutine(Shoot());
+            StartCoroutine(Reload());
+            return;
+        }
+
+        bulletsCount++;
+    
+    }
+
+    protected virtual IEnumerator Reload()
+    {
+        state = WeaponState.Reload;
+        yield return new WaitForSecondsRealtime(timeToReload);
+        bulletsCount = 0;
+        state = WeaponState.Serenity;
     }
 }

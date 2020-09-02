@@ -42,7 +42,7 @@ public class EnemyWeaponLogic : MonoBehaviour
 
     public bool SelectWeapon(WeaponType weaponType)
     {
-        if (!currentWeapon.Weapon.IsAttack)
+        if (currentWeapon.Weapon.State == AWeapon.WeaponState.Serenity)
         {
             var temp = currentWeapon;
             List<WeaponDistance> weaponDistancesTemp = new List<WeaponDistance>();
@@ -71,7 +71,7 @@ public class EnemyWeaponLogic : MonoBehaviour
                 return false;
             }
 
-            if (temp != null && !currentWeapon.Weapon.IsAttack)
+            if (temp != null && currentWeapon.Weapon.State == AWeapon.WeaponState.Serenity)
             {
                 currentWeapon.Weapon.WeaponObject.SetActive(false);
                 currentWeapon = temp;
@@ -86,9 +86,9 @@ public class EnemyWeaponLogic : MonoBehaviour
     {
         if(Physics.SphereCast(currentWeapon.Point.position, currentWeapon.Radius,
             currentWeapon.Point.forward, out RaycastHit hit, currentWeapon.Distance) &&
-            !currentWeapon.Weapon.IsAttack)
+            currentWeapon.Weapon.State == AWeapon.WeaponState.Serenity)
         {
-            if (hit.transform.GetComponent<IDamageble>() != null && !currentWeapon.Weapon.IsAttack)
+            if (hit.transform.GetComponent<IDamageble>() != null && currentWeapon.Weapon.State == AWeapon.WeaponState.Serenity)
             {
                 wantDamagedObject = hit.transform.gameObject;
                 Debug.Log("По идее произошла атака");

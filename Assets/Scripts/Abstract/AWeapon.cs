@@ -11,6 +11,7 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
     [SerializeField] protected MainEvents events;
     [SerializeField] protected LayerMask layer;
 
+    protected WeaponState state = WeaponState.Serenity;
 
 
     protected bool isAttack = false;
@@ -20,6 +21,14 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
         get
         {          
             return weaponType;
+        }
+    }
+
+    public WeaponState State
+    {
+        get
+        {
+            return state;
         }
     }
 
@@ -40,6 +49,11 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
     }
 
     public abstract void Attack();
+
+    public enum WeaponState
+    {
+        Attack, Reload, ImposibleAttack, Serenity
+    }
      
 }
 

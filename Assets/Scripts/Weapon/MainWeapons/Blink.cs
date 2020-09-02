@@ -28,9 +28,9 @@ public class Blink : AWeapon
 
     public override void Attack()
     {
-        if (!isAttack)
+        if (state==WeaponState.Serenity)
         {
-            isAttack = true;
+            state = WeaponState.Attack;
             StartCoroutine(Shoot());
         }
     }
@@ -51,8 +51,9 @@ public class Blink : AWeapon
         }
         //yield return new WaitForSecondsRealtime(1f);
         PauseController.ChangeTime(1f);
+        state = WeaponState.Reload;
         yield return new WaitForSeconds(afterBlink);
-        isAttack = false;
+        state = WeaponState.Serenity;
     }
 
     private void OnDrawGizmos()
@@ -68,7 +69,6 @@ public class Blink : AWeapon
         if (Physics.Raycast(checkRay, out RaycastHit hit, blinkDistance, layer))
         {
             Debug.Log("Через препятсвие можно пройти");
-            // blinkBody.transform.position = blinkGun.position + blinkGun.forward * blinkDistance;
             blinkBody.transform.position = hit.point + (hit.point - blinkGun.position).normalized * inLayerBlinkDistance;
             isLayerBlink = true;
             blinkBody.transform.LookAt(hit.point);
@@ -88,7 +88,6 @@ public class Blink : AWeapon
             Debug.Log("Препятствия не было");
             blinkBody.transform.position = blinkGun.position + blinkGun.forward * blinkDistance;
         }
-        //blinkBody.transform.position = blinkGun.position + blinkGun.forward * blinkDistance;
     }
 
     private void DamageOtherObjects()

@@ -22,9 +22,9 @@ public class MiliWeapon : AWeapon
 
     public override void Attack()
     {
-        if (!isAttack)
-        { 
-            isAttack = true;
+        if (state==AWeapon.WeaponState.Serenity)
+        {
+            state = AWeapon.WeaponState.Attack;
             StartCoroutine(ChangeColider());    
         }
     }
@@ -33,21 +33,20 @@ public class MiliWeapon : AWeapon
     {
         events.OnEffectEvent(EffectsController.EffectType.Melle, IsAttack);
         yield return new WaitForSecondsRealtime(timeToWeaponAttack);
-        if (isAttack)
+        if (state==AWeapon.WeaponState.Attack)
         {
             events.OnAnimEvent(AnimationController.AnimationType.MeleAttack);
 
             foreach (var weapon in miliWeapons)
             {
-                weapon.enabled = isAttack;
+                weapon.enabled = true;
             }
             yield return new WaitForSecondsRealtime(timeWeaponColider);
-
-            isAttack = false;
             foreach (var weapon in miliWeapons)
             {
-                weapon.enabled = isAttack;
+                weapon.enabled = false;
             }
+            state = AWeapon.WeaponState.Serenity;
         }
         events.OnEffectEvent(EffectsController.EffectType.Melle, IsAttack);
 
@@ -57,7 +56,7 @@ public class MiliWeapon : AWeapon
     private void OnTriggerEnter(Collider other)
     {
     
-        if(isAttack)
+        if(state==AWeapon.WeaponState.Attack)
         {
             if(other.transform.GetComponent<IDamageble>()!=null)
             {

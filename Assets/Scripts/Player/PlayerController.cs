@@ -101,22 +101,22 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.ChangeSpeed.performed += context =>
         {
-            if (isShiftNotInput)
+            if (weaponChanger.CurrentWeapon.WeaponType == WeaponType.Range)
+            {
+                movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
+            }
+            else if (isShiftNotInput)
             {
                 movement.moveType = APlayerMovement.PlayerMoveType.Fast;
                 isShiftNotInput = false;
 
             }
-            else
+            else if(!isShiftNotInput)
             {
                 movement.moveType = APlayerMovement.PlayerMoveType.Slow;
                 isShiftNotInput = true;
 
-            }
-            if(weaponChanger.CurrentWeapon.WeaponType == WeaponType.Range)
-            {
-                movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
-            }
+            }         
         };
 
         input.ButtonInputs.Blink.performed += context =>

@@ -32,7 +32,7 @@ public class WeaponChanger
 
             if (currentWeapon != null)
             {
-                if(currentWeapon.IsAttack)
+                if(currentWeapon.State == AWeapon.WeaponState.Attack)
                 {
                     return;
                 }
