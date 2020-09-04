@@ -124,9 +124,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 2048
-  popup: {fileID: 0}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!64 &9142277790740689273
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -265,9 +262,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 2048
-  popup: {fileID: 0}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!64 &7551380496436387468
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -406,9 +400,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 2048
-  popup: {fileID: 0}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!64 &6247489984574598316
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -547,9 +538,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 2048
-  popup: {fileID: 0}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!64 &3666557378753606391
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -688,9 +676,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 2048
-  popup: {fileID: 0}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!64 &3280105498718807057
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -829,9 +814,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 2048
-  popup: {fileID: 0}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!64 &2026046374007934791
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -970,9 +952,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 2048
-  popup: {fileID: 0}
-  popupDestroyTime: 2
-  popupRangeTime: 1
 --- !u!64 &1576206083175540581
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1069,7 +1048,7 @@ MonoBehaviour:
   timeToDeactive: 1
   explousionForce: 10
   explousionRadius: 100
-  forceTransform: {fileID: 0}
+  forceTransform: {fileID: 8657034258934001369}
   destructs: []
   minCountToDestruct: 0
 --- !u!1 &8657034258934001374

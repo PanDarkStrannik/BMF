@@ -56,8 +56,11 @@ public class RangeWeapon : AWeapon
 
     protected virtual void BeforeShoot()
     {
-        events.OnAnimEvent(AnimationController.AnimationType.RangeAttack);
         BulletCounter();
+        if (state == WeaponState.Attack)
+        {
+            events.OnAnimEvent(AnimationController.AnimationType.RangeAttack);
+        }
     }
 
     protected virtual void InShoot()

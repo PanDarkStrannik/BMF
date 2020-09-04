@@ -12,6 +12,7 @@ public class EnemyMovementController : MonoBehaviour
     [SerializeReference] private List<AEnemyMovement> movements;
     [SerializeReference] private NavMeshAgent meshAgent;
     [SerializeReference] private MainEvents mainEvents;
+    [SerializeReference] private Transform enemyAnimatedBody;
     [SerializeField] private float correctSpeedToAnim=10;
 
     //private Animator anim;
@@ -26,8 +27,25 @@ public class EnemyMovementController : MonoBehaviour
         {
             e.MoveToPoint += Moving;
         }
+        mainEvents.AnimationStateEvent += AnimationStateEventChecker;
     }
 
+    public void AnimationStateEventChecker(StateTypeAnimAction animAction)
+    {
+        if(animAction.StateType==StateController.StateType.Enter)
+        {
+            if (animAction.RootMotion)
+            {
+                meshAgent.enabled = false;
+            }
+        }
+        else if (animAction.StateType == StateController.StateType.Exit)
+        {
+            meshAgent.transform.position = enemyAnimatedBody.position;
+            enemyAnimatedBody.localPosition = Vector3.zero;
+            meshAgent.enabled = true;
+        }
+    }
 
     //private void Update()
     //{
@@ -51,15 +69,18 @@ public class EnemyMovementController : MonoBehaviour
 
     private void Moving(Vector3 point, float speed, bool warp)
     {
-        meshAgent.ResetPath();
-        meshAgent.speed = speed;
-        if (warp)
+        if (meshAgent.enabled)
         {
-            meshAgent.Warp(point);
-        }
-        else
-        {
-            meshAgent.destination = point;
+            meshAgent.ResetPath();
+            meshAgent.speed = speed;
+            if (warp)
+            {
+                meshAgent.Warp(point);
+            }
+            else
+            {
+                meshAgent.destination = point;
+            }
         }
     }
 

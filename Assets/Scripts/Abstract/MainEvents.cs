@@ -33,4 +33,13 @@ public class MainEvents : MonoBehaviour
     {
         EffectTypeEvent?.Invoke(effectType, activ);
     }
+
+
+
+    public delegate void OnAnimationStateEventHelper(StateTypeAnimAction animAction);
+    public event OnAnimationStateEventHelper AnimationStateEvent;
+    public void OnAnimationStateEvent(StateTypeAnimAction animAction)
+    {
+        AnimationStateEvent?.Invoke(animAction);
+    }
 }

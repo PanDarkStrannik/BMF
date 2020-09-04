@@ -884,6 +884,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &218878936 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6136166640087527111, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+  m_PrefabInstance: {fileID: 466314248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &225502464 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 147072, guid: 48333a5aa700be24c963813c82ef05d9, type: 3}
@@ -1509,6 +1514,66 @@ PrefabInstance:
       propertyPath: weaponData.Array.data[0].value
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[0].stateControllers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[0].animsActions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[4].animsActions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[5].animsActions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[0].animsActions.Array.data[0].rootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[0].animsActions.Array.data[1].stateType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[4].animsActions.Array.data[0].rootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[4].animsActions.Array.data[1].stateType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[5].animsActions.Array.data[0].rootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 896034266, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: animations.Array.data[5].animsActions.Array.data[1].stateType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264471871, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: objectsAims.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264471871, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: objectsAims.Array.data[2].lookingObject
+      value: 
+      objectReference: {fileID: 218878936}
+    - target: {fileID: 1264471871, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: objectsAims.Array.data[2].correctTargetPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264471871, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: objectsAims.Array.data[2].aimMod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017565599, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: enemyAnimatedBody
+      value: 
+      objectReference: {fileID: 218878936}
     - target: {fileID: 2298525643881898550, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: m_Name
       value: BossOgr
@@ -15336,7 +15401,7 @@ MonoBehaviour:
   timeToDeactive: 3
   explousionForce: 100
   explousionRadius: 100
-  forceTransform: {fileID: 0}
+  forceTransform: {fileID: 8151019351271552139}
   destructs: []
   minCountToDestruct: 1
 --- !u!4 &8151019351271552139

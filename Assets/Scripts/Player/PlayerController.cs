@@ -96,27 +96,36 @@ public class PlayerController : MonoBehaviour
         };
 
 
-        input.ButtonInputs.ChangeWeapon.performed += context => weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeapon.ReadValue<float>());
+
+        input.ButtonInputs.ChangeWeapon.performed += context =>
+        {
+            weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeapon.ReadValue<float>());
+        };
 
 
         input.ButtonInputs.ChangeSpeed.performed += context =>
         {
-            if (weaponChanger.CurrentWeapon.WeaponType == WeaponType.Range)
+            if (!ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType))
             {
-                movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
-            }
-            else if (isShiftNotInput)
-            {
-                movement.moveType = APlayerMovement.PlayerMoveType.Fast;
-                isShiftNotInput = false;
+                if (isShiftNotInput)
+                {
+                    movement.moveType = APlayerMovement.PlayerMoveType.Fast;
+                    isShiftNotInput = false;
 
-            }
-            else if(!isShiftNotInput)
-            {
-                movement.moveType = APlayerMovement.PlayerMoveType.Slow;
-                isShiftNotInput = true;
+                }
+                else
+                {
+                    movement.moveType = APlayerMovement.PlayerMoveType.Slow;
+                    isShiftNotInput = true;
 
-            }         
+                }
+            }
+        };
+
+
+        input.MovementInput.GetDirection.performed += context =>
+        {
+            ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
         };
 
         input.ButtonInputs.Blink.performed += context =>
@@ -128,7 +137,22 @@ public class PlayerController : MonoBehaviour
             }
         };
 
+       
+
     }
+
+
+    private bool ChangeAbilityBecauseWeapon(WeaponType type)
+    {
+        switch(type)
+        {
+            case WeaponType.Range:
+                movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
+                return true;
+        }
+        return false;
+    }
+
 
     private float ClampAngle(float angle, float min, float max)
     {

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class AnimationController : MonoBehaviour
 {
     [SerializeField] private List<WeaponAnimTriggerName> animations;
     [SerializeReference] private List<MainEvents> animationEvents;
+
+    public delegate void InMovementRootAnimationHelper(bool rootMotion);
+    public event InMovementRootAnimationHelper InMovementRoot; 
+   
+
 
     private void Start()
     {
@@ -15,7 +19,18 @@ public class AnimationController : MonoBehaviour
             animEv.AnimTypeEvent += ActivateRandomeTriggerByType;
             animEv.AnimTypeEventWithFloat += GiveValueToAllAnimType;
         }
+        foreach (var e in animations)
+        {
+            e.Initialize();
+            foreach (var animEv in animationEvents)
+            {
+                e.InChangeAnimator += animEv.OnAnimationStateEvent;
+            }
+        }
     }
+
+
+  
 
 
     public void ActivateAllTriggerByType(AnimationType animationType)
@@ -102,7 +117,12 @@ public class WeaponAnimTriggerName
     [SerializeField] private Animator animator;
     [SerializeField] private string animTriggerName;
     [SerializeField] private AnimationController.AnimationType type;
-    [SerializeField] private bool rootMotion = false;
+    [SerializeField] private List<StateTypeAnimAction> animsActions;
+
+    private List<StateController> stateControllers;
+
+    public delegate void InChangeAnimatorHelper(StateTypeAnimAction animAction);
+    public event InChangeAnimatorHelper InChangeAnimator;
 
     public AnimationController.AnimationType Type
     {
@@ -112,11 +132,51 @@ public class WeaponAnimTriggerName
         }
     }
 
+    public void Initialize()
+    {
+        stateControllers = new List<StateController>(animator.GetBehaviours<StateController>());
+
+        foreach(var e in stateControllers)
+        {
+            e.StateEvent += StateTypeCheker;
+        }
+    }
+
+    public void ReInitialize()
+    {
+        foreach (var e in stateControllers)
+        {
+            e.StateEvent -= StateTypeCheker;
+        }
+    }
+
+    private void StateTypeCheker(StateController.StateType type)
+    {
+        if (animsActions.Count > 0)
+        {
+            foreach (var e in animsActions)
+            {
+                if (type == e.StateType)
+                {
+                    ChangeAnimator(e);
+                    return;
+                }
+            }
+        } 
+    }
+
+
+    private void ChangeAnimator(StateTypeAnimAction animAction)
+    {        
+        InChangeAnimator?.Invoke(animAction);
+        animator.applyRootMotion = animAction.RootMotion;
+    }
+
+
     public void ActivateAnimTrigger()
     {
         if (animator.isActiveAndEnabled)
-        {
-            animator.applyRootMotion = rootMotion;
+        {        
             animator.SetTrigger(animTriggerName);
         }
     }
@@ -125,7 +185,6 @@ public class WeaponAnimTriggerName
     {
         if (animator.isActiveAndEnabled)
         {
-            animator.applyRootMotion = rootMotion;
             animator.SetBool(animTriggerName, setValue);
         }
     }
@@ -134,7 +193,6 @@ public class WeaponAnimTriggerName
     {
         if(animator.isActiveAndEnabled)
         {
-            animator.applyRootMotion = rootMotion;
             animator.SetFloat(animTriggerName, value);
         }
     }
@@ -143,3 +201,30 @@ public class WeaponAnimTriggerName
     
 }
 
+[System.Serializable]
+public class StateTypeAnimAction
+{
+    [SerializeField] private StateController.StateType stateType;
+    [SerializeField] private bool rootMotion;
+
+
+    public delegate void StateActivatedHelper();
+    public event StateActivatedHelper StateActivated;
+
+    public StateController.StateType StateType
+    {
+        get
+        {
+            return stateType;
+        }
+    }
+
+    public bool RootMotion
+    {
+        get
+        { 
+            StateActivated?.Invoke();
+            return rootMotion;
+        }
+    }
+}
