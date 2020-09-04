@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BossUI : MonoBehaviour
@@ -11,12 +13,18 @@ public class BossUI : MonoBehaviour
     [SerializeField] private Image bossBar;
     [SerializeField] private EnemyDetection detection;
 
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject winMenu;
+    [SerializeField] private List<MonoBehaviour> deactiveScripts;
+    [SerializeField] private float timeToDeactive=5f;
+
     private float maxBossHP=0f;
 
 
     private void Start()
     {
         currentBossUI.SetActive(false);
+        winMenu.SetActive(false);
         detection.DetectingEvent += delegate
         {
             currentBossUI.SetActive(true);
@@ -49,7 +57,23 @@ public class BossUI : MonoBehaviour
         if(currentHP<=0)
         {
             currentBossUI.SetActive(false);
+            StartCoroutine(Win());
         }
+    }
+
+    private IEnumerator Win()
+    {
+        yield return new WaitForSeconds(timeToDeactive);
+        winMenu.SetActive(true);
+        mainMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        foreach(var e in deactiveScripts)
+        {
+            e.enabled = false;
+        }
+        yield return new WaitForSeconds(2f);
+        PauseController.Pause();
     }
 
 }

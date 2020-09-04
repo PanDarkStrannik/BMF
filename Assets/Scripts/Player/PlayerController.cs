@@ -100,26 +100,27 @@ public class PlayerController : MonoBehaviour
         input.ButtonInputs.ChangeWeapon.performed += context =>
         {
             weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeapon.ReadValue<float>());
+            ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
         };
 
 
         input.ButtonInputs.ChangeSpeed.performed += context =>
         {
-            if (!ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType))
+
+            if (isShiftNotInput)
             {
-                if (isShiftNotInput)
-                {
-                    movement.moveType = APlayerMovement.PlayerMoveType.Fast;
-                    isShiftNotInput = false;
+                movement.moveType = APlayerMovement.PlayerMoveType.Fast;
+                isShiftNotInput = false;
 
-                }
-                else
-                {
-                    movement.moveType = APlayerMovement.PlayerMoveType.Slow;
-                    isShiftNotInput = true;
-
-                }
             }
+            else
+            {
+                movement.moveType = APlayerMovement.PlayerMoveType.Slow;
+                isShiftNotInput = true;
+
+            }
+            ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
+
         };
 
 

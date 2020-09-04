@@ -79,6 +79,8 @@ public class PlayerUI : MonoBehaviour
         PauseController.Pause();
     }
 
+   
+
     public void Resume()
     {
         PauseController.Resume();
