@@ -26,6 +26,8 @@ public class PlayerUI : MonoBehaviour
 
     private float maxPlayerHealth;
 
+    public delegate void OnPlayerDeathEventHelper();
+    public event OnPlayerDeathEventHelper OnPlayerDeathEvent;
 
     private void Start()
     {
@@ -63,7 +65,7 @@ public class PlayerUI : MonoBehaviour
         playerBar.fillAmount = currentHP / maxPlayerHealth;
         if (currentHP <= 0)
         {
-            StartCoroutine(GameOver());
+            OnPlayerDeathEvent?.Invoke();
         }
     }
 

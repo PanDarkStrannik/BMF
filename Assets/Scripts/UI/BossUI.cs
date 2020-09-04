@@ -20,6 +20,8 @@ public class BossUI : MonoBehaviour
 
     private float maxBossHP=0f;
 
+    public delegate void OnBossDeathEventHelper();
+    public event OnBossDeathEventHelper OnBossDeathEvent;
 
     private void Start()
     {
@@ -57,7 +59,7 @@ public class BossUI : MonoBehaviour
         if(currentHP<=0)
         {
             currentBossUI.SetActive(false);
-            StartCoroutine(Win());
+            OnBossDeathEvent?.Invoke();
         }
     }
 

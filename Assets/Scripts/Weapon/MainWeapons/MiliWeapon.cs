@@ -31,7 +31,7 @@ public class MiliWeapon : AWeapon
 
     private IEnumerator ChangeColider()
     {
-        events.OnEffectEvent(EffectsController.EffectType.Melle, IsAttack);
+        events.OnEffectEvent(EffectsController.EffectType.Melle, true);
         yield return new WaitForSecondsRealtime(timeToWeaponAttack);
         if (state==AWeapon.WeaponState.Attack)
         {
@@ -48,7 +48,7 @@ public class MiliWeapon : AWeapon
             }
             state = AWeapon.WeaponState.Serenity;
         }
-        events.OnEffectEvent(EffectsController.EffectType.Melle, IsAttack);
+        events.OnEffectEvent(EffectsController.EffectType.Melle, false);
 
     }
 
