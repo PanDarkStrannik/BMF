@@ -1308,13 +1308,29 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6385403144585974627, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Size.y
+      value: 9.4956455
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385403144585974627, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Center.x
+      value: -1.3649663
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385403144585974627, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Center.y
+      value: 4.462431
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385403144585974627, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Center.z
+      value: -0.15189339
+      objectReference: {fileID: 0}
     - target: {fileID: 6385403144585974628, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: weaponData.Array.data[0].value
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6385403144988011048, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: timeToReload
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6385403144988011048, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: weaponData.Array.data[0].value
