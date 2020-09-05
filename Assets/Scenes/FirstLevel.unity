@@ -1946,6 +1946,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2298525643881898554, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: colliderChances.Array.data[1].radius
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298525643881898554, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: colliderChances.Array.data[2].radius
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298525643881898554, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
+      propertyPath: colliderChances.Array.data[3].radius
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 2298525644315008610, guid: 7ce623a12aee06d49a3d0b92dec034ea, type: 3}
       propertyPath: bossUI
       value: 
