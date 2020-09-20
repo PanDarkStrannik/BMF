@@ -22,8 +22,8 @@ Material:
     m_Floats:
     - Vector1_1CEA61DD: 0.01
     - Vector1_A79C2C6E: 0.4
-    - _Amount: 0.01
-    - _TimeScaleDisplacement: 0.5
+    - _Amount: 1
+    - _TimeScaleDisplacement: 0.1
     - _TimeScaleVotonoi: 2
     m_Colors:
     - Color_62CF0C5: {r: 1.4980392, g: 0.047058824, b: 0, a: 0}
