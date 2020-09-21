@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 6ee3a7c25b7ec80408092f8db87af7e6, type: 3}
+  m_Name: Lava
+  m_Shader: {fileID: -6465566751694194690, guid: bd1b2831fe1bf5249ba79eed2998712a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,10 +18,17 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - Texture2D_1F83B432:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_578B4FF: 0.1
+    - Vector1_3364D3C5: 0.05
+    - Vector1_5755DDA7: 1
+    - Vector1_79C85ED9: 5
+    - Vector1_88D1CA4D: 20
     m_Colors:
-    - Color_5A9F3F38: {r: 0.121219635, g: 1.4546356, b: 2.57255, a: 1}
-    - Color_7E17B354: {r: 0, g: 0.11372549, b: 0.14901961, a: 0}
+    - Color_ADACD5FC: {r: 7.730459, g: 0.27857512, b: 0, a: 0}
+    - Color_F381CE2B: {r: 0.46675906, g: 0, b: 0.0046116104, a: 0}
   m_BuildTextureStacks: []

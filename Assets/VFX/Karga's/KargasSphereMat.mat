@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 6ee3a7c25b7ec80408092f8db87af7e6, type: 3}
+  m_Name: KargasSphereMat
+  m_Shader: {fileID: -6465566751694194690, guid: 3e9e686d15048d349baefaa21008101e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,8 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_578B4FF: 0.1
+    - Vector1_A2AB1C72: 0.6
     m_Colors:
-    - Color_5A9F3F38: {r: 0.121219635, g: 1.4546356, b: 2.57255, a: 1}
-    - Color_7E17B354: {r: 0, g: 0.11372549, b: 0.14901961, a: 0}
+    - Color_81C67765: {r: 4.6745105, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

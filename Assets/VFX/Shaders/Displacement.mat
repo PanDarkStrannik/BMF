@@ -22,7 +22,7 @@ Material:
     m_Floats:
     - Vector1_1CEA61DD: 0.01
     - Vector1_A79C2C6E: 0.4
-    - _Amount: 1
+    - _Amount: 0.5
     - _TimeScaleDisplacement: 0.1
     - _TimeScaleVotonoi: 2
     m_Colors:
