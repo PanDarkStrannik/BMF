@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovementController))]
+[RequireComponent(typeof(OldEnemyMovementController))]
 public class EnemyController : MonoBehaviour
 {
 
@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private float attackDelay = 1f;
 
-    [SerializeReference] private EnemyMovementController movement;
+    [SerializeReference] private OldEnemyMovementController movement;
     [SerializeReference] private EnemyDetection detection;
     [SerializeReference] private EnemyWeaponLogic weapon;
     [SerializeReference] private MainEvents mainEvents;
@@ -144,10 +144,10 @@ public class EnemyController : MonoBehaviour
 [System.Serializable]
 public class EnemyEventMoveType
 {
-    [SerializeField] private AEnemyMovement.EnemyMoveType enemyMoveType;
+    [SerializeField] private OldAEnemyMovement.EnemyMoveType enemyMoveType;
     [SerializeField] private GameEvents.EnemyEvents enemyEventType;
 
-    public AEnemyMovement.EnemyMoveType MoveType
+    public OldAEnemyMovement.EnemyMoveType MoveType
     {
         get
         {
@@ -168,10 +168,10 @@ public class EnemyEventMoveType
 [System.Serializable]
 public class PlayerEventMoveType
 {
-    [SerializeField] private AEnemyMovement.EnemyMoveType enemyMoveType;
+    [SerializeField] private OldAEnemyMovement.EnemyMoveType enemyMoveType;
     [SerializeField] private GameEvents.PlayerEvents playerEventType;
 
-    public AEnemyMovement.EnemyMoveType MoveType
+    public OldAEnemyMovement.EnemyMoveType MoveType
     {
         get
         {

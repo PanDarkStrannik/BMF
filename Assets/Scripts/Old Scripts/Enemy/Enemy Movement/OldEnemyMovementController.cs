@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 
 //[RequireComponent(typeof(Animator))]
-public class EnemyMovementController : MonoBehaviour
+public class OldEnemyMovementController : MonoBehaviour
 {
 
     [HideInInspector] public bool UponDistance = true;
     [HideInInspector] public Transform target = null;
-    [SerializeReference] private List<AEnemyMovement> movements;
+    [SerializeReference] private List<OldAEnemyMovement> movements;
     [SerializeReference] private NavMeshAgent meshAgent;
     [SerializeReference] private MainEvents mainEvents;
     [SerializeReference] private Transform enemyAnimatedBody;
@@ -85,7 +85,7 @@ public class EnemyMovementController : MonoBehaviour
     }
 
 
-    public bool MoveUponDistance(Transform target, float detectionDistance, AEnemyMovement.EnemyMoveType currentType)
+    public bool MoveUponDistance(Transform target, float detectionDistance, OldAEnemyMovement.EnemyMoveType currentType)
     {
         Vector3 toTarget = target.position - transform.position;
         if (toTarget.magnitude <= detectionDistance)
@@ -98,7 +98,7 @@ public class EnemyMovementController : MonoBehaviour
 
 
 
-    public void Move(AEnemyMovement.EnemyMoveType currentType, Transform target)
+    public void Move(OldAEnemyMovement.EnemyMoveType currentType, Transform target)
     {
         foreach (var movement in movements)
         {
@@ -109,7 +109,7 @@ public class EnemyMovementController : MonoBehaviour
         }
     }
 
-    public void Move(AEnemyMovement.EnemyMoveType currentType)
+    public void Move(OldAEnemyMovement.EnemyMoveType currentType)
     {
         Move(currentType, target);
     }

@@ -22,6 +22,9 @@ public class EnemyDetection : MonoBehaviour
     public delegate void DetectingHelper();
     public event DetectingHelper DetectingEvent;
 
+    public delegate void DetectedObjectsHelper(List<GameObject> detectedObjects);
+    public event DetectedObjectsHelper DetectedObjectsEvent;
+
     private bool isForgoting = false;
     private bool alreadyDetect = false;
     public bool AlreadyDetect
@@ -132,7 +135,7 @@ public class EnemyDetection : MonoBehaviour
             }
             if (detectionsInColliders >= 1 && !alreadyDetect)
             {
-                DetectingEvent();
+                DetectingEvent?.Invoke();
                 alreadyDetect = true;
             }
             else if(!isForgoting && forgeting)
@@ -154,6 +157,7 @@ public class EnemyDetection : MonoBehaviour
                 if(colliderChances[i].ObjectsInCollider()!=null)
                 {
                     detectedColider = colliderChances[i];
+                    DetectedObjectsEvent?.Invoke(detections);
                     break;
                 }
             }         
@@ -190,10 +194,10 @@ public class ColliderChance
     [SerializeField] private Color gizmosColor;
     [SerializeField] private Transform center;
     [SerializeField] private float radius;
-    [SerializeField] private AEnemyMovement.EnemyMoveType moveType;
+    [SerializeField] private OldAEnemyMovement.EnemyMoveType moveType;
     [SerializeField] private WeaponType weaponType;
 
-    public AEnemyMovement.EnemyMoveType MoveType
+    public OldAEnemyMovement.EnemyMoveType MoveType
     {
         get
         {
@@ -237,7 +241,7 @@ public class ColliderChance
     public bool IsInCollider()
     {
 
-        var detect = Physics.CheckSphere(center.position, radius, layerMask, QueryTriggerInteraction.Ignore);
+        var detect = Physics.CheckSphere(center.position, radius, layerMask);
  
         return detect;
     }

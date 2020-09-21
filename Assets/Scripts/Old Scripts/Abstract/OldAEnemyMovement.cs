@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public abstract class AEnemyMovement : MonoBehaviour, IMovement
+public abstract class OldAEnemyMovement : MonoBehaviour, IMovement
 {
 
     [SerializeField] protected float speed = 10f;

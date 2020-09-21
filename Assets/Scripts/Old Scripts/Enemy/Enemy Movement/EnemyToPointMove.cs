@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 
 
-public class EnemyToPointMove : AEnemyMovement
+public class EnemyToPointMove : OldAEnemyMovement
 {
 
     [SerializeField] private bool warp=false;

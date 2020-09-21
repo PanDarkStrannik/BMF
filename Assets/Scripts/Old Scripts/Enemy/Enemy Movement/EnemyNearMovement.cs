@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyNearMovement : AEnemyMovement
+public class EnemyNearMovement : OldAEnemyMovement
 {
     
     [SerializeField] private float minDistance = 7f;

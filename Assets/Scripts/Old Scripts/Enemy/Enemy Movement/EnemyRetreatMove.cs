@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 
 
-public class EnemyRetreatMove : AEnemyMovement
+public class EnemyRetreatMove : OldAEnemyMovement
 {
     [SerializeField] private float distance = 3f;
     [SerializeField] private bool warp = false;
