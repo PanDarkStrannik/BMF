@@ -167,6 +167,12 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.unity.vfx-toolbox": {
+      "version": "file:C:/Users/rusla/OneDrive/Рабочий стол/VFXToolbox-master",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.visualeffectgraph": {
       "version": "8.2.0",
       "depth": 0,
