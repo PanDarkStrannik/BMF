@@ -50,6 +50,16 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
     public abstract void Attack();
 
+    public virtual IEnumerator StopAttack(float stopTime)
+    {
+        Debug.Log("Остановили Атаку!");
+        StopAllCoroutines();
+        state = WeaponState.ImposibleAttack;
+        yield return new WaitForSeconds(stopTime);
+        state = WeaponState.Serenity;
+        Debug.Log("Разрешили Атаку!");
+    }
+
     public enum WeaponState
     {
         Attack, Reload, ImposibleAttack, Serenity

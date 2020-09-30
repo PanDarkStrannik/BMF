@@ -5,8 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyMovementController : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private NavMeshAgent navAgent;
+    [SerializeReference] private Animator animator;
+    [SerializeReference] private NavMeshAgent navAgent;
+    [SerializeField] private List<ObjectAimMod> objectAim;
+
 
     void Start()
     {
@@ -14,6 +16,7 @@ public class EnemyMovementController : MonoBehaviour
         foreach (var e in temp)
         {
             e.MoveToPoint += Moving;
+            e.LookToObject += Looking;
         }
 
     }
@@ -29,7 +32,32 @@ public class EnemyMovementController : MonoBehaviour
         {
             navAgent.SetDestination(point);
         }
-        Debug.Log("Сробило");
     }
+
+    private void Looking(Transform target)
+    {
+        foreach(var e in objectAim)
+        {
+            NewAim.Aim(target, e);
+        }
+    }
+
+    //private void Aim(Transform target)
+    //{
+
+    //    switch (weapon.ObjectAim.Mod)
+    //    {
+    //        case ObjectAimMod.AimMod.Full:
+    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.None);
+    //            break;
+    //        case ObjectAimMod.AimMod.LockYaw:
+    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.Yaw);
+    //            break;
+    //        case ObjectAimMod.AimMod.LockPitch:
+    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.Pitch);
+    //            break;
+    //    }
+
+    //}
 
 }

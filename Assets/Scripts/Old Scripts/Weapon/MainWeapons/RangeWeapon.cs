@@ -89,4 +89,5 @@ public class RangeWeapon : AWeapon
         bulletsCount = 0;
         state = WeaponState.Serenity;
     }
+
 }

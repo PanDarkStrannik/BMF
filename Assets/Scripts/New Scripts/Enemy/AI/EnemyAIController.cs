@@ -15,6 +15,14 @@ public class EnemyAIController : MonoBehaviour
 
     private List<AEnemyAI> behaviours;
 
+    public List<AEnemyAI> Behaviours
+    {
+        get
+        {
+            return behaviours;
+        }
+    }
+
     private void Start()
     {
         behaviours = new List<AEnemyAI>(animator.GetBehaviours<AEnemyAI>());
@@ -35,7 +43,7 @@ public class EnemyAIController : MonoBehaviour
             if(obj.CompareTag("Player"))
             {
                 PlayerDetectedEvent.StartEvent(true);
-                mainEvents.DetectedObjectEvent(obj.transform);
+               // mainEvents.DetectedObjectEvent(obj.transform);
                 var distance = Vector3.Distance(obj.transform.position, enemyObject.transform.position);
                 PlayerDistanceEvent.StartEvent(distance);
                 break;
