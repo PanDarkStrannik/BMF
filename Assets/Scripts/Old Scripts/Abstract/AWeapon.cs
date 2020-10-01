@@ -69,5 +69,5 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
 public enum WeaponType
 {
-    Mili, Range
+    Mili, Range, Jump
 }

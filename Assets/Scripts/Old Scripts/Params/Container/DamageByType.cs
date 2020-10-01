@@ -35,6 +35,13 @@ public class DamageByType
         this.value = value;
 
     }
+
+
+    public void AddDamage(float damage)
+    {
+        value += damage;
+    }
+
 }
 
 public enum DamageType

@@ -28,6 +28,38 @@ public class DamageArea : MonoBehaviour
         }
     }
 
+    public List<DamageByType> Damages
+    {
+        get
+        {
+            return damages;
+        }
+        set
+        {
+            damages = value;
+        }
+    }
+
+    public void AddDamage(List<DamageByType> addDamages)
+    {
+        var temp = new List<DamageByType>();
+        foreach(var damage in damages)
+        {
+            foreach(var add in addDamages)
+            {
+                if(damage.DamageType==add.DamageType)
+                {
+                    damage.AddDamage(add.Value);
+                }
+                else
+                {
+                    temp.Add(add);
+                }
+            }
+        }
+        damages.AddRange(temp);
+    }
+
     private void Start()
     {
         enterColiders = new Dictionary<Collider, bool>();
