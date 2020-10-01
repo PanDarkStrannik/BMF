@@ -81,6 +81,7 @@ public class DamageArea : MonoBehaviour
         {
            other.GetComponent<IDamageble>().ApplyDamage(damage);
         }
+        Debug.Log("Зафиксили урон");
         yield return new WaitForSeconds(timeBetweenDamage);
         enterColiders[other] = false;
     }
