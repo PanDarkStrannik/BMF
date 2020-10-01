@@ -425,13 +425,13 @@ MonoBehaviour:
   attackStages:
   - stageName: Prepare
     during: 1
-    weapon: 1
+    weapon: 2
     stopVariant: 1
     aim: 1
     damaging: 0
   - stageName: During
     during: 3
-    weapon: 1
+    weapon: 2
     stopVariant: 0
     aim: 0
     damaging: 1
@@ -440,7 +440,7 @@ MonoBehaviour:
     weapon: 1
     stopVariant: 0
     aim: 1
-    damaging: 0
+    damaging: 1
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -457,6 +457,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: PlayerDetected
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: PlayerAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

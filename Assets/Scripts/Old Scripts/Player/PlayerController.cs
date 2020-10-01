@@ -16,16 +16,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Blink blinkAbility;
 
-
     private APlayerMovement movement;
     private PlayerInput input;
 
     private bool isShiftNotInput = true;
 
     private float moveX, moveY;
-   
-    
 
+    public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
+    public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
+
+  
 
 
     private void Awake()
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        WeaponChecker();
         RotationInput();
     }
 
@@ -87,11 +89,39 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void WeaponChecker()
+    {
+        //if(weaponChanger.CurrentWeapon.State == AWeapon.WeaponState.Attack)
+        //{
+        //    PlayerWeaponControlEvent?.Invoke(PlayerWeaponControlType.PlayerAttack);
+        //}
+        //else if (weaponChanger.CurrentWeapon.State == AWeapon.WeaponState.Reload)
+        //{
+        //    PlayerWeaponControlEvent?.Invoke(PlayerWeaponControlType.PlayerReload);
+        //}
+
+        switch (weaponChanger.CurrentWeapon.State)
+        {
+            case AWeapon.WeaponState.Attack:
+                PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Attack);
+                break;
+            case AWeapon.WeaponState.Reload:
+                PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Reload);
+                break;
+            case AWeapon.WeaponState.ImposibleAttack:
+                PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.ImposibleAttack);
+                break;
+            case AWeapon.WeaponState.Serenity:
+                PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Serenity);
+                break;
+        }
+
+    }
+
     private void ButtonsInput()
     {
         input.ButtonInputs.Shoot.performed += context =>
         {
-
             weaponChanger.CurrentWeapon.Attack();
         };
 

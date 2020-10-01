@@ -12,6 +12,7 @@ public class EnemyAIController : MonoBehaviour
 
     [SerializeField] private EnemyEventValueFSM<bool> PlayerDetectedEvent;
     [SerializeField] private EnemyEventValueFSM<float> PlayerDistanceEvent;
+    [SerializeField] private List<EnemyEventValueFSM<AWeapon.WeaponState, bool>> PlayerWeaponControllerEvents;
 
     private List<AEnemyAI> behaviours;
 
@@ -32,6 +33,8 @@ public class EnemyAIController : MonoBehaviour
             beh.AIAgent = enemyObject;
         }
 
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
+
         detection.DetectedObjectsEvent += ChangeInterestingAIObjects;
         
     }
@@ -45,11 +48,12 @@ public class EnemyAIController : MonoBehaviour
                 PlayerDetectedEvent.StartEvent(true);
                // mainEvents.DetectedObjectEvent(obj.transform);
                 var distance = Vector3.Distance(obj.transform.position, enemyObject.transform.position);
-                PlayerDistanceEvent.StartEvent(distance);
+                PlayerDistanceEvent.StartEvent(distance);              
+
                 break;
             }
             else
-            {
+            {                
                 PlayerDetectedEvent.StartEvent(false);
             }
         }
@@ -57,6 +61,21 @@ public class EnemyAIController : MonoBehaviour
         foreach(var beh in behaviours)
         {
             beh.InterestingObjects = detectedObjects;
+        }
+    }
+
+    private void PlayerWeaponControllerEventListener(AWeapon.WeaponState controlType)
+    {
+        foreach (var e in PlayerWeaponControllerEvents)
+        {
+            if (e.GetStringValue == controlType)
+            {
+                e.StartEvent(true);
+            }
+            else
+            {
+                e.StartEvent(false);
+            }
         }
     }
 }
@@ -82,5 +101,26 @@ public class EnemyEventValueFSM<T>
     public void StartEvent(T value)
     {
         unityEvent?.Invoke(triggerName, value);
+    }
+}
+
+[System.Serializable]
+public class EnemyEventValueFSM<T,A>
+{
+    [SerializeField] private string addStringName;
+    [SerializeField] private T stringValue;
+    [SerializeField] private UnityEvent<string, A> unityEvent;
+
+    public T GetStringValue
+    {
+        get
+        {
+            return stringValue;
+        }
+    }
+
+    public void StartEvent(A value)
+    {
+        unityEvent?.Invoke(addStringName + stringValue.ToString(), value);
     }
 }

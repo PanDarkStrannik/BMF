@@ -11,6 +11,8 @@ public class RangeWeapon : AWeapon
     [SerializeField] protected float timeToReload = 0f;
     [SerializeField] protected int bulletsValue=3;
 
+   
+
     protected int bulletsCount = 0;
 
     private void Awake()
@@ -32,7 +34,7 @@ public class RangeWeapon : AWeapon
 
     public override void Attack()
     {
-        if (/*!isAttack && !isReload*/ state == WeaponState.Serenity)
+        if (state == WeaponState.Serenity)
         {
             state = WeaponState.Attack;
             StartCoroutine(Shoot());
