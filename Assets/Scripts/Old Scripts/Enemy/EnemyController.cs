@@ -76,22 +76,22 @@ public class EnemyController : MonoBehaviour
 
     private void MovementLogic(Transform objTransform)
     {
-        if (movement.MoveUponDistance(objTransform, detection.DetectedColider.Radius, detection.DetectedColider.MoveType))
-        {
+        //if (movement.MoveUponDistance(objTransform, detection.DetectedColider.Radius, detection.DetectedColider.MoveType))
+        //{
            
-        }
+        //}
     }
 
 
 
     private IEnumerator AttackLogic()
     {
-        if (weapon.Attack(detection.DetectedColider.WeaponType))
-        {
-            isAttackRecently = true;
+        //if (weapon.Attack(detection.DetectedColider.WeaponType))
+        //{
+        //    isAttackRecently = true;
             yield return new WaitForSeconds(attackDelay);
-            isAttackRecently = false;
-        }
+        //    isAttackRecently = false;
+        //}
     }
 
 

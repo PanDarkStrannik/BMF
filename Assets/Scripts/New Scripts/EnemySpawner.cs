@@ -7,7 +7,6 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Spawner spawner;
     [SerializeField] private List<SpawnStages> spawnStages;
-    [SerializeField] private int testPoint=1;
     [SerializeField] private Transform spawnPosition;
 
     private SpawnStages currentStage;
@@ -20,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+      
         if (spawnStages.Count > 0)
         {
             currentStage = spawnStages[0];
@@ -28,16 +28,24 @@ public class EnemySpawner : MonoBehaviour
         {
             throw new System.Exception("Не введён лист спавна врагов");
         }
+    
         StartCoroutine(SpawnBetweenTime());
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        ChangeStage(testPoint);     
+        PointCounter.GetPointCounter().PointEvent += ChangeStage;
+    }
+
+    private void OnDisable()
+    {
+        PointCounter.GetPointCounter().PointEvent -= ChangeStage;
     }
 
     private void ChangeStage(int point)
     {
+        Debug.Log("Текущие очки: " + point);
+
         foreach (var stage in spawnStages)
         {
             if (stage.StagePoint == point)

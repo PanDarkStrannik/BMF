@@ -10,14 +10,16 @@ public class ParamController : MonoBehaviour
 
     [SerializeField] protected List<MonoBehaviour> deactiveScripts;
 
-    private void Awake()
-    {
-        paramSum.OnParamNull += CheckType;
-        paramSum.OnParamChanged += CheckTypeAndValues; 
-    }
+    //private void Awake()
+    //{
+    //    paramSum.OnParamNull += CheckType;
+    //    paramSum.OnParamChanged += CheckTypeAndValues; 
+    //}
 
     private void OnEnable()
     {
+        paramSum.OnParamNull += CheckType;
+        paramSum.OnParamChanged += CheckTypeAndValues;
         paramSum.Initialize();
     }
 
@@ -33,13 +35,14 @@ public class ParamController : MonoBehaviour
         switch (type)
         {
             case DamagebleParam.ParamType.Health:
+
                 StartCoroutine(NullHealth());
                 break;
         }
     }
 
     protected virtual IEnumerator NullHealth()
-    {
+    {      
         foreach (var e in deactiveScripts)
         {
             e.enabled = false;

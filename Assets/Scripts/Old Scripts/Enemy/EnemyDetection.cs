@@ -194,24 +194,24 @@ public class ColliderChance
     [SerializeField] private Color gizmosColor;
     [SerializeField] private Transform center;
     [SerializeField] private float radius;
-    [SerializeField] private OldAEnemyMovement.EnemyMoveType moveType;
-    [SerializeField] private WeaponType weaponType;
+    //[SerializeField] private OldAEnemyMovement.EnemyMoveType moveType;
+    //[SerializeField] private WeaponType weaponType;
 
-    public OldAEnemyMovement.EnemyMoveType MoveType
-    {
-        get
-        {
-            return moveType;
-        }
-    }
+    //public OldAEnemyMovement.EnemyMoveType MoveType
+    //{
+    //    get
+    //    {
+    //        return moveType;
+    //    }
+    //}
 
-    public WeaponType WeaponType
-    {
-        get
-        {
-            return weaponType;
-        }
-    }
+    //public WeaponType WeaponType
+    //{
+    //    get
+    //    {
+    //        return weaponType;
+    //    }
+    //}
 
 
     public Color GizmosColor

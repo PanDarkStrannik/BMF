@@ -8,6 +8,12 @@ public class EnemyParamController : ParamController
     [SerializeField] private UnityEvent<AttackAI.AttackStopVariants, float> damageEvent;
     [SerializeField] private float damageToStopAttack = 1f;
     [SerializeField] private float timeToStopAttack = 1f;
+    [SerializeField] protected int pointsForKill = 1;
+
+
+
+
+
 
     protected override void CheckTypeAndValues(DamagebleParam.ParamType type, float value, float maxValue)
     {
@@ -22,4 +28,11 @@ public class EnemyParamController : ParamController
                 break;
         }
     }
+
+    protected override IEnumerator NullHealth()
+    {
+        PointCounter.GetPointCounter().AddPoints(pointsForKill);
+        return base.NullHealth();
+    }
+
 }

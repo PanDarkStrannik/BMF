@@ -6901,6 +6901,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &531469754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 531469755}
+  - component: {fileID: 531469756}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &531469755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531469754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 45.39, y: 0, z: 3.94}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531469756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531469754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1979fd2a55ccd74fb87651d09cfcea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner:
+    spawnObjects:
+    - {fileID: 5464730117673336574, guid: a08660438759ddb43bc333c7263d9316, type: 3}
+    objectsValues: 05000000
+    spawned_objects: []
+  spawnStages:
+  - stageName: 
+    enemyValue: 1
+    timeBetweenSpawn: 20
+    stagePoint: 0
+  - stageName: 
+    enemyValue: 2
+    timeBetweenSpawn: 15
+    stagePoint: 15
+  spawnPosition: {fileID: 531469755}
 --- !u!1001 &532969380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13102,8 +13160,8 @@ MonoBehaviour:
   datas:
     paramDatas:
     - type: 0
-      value: 100
-      maxValue: 100
+      value: 10
+      maxValue: 10
       weakneses:
       - damageType: 1
         value: 0
@@ -13146,6 +13204,7 @@ MonoBehaviour:
         m_CallState: 2
   damageToStopAttack: 1
   timeToStopAttack: 5
+  pointsForKill: 1
 --- !u!4 &637514497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5926740744855542962, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
@@ -13409,6 +13468,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5926740743422367048, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367053, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -37.4
@@ -13419,7 +13482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367053, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.79
+      value: -21.28
       objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367053, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_LocalRotation.x
@@ -13485,6 +13548,10 @@ PrefabInstance:
       propertyPath: objectsAims.Array.data[1].lookingObject
       value: 
       objectReference: {fileID: 1827049908}
+    - target: {fileID: 5926740744855542962, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.27
+      objectReference: {fileID: 0}
     - target: {fileID: 5926740745227633842, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: PlayerControllerEvents.Array.size
       value: 1
@@ -21146,6 +21213,7 @@ MonoBehaviour:
         m_CallState: 2
   damageToStopAttack: 1
   timeToStopAttack: 5
+  pointsForKill: 1
 --- !u!54 &730695547
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35091,6 +35159,7 @@ MonoBehaviour:
         m_CallState: 2
   damageToStopAttack: 1
   timeToStopAttack: 5
+  pointsForKill: 1
 --- !u!114 &1491411290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35106,8 +35175,8 @@ MonoBehaviour:
   datas:
     paramDatas:
     - type: 0
-      value: 100
-      maxValue: 100
+      value: 10
+      maxValue: 10
       weakneses:
       - damageType: 1
         value: 0
@@ -36071,8 +36140,6 @@ MonoBehaviour:
     gizmosColor: {r: 1, g: 0, b: 0, a: 0.59607846}
     center: {fileID: 1822066259}
     radius: 2.8
-    moveType: 1
-    weaponType: 0
   - chance: 100
     layerMask:
       serializedVersion: 2
@@ -36080,8 +36147,6 @@ MonoBehaviour:
     gizmosColor: {r: 1, g: 0.8791206, b: 0, a: 0.5176471}
     center: {fileID: 1822066259}
     radius: 6.28
-    moveType: 2
-    weaponType: 0
   - chance: 100
     layerMask:
       serializedVersion: 2
@@ -36089,8 +36154,6 @@ MonoBehaviour:
     gizmosColor: {r: 0, g: 0.0095796585, b: 1, a: 0.5176471}
     center: {fileID: 1822066259}
     radius: 20
-    moveType: 0
-    weaponType: 0
   timeToCheck: 1
   timeToForget: 1
   detecting: 1
@@ -47429,6 +47492,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangeEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5926740743422367048, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367053, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -37.4
@@ -47670,7 +47737,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20476
+  m_Name: pb_Mesh21118
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -48430,6 +48497,10 @@ PrefabInstance:
     - target: {fileID: 5926740743422367048, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_Name
       value: Karga
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926740743422367048, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367053, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_LocalPosition.x
