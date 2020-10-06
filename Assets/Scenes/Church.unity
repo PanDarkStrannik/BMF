@@ -13409,6 +13409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5926740743422367048, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367053, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -37.4
@@ -47520,7 +47524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 918624224, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: attackTime
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 918624224, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: weaponType
@@ -47780,7 +47784,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7101552171946243257, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: weapons.Array.data[0].distance
-      value: 15
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101552171946243257, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
+      propertyPath: weapons.Array.data[0].objectAim.Array.data[0].correctTargetPosition.y
+      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5926740744506618188, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
