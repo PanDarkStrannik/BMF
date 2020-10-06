@@ -400,6 +400,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+  isRigidbodyKinematick: 0
+  isNavMeshAgentActive: 1
   interestingObjects: []
   speed: 10
   warp: 0
@@ -421,6 +423,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+  isRigidbodyKinematick: 0
+  isNavMeshAgentActive: 0
   interestingObjects: []
   attackStages:
   - stageName: Prepare
@@ -429,18 +433,24 @@ MonoBehaviour:
     stopVariant: 1
     aim: 1
     damaging: 0
+    rigidBodyActive: 0
+    navMeshAgentActive: 0
   - stageName: During
     during: 3
     weapon: 2
     stopVariant: 0
     aim: 0
     damaging: 1
+    rigidBodyActive: 0
+    navMeshAgentActive: 0
   - stageName: End
     during: 1
     weapon: 1
     stopVariant: 0
     aim: 1
     damaging: 1
+    rigidBodyActive: 0
+    navMeshAgentActive: 0
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -496,6 +506,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+  isRigidbodyKinematick: 0
+  isNavMeshAgentActive: 1
   interestingObjects: []
   speed: 10
   warp: 0
@@ -559,6 +571,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+  isRigidbodyKinematick: 0
+  isNavMeshAgentActive: 1
   interestingObjects: []
   speed: 10
   warp: 0
@@ -579,6 +593,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4096
+  isRigidbodyKinematick: 0
+  isNavMeshAgentActive: 0
   interestingObjects: []
   speed: 10
   warp: 0

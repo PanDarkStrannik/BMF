@@ -5,32 +5,55 @@ using UnityEngine.AI;
 
 public class EnemyMovementController : MonoBehaviour
 {
-    [SerializeReference] private Animator animator;
+    //[SerializeReference] private Animator animator;
     [SerializeReference] private NavMeshAgent navAgent;
     [SerializeField] private List<ObjectAimMod> objectAim;
 
 
-    void Start()
+    //void Start()
+    //{
+    //    var temp = new List<AEnemyMovement>(animator.GetBehaviours<AEnemyMovement>());
+    //    foreach (var e in temp)
+    //    {
+    //        e.MoveToPoint += Moving;
+    //        e.LookToObject += Looking;
+    //    }
+
+    //}
+
+    public void Initialize(List<AEnemyMovement> enemyAIs)
     {
-        var temp = new List<AEnemyMovement>(animator.GetBehaviours<AEnemyMovement>());
-        foreach (var e in temp)
+        foreach (var e in enemyAIs)
         {
             e.MoveToPoint += Moving;
             e.LookToObject += Looking;
         }
-
     }
+
+
+    public void Deinitialize(List<AEnemyMovement> enemyAIs)
+    {
+        foreach (var e in enemyAIs)
+        {
+            e.MoveToPoint -= Moving;
+            e.LookToObject -= Looking;
+        }
+    }
+
 
     private void Moving(Vector3 point, float speed, bool warp)
     {
-        navAgent.speed = speed;
-        if (warp)
+        if (navAgent.isActiveAndEnabled)
         {
-            navAgent.Warp(point);
-        }
-        else
-        {
-            navAgent.SetDestination(point);
+            navAgent.speed = speed;
+            if (warp)
+            {
+                navAgent.Warp(point);
+            }
+            else
+            {
+                navAgent.SetDestination(point);
+            }
         }
     }
 

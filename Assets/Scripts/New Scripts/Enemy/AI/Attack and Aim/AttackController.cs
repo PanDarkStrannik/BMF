@@ -4,19 +4,37 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
-    [SerializeReference] private Animator aiFSM;
+  //  [SerializeReference] private Animator aiFSM;
     [SerializeField] private List<WeaponAiData> weapons;
 
-    private List<AttackAI> attackAIs;
+   // private List<AttackAI> attackAIs;
 
     private AWeapon equipWeapon = null;
 
     private AttackAI.AttackStopVariants stopVariant = AttackAI.AttackStopVariants.None;
 
-    private void Start()
-    {
-        attackAIs = new List<AttackAI>(aiFSM.GetBehaviours<AttackAI>());
+    //private void Start()
+    //{
+    //    //attackAIs = new List<AttackAI>(aiFSM.GetBehaviours<AttackAI>());
 
+    //    if (weapons.Count > 0)
+    //    {
+    //        equipWeapon = weapons[0].Weapon;
+    //    }
+    //    else
+    //    {
+    //        throw new System.Exception("Нечего эккипировать!");
+    //    }
+
+    //    //foreach(var e in attackAIs)
+    //    //{
+    //    //    e.AttackAIEvent += AttackOnStage;
+    //    //}
+    //}
+
+
+    public void Initialize(List<AttackAI> enemyAIs)
+    {
         if (weapons.Count > 0)
         {
             equipWeapon = weapons[0].Weapon;
@@ -26,9 +44,18 @@ public class AttackController : MonoBehaviour
             throw new System.Exception("Нечего эккипировать!");
         }
 
-        foreach(var e in attackAIs)
+        foreach (var e in enemyAIs)
         {
             e.AttackAIEvent += AttackOnStage;
+        }
+    }
+
+
+    public void Deinitialize(List<AttackAI> enemyAIs)
+    {
+        foreach (var e in enemyAIs)
+        {
+            e.AttackAIEvent -= AttackOnStage;
         }
     }
 
@@ -161,6 +188,7 @@ public class AttackController : MonoBehaviour
         [SerializeField] private float distance = 1f;
         [SerializeField] private Color gizmosColor;
         [SerializeField] private List<ObjectAimMod> objectAim;
+
 
         public AWeapon Weapon
         {

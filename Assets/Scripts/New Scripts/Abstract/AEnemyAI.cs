@@ -6,6 +6,13 @@ public abstract class AEnemyAI : StateMachineBehaviour
 {
     [SerializeField] protected LayerMask layerMask;
 
+    [SerializeField] protected bool isRigidbodyKinematick = true;
+    [SerializeField] protected bool isNavMeshAgentActive = true;
+
+    public delegate void BoolEventHelper(bool value);
+    public event BoolEventHelper RigidbodyActiveEvent;
+    public event BoolEventHelper NavMeshAgentActiveEvent;
+
     protected GameObject currentInteresting = null;
 
 
@@ -42,6 +49,8 @@ public abstract class AEnemyAI : StateMachineBehaviour
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
         InStateUpdate();
+        RigidbodyActiveEvent?.Invoke(isRigidbodyKinematick);
+        NavMeshAgentActiveEvent?.Invoke(isNavMeshAgentActive);
         EnemyAIStateEvent?.Invoke(AIState.Update);
     }
 

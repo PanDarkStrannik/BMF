@@ -13,8 +13,8 @@ public class JumpAttack : AWeapon
     [SerializeField] private DamageArea damageArea;
     [SerializeField] private UnityEvent<bool> damaging;
 
-    private Vector3 startBodyPosition;
-    private Quaternion startBodyRotation;
+    //private Vector3 startBodyPosition;
+    //private Quaternion startBodyRotation;
 
     private float damageTimer = 0f;
     private float reloadTimer = 0f;
@@ -26,8 +26,8 @@ public class JumpAttack : AWeapon
     private void Start()
     {
         damageArea.AddDamage(weaponData);
-        startBodyRotation = body.transform.localRotation;
-        startBodyPosition = body.transform.localPosition;
+        //startBodyRotation = body.transform.localRotation;
+        //startBodyPosition = body.transform.localPosition;
     }
 
     public override void Attack()
@@ -70,8 +70,8 @@ public class JumpAttack : AWeapon
         if (state == WeaponState.Reload)
         {
             reloadTimer += Time.fixedDeltaTime;
-            body.transform.localPosition = startBodyPosition;
-            body.transform.localRotation = startBodyRotation;
+            //body.transform.localPosition = startBodyPosition;
+            //body.transform.localRotation = startBodyRotation;
             if (reloadTimer >= reloadTime)
             {
                 reloadTimer = 0;
@@ -83,8 +83,9 @@ public class JumpAttack : AWeapon
 
     private void OnDisable()
     {
-        body.transform.localRotation = startBodyRotation;
-        body.transform.localPosition = startBodyPosition;
+        //body.transform.localRotation = startBodyRotation;
+        //body.transform.localPosition = startBodyPosition;
+        state = WeaponState.Serenity;
         damageArea.gameObject.SetActive(false);
     }
 

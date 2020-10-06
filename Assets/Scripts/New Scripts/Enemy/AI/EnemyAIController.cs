@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
 
 public class EnemyAIController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyDetection detection;
     [SerializeField] private GameObject enemyObject;
-    [SerializeReference] private MainEvents mainEvents;
 
     [SerializeField] private EnemyEventValueFSM<bool> PlayerDetectedEvent;
     [SerializeField] private EnemyEventValueFSM<float> PlayerDistanceEvent;
     [SerializeField] private List<EnemyEventValueFSM<AWeapon.WeaponState, bool>> PlayerWeaponControllerEvents;
 
+    [SerializeReference] private AttackController attackController;
+    [SerializeReference] private EnemyMovementController movementController;
+    [SerializeReference] private Rigidbody rb;
+    [SerializeReference] private NavMeshAgent navMeshAgent;
+ 
     private List<AEnemyAI> behaviours;
 
     public List<AEnemyAI> Behaviours
@@ -24,20 +29,62 @@ public class EnemyAIController : MonoBehaviour
         }
     }
 
-    private void Start()
+
+    private List<AttackAI> attackAIs;
+    private List<AEnemyMovement> movementsAIs;
+
+    private void OnEnable()
     {
+
         behaviours = new List<AEnemyAI>(animator.GetBehaviours<AEnemyAI>());
 
-        foreach(var beh in behaviours)
+        foreach (var beh in behaviours)
         {
             beh.AIAgent = enemyObject;
+            beh.RigidbodyActiveEvent += delegate (bool value) { rb.isKinematic = value; };
+            beh.NavMeshAgentActiveEvent += delegate (bool value) { navMeshAgent.enabled = value; };
         }
 
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
 
         detection.DetectedObjectsEvent += ChangeInterestingAIObjects;
-        
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
+
+        attackAIs = new List<AttackAI>(animator.GetBehaviours<AttackAI>());
+        attackController.Initialize(attackAIs);      
+
+        movementsAIs = new List<AEnemyMovement>(animator.GetBehaviours<AEnemyMovement>());
+        movementController.Initialize(movementsAIs);
     }
+
+    private void OnDisable()
+    {
+        detection.DetectedObjectsEvent -= ChangeInterestingAIObjects;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent -= PlayerWeaponControllerEventListener;
+
+        attackController.Deinitialize(attackAIs);
+        movementController.Deinitialize(movementsAIs);
+
+        foreach (var beh in behaviours)
+        {
+            beh.RigidbodyActiveEvent -= delegate (bool value) { rb.isKinematic = value; };
+            beh.NavMeshAgentActiveEvent -= delegate (bool value) { navMeshAgent.enabled = value; };
+        }
+
+    }
+
+
+    //private void Start()
+    //{
+    //    behaviours = new List<AEnemyAI>(animator.GetBehaviours<AEnemyAI>());
+
+    //    foreach(var beh in behaviours)
+    //    {
+    //        beh.AIAgent = enemyObject;
+    //        beh.RigidbodyActiveEvent += delegate (bool value) { rb.isKinematic = value; };
+    //        beh.NavMeshAgentActiveEvent += delegate (bool value) { navMeshAgent.enabled = value; };
+    //    }
+        
+    //}
 
     private void ChangeInterestingAIObjects(List<GameObject> detectedObjects)
     {
