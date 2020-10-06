@@ -14,6 +14,8 @@ public class DamageArea : MonoBehaviour
     [SerializeField] private Transform parent = null;
 
 
+    private float timer = 0f;
+
     private Dictionary<Collider,bool> enterColiders;
 
     public Transform Parent
@@ -41,27 +43,35 @@ public class DamageArea : MonoBehaviour
     }
 
     public void AddDamage(List<DamageByType> addDamages)
-    {
-        var temp = new List<DamageByType>();
-        foreach(var damage in damages)
+    {       
+        if (damages.Count > 0)
         {
-            foreach(var add in addDamages)
+            var temp = new List<DamageByType>();
+            foreach (var damage in damages)
             {
-                if(damage.DamageType==add.DamageType)
+                foreach (var add in addDamages)
                 {
-                    damage.AddDamage(add.Value);
-                }
-                else
-                {
-                    temp.Add(add);
+                    if (damage.DamageType == add.DamageType)
+                    {
+                        damage.AddDamage(add.Value);
+                    }
+                    else
+                    {
+                        temp.Add(add);
+                    }
                 }
             }
+            damages.AddRange(temp);
         }
-        damages.AddRange(temp);
+        else
+        {
+            damages = addDamages;
+        }
     }
 
-    private void Start()
+    private void Awake()
     {
+       
         enterColiders = new Dictionary<Collider, bool>();
 
         if(parent!=null)
@@ -72,7 +82,15 @@ public class DamageArea : MonoBehaviour
     }
 
 
-  
+    private void OnDisable()
+    {    
+        if (enterColiders.Count > 0)
+        {
+            enterColiders.Clear();
+            StopAllCoroutines();
+        }
+    }
+
 
     public void ChangeArea(Vector3 scale)
     {
@@ -91,9 +109,13 @@ public class DamageArea : MonoBehaviour
     {
         if (other.gameObject.GetComponent<IDamageble>() != null)
         {
-            if (!enterColiders[other] && (layer.value & other.transform.GetComponent<ADamageble>().Layer.value) != 0)
+            if (!enterColiders[other])
             {
-                StartCoroutine(GetDamage(other));
+                if ((layer.value & other.transform.GetComponent<ADamageble>().Layer.value) != 0)
+                {
+                    StartCoroutine(GetDamage(other));
+                    GetDamage(other);
+                }
             }
         }
     }
@@ -115,7 +137,10 @@ public class DamageArea : MonoBehaviour
         }
         Debug.Log("Зафиксили урон");
         yield return new WaitForSeconds(timeBetweenDamage);
-        enterColiders[other] = false;
+        //if (timer >= timeBetweenDamage)
+        //{
+            enterColiders[other] = false;
+       // }
     }
 
     public void TimeToDeactiveArea(float time)
