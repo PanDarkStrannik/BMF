@@ -1,22 +1,3 @@
-fileFormatVersion: 2
-guid: 6e04af01277abe1428ffde403e0f7eae
-TrueTypeFontImporter:
-  externalObjects: {}
-  serializedVersion: 4
-  fontSize: 16
-  forceTextureCase: -2
-  characterSpacing: 0
-  characterPadding: 1
-  includeFontData: 1
-  fontName: Enchanted Land
-  fontNames:
-  - Enchanted Land
-  fallbackFontReferences: []
-  customCharacters: 
-  fontRenderingMode: 0
-  ascentCalculationMode: 1
-  useLegacyBoundsCalculation: 0
-  shouldRoundAdvanceValue: 1
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+version https://git-lfs.github.com/spec/v1
+oid sha256:9683ffc9c0ff320f2442fba0c87162e3c08fab834a24187384872c77ed336909
+size 528
