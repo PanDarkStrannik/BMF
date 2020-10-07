@@ -10,7 +10,8 @@ public class EnemyParamController : ParamController
     [SerializeField] private float timeToStopAttack = 1f;
     [SerializeField] protected int pointsForKill = 1;
 
-
+    public delegate void OnEnemyDieEventHelper();
+    public event OnEnemyDieEventHelper OnEnemyDie; 
 
 
 
@@ -31,8 +32,9 @@ public class EnemyParamController : ParamController
 
     protected override IEnumerator NullHealth()
     {
+        yield return new WaitForSeconds(timeToDeactive);
         PointCounter.GetPointCounter().AddPoints(pointsForKill);
-        return base.NullHealth();
+        OnEnemyDie(); 
     }
 
 }

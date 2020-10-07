@@ -2,19 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Spawner spawner;
+    [SerializeField] private Spawner enemySpawner;
     [SerializeField] private List<SpawnStages> spawnStages;
     [SerializeField] private Transform spawnPosition;
+    [SerializeField] private UnityEvent spawnEvent;
 
     private SpawnStages currentStage;
 
     private void Awake()
     {
-        spawner.CreateSpawner();
+        enemySpawner.CreateSpawner();
         spawnStages.OrderBy(stage => stage.StagePoint);
+        foreach (var enemy in enemySpawner.spawned_objects)
+        {
+            enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
+        }
     }
 
     private void Start()
@@ -60,11 +66,12 @@ public class EnemySpawner : MonoBehaviour
     {
         while(true)
         {
+            spawnEvent?.Invoke();
             for (int i = 0; i < currentStage.EnemyValue; i++)
             {
-                spawner.SpawnObject(spawnPosition.position, spawnPosition.rotation);
+                enemySpawner.SpawnObject(spawnPosition.position, spawnPosition.rotation);                
             }
-            yield return new WaitForSeconds(currentStage.TimeBetweenSpawn);
+            yield return new WaitForSeconds(currentStage.TimeBetweenSpawn);           
         }
     }
 
@@ -110,4 +117,5 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+   
 }

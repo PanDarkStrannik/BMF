@@ -129,7 +129,7 @@ MonoBehaviour:
       strongs: []
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &637514493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,11 +339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367048, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_Name
-      value: RangeEnemy
+      value: RangeEnemy Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367048, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5926740743422367053, guid: 3aca5da701bee64478bb87bbd3d70ec4, type: 3}
       propertyPath: m_LocalPosition.x

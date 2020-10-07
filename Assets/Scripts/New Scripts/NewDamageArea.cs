@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageArea : MonoBehaviour
+public class NewDamageArea : MonoBehaviour
 {
     [SerializeField] private List<DamageByType> damages;
     [SerializeField] private Collider damageCollider;
@@ -14,7 +14,10 @@ public class DamageArea : MonoBehaviour
     [SerializeField] private Transform parent = null;
 
 
-    private Dictionary<Collider,bool> enterColiders;
+    private float timer=0;
+
+
+    private Dictionary<Collider, bool> enterColiders;
 
     public Transform Parent
     {
@@ -41,7 +44,7 @@ public class DamageArea : MonoBehaviour
     }
 
     public void AddDamage(List<DamageByType> addDamages)
-    {       
+    {
         if (damages.Count > 0)
         {
             var temp = new List<DamageByType>();
@@ -69,10 +72,10 @@ public class DamageArea : MonoBehaviour
 
     private void Awake()
     {
-       
+
         enterColiders = new Dictionary<Collider, bool>();
 
-        if(parent!=null)
+        if (parent != null)
         {
             damageCollider.transform.parent = parent;
         }
@@ -81,7 +84,7 @@ public class DamageArea : MonoBehaviour
 
 
     private void OnDisable()
-    {    
+    {
         if (enterColiders.Count > 0)
         {
             enterColiders.Clear();
@@ -95,50 +98,50 @@ public class DamageArea : MonoBehaviour
         damageCollider.transform.localScale = colliderScale;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!enterColiders.ContainsKey(other))
-        {
-            enterColiders.Add(other, false);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (!enterColiders.ContainsKey(other))
+    //    {
+    //        enterColiders.Add(other, false);
+    //    }
+    //}
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.GetComponent<IDamageble>() != null)
         {
-            if (!enterColiders[other])
-            {
+            //if (!enterColiders[other])
+            //{
                 if ((layer.value & other.transform.GetComponent<ADamageble>().Layer.value) != 0)
                 {
-                    StartCoroutine(GetDamage(other));
+                //StartCoroutine(GetDamage(other));
+                GetDamage(other);
                 }
-            }
+            //}
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (enterColiders.ContainsKey(other))
-        {
-            StopCoroutine(GetDamage(other));
-           // enterColiders.Remove(other);
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (enterColiders.ContainsKey(other))
+    //    {
+    //        enterColiders.Remove(other);
+    //    }
+    //}
 
     private IEnumerator GetDamage(Collider other)
     {
-        enterColiders[other] = true;
+        //enterColiders[other] = true;
         foreach (var damage in damages)
         {
-           other.GetComponent<IDamageble>().ApplyDamage(damage);
+            other.GetComponent<IDamageble>().ApplyDamage(damage);
         }
         Debug.Log("Зафиксили урон");
         yield return new WaitForSeconds(timeBetweenDamage);
         //if (timer >= timeBetweenDamage)
         //{
-            enterColiders[other] = false;
-       // }
+       // enterColiders[other] = false;
+        // }
     }
 
     public void TimeToDeactiveArea(float time)
@@ -161,6 +164,5 @@ public class DamageArea : MonoBehaviour
         Gizmos.color = gizmosColor;
         Gizmos.DrawCube(damageCollider.transform.position, damageCollider.transform.lossyScale);
     }
-
 
 }
