@@ -99,6 +99,7 @@ public class AttackController : MonoBehaviour
                 {
                     if (CanAttack(mask, weapon))
                     {
+                        Debug.Log($"Можем атаковать");
                         Attack(weapon);
                     }
                 }
@@ -120,6 +121,7 @@ public class AttackController : MonoBehaviour
 
     private void Attack(WeaponAiData weapon)
     {
+        Debug.Log($"Атаковали!");
         weapon.Weapon.Attack();
     }
 
@@ -130,7 +132,7 @@ public class AttackController : MonoBehaviour
         {
             Ray ray = new Ray(weapon.Point.position, weapon.Point.forward);
 
-            if (Physics.SphereCast(ray, weapon.Radius, weapon.Distance, mask))
+            if (Physics.SphereCast(ray, weapon.Radius, weapon.Distance, mask.value))
             {
                 return true;
             }

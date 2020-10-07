@@ -135,6 +135,14 @@ public class DamagebleParamDatas
         }
     }
 
+
+    public void SetDefault()
+    {
+        foreach(var data in paramDatas)
+        {
+            data.Maximize();
+        }
+    }
 }
 
 

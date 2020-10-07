@@ -59,9 +59,15 @@ public class MiliWeapon : AWeapon
     }
 
 
+    private void OnDisable()
+    {
+        state = AWeapon.WeaponState.Serenity;
+       // StopCoroutine(ChangeColider());
+    }
+
     //private void OnTriggerEnter(Collider other)
     //{
-    
+
     //    if(state==AWeapon.WeaponState.Attack)
     //    {
     //        if(other.transform.GetComponent<IDamageble>()!=null)
@@ -79,5 +85,5 @@ public class MiliWeapon : AWeapon
     //}
 
 
-   
+
 }

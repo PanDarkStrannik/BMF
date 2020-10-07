@@ -11,9 +11,7 @@ public class EnemyParamController : ParamController
     [SerializeField] protected int pointsForKill = 1;
 
     public delegate void OnEnemyDieEventHelper();
-    public event OnEnemyDieEventHelper OnEnemyDie; 
-
-
+    public event OnEnemyDieEventHelper OnEnemyDie;
 
 
     protected override void CheckTypeAndValues(DamagebleParam.ParamType type, float value, float maxValue)
@@ -34,7 +32,8 @@ public class EnemyParamController : ParamController
     {
         yield return new WaitForSeconds(timeToDeactive);
         PointCounter.GetPointCounter().AddPoints(pointsForKill);
-        OnEnemyDie(); 
+        OnEnemyDie?.Invoke();
+        paramSum.SetDefault();
     }
 
 }
