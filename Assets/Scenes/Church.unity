@@ -6898,7 +6898,7 @@ GameObject:
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &531469755
 Transform:
   m_ObjectHideFlags: 0
@@ -6956,6 +6956,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  toSpawnTime: 5
 --- !u!1001 &532969380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22522,7 +22523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7272017524441590856, guid: 3bb0c4288effb634eaedb109667c5584, type: 3}
       propertyPath: stopAction
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7272017524441590856, guid: 3bb0c4288effb634eaedb109667c5584, type: 3}
       propertyPath: playOnAwake
@@ -47321,7 +47322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595440305286790906, guid: 4543e79a5a82b584dbc7878c8a60fa3a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5595440305286790911, guid: 4543e79a5a82b584dbc7878c8a60fa3a, type: 3}
       propertyPath: m_LocalPosition.x

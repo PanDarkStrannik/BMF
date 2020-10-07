@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<SpawnStages> spawnStages;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private UnityEvent spawnEvent;
+    [SerializeField] private float toSpawnTime;
 
     private SpawnStages currentStage;
 
@@ -67,6 +68,7 @@ public class EnemySpawner : MonoBehaviour
         while(true)
         {
             spawnEvent?.Invoke();
+            yield return new WaitForSeconds(toSpawnTime);
             for (int i = 0; i < currentStage.EnemyValue; i++)
             {
                 enemySpawner.SpawnObject(spawnPosition.position, spawnPosition.rotation);                
