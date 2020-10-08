@@ -17,6 +17,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Text TPCDtext;
     [SerializeField] private Image TPCDimage;
 
+    [SerializeField] private float timeToGameOver = 3f;
+
     /*if(спелл на кулдауне) HealCDtext.enabled = true;
      * else HealCDtext.enabled = false;
      * HealCDtext.text = (время перезарядки скилла).ToString();
@@ -66,6 +68,7 @@ public class PlayerUI : MonoBehaviour
         if (currentHP <= 0)
         {
             OnPlayerDeathEvent?.Invoke();
+            StartCoroutine(GameOver());
         }
     }
 
@@ -77,7 +80,7 @@ public class PlayerUI : MonoBehaviour
     {
         deathMenu.SetActive(true);
         mainMenu.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(timeToGameOver);
         PauseController.Pause();
     }
 

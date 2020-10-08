@@ -24,7 +24,7 @@ public class PlayerParamController : ParamController
             case DamagebleParam.ParamType.Health:
                 if (isFirstCheck)
                 {
-                    //playerUI.InitializePlayerView(maxValue);
+                    playerUI.InitializePlayerView(maxValue);
                     isFirstCheck = false;
                 }
                 else
@@ -32,7 +32,7 @@ public class PlayerParamController : ParamController
                     PlayerDamaged?.Invoke();
                     PlayerDamagedEvent?.Invoke();
                 }
-               // playerUI.ViewHealth(value);
+                playerUI.ViewHealth(value);
                 break;
         }
     }
