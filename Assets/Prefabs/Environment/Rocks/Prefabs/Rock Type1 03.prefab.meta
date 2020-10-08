@@ -1,15 +1,3 @@
-fileFormatVersion: 2
-guid: 85f4229977c9ee247bc4425710c5b0c4
-labels:
-- lowpoly
-- rock
-- low-poly
-- rocks
-- art
-- pack
-timeCreated: 1457638012
-licenseType: Store
-NativeFormatImporter:
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+version https://git-lfs.github.com/spec/v1
+oid sha256:91e9978a0f01e2112e4aeaa3e67c512ca08ad5e76664408d7cf8bac7d20be180
+size 253
