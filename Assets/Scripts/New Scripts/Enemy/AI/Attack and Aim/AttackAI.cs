@@ -33,8 +33,8 @@ public class AttackAI : AEnemyAI
             if (timer < currentStage.During)
             {
                 AttackAIEvent?.Invoke(layerMask, currentStage);
-                isRigidbodyKinematick = currentStage.RigidBodyActive;
-                isNavMeshAgentActive = currentStage.NavMeshAgentActive;
+                isRigidbodyKinematick = currentStage.IsRigidbodyKinematick;
+                isNavMeshAgentActive = currentStage.IsNavMeshAgentActive;
                // Debug.Log($"{currentStage.During} : {timer}");
             }
             else
@@ -75,23 +75,23 @@ public class AttackAI : AEnemyAI
         [SerializeField] private AttackStopVariants stopVariant = AttackStopVariants.None;
         [SerializeField] private bool aim = false;
         [SerializeField] private bool damaging = false;
-        [SerializeField] private bool rigidBodyActive = false;
-        [SerializeField] private bool navMeshAgentActive = false;
+        [SerializeField] private bool isRigidBodyKinematick = false;
+        [SerializeField] private bool isNavMeshAgentActive = false;
 
 
-        public bool RigidBodyActive
+        public bool IsRigidbodyKinematick
         {
             get
             {
-                return rigidBodyActive;
+                return isRigidBodyKinematick;
             }
         }
 
-        public bool NavMeshAgentActive
+        public bool IsNavMeshAgentActive
         {
             get
             {
-                return navMeshAgentActive;
+                return isNavMeshAgentActive;
             }
         }
 

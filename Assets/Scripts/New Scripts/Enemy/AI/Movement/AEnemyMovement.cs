@@ -9,7 +9,7 @@ public abstract class AEnemyMovement : AEnemyAI, IMovement
     [SerializeField] private float randomizeInterestingTimer = 3f;
 
 
-    private float timer = 0f;
+    private float baseTimer = 0f;
 
     public delegate void MoveToPointHelper(Vector3 point, float speed, bool warp);
     public event MoveToPointHelper MoveToPoint;
@@ -29,14 +29,14 @@ public abstract class AEnemyMovement : AEnemyAI, IMovement
 
     protected override void InStateUpdate()
     {
-        if (timer == 0)
+        if (baseTimer == 0)
         {
             currentInteresting = GetRandomInList(CheckInterestingObjects());
         }
-        timer += Time.deltaTime;
-        if (timer >= randomizeInterestingTimer)
+        baseTimer += Time.deltaTime;
+        if (baseTimer >= randomizeInterestingTimer)
         {
-            timer = 0;
+            baseTimer = 0;
         }
         if (currentInteresting != null)
         {

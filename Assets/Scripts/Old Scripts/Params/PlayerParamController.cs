@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerParamController : ParamController
 {
@@ -9,6 +10,7 @@ public class PlayerParamController : ParamController
     [SerializeField] protected List<GameObject> deactiveObjects;
     [SerializeField] private Vector3 torgueForceOnDeath;
 
+    [SerializeField] private UnityEvent PlayerDamagedEvent;
 
     public delegate void PlayerDamagedHelper();
     public event PlayerDamagedHelper PlayerDamaged;
@@ -22,14 +24,15 @@ public class PlayerParamController : ParamController
             case DamagebleParam.ParamType.Health:
                 if (isFirstCheck)
                 {
-                    playerUI.InitializePlayerView(maxValue);
+                    //playerUI.InitializePlayerView(maxValue);
                     isFirstCheck = false;
                 }
                 else
                 {
                     PlayerDamaged?.Invoke();
+                    PlayerDamagedEvent?.Invoke();
                 }
-                playerUI.ViewHealth(value);
+               // playerUI.ViewHealth(value);
                 break;
         }
     }
