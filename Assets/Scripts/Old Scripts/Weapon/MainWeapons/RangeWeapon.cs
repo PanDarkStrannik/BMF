@@ -61,7 +61,7 @@ public class RangeWeapon : AWeapon
         BulletCounter();
         if (state == WeaponState.Attack)
         {
-            events.OnAnimEvent(AnimationController.AnimationType.RangeAttack);
+            OnAttackEvent?.Invoke();
         }
     }
 

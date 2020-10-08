@@ -10,9 +10,9 @@ public class EnemyAIController : MonoBehaviour
     [SerializeField] private EnemyDetection detection;
     [SerializeField] private GameObject enemyObject;
 
-    [SerializeField] private EnemyEventValueFSM<bool> PlayerDetectedEvent;
-    [SerializeField] private EnemyEventValueFSM<float> PlayerDistanceEvent;
-    [SerializeField] private List<EnemyEventValueFSM<AWeapon.WeaponState, bool>> PlayerWeaponControllerEvents;
+    [SerializeField] private CustomEventValue<bool> PlayerDetectedEvent;
+    [SerializeField] private CustomEventValue<float> PlayerDistanceEvent;
+    [SerializeField] private List<CustomEventValue<AWeapon.WeaponState, bool>> PlayerWeaponControllerEvents;
 
     [SerializeReference] private AttackController attackController;
     [SerializeReference] private EnemyMovementController movementController;
@@ -128,7 +128,7 @@ public class EnemyAIController : MonoBehaviour
 }
 
 [System.Serializable]
-public class EnemyEventFSM
+public class CustomEventNotValue
 {
     [SerializeField] private string triggerName;
     [SerializeField] private UnityEvent<string> unityEvent;
@@ -140,7 +140,7 @@ public class EnemyEventFSM
 }
 
 [System.Serializable]
-public class EnemyEventValueFSM<T>
+public class CustomEventValue<T>
 {
     [SerializeField] private string triggerName;
     [SerializeField] private UnityEvent<string, T> unityEvent;
@@ -152,7 +152,7 @@ public class EnemyEventValueFSM<T>
 }
 
 [System.Serializable]
-public class EnemyEventValueFSM<T,A>
+public class CustomEventValue<T,A>
 {
     [SerializeField] private string addStringName;
     [SerializeField] private T stringValue;

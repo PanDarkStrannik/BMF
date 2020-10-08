@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class AWeapon : MonoBehaviour, IWeapon
 {
@@ -8,8 +9,9 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
     [SerializeField] protected List<DamageByType> weaponData;
     [SerializeField] protected WeaponType weaponType;
     [SerializeField] protected GameObject weaponObject;
-    [SerializeField] protected MainEvents events;
     [SerializeField] protected LayerMask layer;
+    [SerializeField] protected UnityEvent<bool> AttackStartEvent;
+    [SerializeField] protected UnityEvent OnAttackEvent;
 
     protected WeaponState state = WeaponState.Serenity;
 
