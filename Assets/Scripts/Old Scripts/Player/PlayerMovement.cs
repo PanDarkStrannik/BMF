@@ -15,6 +15,7 @@ public class PlayerMovement : APlayerMovement
     [SerializeField] private float speedInAir=4f;
     [SerializeField] private MainEvents movementEvents;
     [SerializeField] private float correctToAnim = 100f;
+    [SerializeField] private CustomEventValue<float> movementSpeedEvent;
     private Dictionary<PlayerMoveType, float> moveTypeSpeeds;
     private bool grounded = false;
 
@@ -50,7 +51,8 @@ public class PlayerMovement : APlayerMovement
                 if (grounded)
                 {
                     var toAnim = direction.magnitude/correctToAnim;
-                    movementEvents.OnAnimEvent(AnimationController.AnimationType.Movement, toAnim);
+                    //movementEvents.OnAnimEvent(AnimationController.AnimationType.Movement, toAnim);
+                    movementSpeedEvent.StartEvent(toAnim);
                     body.AddForce(direction * Time.fixedDeltaTime * 100);
                 }
                 else

@@ -84,4 +84,9 @@ public class DamagebleParamSum
         }
     }
 
+    public void SetDefault()
+    {
+        sumDatas.SetDefault();
+    }
+
 }

@@ -9,7 +9,6 @@ public class MiliWeapon : AWeapon
     [SerializeField] private float timeToWeaponAttack = 0f;
     [SerializeReference] private DamageArea damageArea;
 
-
     private void Start()
     {
         //foreach(var weapon in miliWeapons)
@@ -34,11 +33,11 @@ public class MiliWeapon : AWeapon
 
     private IEnumerator ChangeColider()
     {
-        events.OnEffectEvent(EffectsController.EffectType.Melle, true);
+        AttackStartEvent?.Invoke(true);
         yield return new WaitForSecondsRealtime(timeToWeaponAttack);
         if (state==AWeapon.WeaponState.Attack)
         {
-            events.OnAnimEvent(AnimationController.AnimationType.MeleAttack);
+            OnAttackEvent?.Invoke();
 
             damageArea.gameObject.SetActive(true);
 
@@ -54,14 +53,19 @@ public class MiliWeapon : AWeapon
             //}
             state = AWeapon.WeaponState.Serenity;
         }
-        events.OnEffectEvent(EffectsController.EffectType.Melle, false);
-
+        AttackStartEvent?.Invoke(false);
     }
 
 
+    private void OnDisable()
+    {
+        state = AWeapon.WeaponState.Serenity;
+       // StopCoroutine(ChangeColider());
+    }
+
     //private void OnTriggerEnter(Collider other)
     //{
-    
+
     //    if(state==AWeapon.WeaponState.Attack)
     //    {
     //        if(other.transform.GetComponent<IDamageble>()!=null)
@@ -79,5 +83,5 @@ public class MiliWeapon : AWeapon
     //}
 
 
-   
+
 }
