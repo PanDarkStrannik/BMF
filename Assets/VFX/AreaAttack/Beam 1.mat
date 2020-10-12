@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: KargasSphereMat
-  m_Shader: {fileID: -6465566751694194690, guid: 3e9e686d15048d349baefaa21008101e, type: 3}
+  m_Name: Beam 1
+  m_Shader: {fileID: -6465566751694194690, guid: a9528b8cbedec344dac8684af25f1e15, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,9 +18,12 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats:
-    - Vector1_A2AB1C72: 0.6
+    m_TexEnvs:
+    - Texture2D_255E8352:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
     m_Colors:
-    - Color_81C67765: {r: 6.2408385, g: 6.2408385, b: 6.2408385, a: 0}
+    - Color_2883C753: {r: 3.6235294, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
