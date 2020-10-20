@@ -8544,6 +8544,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 805b16e99605bc240b397882037a7735, type: 3}
   m_PrefabInstance: {fileID: 204887336}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &219412447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+  m_PrefabInstance: {fileID: 908110325}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa576ee0f4be2db48ad6cadc2e7a9c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &230447578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16332,7 +16343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &856609958
 Transform:
   m_ObjectHideFlags: 0
@@ -16884,10 +16895,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 641760990, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 219412447}
     - target: {fileID: 885063586, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 1822474564}
+    - target: {fileID: 885063586, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: shakingParams.duration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 885063586, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: shakingParams.strength
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1293312928, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: speeds.Array.data[0]
       value: 7
@@ -16895,6 +16918,26 @@ PrefabInstance:
     - target: {fileID: 1293312928, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: speeds.Array.data[1]
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293312928, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: friction
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293312928, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: acceleration
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293312930, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293312930, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293312930, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5505282187759526130, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -16933,9 +16976,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: gunPushes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 1822474564}
+    - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: gunPushes.Array.data[0].pushForce.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: gunPushes.Array.data[0].pushForce.z
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: gunPushes.Array.data[0].forceMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: gunPushes.Array.data[0].shakingParams.duration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230216899918538133, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: gunPushes.Array.data[0].shakingParams.strength
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7230216899918538134, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.17

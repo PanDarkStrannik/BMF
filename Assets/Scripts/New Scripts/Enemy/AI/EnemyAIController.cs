@@ -47,7 +47,7 @@ public class EnemyAIController : MonoBehaviour
 
 
         detection.DetectedObjectsEvent += ChangeInterestingAIObjects;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
+       // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
 
         attackAIs = new List<AttackAI>(animator.GetBehaviours<AttackAI>());
         attackController.Initialize(attackAIs);      
@@ -59,7 +59,7 @@ public class EnemyAIController : MonoBehaviour
     private void OnDisable()
     {
         detection.DetectedObjectsEvent -= ChangeInterestingAIObjects;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent -= PlayerWeaponControllerEventListener;
+       // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent -= PlayerWeaponControllerEventListener;
 
         attackController.Deinitialize(attackAIs);
         movementController.Deinitialize(movementsAIs);

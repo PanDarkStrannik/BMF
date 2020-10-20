@@ -12,6 +12,16 @@ public class PlayerParamController : ParamController
 
     [SerializeField] private UnityEvent PlayerDamagedEvent;
 
+    [SerializeField] private ShakingParams shakingParams;
+
+    public ShakingParams ShakingParams
+    {
+        get
+        {
+            return shakingParams;
+        }
+    }
+
     public delegate void PlayerDamagedHelper();
     public event PlayerDamagedHelper PlayerDamaged;
 
@@ -31,6 +41,7 @@ public class PlayerParamController : ParamController
                 {
                     PlayerDamaged?.Invoke();
                     PlayerDamagedEvent?.Invoke();
+                    shakingParams.ShakeEventInvoke();
                 }
                 playerUI.ViewHealth(value);
                 break;

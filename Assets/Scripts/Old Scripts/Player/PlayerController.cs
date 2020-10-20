@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Blink blinkAbility;
 
+    [SerializeField] private List<GunPush> gunPushes;
+
+
     private APlayerMovement movement;
     private PlayerInput input;
 
@@ -26,7 +29,14 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
 
-  
+
+    public List<GunPush> GunPushes
+    {
+        get
+        {
+            return gunPushes;
+        }
+    }
 
 
     private void Awake()
@@ -122,6 +132,18 @@ public class PlayerController : MonoBehaviour
     {
         input.ButtonInputs.Shoot.performed += context =>
         {
+            if (weaponChanger.CurrentWeapon.State == AWeapon.WeaponState.Serenity)
+            {
+                foreach (var e in gunPushes)
+                {
+                    if (weaponChanger.CurrentWeapon.WeaponType == e.WeaponType)
+                    {
+                        var push = transform.TransformDirection(e.PushForce);
+                        movement.ImpulseMove(push, e.ForceMode);
+                        e.ShakingParams.ShakeEventInvoke();
+                    }
+                }
+            }
             weaponChanger.CurrentWeapon.Attack();
         };
 
@@ -177,6 +199,7 @@ public class PlayerController : MonoBehaviour
     {
         switch(type)
         {
+
             case WeaponType.Range:
                 movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
                 return true;
@@ -192,5 +215,46 @@ public class PlayerController : MonoBehaviour
         return Mathf.Clamp(angle, min, max);
     }
 
-}
+    [System.Serializable]
+    public class GunPush
+    {
+        [SerializeField] private WeaponType weaponType;
+        [SerializeField] private Vector3 pushForce;
+        [SerializeField] private ForceMode forceMode;
+        [SerializeField] private ShakingParams shakingParams;
 
+        public WeaponType WeaponType
+        {
+            get
+            {
+                
+                return weaponType;
+            }
+        }
+
+        public Vector3 PushForce
+        {
+            get
+            {
+                return pushForce;
+            }
+        }
+
+        public ForceMode ForceMode
+        {
+            get
+            {
+                return forceMode;
+            }
+        }
+
+        public ShakingParams ShakingParams
+        {
+            get
+            {
+                return shakingParams;
+            }
+        }
+    }
+
+}
