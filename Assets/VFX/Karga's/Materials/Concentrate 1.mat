@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Disolve 1
-  m_Shader: {fileID: -6465566751694194690, guid: bbedeabebf7df434e83aa226e2a7c26d, type: 3}
+  m_Name: Concentrate 1
+  m_Shader: {fileID: -6465566751694194690, guid: 37540dd0ac95ed54397239b3be521b6e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,12 +18,12 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats:
-    - Vector1_5AB100F2: 100
-    - Vector1_8552AC31: 0.1
-    - _DisolveAmount: -1
-    - _DissolveAmount: 2.028018
+    m_TexEnvs:
+    - Texture2D_C1DF13FF:
+        m_Texture: {fileID: 2800000, guid: 87dac20630c07c343b2d5566bf49f7cd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
     m_Colors:
-    - Color_881B5522: {r: 7.6981173, g: 0.21489637, b: 0, a: 0}
+    - Color_79CB2757: {r: 51.95294, g: 51.95294, b: 51.95294, a: 0}
   m_BuildTextureStacks: []
