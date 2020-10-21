@@ -67,16 +67,20 @@ public class PlayerController : MonoBehaviour
     {
         WeaponChecker();
         RotationInput();
-    }
-
-
-    private void FixedUpdate()
-    {
         var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
         var correctMove = new Vector3(moveDirection.x, input.ButtonInputs.Jump.ReadValue<float>(), moveDirection.y);
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
     }
+
+
+    //private void FixedUpdate()
+    //{
+    //    var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
+    //    var correctMove = new Vector3(moveDirection.x, input.ButtonInputs.Jump.ReadValue<float>(), moveDirection.y);
+    //    correctMove = transform.TransformDirection(correctMove);
+    //    movement.Move(correctMove);
+    //}
 
 
 

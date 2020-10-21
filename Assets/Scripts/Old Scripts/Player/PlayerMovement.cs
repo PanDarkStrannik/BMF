@@ -31,17 +31,23 @@ public class PlayerMovement : APlayerMovement
     }
 
 
-    private void FixedUpdate()
-    {
+    //private void FixedUpdate()
+    //{
 
+    //    grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
+    //        groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);      
+    //}
+
+    private void Update()
+    {
         grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
-            groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
-        if(grounded && body.velocity.magnitude > 0)
+          groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
+
+        if (grounded && body.velocity.magnitude > 0)
         {
-            body.AddForce(-body.velocity * friction);
+            body.AddForce(-body.velocity * friction * Time.deltaTime);
         }
     }
-
 
     public override void Move(Vector3 direction)
     {
@@ -57,13 +63,13 @@ public class PlayerMovement : APlayerMovement
                 {
                     var toAnim = direction.magnitude/correctToAnim;
                     movementSpeedEvent.StartEvent(toAnim);
-                    body.AddForce(direction * Time.fixedDeltaTime * acceleration);
+                    body.AddForce(direction * Time.deltaTime * acceleration);
                 }
                 else
                 {
                     var newDirection = direction / speedInAir;
                     newDirection.y = -g;
-                    body.AddForce(newDirection * Time.fixedDeltaTime * acceleration);
+                    body.AddForce(newDirection * Time.deltaTime * acceleration);
                 }
 
                 

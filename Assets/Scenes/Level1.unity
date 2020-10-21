@@ -16921,12 +16921,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1293312928, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: friction
-      value: 1.5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1293312928, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: acceleration
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1293312929, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 5a56241854d06f547b10697484816901, type: 2}
     - target: {fileID: 1293312930, guid: 7e1d7be5d4b0a284da7894dd9f2adbd9, type: 3}
       propertyPath: m_Drag
       value: 0
