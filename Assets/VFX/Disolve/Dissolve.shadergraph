@@ -22,7 +22,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"7bc4488a-8285-4991-89ee-bfae0926c623\"\n    },\n    \"m_Name\": \"DisolveAmount\",\n    \"m_DefaultReferenceName\": \"Vector1_2716C77D\",\n    \"m_OverrideReferenceName\": \"_DisolveAmount\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": -1.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": -1.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"7bc4488a-8285-4991-89ee-bfae0926c623\"\n    },\n    \"m_Name\": \"DisolveAmount\",\n    \"m_DefaultReferenceName\": \"Vector1_2716C77D\",\n    \"m_OverrideReferenceName\": \"_DissolveAmount\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": -1.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": -1.0,\n        \"y\": 1.0\n    }\n}"
         }
     ],
     "m_SerializedKeywords": [],
