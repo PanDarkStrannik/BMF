@@ -16,17 +16,25 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
+        //enemySpawner.CreateSpawner();
+        //spawnStages.OrderBy(stage => stage.StagePoint);
+        //foreach (var enemy in enemySpawner.spawned_objects)
+        //{
+        //    enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
+        //}
+    }
+
+    private void Start()
+    {
+
         enemySpawner.CreateSpawner();
         spawnStages.OrderBy(stage => stage.StagePoint);
         foreach (var enemy in enemySpawner.spawned_objects)
         {
             enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
         }
-    }
 
-    private void Start()
-    {
-      
+
         if (spawnStages.Count > 0)
         {
             currentStage = spawnStages[0];

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(APlayerMovement))]
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform cameraOnPlayer;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private List<GunPush> gunPushes;
 
 
-    private APlayerMovement movement;
+    [SerializeReference] private APlayerMovement movement;
     private PlayerInput input;
 
     private bool isShiftNotInput = true;
@@ -41,8 +41,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        PlayerInformation.GetInstance().PlayerController = this;
+        PlayerInformation.GetInstance().Player = gameObject;
+
         input = new PlayerInput();
-        movement = GetComponent<APlayerMovement>();
+        //movement = GetComponent<APlayerMovement>();
         weaponChanger.ChangeWeapon(0);
     }
 

@@ -27,6 +27,12 @@ public class PlayerParamController : ParamController
 
     private bool isFirstCheck = true;
 
+    private void Awake()
+    {
+        PlayerInformation.GetInstance().PlayerParamController = this;
+    }
+
+
     protected override void CheckTypeAndValues(DamagebleParam.ParamType type, float value, float maxValue)
     {      
         switch (type)
