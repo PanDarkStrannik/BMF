@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class PlayerParamController : ParamController
 {
@@ -13,6 +14,9 @@ public class PlayerParamController : ParamController
     [SerializeField] private UnityEvent PlayerDamagedEvent;
 
     [SerializeField] private ShakingParams shakingParams;
+
+    [SerializeField] private List<HeigthAndDamage> heigthsAndDamages;
+
 
     public ShakingParams ShakingParams
     {
@@ -29,7 +33,34 @@ public class PlayerParamController : ParamController
 
     private void Awake()
     {
+        heigthsAndDamages.OrderBy(x => x.Heigth);
+        heigthsAndDamages.Reverse();
         PlayerInformation.GetInstance().PlayerParamController = this;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        PlayerInformation.GetInstance().PlayerMovement.FallingEvent += FallingDamage;
+    }
+
+    protected override void OnDisable()
+    {
+        PlayerInformation.GetInstance().PlayerMovement.FallingEvent -= FallingDamage;
+        base.OnDisable();
+    }
+
+    protected void FallingDamage(float heigth)
+    {
+        for (int i = 0; i < heigthsAndDamages.Count; i++)
+        {
+            if (heigth >= heigthsAndDamages[i].Heigth)
+            {
+                paramSum.DamageAllByType(heigthsAndDamages[i].Damage);
+                Debug.Log("Урон от падения: " + heigthsAndDamages[i].Damage.Value);
+                break;
+            }
+        }
     }
 
 
@@ -69,6 +100,31 @@ public class PlayerParamController : ParamController
         }
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+
+    [System.Serializable]
+    public class HeigthAndDamage
+    {
+        [SerializeField] private float heigth = 0f;
+        [SerializeField] private DamageByType damage;
+
+        public float Heigth
+        {
+            get
+            {
+                return heigth;
+            }
+        }
+
+        public DamageByType Damage
+        {
+            get
+            {
+                return damage;
+            }
+        }
+
     }
 
 }

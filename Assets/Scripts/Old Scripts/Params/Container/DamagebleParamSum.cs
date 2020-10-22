@@ -89,4 +89,13 @@ public class DamagebleParamSum
         sumDatas.SetDefault();
     }
 
+
+    public void DamageAllByType(DamageByType damage)
+    {
+        foreach(var damagePlace in damagebles)
+        {
+            damagePlace.ApplyDamage(damage);
+        }
+    }
+
 }

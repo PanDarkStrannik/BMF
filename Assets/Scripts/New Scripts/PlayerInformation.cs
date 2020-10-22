@@ -7,6 +7,11 @@ public class PlayerInformation
     private static PlayerInformation instance;
     private static object synchRoot = new object();
 
+    public PlayerMovement PlayerMovement
+    {
+        get; set;
+    }
+
     public PlayerParamController PlayerParamController
     {
         get; set;

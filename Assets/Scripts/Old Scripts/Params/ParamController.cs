@@ -16,14 +16,14 @@ public class ParamController : MonoBehaviour
     //    paramSum.OnParamChanged += CheckTypeAndValues; 
     //}
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         paramSum.OnParamNull += CheckType;
         paramSum.OnParamChanged += CheckTypeAndValues;
         paramSum.Initialize();
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         paramSum.Unsubscribe();
         paramSum.OnParamNull -= CheckType;

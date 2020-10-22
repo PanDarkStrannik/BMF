@@ -17,8 +17,23 @@ public class PlayerMovement : APlayerMovement
     [SerializeField] private float speedInAir=4f;
     [SerializeField] private float correctToAnim = 100f;
     [SerializeField] private CustomEventValue<float> movementSpeedEvent;
+
+    public float test;
+
     private Dictionary<PlayerMoveType, float> moveTypeSpeeds;
     private bool grounded = false;
+
+    public delegate void FallingEventHelper(float heigth);
+    public event FallingEventHelper FallingEvent;
+
+    private bool faling = false;
+
+    private float groundedPos=0f;
+
+    private void Awake()
+    {
+        PlayerInformation.GetInstance().PlayerMovement = this;
+    }
 
     private void Start()
     {
@@ -31,17 +46,28 @@ public class PlayerMovement : APlayerMovement
     }
 
 
-    //private void FixedUpdate()
-    //{
-
-    //    grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
-    //        groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);      
-    //}
-
     private void Update()
     {
         grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
           groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
+
+        if (!grounded && !faling)
+        {
+            faling = true;
+            groundedPos = body.transform.position.y;
+        }
+
+        if(grounded && faling)
+        {
+            faling = false;
+            var fallPos = body.transform.position.y;
+            var heigth = groundedPos - fallPos;
+            if (Mathf.Abs(heigth) != Mathf.Abs(fallPos))
+            {
+                test = heigth;
+                FallingEvent?.Invoke(heigth);
+            }
+        } 
 
         if (grounded && body.velocity.magnitude > 0)
         {
@@ -81,5 +107,6 @@ public class PlayerMovement : APlayerMovement
     {
         body.AddForce(direction, forceMode);
     }
+
 
 }
