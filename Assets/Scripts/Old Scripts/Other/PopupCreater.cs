@@ -19,13 +19,13 @@ public class PopupCreater : MonoBehaviour
             e.OnDamagedWithValue += CreatePopup;
         }
     }
-    private void OnEnable()
-    {
-        foreach (var e in spawner.spawned_objects)
-        {
-            e.GetComponent<POPUP>().OnPopupDie += spawner.ReturnObject;
-        }
-    }
+    //private void OnEnable()
+    //{
+    //    foreach (var e in spawner.spawned_objects)
+    //    {
+    //       // e.GetComponent<POPUP>().OnPopupDie += spawner.ReturnObject;
+    //    }
+    //}
 
     //private void OnDisable()
     //{
@@ -61,7 +61,7 @@ public class PopupCreater : MonoBehaviour
                 break;
             }
         }
-        spawner.SpawnObject(damageble.gameObject.transform.position, Quaternion.identity);
+        spawner.SpawnFirstObjectInQueue(damageble.gameObject.transform.position, Quaternion.identity);
         Debug.Log("Заспавнили попуп " + damage);
     }
 

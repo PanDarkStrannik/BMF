@@ -66,8 +66,8 @@ MonoBehaviour:
     stopVariant: 0
     aim: 1
     damaging: 1
-    rigidBodyActive: 0
-    navMeshAgentActive: 0
+    isRigidBodyKinematick: 0
+    isNavMeshAgentActive: 0
 --- !u!1102 &-4963493063246675018
 AnimatorState:
   serializedVersion: 5
@@ -205,16 +205,16 @@ MonoBehaviour:
     stopVariant: 1
     aim: 1
     damaging: 0
-    rigidBodyActive: 0
-    navMeshAgentActive: 0
+    isRigidBodyKinematick: 0
+    isNavMeshAgentActive: 0
   - stageName: During
     during: 3
     weapon: 2
     stopVariant: 0
     aim: 0
     damaging: 1
-    rigidBodyActive: 0
-    navMeshAgentActive: 0
+    isRigidBodyKinematick: 0
+    isNavMeshAgentActive: 0
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -368,7 +368,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: DistanceToPlayer
-    m_EventTreshold: 3
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8986466613869552120}
   m_Solo: 0
@@ -393,7 +393,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: DistanceToPlayer
-    m_EventTreshold: 3
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4963493063246675018}
   m_Solo: 0

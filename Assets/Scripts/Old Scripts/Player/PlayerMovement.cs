@@ -88,7 +88,7 @@ public class PlayerMovement : APlayerMovement
                 if (grounded)
                 {
                     var toAnim = direction.magnitude/correctToAnim;
-                   // movementSpeedEvent.StartEvent(toAnim);
+                    //movementSpeedEvent.StartEvent(toAnim);
                     body.AddForce(direction * Time.deltaTime * acceleration);
                 }
                 else

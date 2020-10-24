@@ -9,6 +9,8 @@ public class WeaponChanger
 
     private AWeapon currentWeapon = null;
 
+    private float currentWeaponNum = 0f;
+
     public AWeapon CurrentWeapon
     {
         get
@@ -21,11 +23,37 @@ public class WeaponChanger
         }
     }
 
+
+    public void NextWeapon()
+    {
+        currentWeaponNum++;
+
+        if (currentWeaponNum > weapons.Count - 1)
+        {
+            currentWeaponNum = 0;
+        }
+
+        ChangeWeapon(currentWeaponNum);
+    }
+
+    public void PrevWeapon()
+    {
+        currentWeaponNum--;
+
+        if (currentWeaponNum < 0)
+        {
+            currentWeaponNum = weapons.Count - 1;
+        }        
+        ChangeWeapon(currentWeaponNum);
+    }
+
+
     public void ChangeWeapon(float weaponNum)
     {
+        Debug.Log("Номер оружия: " + weaponNum);
         if (weapons.Count > 0)
         {
-            if (weaponNum > weapons.Count)
+            if (weaponNum > weapons.Count - 1)
             {
                 weaponNum = 0;
             }
@@ -43,7 +71,12 @@ public class WeaponChanger
             }
             currentWeapon = weapons[(int)weaponNum];
             currentWeapon.WeaponObject.SetActive(true);
+            currentWeaponNum = weaponNum;
 
+        }
+        else
+        {
+            throw new System.Exception("Нет оружия для смены!");
         }
         
     }

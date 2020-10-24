@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class JumpAttack : AWeapon
 {
-
     [SerializeReference] private Rigidbody body;
+   // [SerializeField] private List<DamageByType> weaponData;
     [SerializeField] private float forceValue=3f;
     [SerializeField] private float damageTime = 3f;
     [SerializeField] private float reloadTime = 3f;
@@ -20,12 +20,20 @@ public class JumpAttack : AWeapon
     private float reloadTimer = 0f;
 
 
+    public override WeaponType WeaponType
+    {
+        get
+        {
+            return WeaponType.Jump;
+        }
+    }
+
 
 
 
     private void Start()
     {
-        damageArea.AddDamage(weaponData);
+      //  damageArea.AddDamage(weaponData);
         //startBodyRotation = body.transform.localRotation;
         //startBodyPosition = body.transform.localPosition;
     }

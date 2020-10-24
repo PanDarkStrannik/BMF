@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
         //spawnStages.OrderBy(stage => stage.StagePoint);
         //foreach (var enemy in enemySpawner.spawned_objects)
         //{
-        //    enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
+         //  enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
         //}
     }
 
@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         spawnStages.OrderBy(stage => stage.StagePoint);
         foreach (var enemy in enemySpawner.spawned_objects)
         {
-            enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
+            //enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
         }
 
 
@@ -79,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(toSpawnTime);
             for (int i = 0; i < currentStage.EnemyValue; i++)
             {
-                enemySpawner.SpawnObject(spawnPosition.position, spawnPosition.rotation);                
+                enemySpawner.SpawnFirstObjectInQueue(spawnPosition.position, spawnPosition.rotation);                
             }
             yield return new WaitForSeconds(currentStage.TimeBetweenSpawn);           
         }

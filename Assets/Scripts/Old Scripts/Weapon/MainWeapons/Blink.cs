@@ -13,10 +13,19 @@ public class Blink : AWeapon
     [SerializeField] private float minDistanceToBlink=1f;
     [SerializeField] private float timeScaleBeforeBlink=1f;
     [SerializeField] private float timeScaleUntilLayerBlink = 0.5f;
+    [SerializeField] private LayerMask layer;
     [SerializeField] private float secondsInLayerBlinkSloumo = 3f;
     [SerializeField] private float inLayerBlinkDistance = 1f;
 
     private bool isLayerBlink = false;
+
+    public override WeaponType WeaponType
+    {
+        get
+        {
+            return WeaponType.Blink;
+        }
+    }
 
     public float ReloadTime
     {
@@ -88,10 +97,5 @@ public class Blink : AWeapon
             Debug.Log("Препятствия не было");
             blinkBody.transform.position = blinkGun.position + blinkGun.forward * blinkDistance;
         }
-    }
-
-    private void DamageOtherObjects()
-    {
-
     }
 }

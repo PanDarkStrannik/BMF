@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Player/PlayerInput.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Old Scripts/Player/PlayerInput.inputactions'
 
 using System;
 using System.Collections;
@@ -193,11 +193,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ChangeWeapon"",
+                    ""name"": ""ChangeWeaponByKeyboard"",
                     ""type"": ""Value"",
                     ""id"": ""17c19c88-728e-4736-8029-6166c96a42a4"",
                     ""expectedControlType"": """",
-                    ""processors"": ""Clamp(max=1)"",
+                    ""processors"": """",
                     ""interactions"": """"
                 },
                 {
@@ -222,6 +222,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""id"": ""693c5d5f-6dd9-4bb4-9ff6-52c83a259f48"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseScroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""eecf0386-e165-438c-819b-3c3df2e664e3"",
+                    ""expectedControlType"": """",
+                    ""processors"": ""Clamp(min=-1,max=1)"",
                     ""interactions"": """"
                 }
             ],
@@ -250,17 +258,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""aeae8199-5d54-43e4-921f-be021a302937"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""ChangeSpeed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f9254611-3d50-48dc-826d-e70bd9371c4c"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -277,7 +274,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": ""Scale(factor=0)"",
                     ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""ChangeWeapon"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -288,18 +285,95 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": ""Scale"",
                     ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""ChangeWeapon"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3d6ce058-c58e-49ca-a7ee-6817959dbe66"",
-                    ""path"": ""<Mouse>/scroll/y"",
+                    ""id"": ""2f33270f-2104-48a1-b494-ec3fea795455"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
-                    ""processors"": ""Invert"",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeaponByKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dd07ace-8b2c-4141-9144-a4066467180d"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
                     ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""ChangeWeapon"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a23f0003-d225-4d02-89ba-fd315652a8d3"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3d77383-b7db-428b-9834-6d33764e5559"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b3099b6-59c2-4b2e-a1b2-471e675f9731"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=6)"",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4bf0c8f6-b944-470b-a2c5-832338dba890"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=7)"",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7c3b94b-90f9-4686-bc2d-c43677e689b1"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=8)"",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""619bffed-efe7-4cc2-b05c-a480822ca122"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=9)"",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""ChangeWeaponByKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -335,6 +409,50 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""ESC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aeae8199-5d54-43e4-921f-be021a302937"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""ChangeSpeed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""4f30a999-e2b4-476c-aba0-57d4cbf25e14"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseScroll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""a21a2013-0d74-43de-bad4-a07cec73d458"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1c39e659-16d3-492d-ba3b-f9a126564e89"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""MouseScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -370,10 +488,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ButtonInputs_Shoot = m_ButtonInputs.FindAction("Shoot", throwIfNotFound: true);
         m_ButtonInputs_ChangeSpeed = m_ButtonInputs.FindAction("ChangeSpeed", throwIfNotFound: true);
         m_ButtonInputs_Heal = m_ButtonInputs.FindAction("Heal", throwIfNotFound: true);
-        m_ButtonInputs_ChangeWeapon = m_ButtonInputs.FindAction("ChangeWeapon", throwIfNotFound: true);
+        m_ButtonInputs_ChangeWeaponByKeyboard = m_ButtonInputs.FindAction("ChangeWeaponByKeyboard", throwIfNotFound: true);
         m_ButtonInputs_Jump = m_ButtonInputs.FindAction("Jump", throwIfNotFound: true);
         m_ButtonInputs_Blink = m_ButtonInputs.FindAction("Blink", throwIfNotFound: true);
         m_ButtonInputs_ESC = m_ButtonInputs.FindAction("ESC", throwIfNotFound: true);
+        m_ButtonInputs_MouseScroll = m_ButtonInputs.FindAction("MouseScroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -493,10 +612,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_ButtonInputs_Shoot;
     private readonly InputAction m_ButtonInputs_ChangeSpeed;
     private readonly InputAction m_ButtonInputs_Heal;
-    private readonly InputAction m_ButtonInputs_ChangeWeapon;
+    private readonly InputAction m_ButtonInputs_ChangeWeaponByKeyboard;
     private readonly InputAction m_ButtonInputs_Jump;
     private readonly InputAction m_ButtonInputs_Blink;
     private readonly InputAction m_ButtonInputs_ESC;
+    private readonly InputAction m_ButtonInputs_MouseScroll;
     public struct ButtonInputsActions
     {
         private @PlayerInput m_Wrapper;
@@ -505,10 +625,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_ButtonInputs_Shoot;
         public InputAction @ChangeSpeed => m_Wrapper.m_ButtonInputs_ChangeSpeed;
         public InputAction @Heal => m_Wrapper.m_ButtonInputs_Heal;
-        public InputAction @ChangeWeapon => m_Wrapper.m_ButtonInputs_ChangeWeapon;
+        public InputAction @ChangeWeaponByKeyboard => m_Wrapper.m_ButtonInputs_ChangeWeaponByKeyboard;
         public InputAction @Jump => m_Wrapper.m_ButtonInputs_Jump;
         public InputAction @Blink => m_Wrapper.m_ButtonInputs_Blink;
         public InputAction @ESC => m_Wrapper.m_ButtonInputs_ESC;
+        public InputAction @MouseScroll => m_Wrapper.m_ButtonInputs_MouseScroll;
         public InputActionMap Get() { return m_Wrapper.m_ButtonInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -530,9 +651,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Heal.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnHeal;
                 @Heal.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnHeal;
                 @Heal.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnHeal;
-                @ChangeWeapon.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeapon;
-                @ChangeWeapon.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeapon;
-                @ChangeWeapon.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeapon;
+                @ChangeWeaponByKeyboard.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeaponByKeyboard;
+                @ChangeWeaponByKeyboard.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeaponByKeyboard;
+                @ChangeWeaponByKeyboard.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeaponByKeyboard;
                 @Jump.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnJump;
@@ -542,6 +663,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @ESC.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnESC;
                 @ESC.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnESC;
                 @ESC.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnESC;
+                @MouseScroll.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMouseScroll;
+                @MouseScroll.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMouseScroll;
+                @MouseScroll.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMouseScroll;
             }
             m_Wrapper.m_ButtonInputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -558,9 +682,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Heal.started += instance.OnHeal;
                 @Heal.performed += instance.OnHeal;
                 @Heal.canceled += instance.OnHeal;
-                @ChangeWeapon.started += instance.OnChangeWeapon;
-                @ChangeWeapon.performed += instance.OnChangeWeapon;
-                @ChangeWeapon.canceled += instance.OnChangeWeapon;
+                @ChangeWeaponByKeyboard.started += instance.OnChangeWeaponByKeyboard;
+                @ChangeWeaponByKeyboard.performed += instance.OnChangeWeaponByKeyboard;
+                @ChangeWeaponByKeyboard.canceled += instance.OnChangeWeaponByKeyboard;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -570,6 +694,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @ESC.started += instance.OnESC;
                 @ESC.performed += instance.OnESC;
                 @ESC.canceled += instance.OnESC;
+                @MouseScroll.started += instance.OnMouseScroll;
+                @MouseScroll.performed += instance.OnMouseScroll;
+                @MouseScroll.canceled += instance.OnMouseScroll;
             }
         }
     }
@@ -597,9 +724,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnChangeSpeed(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
-        void OnChangeWeapon(InputAction.CallbackContext context);
+        void OnChangeWeaponByKeyboard(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnBlink(InputAction.CallbackContext context);
         void OnESC(InputAction.CallbackContext context);
+        void OnMouseScroll(InputAction.CallbackContext context);
     }
 }

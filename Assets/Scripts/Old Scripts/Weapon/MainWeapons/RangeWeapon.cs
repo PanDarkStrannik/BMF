@@ -6,19 +6,29 @@ public class RangeWeapon : AWeapon
 {
     [SerializeField] protected Spawner bulletSpawner;
     [SerializeField] protected Transform gunPosition;
+    [SerializeField] private List<DamageByType> weaponData;
+    [SerializeField] protected LayerMask layer;
     [SerializeField] protected float attackTime;
     [SerializeField] protected float toShootTime=0f;
     [SerializeField] protected float timeToReload = 0f;
     [SerializeField] protected int bulletsValue=3;
 
-   
+
+    public override WeaponType WeaponType
+    {
+        get
+        {
+            return WeaponType.Range;
+        }
+    }
+
 
     protected int bulletsCount = 0;
 
     private void Awake()
     {
         bulletSpawner.CreateSpawner();
-        GameEvents.onBulletDie+=bulletSpawner.ReturnObject;
+       // GameEvents.onBulletDie+=bulletSpawner.ReturnObject;
         foreach(var e in bulletSpawner.spawned_objects)
         {
             e.GetComponent<IBullet>().Init(weaponData,layer);
@@ -50,7 +60,7 @@ public class RangeWeapon : AWeapon
         if (state==WeaponState.Attack)
         {
             InShoot();
-            bulletSpawner.SpawnObject(gunPosition.position, gunPosition.rotation);
+            bulletSpawner.SpawnFirstObjectInQueue(gunPosition.position, gunPosition.rotation);
             yield return new WaitForSecondsRealtime(attackTime);
             state = WeaponState.Serenity;
         }

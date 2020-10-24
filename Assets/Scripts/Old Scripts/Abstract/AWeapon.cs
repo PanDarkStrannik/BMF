@@ -6,10 +6,10 @@ using UnityEngine.Events;
 public abstract class AWeapon : MonoBehaviour, IWeapon
 {
 
-    [SerializeField] protected List<DamageByType> weaponData;
-    [SerializeField] protected WeaponType weaponType;
+   // [SerializeField] protected List<DamageByType> weaponData;
+   //[SerializeField] protected WeaponType weaponType;
     [SerializeField] protected GameObject weaponObject;
-    [SerializeField] protected LayerMask layer;
+   // [SerializeField] protected LayerMask layer;
     [SerializeField] protected UnityEvent<bool> AttackStartEvent;
     [SerializeField] protected UnityEvent OnAttackEvent;
 
@@ -18,12 +18,12 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
     protected bool isAttack = false;
 
-    public WeaponType WeaponType
+    public abstract WeaponType WeaponType
     {
-        get
-        {          
-            return weaponType;
-        }
+        get;
+        //{          
+        //    return weaponType;
+        //}
     }
 
     public WeaponState State
@@ -71,5 +71,5 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
 public enum WeaponType
 {
-    Mili, Range, Jump
+    Mili, Range, Jump, Summon, Blink
 }

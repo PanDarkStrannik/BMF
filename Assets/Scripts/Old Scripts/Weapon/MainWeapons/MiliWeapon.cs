@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class MiliWeapon : AWeapon
 {
-   // [SerializeField] private List<Collider> miliWeapons;
+    // [SerializeField] private List<Collider> miliWeapons;
+    //[SerializeField] private List<DamageByType> weaponData;
     [SerializeField] private float timeWeaponColider=1f;
     [SerializeField] private float timeToWeaponAttack = 0f;
     [SerializeReference] private DamageArea damageArea;
+
+    public override WeaponType WeaponType
+    {
+        get
+        {
+            return WeaponType.Mili;
+        }
+    }
 
     private void Start()
     {
@@ -17,7 +26,7 @@ public class MiliWeapon : AWeapon
         //    weapon.isTrigger = true;
         //}
 
-        damageArea.AddDamage(weaponData);
+      //  damageArea.AddDamage(weaponData);
 
     }
 

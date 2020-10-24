@@ -9,6 +9,7 @@ public class SimpleBullet : MonoBehaviour, IBullet
     [SerializeField] private float speed = 5f;
     [SerializeField] private List<DamageByType> bulletDatas;
     [SerializeReference] private ParticleSystem bulletDieEffect;
+    [SerializeReference] private SpawnedObject spawnedObject;
 
     private LayerMask layer;
     private bool notFistInit = false;
@@ -67,7 +68,8 @@ public class SimpleBullet : MonoBehaviour, IBullet
     {
         yield return new WaitForSeconds(toDieTime);
         OnDie();
-        GameEvents.onBulletDie(gameObject);
+        //GameEvents.onBulletDie(gameObject);
+        spawnedObject.Die();
     }
 
     private void OnTriggerEnter(Collider other)

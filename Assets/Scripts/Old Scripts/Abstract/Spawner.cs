@@ -54,6 +54,14 @@ public class Spawner
                 _objects_queue.Enqueue(created_object);
                 spawned_objects.Add(created_object);
                 created_object.SetActive(false);
+                if(created_object.GetComponent<SpawnedObject>() != null)
+                {
+                    created_object.GetComponent<SpawnedObject>().OnDieEvent += ReturnObject;
+                }
+                else
+                {
+                    throw new System.Exception("На объекте для спавна нет компонента SpawnedObject!");
+                }
             }
         }
         
@@ -74,16 +82,45 @@ public class Spawner
 
     #region Собственные наследуемые методы
 
-    public void SpawnObject(Vector3 position, Quaternion rotation)
+    public void SpawnFirstObjectInQueue(Vector3 position, Quaternion rotation)
     {
         if (_objects_queue.Count > 0)
         {
             SpawnObject(position, rotation, _objects_queue.Dequeue());
         }
+        else
+        {
+            throw new System.Exception("Куча пуста!");
+        }
+    }
+
+    public void SpawnObjectFromQueue(Vector3 position, Quaternion rotation, GameObject gameObject)
+    {
+        if (_objects_queue.Count > 0)
+        {
+            if (gameObject.GetComponent<SpawnedObject>() != null)
+            {
+                
+                var objectFromQueue = _objects_queue.Peek();
+                while (gameObject.GetComponent<SpawnedObject>().ID != objectFromQueue.GetComponent<SpawnedObject>().ID)
+                {
+                    objectFromQueue = _objects_queue.Peek();
+                }
+                SpawnObject(position, rotation, _objects_queue.Dequeue());
+            }
+            else
+            {
+                throw new System.Exception("На желанном для спавна объекте нет скрипта SpawnedObject!");
+            }
+        }
+        else
+        {
+            throw new System.Exception("Куча пуста!");
+        }
     }
 
 
-    public void ReturnObject(GameObject returnedObject)
+    private void ReturnObject(GameObject returnedObject)
     {       
         foreach(var spawned_object in spawned_objects)
         {

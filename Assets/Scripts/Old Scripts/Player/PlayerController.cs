@@ -156,10 +156,30 @@ public class PlayerController : MonoBehaviour
 
 
 
-        input.ButtonInputs.ChangeWeapon.performed += context =>
+        input.ButtonInputs.ChangeWeaponByKeyboard.performed += context =>
         {
-            weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeapon.ReadValue<float>());
+            weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
             ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
+        };
+
+        input.ButtonInputs.MouseScroll.performed += context =>
+        {
+            var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
+            Debug.Log(testValue);
+            if (testValue > 0)
+            {
+                weaponChanger.NextWeapon();
+            }
+            else if (testValue < 0)
+            {
+                weaponChanger.PrevWeapon();
+            }
+            else
+            {
+                throw new System.Exception("Почему-то при скролле выдало 0");
+            }
+            //weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeaponByMouse.ReadValue<Vector2>().y);
+            //ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
         };
 
 
