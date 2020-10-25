@@ -49,7 +49,7 @@ public class EnemyAIController : MonoBehaviour
         detection.DetectedObjectsEvent += ChangeInterestingAIObjects;
         // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
 
-        PlayerInformation.GetInstance().PlayerController.PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
+       // PlayerInformation.GetInstance().PlayerController.PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
 
         attackAIs = new List<AttackAI>(animator.GetBehaviours<AttackAI>());
         attackController.Initialize(attackAIs);      

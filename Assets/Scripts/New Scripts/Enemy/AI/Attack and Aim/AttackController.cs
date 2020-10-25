@@ -4,33 +4,11 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
-  //  [SerializeReference] private Animator aiFSM;
     [SerializeField] private List<WeaponAiData> weapons;
-
-   // private List<AttackAI> attackAIs;
 
     private AWeapon equipWeapon = null;
 
     private AttackAI.AttackStopVariants stopVariant = AttackAI.AttackStopVariants.None;
-
-    //private void Start()
-    //{
-    //    //attackAIs = new List<AttackAI>(aiFSM.GetBehaviours<AttackAI>());
-
-    //    if (weapons.Count > 0)
-    //    {
-    //        equipWeapon = weapons[0].Weapon;
-    //    }
-    //    else
-    //    {
-    //        throw new System.Exception("Нечего эккипировать!");
-    //    }
-
-    //    //foreach(var e in attackAIs)
-    //    //{
-    //    //    e.AttackAIEvent += AttackOnStage;
-    //    //}
-    //}
 
 
     public void Initialize(List<AttackAI> enemyAIs)
@@ -85,6 +63,7 @@ public class AttackController : MonoBehaviour
             {
                 if (stage.Aim)
                 {
+                    // RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
                     RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
                     if (hits.Length > 0)
                     {
@@ -97,7 +76,15 @@ public class AttackController : MonoBehaviour
                 }
                 if (stage.Damaging)
                 {
-                    if (CanAttack(mask, weapon))
+                    if(stage.AttackAnyway)
+                    {
+                        if(CanAttack(weapon))
+                        {
+                            Debug.Log("Можем атаковать, игнорируя нахождения в радиусе атаки");
+                            Attack(weapon);
+                        }
+                    }
+                    else if (CanAttack(mask, weapon))
                     {
                         Debug.Log($"Можем атаковать");
                         Attack(weapon);
@@ -128,7 +115,7 @@ public class AttackController : MonoBehaviour
 
     private bool CanAttack(LayerMask mask, WeaponAiData weapon)
     {
-        if(weapon.Weapon.State == AWeapon.WeaponState.Serenity)
+        if(CanAttack(weapon))
         {
             Ray ray = new Ray(weapon.Point.position, weapon.Point.forward);
 
@@ -139,6 +126,18 @@ public class AttackController : MonoBehaviour
             
         }
         return false;
+    }
+
+    private bool CanAttack(WeaponAiData weapon)
+    {
+        if(weapon.Weapon.State == AWeapon.WeaponState.Serenity)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 

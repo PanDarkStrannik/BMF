@@ -12,6 +12,7 @@ public class JumpAttack : AWeapon
     [SerializeField] private float reloadTime = 3f;
     [SerializeField] private DamageArea damageArea;
     [SerializeField] private UnityEvent<bool> damaging;
+    [SerializeField] private ForceMode forceMode;
 
     //private Vector3 startBodyPosition;
     //private Quaternion startBodyRotation;
@@ -42,7 +43,7 @@ public class JumpAttack : AWeapon
     {
         state = WeaponState.Attack;
         Debug.Log("Должна была произойти атака");
-        body.AddForce(forceValue * body.transform.forward, ForceMode.Impulse);
+        body.AddForce(forceValue * body.transform.forward, forceMode);
     }
 
     public void FixedUpdate()
@@ -72,6 +73,7 @@ public class JumpAttack : AWeapon
         else
         {
             damageArea.gameObject.SetActive(false);
+            //body.Sleep();
             damaging?.Invoke(false);
         }
 
