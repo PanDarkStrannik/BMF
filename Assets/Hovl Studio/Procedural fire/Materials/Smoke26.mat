@@ -48,5 +48,5 @@ Material:
     - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 0.9433962, g: 0.58205765, b: 0.865595, a: 0.11764706}
   m_BuildTextureStacks: []
