@@ -84,7 +84,8 @@ public class SimpleBullet : MonoBehaviour, IBullet
                     other.gameObject.GetComponent<IDamageble>().ApplyDamage(data);
                 }
                 OnDie();
-                GameEvents.onBulletDie(gameObject);
+                spawnedObject.Die();
+                // GameEvents.onBulletDie(gameObject);
             }
         }
         else
@@ -92,7 +93,8 @@ public class SimpleBullet : MonoBehaviour, IBullet
             if ( (layer.value & (1 << other.gameObject.layer)) != 0)
             {
                 OnDie();
-                GameEvents.onBulletDie(gameObject);
+                //GameEvents.onBulletDie(gameObject);
+                spawnedObject.Die();
             }
         }
         

@@ -19,6 +19,6 @@ public class SpawnedObject : MonoBehaviour
 
     public void Die()
     {
-        OnDieEvent(gameObject);
+        OnDieEvent?.Invoke(gameObject);
     }
 }

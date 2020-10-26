@@ -43,6 +43,7 @@ public class JumpAttack : AWeapon
     {
         state = WeaponState.Attack;
         Debug.Log("Должна была произойти атака");
+        body.velocity = Vector3.zero;
         body.AddForce(forceValue * body.transform.forward, forceMode);
     }
 

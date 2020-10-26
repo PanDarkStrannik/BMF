@@ -48,7 +48,6 @@ public class AttackController : MonoBehaviour
 
     private void AttackOnStage(LayerMask mask, AttackAI.AttackStage stage)
     {
-        Debug.Log($"атаковали на стадии {stage.Name}");
 
         stopVariant = stage.StopVariant;
 
@@ -80,13 +79,11 @@ public class AttackController : MonoBehaviour
                     {
                         if(CanAttack(weapon))
                         {
-                            Debug.Log("Можем атаковать, игнорируя нахождения в радиусе атаки");
                             Attack(weapon);
                         }
                     }
                     else if (CanAttack(mask, weapon))
                     {
-                        Debug.Log($"Можем атаковать");
                         Attack(weapon);
                     }
                 }
@@ -108,7 +105,6 @@ public class AttackController : MonoBehaviour
 
     private void Attack(WeaponAiData weapon)
     {
-        Debug.Log($"Атаковали!");
         weapon.Weapon.Attack();
     }
 
