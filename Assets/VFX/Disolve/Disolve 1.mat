@@ -23,7 +23,7 @@ Material:
     - Vector1_5AB100F2: 100
     - Vector1_8552AC31: 0.1
     - _DisolveAmount: -1
-    - _DissolveAmount: 2.0005329
+    - _DissolveAmount: 2.028018
     m_Colors:
     - Color_881B5522: {r: 7.6981173, g: 0.21489637, b: 0, a: 0}
   m_BuildTextureStacks: []
