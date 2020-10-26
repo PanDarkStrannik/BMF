@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
             if(!blinkAbility.IsAttack)
             {
                 blinkAbility.Attack();
-                StartCoroutine(playerUI.ReloadTP(blinkAbility.ReloadTime));
+               // StartCoroutine(playerUI.ReloadTP(blinkAbility.ReloadTime));
             }
         };
 

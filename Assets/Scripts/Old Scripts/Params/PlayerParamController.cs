@@ -26,10 +26,16 @@ public class PlayerParamController : ParamController
         }
     }
 
-    public delegate void PlayerDamagedHelper();
-    public event PlayerDamagedHelper PlayerDamaged;
+    public float MaxHealth
+    {
+        get; private set;
+    }
+
 
     private bool isFirstCheck = true;
+
+    public delegate void PlayerDamagedHelper(float damageValue);
+    public event PlayerDamagedHelper PlayerDamaged;
 
     private void Awake()
     {
@@ -41,6 +47,10 @@ public class PlayerParamController : ParamController
     protected override void OnEnable()
     {
         base.OnEnable();
+    }
+
+    private void Start()
+    {
         PlayerInformation.GetInstance().PlayerMovement.FallingEvent += FallingDamage;
     }
 
@@ -71,16 +81,18 @@ public class PlayerParamController : ParamController
             case DamagebleParam.ParamType.Health:
                 if (isFirstCheck)
                 {
-                    playerUI.InitializePlayerView(maxValue);
+                    //playerUI.InitializePlayerView(maxValue);
+                    //PlayerDamaged?.Invoke(maxValue);
+                    MaxHealth = maxValue;
                     isFirstCheck = false;
                 }
                 else
                 {
-                    PlayerDamaged?.Invoke();
+                    PlayerDamaged?.Invoke(value);
                     PlayerDamagedEvent?.Invoke();
                     shakingParams.ShakeEventInvoke();
                 }
-                playerUI.ViewHealth(value);
+               // playerUI.ViewHealth(value);
                 break;
         }
     }

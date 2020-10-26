@@ -105,6 +105,7 @@ public class PlayerMovement : APlayerMovement
 
     public override void ImpulseMove(Vector3 direction, ForceMode forceMode)
     {
+        body.velocity = Vector3.zero;
         body.AddForce(direction, forceMode);
     }
 
