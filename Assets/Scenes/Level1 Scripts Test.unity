@@ -12976,18 +12976,6 @@ PrefabInstance:
       propertyPath: deathMenu
       value: 
       objectReference: {fileID: 69532756}
-    - target: {fileID: 2043466443, guid: dad9f5cbb634ab243a7248dcfe3874d5, type: 3}
-      propertyPath: damagedEffect
-      value: 
-      objectReference: {fileID: 1279362880}
-    - target: {fileID: 2043466443, guid: dad9f5cbb634ab243a7248dcfe3874d5, type: 3}
-      propertyPath: damagedEffectAnim
-      value: 
-      objectReference: {fileID: 640319554}
-    - target: {fileID: 2043466443, guid: dad9f5cbb634ab243a7248dcfe3874d5, type: 3}
-      propertyPath: timeDamagedAnim
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 950297990545761146, guid: dad9f5cbb634ab243a7248dcfe3874d5, type: 3}
       propertyPath: m_Name
       value: UIhp
@@ -13078,11 +13066,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dad9f5cbb634ab243a7248dcfe3874d5, type: 3}
---- !u!95 &640319554 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 875169033, guid: dad9f5cbb634ab243a7248dcfe3874d5, type: 3}
-  m_PrefabInstance: {fileID: 640319553}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &650032929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17600,11 +17583,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267638777}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1279362880 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1392386205, guid: dad9f5cbb634ab243a7248dcfe3874d5, type: 3}
-  m_PrefabInstance: {fileID: 640319553}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1284828443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24095,11 +24073,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794125138}
   m_CullTransparentMesh: 0
---- !u!95 &1795692301 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1795692301, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-  m_PrefabInstance: {fileID: 8732325220232762238}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1802379626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27356,52 +27329,8 @@ PrefabInstance:
       value: New Player Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 2082450012}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1279362880}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1279362880}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732325221464641896, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: PlayerDamagedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8732325221464641899, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: movementSpeedEvent.unityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1795692301}
-    - target: {fileID: 8732325221464641899, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
-      propertyPath: movementSpeedEvent.unityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetFloat
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 public class SummoningWeapon : AWeapon
 {
@@ -10,9 +11,14 @@ public class SummoningWeapon : AWeapon
     [SerializeField] private List<EnemySpawnChances> enemyChances;
 
     [Range(0,100)]
-    [SerializeField] private float multiplieChance = 0;
+    [SerializeField] private float multiplieChance = 0f;
 
     [SerializeReference] private Transform spawnPoint;
+
+    [SerializeField] private float timeToSpawn = 0f;
+
+    [SerializeField] private UnityEvent<bool> attackStart;
+    [SerializeField] private UnityEvent attack;
 
     public override WeaponType WeaponType
     {
@@ -31,11 +37,20 @@ public class SummoningWeapon : AWeapon
 
     public override void Attack()
     {
-        MultiplieSummonSpawn();
+        if (state == WeaponState.Serenity)
+        {
+            StartCoroutine(MultiplieSummonSpawn());
+        }
     }
 
-    private void MultiplieSummonSpawn()
+    private IEnumerator MultiplieSummonSpawn()
     {
+        state = WeaponState.Attack;
+        attackStart?.Invoke(true);
+        yield return new WaitForSeconds(timeToSpawn);
+
+        attack?.Invoke();
+
         var rand = Random.Range(0, 100);
         if (rand < multiplieChance)
         {
@@ -48,6 +63,10 @@ public class SummoningWeapon : AWeapon
             SpawnGameObject(ReturnSomeGameObject());
             //SpawnByLayer(ReturnSomeLayer());
         }
+
+        state = WeaponState.Serenity;
+        attackStart?.Invoke(false);
+
     }
 
 
