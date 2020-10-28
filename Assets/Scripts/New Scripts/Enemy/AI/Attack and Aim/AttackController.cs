@@ -10,7 +10,7 @@ public class AttackController : MonoBehaviour
 
     private AttackAI.AttackStopVariants stopVariant = AttackAI.AttackStopVariants.None;
 
-
+    private Transform currentTarget;
     public void Initialize(List<AttackAI> enemyAIs)
     {
         if (weapons.Count > 0)
@@ -62,19 +62,27 @@ public class AttackController : MonoBehaviour
             {
                 if (stage.Aim)
                 {
+                    if (currentTarget != null)
+                    {
+                        Aim();
+                    }
                     // RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
                     RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
                     if (hits.Length > 0)
                     {
                         foreach (var hit in hits)
                         {
-                            if (hit.collider != null && hit.collider.gameObject != null)
+                            if (hit.transform != null /* && hit.collider.gameObject != null && hit.transform != null*/)
                             {
-                                Debug.Log("Местоположения отслеживаемого" + hit.collider.transform.position);
-                                foreach (var aim in weapon.ObjectAim)
-                                {
-                                    NewAim.Aim(hit.collider.transform, aim);
-                                }
+                                currentTarget = hit.transform;
+                                //Debug.Log("Местоположения отслеживаемого" + hit.collider.transform.position);
+                                
+                                //foreach (var aim in weapon.ObjectAim)
+                                //{
+   
+                                //    //NewAim.Aim(hit.transform, aim);
+                                //}
+                                
                                 break;
                             }
                         }
@@ -99,6 +107,17 @@ public class AttackController : MonoBehaviour
 
     }
 
+
+    private void Aim()
+    {
+        foreach (var weapon in weapons)
+        {
+            foreach (var aim in weapon.ObjectAim)
+            {
+                NewAim.Aim(currentTarget, aim);
+            }
+        }
+    }
 
     private void SelectWeapon(AWeapon weapon)
     {
