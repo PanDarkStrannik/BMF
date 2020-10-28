@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovementController : MonoBehaviour
+public class EnemyMovementController : AFaling
 {
     //[SerializeReference] private Animator animator;
     [SerializeReference] private NavMeshAgent navAgent;
@@ -20,6 +20,16 @@ public class EnemyMovementController : MonoBehaviour
     //    }
 
     //}
+
+    private void Update()
+    {
+        Falling();
+        if(!grounded)
+        {
+            body.AddForce(new Vector3(0, -9.8f, 0) * Time.deltaTime);
+        }
+    }
+
 
     public void Initialize(List<AEnemyMovement> enemyAIs)
     {
@@ -65,22 +75,30 @@ public class EnemyMovementController : MonoBehaviour
         }
     }
 
-    //private void Aim(Transform target)
+    //private void FixedUpdate()
     //{
 
-    //    switch (weapon.ObjectAim.Mod)
+
+    //    grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
+    //          groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
+
+    //    if (!grounded && !faling)
     //    {
-    //        case ObjectAimMod.AimMod.Full:
-    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.None);
-    //            break;
-    //        case ObjectAimMod.AimMod.LockYaw:
-    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.Yaw);
-    //            break;
-    //        case ObjectAimMod.AimMod.LockPitch:
-    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.Pitch);
-    //            break;
+    //        faling = true;
+    //        groundedPos = body.transform.position.y;
+    //    }
+
+    //    if (grounded && faling)
+    //    {
+    //        faling = false;
+    //        var fallPos = body.transform.position.y;
+    //        var heigth = groundedPos - fallPos;
+    //        if (Mathf.Abs(heigth) != Mathf.Abs(fallPos))
+    //        {
+    //            test = heigth;
+    //            FallingEvent?.Invoke(heigth);
+    //        }
     //    }
 
     //}
-
 }

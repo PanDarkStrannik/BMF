@@ -13,6 +13,8 @@ public class DamageArea : MonoBehaviour
 
     [SerializeField] private Transform parent = null;
 
+    [SerializeField] private Vector3 push;
+    [SerializeField] private ForceMode forceMode;
 
     private Dictionary<Collider,bool> enterColiders;
 
@@ -51,7 +53,7 @@ public class DamageArea : MonoBehaviour
                 {
                     if (damage.DamageType == add.DamageType)
                     {
-                        damage.AddDamage(add.Value);
+                        damage.AddDamage(add.DamageValue);
                     }
                     else
                     {
@@ -129,9 +131,12 @@ public class DamageArea : MonoBehaviour
     private IEnumerator GetDamage(Collider other)
     {
         enterColiders[other] = true;
+        
         foreach (var damage in damages)
         {
            other.GetComponent<IDamageble>().ApplyDamage(damage);
+           var tempPush = transform.TransformDirection(push);
+           other.GetComponent<IDamageble>().Push(tempPush, forceMode);
         }
         Debug.Log("Зафиксили урон");
         yield return new WaitForSeconds(timeBetweenDamage);

@@ -8,6 +8,14 @@ public class DamagebleParamSum
     [SerializeField] private List<DamagebleParam.ParamType> types;
     [SerializeReference] private List<ADamageble> damagebles;
 
+    public List<ADamageble> Damagebles
+    {
+        get
+        {
+            return damagebles;
+        }
+    }
+
     private DamagebleParamDatas sumDatas;
 
     public Dictionary<DamagebleParam.ParamType, float> typesValues;

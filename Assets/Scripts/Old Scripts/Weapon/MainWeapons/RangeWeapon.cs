@@ -56,12 +56,14 @@ public class RangeWeapon : AWeapon
     private IEnumerator Shoot()
     {
         BeforeShoot();
+        AttackStartEvent?.Invoke(true);
         yield return new WaitForSecondsRealtime(toShootTime);
         if (state==WeaponState.Attack)
         {
             InShoot();
             bulletSpawner.SpawnFirstObjectInQueue(gunPosition.position, gunPosition.rotation);
             yield return new WaitForSecondsRealtime(attackTime);
+            AttackStartEvent?.Invoke(false);
             state = WeaponState.Serenity;
         }
     }

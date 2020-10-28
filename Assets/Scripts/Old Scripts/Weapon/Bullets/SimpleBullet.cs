@@ -26,7 +26,7 @@ public class SimpleBullet : MonoBehaviour, IBullet
             {
                 if (mainWeapon.DamageType == myData.DamageType)
                 {
-                    tmp.Add(new DamageByType(mainWeapon.DamageType, mainWeapon.Value + myData.Value));
+                    tmp.Add(new DamageByType(mainWeapon.DamageType, mainWeapon.DamageValue + myData.DamageValue));
                     bulletDatas.Remove(myData);
                     mainWeaponDatas.Remove(mainWeapon);
                 }

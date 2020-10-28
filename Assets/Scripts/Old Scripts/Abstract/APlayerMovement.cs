@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class APlayerMovement : MonoBehaviour, IMovement
+public abstract class APlayerMovement : AFaling, IMovement
 {
 
     public PlayerMoveType moveType;

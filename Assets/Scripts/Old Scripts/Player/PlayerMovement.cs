@@ -10,25 +10,25 @@ public class PlayerMovement : APlayerMovement
     [SerializeField] private float friction=3f;
     [SerializeField] private float acceleration = 10f;
     [SerializeField] private float jumpForce = 1f;
-    [SerializeField] private Rigidbody body;
-    [SerializeField] private SphereCollider groundCheckSphere;
-    [SerializeField] private LayerMask groundCheckMask;
+    //[SerializeField] private Rigidbody body;
+    //[SerializeField] private SphereCollider groundCheckSphere;
+    //[SerializeField] private LayerMask groundCheckMask;
     [SerializeField] private float g = 9.8f;
     [SerializeField] private float speedInAir=4f;
     [SerializeField] private float correctToAnim = 100f;
     [SerializeField] private CustomEventValue<float> movementSpeedEvent;
 
-    public float test;
+    //public float test;
 
     private Dictionary<PlayerMoveType, float> moveTypeSpeeds;
-    private bool grounded = false;
+    //private bool grounded = false;
 
-    public delegate void FallingEventHelper(float heigth);
-    public event FallingEventHelper FallingEvent;
+    //public delegate void FallingEventHelper(float heigth);
+    //public event FallingEventHelper FallingEvent;
 
-    private bool faling = false;
+    //private bool faling = false;
 
-    private float groundedPos=0f;
+    //private float groundedPos=0f;
 
     private void Awake()
     {
@@ -48,26 +48,27 @@ public class PlayerMovement : APlayerMovement
 
     private void Update()
     {
-        grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
-          groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
+        Falling();
+        //grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
+        //  groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
 
-        if (!grounded && !faling)
-        {
-            faling = true;
-            groundedPos = body.transform.position.y;
-        }
+        //if (!grounded && !faling)
+        //{
+        //    faling = true;
+        //    groundedPos = body.transform.position.y;
+        //}
 
-        if(grounded && faling)
-        {
-            faling = false;
-            var fallPos = body.transform.position.y;
-            var heigth = groundedPos - fallPos;
-            if (Mathf.Abs(heigth) != Mathf.Abs(fallPos))
-            {
-                test = heigth;
-                FallingEvent?.Invoke(heigth);
-            }
-        } 
+        //if(grounded && faling)
+        //{
+        //    faling = false;
+        //    var fallPos = body.transform.position.y;
+        //    var heigth = groundedPos - fallPos;
+        //    if (Mathf.Abs(heigth) != Mathf.Abs(fallPos))
+        //    {
+        //        test = heigth;
+        //        FallingEvent?.Invoke(heigth);
+        //    }
+        //} 
 
         if (grounded && body.velocity.magnitude > 0)
         {

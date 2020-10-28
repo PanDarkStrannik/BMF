@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<SpawnStages> spawnStages;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private UnityEvent spawnEvent;
+    [SerializeField] private UnityEvent<bool> spawnStart;
     [SerializeField] private float toSpawnTime;
 
     private SpawnStages currentStage;
@@ -76,12 +77,14 @@ public class EnemySpawner : MonoBehaviour
         while(true)
         {
             spawnEvent?.Invoke();
+            spawnStart?.Invoke(true);
             yield return new WaitForSeconds(toSpawnTime);
             for (int i = 0; i < currentStage.EnemyValue; i++)
             {
                 enemySpawner.SpawnFirstObjectInQueue(spawnPosition.position, spawnPosition.rotation);                
             }
-            yield return new WaitForSeconds(currentStage.TimeBetweenSpawn);           
+            yield return new WaitForSeconds(currentStage.TimeBetweenSpawn);
+            spawnStart?.Invoke(false);
         }
     }
 

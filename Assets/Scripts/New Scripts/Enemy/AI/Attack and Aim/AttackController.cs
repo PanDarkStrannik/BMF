@@ -66,10 +66,17 @@ public class AttackController : MonoBehaviour
                     RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
                     if (hits.Length > 0)
                     {
-
-                        foreach (var aim in weapon.ObjectAim)
+                        foreach (var hit in hits)
                         {
-                            NewAim.Aim(hits[0].transform, aim);
+                            if (hit.collider != null && hit.collider.gameObject != null)
+                            {
+                                Debug.Log("Местоположения отслеживаемого" + hit.collider.transform.position);
+                                foreach (var aim in weapon.ObjectAim)
+                                {
+                                    NewAim.Aim(hit.collider.transform, aim);
+                                }
+                                break;
+                            }
                         }
                     }
                 }

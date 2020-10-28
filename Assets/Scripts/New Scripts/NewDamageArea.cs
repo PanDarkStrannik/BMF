@@ -54,7 +54,7 @@ public class NewDamageArea : MonoBehaviour
                 {
                     if (damage.DamageType == add.DamageType)
                     {
-                        damage.AddDamage(add.Value);
+                        damage.AddDamage(add.DamageValue);
                     }
                     else
                     {

@@ -14,19 +14,19 @@ public class DamageblePlace : ADamageble
 
             foreach (var weak in allWeak)
             {
-                float damage = weapon.Value;
+                float damage = weapon.DamageValue;
                 foreach (var strongData in weak.Strongs)
                 {
                     if (strongData.DamageType == weapon.DamageType)
                     {
-                        damage -= strongData.Value;
+                        damage -= strongData.DamageValue;
                     }
                 }
                 foreach(var weakData in weak.Weakneses)
                 {
                     if(weakData.DamageType == weapon.DamageType)
                     {
-                        damage += weakData.Value;
+                        damage += weakData.DamageValue;
                     }
                 }
                 if (damage < 0)

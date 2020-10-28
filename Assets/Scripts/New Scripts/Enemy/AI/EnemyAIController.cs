@@ -33,18 +33,41 @@ public class EnemyAIController : MonoBehaviour
     private List<AttackAI> attackAIs;
     private List<AEnemyMovement> movementsAIs;
 
+    private bool faling = false;
+
     private void OnEnable()
     {
 
         behaviours = new List<AEnemyAI>(animator.GetBehaviours<AEnemyAI>());
 
+        movementController.FalingEvent += delegate (bool value) { faling = value; };
+
         foreach (var beh in behaviours)
         {
             beh.AIAgent = enemyObject;
-            beh.RigidbodyActiveEvent += delegate (bool value) { rb.isKinematic = value; };
-            beh.NavMeshAgentActiveEvent += delegate (bool value) { navMeshAgent.enabled = value; };
+            beh.RigidbodyActiveEvent += delegate (bool value)
+            {
+                if (faling)
+                {
+                    rb.isKinematic = false;
+                }
+                else
+                {
+                    rb.isKinematic = value;
+                }
+            };
+            beh.NavMeshAgentActiveEvent += delegate (bool value)
+            {
+                if (faling)
+                {
+                    navMeshAgent.enabled = false;
+                }
+                else
+                {
+                    navMeshAgent.enabled = value;
+                }
+            };
         }
-
 
         detection.DetectedObjectsEvent += ChangeInterestingAIObjects;
         // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;

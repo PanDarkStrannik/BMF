@@ -15,7 +15,7 @@ public class PlayerParamController : ParamController
 
     [SerializeField] private ShakingParams shakingParams;
 
-    [SerializeField] private List<HeigthAndDamage> heigthsAndDamages;
+    //[SerializeField] private List<HeigthAndDamage> heigthsAndDamages;
 
 
     public ShakingParams ShakingParams
@@ -39,8 +39,8 @@ public class PlayerParamController : ParamController
 
     private void Awake()
     {
-        heigthsAndDamages.OrderBy(x => x.Heigth);
-        heigthsAndDamages.Reverse();
+        //heigthsAndDamages.OrderBy(x => x.Heigth);
+        //heigthsAndDamages.Reverse();
         PlayerInformation.GetInstance().PlayerParamController = this;
     }
 
@@ -51,27 +51,27 @@ public class PlayerParamController : ParamController
 
     private void Start()
     {
-        PlayerInformation.GetInstance().PlayerMovement.FallingEvent += FallingDamage;
+        //PlayerInformation.GetInstance().PlayerMovement.FallingEvent += FallingDamage;
     }
 
     protected override void OnDisable()
     {
-        PlayerInformation.GetInstance().PlayerMovement.FallingEvent -= FallingDamage;
+        //PlayerInformation.GetInstance().PlayerMovement.FallingEvent -= FallingDamage;
         base.OnDisable();
     }
 
-    protected void FallingDamage(float heigth)
-    {
-        for (int i = 0; i < heigthsAndDamages.Count; i++)
-        {
-            if (heigth >= heigthsAndDamages[i].Heigth)
-            {
-                paramSum.DamageAllByType(heigthsAndDamages[i].Damage);
-                Debug.Log("Урон от падения: " + heigthsAndDamages[i].Damage.Value);
-                break;
-            }
-        }
-    }
+    //protected void FallingDamage(float heigth)
+    //{
+    //    for (int i = 0; i < heigthsAndDamages.Count; i++)
+    //    {
+    //        if (heigth >= heigthsAndDamages[i].Heigth)
+    //        {
+    //            paramSum.DamageAllByType(heigthsAndDamages[i].Damage);
+    //            Debug.Log("Урон от падения: " + heigthsAndDamages[i].Damage.DamageValue);
+    //            break;
+    //        }
+    //    }
+    //}
 
 
     protected override void CheckTypeAndValues(DamagebleParam.ParamType type, float value, float maxValue)
@@ -115,28 +115,28 @@ public class PlayerParamController : ParamController
     }
 
 
-    [System.Serializable]
-    public class HeigthAndDamage
-    {
-        [SerializeField] private float heigth = 0f;
-        [SerializeField] private DamageByType damage;
+    //[System.Serializable]
+    //public class HeigthAndDamage
+    //{
+    //    [SerializeField] private float heigth = 0f;
+    //    [SerializeField] private DamageByType damage;
 
-        public float Heigth
-        {
-            get
-            {
-                return heigth;
-            }
-        }
+    //    public float Heigth
+    //    {
+    //        get
+    //        {
+    //            return heigth;
+    //        }
+    //    }
 
-        public DamageByType Damage
-        {
-            get
-            {
-                return damage;
-            }
-        }
+    //    public DamageByType Damage
+    //    {
+    //        get
+    //        {
+    //            return damage;
+    //        }
+    //    }
 
-    }
+    //}
 
 }
