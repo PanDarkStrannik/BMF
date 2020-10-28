@@ -7204,7 +7204,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1e81c8df1f10ab44691d2ab5d77d9a66, type: 2}
+  - {fileID: 2100000, guid: 684ef06790f0a0f4999d931a63066d99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15704,6 +15704,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 16acbb4284f574048b2c750772b46609, type: 2}
+    - target: {fileID: 2226039265115930911, guid: e2e21b56ff7561248ada222f9176b972, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2e21b56ff7561248ada222f9176b972, type: 3}
 --- !u!1001 &453359326
@@ -22840,9 +22844,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.5457458, g: 0.7338241, b: 0.990566, a: 1}
-  m_Intensity: 15
-  m_Range: 30
+  m_Color: {r: 0.347152, g: 0.59423006, b: 0.9339623, a: 1}
+  m_Intensity: 30
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -24379,8 +24383,8 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.54509807, g: 0.80784315, b: 0.99215686, a: 1}
-  m_Intensity: 100
+  m_Color: {r: 0.32719827, g: 0.694894, b: 0.9528302, a: 1}
+  m_Intensity: 200
   m_Range: 1000
   m_SpotAngle: 30
   m_InnerSpotAngle: 10
@@ -28425,6 +28429,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 16acbb4284f574048b2c750772b46609, type: 2}
+    - target: {fileID: 2226039265115930911, guid: e2e21b56ff7561248ada222f9176b972, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2e21b56ff7561248ada222f9176b972, type: 3}
 --- !u!1001 &1691979471
