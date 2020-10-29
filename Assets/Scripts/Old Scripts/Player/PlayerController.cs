@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
                     if (weaponChanger.CurrentWeapon.WeaponType == e.WeaponType)
                     {
                         var push = transform.TransformDirection(e.PushForce);
-                        movement.ImpulseMove(push, e.ForceMode);
+                        StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
                         e.ShakingParams.ShakeEventInvoke();
                     }
                 }
@@ -248,6 +248,7 @@ public class PlayerController : MonoBehaviour
         [SerializeField] private WeaponType weaponType;
         [SerializeField] private Vector3 pushForce;
         [SerializeField] private ForceMode forceMode;
+        [SerializeField] private float timeToPush;
         [SerializeField] private ShakingParams shakingParams;
 
         public WeaponType WeaponType
@@ -272,6 +273,14 @@ public class PlayerController : MonoBehaviour
             get
             {
                 return forceMode;
+            }
+        }
+
+        public float TimeToPush
+        {
+            get
+            {
+                return timeToPush;
             }
         }
 

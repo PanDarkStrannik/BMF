@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     [SerializeField] private List<WeaponAiData> weapons;
+    [SerializeField] private List<AimSpheres> aimSpheres;
 
     private AWeapon equipWeapon = null;
 
@@ -62,30 +63,38 @@ public class AttackController : MonoBehaviour
             {
                 if (stage.Aim)
                 {
-                    if (currentTarget != null)
+                    //if (currentTarget != null)
+                    //{
+                    //    Aim();
+                    //}
+                    foreach (var aimSphere in aimSpheres)
                     {
-                        Aim();
-                    }
-                    // RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
-                    RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
-                    if (hits.Length > 0)
-                    {
-                        foreach (var hit in hits)
+                        // RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
+                        RaycastHit[] hits = Physics.SphereCastAll(aimSphere.Point.position, aimSphere.Radius, aimSphere.Point.forward, aimSphere.Distance, mask);
+                        if (hits.Length > 0)
                         {
-                            if (hit.transform != null /* && hit.collider.gameObject != null && hit.transform != null*/)
+                            foreach (var hit in hits)
                             {
-                                currentTarget = hit.transform;
-                                //Debug.Log("Местоположения отслеживаемого" + hit.collider.transform.position);
-                                
-                                //foreach (var aim in weapon.ObjectAim)
-                                //{
-   
-                                //    //NewAim.Aim(hit.transform, aim);
-                                //}
-                                
-                                break;
+                                if (hit.transform != null /* && hit.collider.gameObject != null && hit.transform != null*/)
+                                {
+                                    currentTarget = hit.transform;
+
+                                    Aim(hit.transform);
+                                    //Debug.Log("Местоположения отслеживаемого" + hit.collider.transform.position);
+
+                                    //foreach (var aim in weapon.ObjectAim)
+                                    //{
+
+                                    //    //NewAim.Aim(hit.transform, aim);
+                                    //}
+
+                                    break;
+                                }
                             }
+                            break;
                         }
+
+
                     }
                 }
                 if (stage.Damaging)
@@ -108,13 +117,13 @@ public class AttackController : MonoBehaviour
     }
 
 
-    private void Aim()
+    private void Aim(Transform target)
     {
         foreach (var weapon in weapons)
         {
             foreach (var aim in weapon.ObjectAim)
             {
-                NewAim.Aim(currentTarget, aim);
+                NewAim.Aim(target, aim);
             }
         }
     }
@@ -200,7 +209,62 @@ public class AttackController : MonoBehaviour
                 Gizmos.DrawSphere(tmpPoint.position + tmpPoint.forward * tmpDistance, tmpRadius);
             }
         }
+
+        foreach(var aimSphere in aimSpheres)
+        {
+            if(aimSphere.GizmosColor != null && aimSphere.Point != null)
+            {
+                Gizmos.color = aimSphere.GizmosColor;
+                Gizmos.DrawSphere(aimSphere.Point.position, aimSphere.Radius);
+                Gizmos.DrawLine(aimSphere.Point.position, aimSphere.Point.position + aimSphere.Point.forward * aimSphere.Distance);
+                Gizmos.DrawSphere(aimSphere.Point.position + aimSphere.Point.forward * aimSphere.Distance, aimSphere.Radius);
+            }
+        }
+
     }
+
+    [System.Serializable]
+    public struct AimSpheres
+    {
+        [SerializeReference] private Transform point;
+        [SerializeField] private float radius;
+        [SerializeField] private float distance;
+        [SerializeField] private Color gizmosColor;
+
+        public Transform Point
+        {
+            get
+            {
+                return point;
+            }
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return radius;
+            }
+        }
+
+        public float Distance
+        {
+            get
+            {
+                return distance;
+            }
+        }
+
+        public Color GizmosColor
+        {
+            get
+            {
+                return gizmosColor;
+            }
+        }
+
+    }
+
 
     [System.Serializable]
     public class WeaponAiData

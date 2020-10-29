@@ -9,6 +9,6 @@ public abstract class APlayerMovement : AFaling, IMovement
     public enum PlayerMoveType {Slow, Fast, RangeMove}
     public abstract void Move(Vector3 direction);
 
-    public abstract void ImpulseMove(Vector3 direction, ForceMode forceMode);
+    public abstract IEnumerator ImpulseMove(Vector3 direction, ForceMode forceMode, float time);
 
 }

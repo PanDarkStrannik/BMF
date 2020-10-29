@@ -365,7 +365,7 @@ MonoBehaviour:
     damaging: 1
     isRigidBodyKinematick: 0
     isNavMeshAgentActive: 0
-    attackAnyway: 1
+    attackAnyway: 0
 --- !u!114 &-625298934347838434
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -104,8 +104,9 @@ public class PlayerMovement : APlayerMovement
         }
     }
 
-    public override void ImpulseMove(Vector3 direction, ForceMode forceMode)
+    public override IEnumerator ImpulseMove(Vector3 direction, ForceMode forceMode, float time)
     {
+        yield return new WaitForSecondsRealtime(time);
         body.velocity = Vector3.zero;
         body.AddForce(direction, forceMode);
     }
