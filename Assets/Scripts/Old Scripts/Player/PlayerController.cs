@@ -210,11 +210,11 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.Blink.performed += context =>
         {
-            if(!blinkAbility.IsAttack)
-            {
-                blinkAbility.Attack();
-               // StartCoroutine(playerUI.ReloadTP(blinkAbility.ReloadTime));
-            }
+            //if(!blinkAbility.IsAttack)
+            //{
+            //    blinkAbility.Attack();
+            //   // StartCoroutine(playerUI.ReloadTP(blinkAbility.ReloadTime));
+            //}
         };
 
        

@@ -52,6 +52,13 @@ public class PlayerUI : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        PointCounter.GetPointCounter().RefreshPoints();
+        PlayerInformation.GetInstance().PlayerParamController.PlayerDamaged -= ViewHealth;
+        PointCounter.GetPointCounter().PointEvent -= PlayerUI_PointEvent;
+    }
+
     private void PlayerUI_PointEvent(int value)
     {
         score.text = value.ToString();

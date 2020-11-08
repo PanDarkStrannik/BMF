@@ -25,8 +25,9 @@ public class RangeWeapon : AWeapon
 
     protected int bulletsCount = 0;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         bulletSpawner.CreateSpawner();
        // GameEvents.onBulletDie+=bulletSpawner.ReturnObject;
         foreach(var e in bulletSpawner.spawned_objects)
@@ -49,6 +50,7 @@ public class RangeWeapon : AWeapon
             state = WeaponState.Attack;
             StartCoroutine(Shoot());
         }
+        base.Attack();
     }
 
 
