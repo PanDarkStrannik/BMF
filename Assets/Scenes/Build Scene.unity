@@ -1670,6 +1670,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 254475458340445960, guid: c8aeb5becda46c949968919be45956dd, type: 3}
   m_PrefabInstance: {fileID: 190068292}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &192836015 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8732325219911054926, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+  m_PrefabInstance: {fileID: 1520739200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &202615354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4870030517758886, guid: 9ce4142b18056ab4b813713b878856ca, type: 3}
@@ -11262,6 +11267,42 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5513932532646931255, guid: b844834df7dea674ca0195f7d1c7af2c, type: 3}
+--- !u!1 &457419100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4893131092955758817, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+  m_PrefabInstance: {fileID: 1520739200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &457419106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457419100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c553bfad1ab893b4abfb91deff4daf85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponObject: {fileID: 457419100}
+  events: []
+  bulletSpawner:
+    spawnObjects:
+    - {fileID: 704009927254369956, guid: 41022131e13daab498d6815688e62a09, type: 3}
+    objectsValues: 05000000
+    spawned_objects: []
+  gunPosition: {fileID: 754558042}
+  weaponData:
+  - damageType: 0
+    damageValue: 0
+  - damageType: 2
+    damageValue: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 232960
+  attackTime: 1
+  reloadTime: 0
+  bulletsValue: 3
 --- !u!1 &459648625 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1439994112096857369, guid: b3ae49eefdf960f459141bd379d3a4a7, type: 3}
@@ -14398,6 +14439,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 805b16e99605bc240b397882037a7735, type: 3}
   m_PrefabInstance: {fileID: 750867291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &754558042 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2428269032656818293, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+  m_PrefabInstance: {fileID: 1520739200}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &757554107
 PrefabInstance:
@@ -17976,7 +18022,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 1795692301, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
   m_PrefabInstance: {fileID: 1520739200}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1199373499
+--- !u!114 &1199373498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17985,21 +18031,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1199373496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57271c9f64f9b3543ad11ca1b779e824, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c783fa20fa65344c9a583acd4568220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponObject: {fileID: 1199373496}
-  AttackStartEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnAttackEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  attackStates:
+  events:
   - weaponState: 0
-    toEventStart: 0.2
-    activateStateFunc: 1
-    funcTime: 1
+    toEventStart: 0
     weaponEvent:
       m_PersistentCalls:
         m_Calls:
@@ -18015,6 +18053,9 @@ MonoBehaviour:
             m_StringArgument: Attack
             m_BoolArgument: 0
           m_CallState: 2
+  damagingTime: 1
+  reloadTime: 0.3
+  timeToWeaponAttack: 0
   damageArea: {fileID: 852406554}
 --- !u!1001 &1203069252
 PrefabInstance:
@@ -21479,6 +21520,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1795692302, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+      propertyPath: eventController.events.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1117266775985455782, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -21518,6 +21563,10 @@ PrefabInstance:
     - target: {fileID: 1477401473950683031, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428269031734253321, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+      propertyPath: layer.m_Bits
+      value: 3584
       objectReference: {fileID: 0}
     - target: {fileID: 3839815106574107583, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -21612,8 +21661,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8732325219911054927, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+      propertyPath: blinkAbility
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8732325219911054927, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: weaponChanger.weapons.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8732325219911054927, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: gunPushes.Array.data[0].forceMode
@@ -21630,7 +21683,15 @@ PrefabInstance:
     - target: {fileID: 8732325219911054927, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: weaponChanger.weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 1199373499}
+      objectReference: {fileID: 1199373498}
+    - target: {fileID: 8732325219911054927, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+      propertyPath: weaponChanger.weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 457419106}
+    - target: {fileID: 8732325219911054927, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+      propertyPath: weaponChanger.weapons.Array.data[2]
+      value: 
+      objectReference: {fileID: 1866003265}
     - target: {fileID: 8732325219911054928, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: m_Name
       value: New Player Prefab
@@ -21683,7 +21744,10 @@ PrefabInstance:
       propertyPath: acceleration
       value: 500
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1795692302, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+    - {fileID: 2428269031734253321, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+    - {fileID: 1477401473950683029, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
 --- !u!1 &1528138435
 GameObject:
@@ -31122,6 +31186,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 805b16e99605bc240b397882037a7735, type: 3}
   m_PrefabInstance: {fileID: 1857923320}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1866003264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1477401473950683031, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+  m_PrefabInstance: {fileID: 1520739200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1866003265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866003264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33621c8e46cae184fa00fb2f287454fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponObject: {fileID: 1866003264}
+  events: []
+  toBlinkTime: 0.2
+  afterBlink: 7
+  blinkBody: {fileID: 192836015}
+  blinkDistance: 7
+  gizmosColor: {r: 0, g: 0, b: 0, a: 0}
+  blinkGun: {fileID: 754558042}
+  minDistanceToBlink: 3
+  timeScaleBeforeBlink: 0.1
+  timeScaleUntilLayerBlink: 0.1
+  layer:
+    serializedVersion: 2
+    m_Bits: 461824
+  secondsInLayerBlinkSloumo: 3
+  inLayerBlinkDistance: 10
 --- !u!1001 &1869126494
 PrefabInstance:
   m_ObjectHideFlags: 0

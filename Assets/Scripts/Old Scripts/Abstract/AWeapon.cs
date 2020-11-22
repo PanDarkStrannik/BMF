@@ -6,10 +6,7 @@ using UnityEngine.Events;
 public abstract class AWeapon : MonoBehaviour, IWeapon
 {
     [SerializeField] protected GameObject weaponObject;
-    [SerializeField] protected UnityEvent<bool> AttackStartEvent;
-    [SerializeField] protected UnityEvent OnAttackEvent;
-
-    [SerializeField] protected List<AttackState> attackStates;
+    [SerializeField] private List<EventOnAttackState> events;
 
     protected WeaponState state = WeaponState.Serenity;
 
@@ -24,6 +21,13 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
         {
             return state;
         }
+
+        protected set
+        {
+            WeaponStateEvent?.Invoke(value);
+            state = value;
+        }
+
     }
 
     public GameObject WeaponObject
@@ -36,75 +40,56 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
 
 
+    public delegate void WeaponStateEventHelper(WeaponState state);
+    public event WeaponStateEventHelper WeaponStateEvent;
+
+
+
     protected virtual void Awake()
     {
-        foreach (var e in attackStates)
-        {
-            e.EventState += WeaponEventListener;
-        }
+        WeaponStateEvent += WeaponStateListener;
     }
-
 
     protected virtual void OnDestroy()
     {
-        foreach (var e in attackStates)
-        {
-            e.EventState -= WeaponEventListener;
-        }
+        WeaponStateEvent -= WeaponStateListener;
     }
 
+    private void WeaponStateListener(WeaponState state)
+    {
+        StartCoroutine(EventStarter(state));
+    }
+
+
+    public IEnumerator EventStarter(AWeapon.WeaponState weaponState)
+    {
+        for (int i = 0; i < events.Count; i++)
+        {
+            if (events[i].WeaponState == weaponState)
+            {
+                StartCoroutine(events[i].Invoke());
+                yield return new WaitForSeconds(events[i].MinTime);
+            }
+        }
+    }
 
     public virtual void Attack()
     {
         if (state == AWeapon.WeaponState.Serenity)
         {
-            StartCoroutine(EventsStarter());
+           // StartCoroutine(EventsStarter());
         }
     }
 
-    private IEnumerator EventsStarter()
-    {
-        if (attackStates.Count > 0)
-        {
-            for (int i = 0; i < attackStates.Count; i++)
-            {
-                StartCoroutine(attackStates[i].Invoke());
-                yield return new WaitForSeconds(attackStates[i].MinTime);
-            }
-        }
-    }
 
-    private void WeaponEventListener(AttackState weaponEvent)
-    {
-        state = weaponEvent.WeaponState;
 
-        if(weaponEvent.ActivateStateFunc)
-        {
-            switch (weaponEvent.WeaponState)
-            {
-                case WeaponState.Attack:
-                    StartCoroutine(Damaging(weaponEvent.FuncTime));
-                    break;
-                case WeaponState.Reload:
-                    StartCoroutine(Reload(weaponEvent.FuncTime));
-                    break;
-                case WeaponState.ImposibleAttack:
-                    Debug.LogError("Стейт невозможности атаки! Функции нет!");
-                    break;
-                case WeaponState.Serenity:
-                    Debug.LogError("Стейт спокойствия оружия! Функции нет!");
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
 
 
     #region Переопределяемые методы
 
     protected virtual IEnumerator Damaging(float time)
     {
+        State = WeaponState.Attack;
         Debug.Log("Нанесение урона начали");
         yield return new WaitForSeconds(time);
         Debug.Log("Нанесение урона окончено");
@@ -112,6 +97,15 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
     protected virtual IEnumerator Reload(float time)
     {
+        State = WeaponState.Reload;
+        Debug.Log("Перезарядку начали");
+        yield return new WaitForSeconds(time);
+        Debug.Log("Перезарядка окончена");
+    }
+
+    protected virtual IEnumerator Serenity(float time)
+    {
+        State = WeaponState.Serenity;
         Debug.Log("Перезарядку начали");
         yield return new WaitForSeconds(time);
         Debug.Log("Перезарядка окончена");
@@ -121,50 +115,59 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
     {
         Debug.Log("Остановили Атаку!");
         StopAllCoroutines();
-        state = WeaponState.ImposibleAttack;
+        State = WeaponState.ImposibleAttack;
         yield return new WaitForSeconds(stopTime);
-        state = WeaponState.Serenity;
+        State = WeaponState.Serenity;
         Debug.Log("Разрешили Атаку!");
     }
     #endregion
 
 
+    public enum WeaponState
+    {
+        Attack, Reload, ImposibleAttack, Serenity, TransitionState
+    }
+
+
+
+
+
     #region Вспомогательный класс
 
     [System.Serializable]
-    public class AttackState
+    public class EventOnAttackState
     {
-        [SerializeField] private WeaponState weaponState;
+        [SerializeField] private AWeapon.WeaponState weaponState;
         [SerializeField] private float toEventStart;
-        [SerializeField] private bool activateStateFunc;
-        [SerializeField] protected float funcTime;
         [SerializeField] private UnityEvent weaponEvent;
 
-        //private AttackState nextState;
+        private EventOnAttackState nextState;
 
-        //public AttackState NextState
-        //{
-        //    get
-        //    {
-        //        return nextState;
-        //    }
-
-        //    set
-        //    {
-        //        nextState = value;
-        //    }
-
-        //}
-
-        public bool ActivateStateFunc
+        public EventOnAttackState NextState
         {
             get
             {
-                return activateStateFunc;
+                return nextState;
+            }
+
+            set
+            {
+                nextState = value;
+            }
+
+        }
+
+        public UnityEvent WeaponEvent
+        {
+            get
+            {
+                return weaponEvent;
             }
         }
 
-        public WeaponState WeaponState
+
+
+        public AWeapon.WeaponState WeaponState
         {
             get
             {
@@ -172,47 +175,34 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
             }
         }
 
-        public float FuncTime
-        {
-            get
-            {
-                return funcTime;
-            }
-        }
+
 
         public float MinTime
         {
             get
             {
-                if (funcTime < toEventStart)
-                {
-                    return funcTime;
-                }
-                else
-                {
-                    return toEventStart;
-                }
+
+                return toEventStart;
+
             }
         }
 
-        public delegate void WeaponEventStateHelper(AttackState weaponEvent);
+        public delegate void WeaponEventStateHelper(EventOnAttackState weaponEvent);
         public event WeaponEventStateHelper EventState;
+
+        public delegate void WeaponEventEndHelper();
+        public event WeaponEventEndHelper EventEnd;
 
         public IEnumerator Invoke()
         {
             EventState?.Invoke(this);
             yield return new WaitForSeconds(toEventStart);
             weaponEvent?.Invoke();
+            EventEnd?.Invoke();
         }
     }
 
     #endregion
-
-    public enum WeaponState
-    {
-        Attack, Reload, ImposibleAttack, Serenity
-    }
-
 
 }
 

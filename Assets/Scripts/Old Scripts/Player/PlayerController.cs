@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private PlayerUI playerUI;
 
-    [SerializeField] private Blink blinkAbility;
+    //[SerializeField] private Blink blinkAbility;
 
     [SerializeField] private List<GunPush> gunPushes;
 

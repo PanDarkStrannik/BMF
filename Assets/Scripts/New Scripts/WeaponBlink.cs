@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blink : AWeapon
+public class WeaponBlink : AWeapon
 {
-    [SerializeField] private float toBlinkTime=0.2f;
+    [SerializeField] private float toBlinkTime = 0.2f;
     [SerializeField] private float afterBlink = 5f;
     [SerializeField] private Transform blinkBody;
-    [SerializeField] private float blinkDistance=3f;
+    [SerializeField] private float blinkDistance = 3f;
     [SerializeField] private Color gizmosColor;
     [SerializeField] private Transform blinkGun;
-    [SerializeField] private float minDistanceToBlink=1f;
-    [SerializeField] private float timeScaleBeforeBlink=1f;
+    [SerializeField] private float minDistanceToBlink = 1f;
+    [SerializeField] private float timeScaleBeforeBlink = 1f;
     [SerializeField] private float timeScaleUntilLayerBlink = 0.5f;
     [SerializeField] private LayerMask layer;
     [SerializeField] private float secondsInLayerBlinkSloumo = 3f;
@@ -37,39 +37,42 @@ public class Blink : AWeapon
 
     public override void Attack()
     {
-        if (state==WeaponState.Serenity)
+        if (state == WeaponState.Serenity)
         {
-            state = WeaponState.Attack;
-            StartCoroutine(Shoot());
+            StartCoroutine(Damaging(0f));
         }
     }
 
-    private IEnumerator Shoot()
+    protected override IEnumerator Damaging(float time)
     {
         isLayerBlink = false;
+        State = WeaponState.Attack;
         PauseController.ChangeTime(timeScaleBeforeBlink);
         yield return new WaitForSecondsRealtime(toBlinkTime);
         Teleport();
         if (isLayerBlink)
         {
-            for (int i=0; i < secondsInLayerBlinkSloumo; i++)
+            for (int i = 0; i < secondsInLayerBlinkSloumo; i++)
             {
                 PauseController.ChangeTime(timeScaleUntilLayerBlink);
                 yield return new WaitForSecondsRealtime(1f);
             }
         }
-        //yield return new WaitForSecondsRealtime(1f);
         PauseController.ChangeTime(1f);
-        state = WeaponState.Reload;
-        yield return new WaitForSeconds(afterBlink);
-        state = WeaponState.Serenity;
+        StartCoroutine(Serenity(afterBlink));
     }
 
-    private void OnDrawGizmos()
+    protected override IEnumerator Reload(float time)
     {
-        Gizmos.color = gizmosColor;
-        Gizmos.DrawSphere(blinkGun.position, 1f);
-        Gizmos.DrawSphere(blinkGun.position + blinkGun.forward * blinkDistance, 1f);
+        State = WeaponState.Reload;
+        yield return new WaitForSeconds(time);
+        StartCoroutine(Serenity(0f));
+    }
+
+    protected override IEnumerator Serenity(float time)
+    {
+        yield return new WaitForSeconds(time);
+        State = WeaponState.Serenity;
     }
 
     private void Teleport()
@@ -98,4 +101,12 @@ public class Blink : AWeapon
             blinkBody.transform.position = blinkGun.position + blinkGun.forward * blinkDistance;
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = gizmosColor;
+        Gizmos.DrawSphere(blinkGun.position, 1f);
+        Gizmos.DrawSphere(blinkGun.position + blinkGun.forward * blinkDistance, 1f);
+    }
+
 }
