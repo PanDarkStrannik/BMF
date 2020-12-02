@@ -41,29 +41,32 @@ public class DamageblePlace : ADamageble
         }
     }
 
+    public override void ApplyHeal(DamageByType healWeapon)
+    {
+        var allWeak = datas.FindAllByWeak(healWeapon.DamageType);
 
-    
+        if (allWeak != null)
+        {
 
+            foreach (var weak in allWeak)
+            {
+                float damage = healWeapon.DamageValue;
+                foreach (var strongData in weak.Strongs)
+                {
+                    if (strongData.DamageType == healWeapon.DamageType)
+                    {
+                        damage += strongData.DamageValue;
+                    }
+                }
+                if (damage < 0)
+                {
+                    damage = 0;
+                }
+                weak.Enlarge(damage);
 
-    //private void PopupCreate(DamagebleParam param, DamageByType weapon, float damage)
-    //{
-
-    //    var tmpPopup = Instantiate(popup, transform.position, Quaternion.identity);
-    //    if (damage <= 3f)
-    //    {
-    //        tmpPopup.GetComponentInChildren<TextMesh>().color = Color.white;
-    //    }
-    //    else if (damage <= 7f)
-    //    {
-    //        tmpPopup.GetComponentInChildren<TextMesh>().color = Color.yellow;
-    //    }
-    //    else if (damage <= 10f)
-    //    {
-    //        tmpPopup.GetComponentInChildren<TextMesh>().color = Color.green;
-    //    }
-    //    tmpPopup.GetComponentInChildren<TextMesh>().text = $"{damage}";
-    //    Destroy(tmpPopup, popupDestroyTime);
-    //    Debug.Log("Слабость у " + param.Type + " " + weapon.DamageType + " " + damage);
-
-    //}
+                HealEventWithValue(damage, this);
+            }
+            HealEvent();
+        }
+    }
 }

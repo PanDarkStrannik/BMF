@@ -44,34 +44,15 @@ public class PlayerParamController : ParamController
         PlayerInformation.GetInstance().PlayerParamController = this;
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-    }
+  
 
     private void Start()
     {
         //PlayerInformation.GetInstance().PlayerMovement.FallingEvent += FallingDamage;
     }
 
-    protected override void OnDisable()
-    {
-        //PlayerInformation.GetInstance().PlayerMovement.FallingEvent -= FallingDamage;
-        base.OnDisable();
-    }
 
-    //protected void FallingDamage(float heigth)
-    //{
-    //    for (int i = 0; i < heigthsAndDamages.Count; i++)
-    //    {
-    //        if (heigth >= heigthsAndDamages[i].Heigth)
-    //        {
-    //            paramSum.DamageAllByType(heigthsAndDamages[i].Damage);
-    //            Debug.Log("Урон от падения: " + heigthsAndDamages[i].Damage.DamageValue);
-    //            break;
-    //        }
-    //    }
-    //}
+
 
 
     protected override void CheckTypeAndValues(DamagebleParam.ParamType type, float value, float maxValue)
@@ -85,6 +66,8 @@ public class PlayerParamController : ParamController
                     //PlayerDamaged?.Invoke(maxValue);
                     MaxHealth = maxValue;
                     isFirstCheck = false;
+                    PlayerDamaged?.Invoke(value);
+                    PlayerDamagedEvent?.Invoke();
                 }
                 else
                 {

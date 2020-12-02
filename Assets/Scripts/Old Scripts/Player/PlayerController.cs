@@ -20,14 +20,17 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeReference] private APlayerMovement movement;
-    private PlayerInput input;
-
-    private bool isShiftNotInput = true;
-
-    private float moveX, moveY;
 
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
+
+
+
+    private PlayerInput input;
+    private bool isShiftNotInput = true;
+    private float moveX, moveY;
+    private WeaponHealing weaponHealing;
+
 
 
     public List<GunPush> GunPushes
@@ -54,6 +57,9 @@ public class PlayerController : MonoBehaviour
         ButtonsInput();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        weaponHealing = weaponChanger.AllWeapons.Find(x => x is WeaponHealing) as WeaponHealing; 
+        
     }
 
     private void OnEnable()
@@ -108,14 +114,7 @@ public class PlayerController : MonoBehaviour
 
     private void WeaponChecker()
     {
-        //if(weaponChanger.CurrentWeapon.State == AWeapon.WeaponState.Attack)
-        //{
-        //    PlayerWeaponControlEvent?.Invoke(PlayerWeaponControlType.PlayerAttack);
-        //}
-        //else if (weaponChanger.CurrentWeapon.State == AWeapon.WeaponState.Reload)
-        //{
-        //    PlayerWeaponControlEvent?.Invoke(PlayerWeaponControlType.PlayerReload);
-        //}
+     
 
         switch (weaponChanger.CurrentWeapon.State)
         {
@@ -210,6 +209,11 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.Blink.performed += context =>
         {
+            if (weaponHealing.State == AWeapon.WeaponState.Serenity)
+            {
+                weaponHealing.Attack(gameObject);
+            }
+            
             //if(!blinkAbility.IsAttack)
             //{
             //    blinkAbility.Attack();

@@ -23,6 +23,14 @@ public class WeaponChanger
         }
     }
 
+    public List<AWeapon> AllWeapons
+    {
+        get
+        {
+            return weapons;
+        }
+    }
+
 
     public void NextWeapon()
     {

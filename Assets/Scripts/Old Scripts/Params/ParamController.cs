@@ -18,11 +18,21 @@ public class ParamController : MonoBehaviour
 
     [SerializeField] private List<HeigthAndDamage> heigthsAndDamages;
 
+    
+
     //private void Awake()
     //{
     //    paramSum.OnParamNull += CheckType;
     //    paramSum.OnParamChanged += CheckTypeAndValues; 
     //}
+
+    public DamagebleParamSum DamagebleParams
+    {
+        get
+        {
+            return paramSum;
+        }
+    }
 
     protected virtual void OnEnable()
     {

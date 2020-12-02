@@ -75,10 +75,12 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
     public virtual void Attack()
     {
-        if (state == AWeapon.WeaponState.Serenity)
-        {
-           // StartCoroutine(EventsStarter());
-        }
+       throw new System.Exception("Ненаправленная атака нереализована");      
+    }
+
+    public virtual void Attack(GameObject attackedObject)
+    {
+        throw new System.Exception("Направленная атака нереализована");
     }
 
 
@@ -88,6 +90,14 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
     #region Переопределяемые методы
 
     protected virtual IEnumerator Damaging(float time)
+    {
+        State = WeaponState.Attack;
+        Debug.Log("Нанесение урона начали");
+        yield return new WaitForSeconds(time);
+        Debug.Log("Нанесение урона окончено");
+    }
+
+    protected virtual IEnumerator Damaging(float time, GameObject damagingObject)
     {
         State = WeaponState.Attack;
         Debug.Log("Нанесение урона начали");
@@ -208,5 +218,5 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
 public enum WeaponType
 {
-    Mili, Range, Jump, Summon, Blink
+    Mili, Range, Jump, Summon, Blink, Directional
 }

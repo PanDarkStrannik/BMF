@@ -42,6 +42,7 @@ public class DamagebleParamSum
             {
                 sumDatas.ParamDatas.AddRange(placeDamage.Datas.ParamDatas);
                 placeDamage.OnDamaged += ChangeParam;
+                placeDamage.OnHeal += ChangeParam;
 
             }
 
@@ -56,7 +57,8 @@ public class DamagebleParamSum
         {
             foreach (var placeDamage in damagebles)
             {                
-                placeDamage.OnDamaged += ChangeParam;
+                placeDamage.OnDamaged -= ChangeParam;
+                placeDamage.OnHeal -= ChangeParam;
             }
         }
     }
@@ -103,6 +105,14 @@ public class DamagebleParamSum
         foreach(var damagePlace in damagebles)
         {
             damagePlace.ApplyDamage(damage);
+        }
+    }
+
+    public void HealAllByType(DamageByType heal)
+    {
+        foreach (var damagePlace in damagebles)
+        {
+            damagePlace.ApplyHeal(heal);
         }
     }
 
