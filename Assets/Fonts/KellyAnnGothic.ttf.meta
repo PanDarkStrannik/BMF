@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 fileFormatVersion: 2
 guid: a9997a85969654146895fb6ae19be0f6
 TrueTypeFontImporter:
@@ -20,3 +21,8 @@ TrueTypeFontImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:0b1273cf2b96f37d189328f19507431ade21aad0a4bfbfaf2530a2218e8acdda
+size 510
+>>>>>>> Stashed changes
