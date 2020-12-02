@@ -1,0 +1,465 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "MovementInput",
+            "id": "2b6bd468-282a-4fc0-9a00-a374abfdd941",
+            "actions": [
+                {
+                    "name": "GetDirection",
+                    "type": "Value",
+                    "id": "ccbc5f4e-c9f9-4dfa-91dd-09d58bb0dc68",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "f144a53d-5206-4066-a639-ed7bf2bc5adf",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetDirection",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f145886c-0602-43b8-a160-d92654ab3f74",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "Clamp(max=1)",
+                    "groups": "Mouse And Keybord",
+                    "action": "GetDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "f56ffb5d-c294-4711-abb7-e6593704713d",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "Invert,Clamp(max=1)",
+                    "groups": "Mouse And Keybord",
+                    "action": "GetDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "19e92a23-796b-4dee-a530-07b9f0a6ee33",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "Invert,Clamp(max=1)",
+                    "groups": "Mouse And Keybord",
+                    "action": "GetDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "7205d46c-55f4-431c-af9d-292d041b56c4",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "Clamp(max=1)",
+                    "groups": "Mouse And Keybord",
+                    "action": "GetDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "RotationInput",
+            "id": "47823a55-9c73-400b-8dcd-f451a1d1045c",
+            "actions": [
+                {
+                    "name": "GetRotation",
+                    "type": "Value",
+                    "id": "1482543b-bab0-4886-b875-030da9d106a0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "26c8e5dc-00dc-4507-9bda-a9e7d3a3e05b",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetRotation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "a52575f8-3c5d-4d99-983a-28738c76d2ab",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "2d4fee5a-3428-4924-8df0-fe594b9e916b",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "GetRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "3b1afb3d-9a99-4564-b2d0-a06c8232511e",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "GetRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "b349abdf-764e-4eed-8c36-8c55f13ae546",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "ButtonInputs",
+            "id": "7e21ab00-bdba-48eb-871d-4deb5abf5877",
+            "actions": [
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "d454fa5c-8eea-4eaa-92e4-3f2b91614e60",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "bc458cfe-e4ec-4eb0-80a7-e03bb64078e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ChangeSpeed",
+                    "type": "Button",
+                    "id": "c2ea2e8d-6a2a-4e99-9376-ce6478f5e7a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Heal",
+                    "type": "Button",
+                    "id": "cb226fdd-4f2f-4c63-9047-5b82e0c600ad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ChangeWeaponByKeyboard",
+                    "type": "Value",
+                    "id": "17c19c88-728e-4736-8029-6166c96a42a4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "6a45f470-39ee-40b8-bcd8-3bada907721b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Blink",
+                    "type": "Button",
+                    "id": "262ca9b5-09a6-45b5-8b0e-305f73b60dc3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ESC",
+                    "type": "Button",
+                    "id": "693c5d5f-6dd9-4bb4-9ff6-52c83a259f48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MouseScroll",
+                    "type": "Value",
+                    "id": "eecf0386-e165-438c-819b-3c3df2e664e3",
+                    "expectedControlType": "",
+                    "processors": "Clamp(min=-1,max=1)",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f22215fc-8137-4e0c-8c88-365806612a2c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0c73c44-05b3-4316-b7a5-52f23d8ec975",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9254611-3d50-48dc-826d-e70bd9371c4c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "Heal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62957fad-a3da-4f7b-a3c9-9a413ccc209a",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "Scale(factor=0)",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "491486a2-1d60-4a73-b056-c9ccfbc8546c",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f33270f-2104-48a1-b494-ec3fea795455",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "Scale(factor=2)",
+                    "groups": "",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6dd07ace-8b2c-4141-9144-a4066467180d",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a23f0003-d225-4d02-89ba-fd315652a8d3",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "Scale(factor=4)",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3d77383-b7db-428b-9834-6d33764e5559",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "Scale(factor=5)",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b3099b6-59c2-4b2e-a1b2-471e675f9731",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "Scale(factor=6)",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bf0c8f6-b944-470b-a2c5-832338dba890",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "Scale(factor=7)",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7c3b94b-90f9-4686-bc2d-c43677e689b1",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "Scale(factor=8)",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "619bffed-efe7-4cc2-b05c-a480822ca122",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "Scale(factor=9)",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeWeaponByKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d207e94-7b84-45c6-ac15-f26391360e6f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6060e051-a22b-47f2-90cb-66b07c3d3c97",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "Blink",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ecebe920-bb85-4276-8c21-4975cde34833",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aeae8199-5d54-43e4-921f-be021a302937",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "ChangeSpeed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "4f30a999-e2b4-476c-aba0-57d4cbf25e14",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseScroll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "a21a2013-0d74-43de-bad4-a07cec73d458",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "1c39e659-16d3-492d-ba3b-f9a126564e89",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "MouseScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Mouse And Keybord",
+            "bindingGroup": "Mouse And Keybord",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
