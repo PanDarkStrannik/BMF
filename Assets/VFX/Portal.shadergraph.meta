@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 fileFormatVersion: 2
 guid: 3ccd7296da80d344b902ad4323519e08
 ScriptedImporter:
@@ -8,3 +9,8 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:f99874baee210ddfa0981b575a80c9d245cc4a498e46a49e7355240d97d4cfab
+size 295
+>>>>>>> Stashed changes

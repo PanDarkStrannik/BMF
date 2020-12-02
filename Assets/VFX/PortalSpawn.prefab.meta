@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 fileFormatVersion: 2
 guid: 5d44a73c0363ad746b5db4dd8f179b90
 PrefabImporter:
@@ -5,3 +6,8 @@ PrefabImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:e5af7f9e0105c190dc657f1ec210d5b51c45cac1684199083e78057bc0a4416f
+size 161
+>>>>>>> Stashed changes

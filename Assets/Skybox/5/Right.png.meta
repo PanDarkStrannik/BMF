@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 fileFormatVersion: 2
 guid: 4f0a00d891b0b934593de718775b1b55
 TextureImporter:
@@ -90,3 +91,8 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:bd29ef89d8fae9f36b1b2114be5b20476110142a11f6e4a235620419dee83a70
+size 2141
+>>>>>>> Stashed changes

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 fileFormatVersion: 2
 guid: 90d8fcdf3142f174d8a8aa3ff56968ee
 NativeFormatImporter:
@@ -6,3 +7,8 @@ NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:1e41978558e56098721cc91473d22331bad62b43159b3479c2bca285263bb049
+size 190
+>>>>>>> Stashed changes

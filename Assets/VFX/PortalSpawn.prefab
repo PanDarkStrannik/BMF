@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &7713127449671653298
@@ -19425,3 +19426,8 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:3bf6729fe4c48cbe8ab0d49648661da9ff51407404e01e0fc140ab05bffe9265
+size 489838
+>>>>>>> Stashed changes
