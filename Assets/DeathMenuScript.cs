@@ -15,7 +15,7 @@ public class DeathMenuScript : MonoBehaviour
 
     private void PlayerDamagedListener()
     {
-        score.text = $"YOUR SCORE: {PointCounter.GetPointCounter().Points}";
+        score.text = $"YOUR SCORE: {PointCounter.Instance.Points}";
     }
 
 

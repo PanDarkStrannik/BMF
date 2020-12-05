@@ -35,7 +35,11 @@ public class EnemySpawner : MonoBehaviour
             //enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
         }
 
+    }
 
+
+    private void StartSpawn()
+    {
         if (spawnStages.Count > 0)
         {
             currentStage = spawnStages[0];
@@ -44,18 +48,21 @@ public class EnemySpawner : MonoBehaviour
         {
             throw new System.Exception("Не введён лист спавна врагов");
         }
-    
+
         StartCoroutine(SpawnBetweenTime());
     }
 
+
     private void OnEnable()
     {
-        PointCounter.GetPointCounter().PointEvent += ChangeStage;
+        GlobalGameEvents.Instance.OnEnemySpawnStart += StartSpawn;
+        PointCounter.Instance.PointEvent += ChangeStage;
     }
 
     private void OnDisable()
     {
-        PointCounter.GetPointCounter().PointEvent -= ChangeStage;
+        GlobalGameEvents.Instance.OnEnemySpawnStart -= StartSpawn;
+        PointCounter.Instance.PointEvent -= ChangeStage;
     }
 
     private void ChangeStage(int point)
