@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private UnityEvent<bool> spawnStart;
     [SerializeField] private float toSpawnTime;
 
+    private bool firstInit = false;
+
     private SpawnStages currentStage;
 
     private void Awake()
@@ -35,6 +37,9 @@ public class EnemySpawner : MonoBehaviour
             //enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
         }
 
+        Subscribe();
+        
+        firstInit = true;
     }
 
 
@@ -52,18 +57,37 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnBetweenTime());
     }
 
-
-    private void OnEnable()
+    private void Subscribe()
     {
         GlobalGameEvents.Instance.OnEnemySpawnStart += StartSpawn;
         PointCounter.Instance.PointEvent += ChangeStage;
     }
 
-    private void OnDisable()
+    private void Unsubscribe()
     {
         GlobalGameEvents.Instance.OnEnemySpawnStart -= StartSpawn;
+        StopCoroutine(SpawnBetweenTime());
         PointCounter.Instance.PointEvent -= ChangeStage;
     }
+
+    private void OnEnable()
+    {
+        if (firstInit == true)
+        {
+            Subscribe();
+        }
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+
+    //private void OnDestroy()
+    //{
+    //    GlobalGameEvents.Instance.OnEnemySpawnStart -= StartSpawn;
+    //    StopCoroutine(SpawnBetweenTime());
+    //}
 
     private void ChangeStage(int point)
     {

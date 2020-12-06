@@ -177,10 +177,28 @@ namespace Scripts.DevelopingSupporting
                 }
             }
 
+
             protected virtual void Creating()
             {
 
             }
+
+            private void OnEnable()
+            {
+                if (Instance == null)
+                {
+                    Instance = this as T;
+                    Creating();
+                }
+
+            }
+
+            private void OnDisable()
+            {
+                Instance = null;
+            }
+
+
 
 
         }
