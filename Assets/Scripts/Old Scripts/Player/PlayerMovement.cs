@@ -30,7 +30,7 @@ public class PlayerMovement : APlayerMovement
 
     //private float groundedPos=0f;
 
-    private void Awake()
+    private PlayerMovement()
     {
         PlayerInformation.GetInstance().PlayerMovement = this;
     }
@@ -44,7 +44,6 @@ public class PlayerMovement : APlayerMovement
             moveTypeSpeeds.Add(moveTypes[i], speeds[i]);
         }
     }
-
 
     private void Update()
     {
