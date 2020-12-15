@@ -19807,6 +19807,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
+      propertyPath: enemySpawner.spawnObjects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
+      propertyPath: enemySpawner.objectsValues.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: spawnStages.Array.data[1].stageName
       value: First Stage
       objectReference: {fileID: 0}
@@ -19821,10 +19829,6 @@ PrefabInstance:
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: spawnStages.Array.data[4].stageName
       value: Fourth Stage
-      objectReference: {fileID: 0}
-    - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
-      propertyPath: enemySpawner.spawnObjects.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: spawnStages.Array.data[1].enemyValue
@@ -19857,10 +19861,6 @@ PrefabInstance:
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: spawnStages.Array.data[4].stagePoint
       value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
-      propertyPath: enemySpawner.objectsValues.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: enemySpawner.spawnObjects.Array.data[0]
@@ -21407,6 +21407,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1795692301, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 450453826357c6a409ea0492af80e413, type: 2}
     - target: {fileID: 1117266775985455782, guid: ecdcc084707c1e440bb7bbd877ce0479, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -30164,6 +30168,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
+      propertyPath: enemySpawner.spawnObjects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
+      propertyPath: enemySpawner.objectsValues.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: spawnStages.Array.data[1].stageName
       value: First Stage
       objectReference: {fileID: 0}
@@ -30178,10 +30190,6 @@ PrefabInstance:
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: spawnStages.Array.data[4].stageName
       value: Fourth Stage
-      objectReference: {fileID: 0}
-    - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
-      propertyPath: enemySpawner.spawnObjects.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: spawnStages.Array.data[1].enemyValue
@@ -30214,10 +30222,6 @@ PrefabInstance:
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: spawnStages.Array.data[4].stagePoint
       value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
-      propertyPath: enemySpawner.objectsValues.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4423659500879208227, guid: 7b9cc0e9d7dba1e448e574e14cf3ef14, type: 3}
       propertyPath: enemySpawner.spawnObjects.Array.data[0]
