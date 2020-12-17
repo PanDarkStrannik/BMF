@@ -8,7 +8,7 @@ public class WeaponRange : AWeapon
     [SerializeField] protected Transform gunPosition;
     [SerializeField] private List<DamageByType> weaponData;
     [SerializeField] protected LayerMask layer;
-    [SerializeField] protected float attackTime;
+    [SerializeField] protected float toAttackTime;
     [SerializeField] protected float reloadTime = 0f;
     [SerializeField] protected int bulletsValue = 3;
 
@@ -49,7 +49,7 @@ public class WeaponRange : AWeapon
         }
         else if (state == WeaponState.Serenity)
         {
-            StartCoroutine(Damaging(attackTime));
+            StartCoroutine(Damaging(toAttackTime));
         }
     }
 
@@ -60,9 +60,9 @@ public class WeaponRange : AWeapon
         State = WeaponState.Attack;
         if (state == WeaponState.Attack)
         {
+            yield return new WaitForSecondsRealtime(time);
             bulletSpawner.SpawnFirstObjectInQueue(gunPosition.position, gunPosition.rotation);
             bulletsCount++;
-            yield return new WaitForSecondsRealtime(time);
             StartCoroutine(Serenity(0f));
         }
     }
@@ -72,7 +72,7 @@ public class WeaponRange : AWeapon
         State = WeaponState.Reload;
         if (state == WeaponState.Reload)
         {
-            StopCoroutine(Damaging(attackTime));
+            StopCoroutine(Damaging(toAttackTime));
             yield return new WaitForSecondsRealtime(time);
             bulletsCount = 0;
             StartCoroutine(Serenity(0f));

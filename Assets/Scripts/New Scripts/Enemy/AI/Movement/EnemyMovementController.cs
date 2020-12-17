@@ -21,6 +21,11 @@ public class EnemyMovementController : AFaling
 
     //}
 
+    private void Start()
+    {
+        navAgent.updateRotation = false;
+    }
+
     private void Update()
     {
         Falling();

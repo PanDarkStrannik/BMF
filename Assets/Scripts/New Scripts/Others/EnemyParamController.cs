@@ -32,7 +32,7 @@ public class EnemyParamController : ParamController
     protected override IEnumerator NullHealth()
     {
         yield return new WaitForSeconds(timeToDeactive);
-        PointCounter.GetPointCounter().AddPoints(pointsForKill);
+        PointCounter.Instance.AddPoints(pointsForKill);
         OnEnemyDie?.Invoke();
         spawnedObject.Die();
         paramSum.SetDefault();

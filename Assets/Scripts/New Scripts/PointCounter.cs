@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Scripts.DevelopingSupporting;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointCounter
+public class PointCounter : SupportingScripts.Singlton<PointCounter>
 {
 
     public delegate void PointCounterHelper(int value);
@@ -22,27 +23,27 @@ public class PointCounter
         }
     }
 
-    private static PointCounter instance;
-    private static object synchRoot = new object();
+    //private static PointCounter instance;
+    //private static object synchRoot = new object();
 
-    protected PointCounter()
-    {
-        points = 0;
-    }
+    //protected PointCounter()
+    //{
+    //    points = 0;
+    //}
 
     
 
-    public static PointCounter GetPointCounter()
-    {
-        lock (synchRoot)
-        {
-            if (instance == null)
-            {
-                instance = new PointCounter();
-            }
-        }
-        return instance;
-    }
+    //public static PointCounter GetPointCounter()
+    //{
+    //    lock (synchRoot)
+    //    {
+    //        if (instance == null)
+    //        {
+    //            instance = new PointCounter();
+    //        }
+    //    }
+    //    return instance;
+    //}
 
     public void AddPoints(int value)
     {
@@ -59,5 +60,10 @@ public class PointCounter
     {
         points = 0;
         PointEvent?.Invoke(points);
+    }
+
+    protected override void Creating()
+    {
+        points = 0;
     }
 }

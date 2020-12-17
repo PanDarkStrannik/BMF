@@ -83,12 +83,12 @@ public class WeaponHealing : AWeapon
         state = WeaponState.Serenity;
     }
 
-    private bool FindComponentInIerarhy<T>(GameObject searchObject, out T finded)
+    private bool FindComponentInIerarhy<T>(GameObject searchObject, out T finded) where T : MonoBehaviour
     {
         finded = default(T);
         if (searchObject.GetComponent<T>() != null)
         {
-            finded = searchObject.GetComponent<T>();
+            finded = searchObject.GetComponent<T>();            
             return true;
         }
         else if (searchObject.GetComponentInParent<T>() != null)
