@@ -8,6 +8,14 @@ public class DamagebleParamSum
     [SerializeField] private List<DamagebleParam.ParamType> types;
     [SerializeReference] private List<ADamageble> damagebles;
 
+    public List<ADamageble> Damagebles
+    {
+        get
+        {
+            return damagebles;
+        }
+    }
+
     private DamagebleParamDatas sumDatas;
 
     public Dictionary<DamagebleParam.ParamType, float> typesValues;
@@ -34,6 +42,7 @@ public class DamagebleParamSum
             {
                 sumDatas.ParamDatas.AddRange(placeDamage.Datas.ParamDatas);
                 placeDamage.OnDamaged += ChangeParam;
+                placeDamage.OnHeal += ChangeParam;
 
             }
 
@@ -48,7 +57,8 @@ public class DamagebleParamSum
         {
             foreach (var placeDamage in damagebles)
             {                
-                placeDamage.OnDamaged += ChangeParam;
+                placeDamage.OnDamaged -= ChangeParam;
+                placeDamage.OnHeal -= ChangeParam;
             }
         }
     }
@@ -87,6 +97,23 @@ public class DamagebleParamSum
     public void SetDefault()
     {
         sumDatas.SetDefault();
+    }
+
+
+    public void DamageAllByType(DamageByType damage)
+    {
+        foreach(var damagePlace in damagebles)
+        {
+            damagePlace.ApplyDamage(damage);
+        }
+    }
+
+    public void HealAllByType(DamageByType heal)
+    {
+        foreach (var damagePlace in damagebles)
+        {
+            damagePlace.ApplyHeal(heal);
+        }
     }
 
 }

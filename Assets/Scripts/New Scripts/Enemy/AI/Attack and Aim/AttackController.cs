@@ -4,35 +4,14 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
-  //  [SerializeReference] private Animator aiFSM;
     [SerializeField] private List<WeaponAiData> weapons;
-
-   // private List<AttackAI> attackAIs;
+    [SerializeField] private List<AimSpheres> aimSpheres;
 
     private AWeapon equipWeapon = null;
 
     private AttackAI.AttackStopVariants stopVariant = AttackAI.AttackStopVariants.None;
 
-    //private void Start()
-    //{
-    //    //attackAIs = new List<AttackAI>(aiFSM.GetBehaviours<AttackAI>());
-
-    //    if (weapons.Count > 0)
-    //    {
-    //        equipWeapon = weapons[0].Weapon;
-    //    }
-    //    else
-    //    {
-    //        throw new System.Exception("Нечего эккипировать!");
-    //    }
-
-    //    //foreach(var e in attackAIs)
-    //    //{
-    //    //    e.AttackAIEvent += AttackOnStage;
-    //    //}
-    //}
-
-
+    private Transform currentTarget;
     public void Initialize(List<AttackAI> enemyAIs)
     {
         if (weapons.Count > 0)
@@ -70,7 +49,6 @@ public class AttackController : MonoBehaviour
 
     private void AttackOnStage(LayerMask mask, AttackAI.AttackStage stage)
     {
-        Debug.Log($"атаковали на стадии {stage.Name}");
 
         stopVariant = stage.StopVariant;
 
@@ -85,21 +63,51 @@ public class AttackController : MonoBehaviour
             {
                 if (stage.Aim)
                 {
-                    RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
-                    if (hits.Length > 0)
+                    //if (currentTarget != null)
+                    //{
+                    //    Aim();
+                    //}
+                    foreach (var aimSphere in aimSpheres)
                     {
-
-                        foreach (var aim in weapon.ObjectAim)
+                        // RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
+                        RaycastHit[] hits = Physics.SphereCastAll(aimSphere.Point.position, aimSphere.Radius, aimSphere.Point.forward, aimSphere.Distance, mask);
+                        if (hits.Length > 0)
                         {
-                            NewAim.Aim(hits[0].transform, aim);
+                            foreach (var hit in hits)
+                            {
+                                if (hit.transform != null /* && hit.collider.gameObject != null && hit.transform != null*/)
+                                {
+                                    currentTarget = hit.transform;
+
+                                    Aim(hit.transform);
+                                    //Debug.Log("Местоположения отслеживаемого" + hit.collider.transform.position);
+
+                                    //foreach (var aim in weapon.ObjectAim)
+                                    //{
+
+                                    //    //NewAim.Aim(hit.transform, aim);
+                                    //}
+
+                                    break;
+                                }
+                            }
+                            break;
                         }
+
+
                     }
                 }
                 if (stage.Damaging)
                 {
-                    if (CanAttack(mask, weapon))
+                    if(stage.AttackAnyway)
                     {
-                        Debug.Log($"Можем атаковать");
+                        if(CanAttack(weapon))
+                        {
+                            Attack(weapon);
+                        }
+                    }
+                    else if (CanAttack(mask, weapon))
+                    {
                         Attack(weapon);
                     }
                 }
@@ -108,6 +116,17 @@ public class AttackController : MonoBehaviour
 
     }
 
+
+    private void Aim(Transform target)
+    {
+        foreach (var weapon in weapons)
+        {
+            foreach (var aim in weapon.ObjectAim)
+            {
+                NewAim.Aim(target, aim);
+            }
+        }
+    }
 
     private void SelectWeapon(AWeapon weapon)
     {
@@ -121,14 +140,13 @@ public class AttackController : MonoBehaviour
 
     private void Attack(WeaponAiData weapon)
     {
-        Debug.Log($"Атаковали!");
         weapon.Weapon.Attack();
     }
 
 
     private bool CanAttack(LayerMask mask, WeaponAiData weapon)
     {
-        if(weapon.Weapon.State == AWeapon.WeaponState.Serenity)
+        if(CanAttack(weapon))
         {
             Ray ray = new Ray(weapon.Point.position, weapon.Point.forward);
 
@@ -139,6 +157,18 @@ public class AttackController : MonoBehaviour
             
         }
         return false;
+    }
+
+    private bool CanAttack(WeaponAiData weapon)
+    {
+        if(weapon.Weapon.State == AWeapon.WeaponState.Serenity)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 
@@ -179,7 +209,62 @@ public class AttackController : MonoBehaviour
                 Gizmos.DrawSphere(tmpPoint.position + tmpPoint.forward * tmpDistance, tmpRadius);
             }
         }
+
+        foreach(var aimSphere in aimSpheres)
+        {
+            if(aimSphere.GizmosColor != null && aimSphere.Point != null)
+            {
+                Gizmos.color = aimSphere.GizmosColor;
+                Gizmos.DrawSphere(aimSphere.Point.position, aimSphere.Radius);
+                Gizmos.DrawLine(aimSphere.Point.position, aimSphere.Point.position + aimSphere.Point.forward * aimSphere.Distance);
+                Gizmos.DrawSphere(aimSphere.Point.position + aimSphere.Point.forward * aimSphere.Distance, aimSphere.Radius);
+            }
+        }
+
     }
+
+    [System.Serializable]
+    public struct AimSpheres
+    {
+        [SerializeReference] private Transform point;
+        [SerializeField] private float radius;
+        [SerializeField] private float distance;
+        [SerializeField] private Color gizmosColor;
+
+        public Transform Point
+        {
+            get
+            {
+                return point;
+            }
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return radius;
+            }
+        }
+
+        public float Distance
+        {
+            get
+            {
+                return distance;
+            }
+        }
+
+        public Color GizmosColor
+        {
+            get
+            {
+                return gizmosColor;
+            }
+        }
+
+    }
+
 
     [System.Serializable]
     public class WeaponAiData

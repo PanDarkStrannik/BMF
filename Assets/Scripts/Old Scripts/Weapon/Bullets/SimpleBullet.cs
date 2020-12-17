@@ -9,6 +9,7 @@ public class SimpleBullet : MonoBehaviour, IBullet
     [SerializeField] private float speed = 5f;
     [SerializeField] private List<DamageByType> bulletDatas;
     [SerializeReference] private ParticleSystem bulletDieEffect;
+    [SerializeReference] private SpawnedObject spawnedObject;
 
     private LayerMask layer;
     private bool notFistInit = false;
@@ -25,7 +26,7 @@ public class SimpleBullet : MonoBehaviour, IBullet
             {
                 if (mainWeapon.DamageType == myData.DamageType)
                 {
-                    tmp.Add(new DamageByType(mainWeapon.DamageType, mainWeapon.Value + myData.Value));
+                    tmp.Add(new DamageByType(mainWeapon.DamageType, mainWeapon.DamageValue + myData.DamageValue));
                     bulletDatas.Remove(myData);
                     mainWeaponDatas.Remove(mainWeapon);
                 }
@@ -67,7 +68,8 @@ public class SimpleBullet : MonoBehaviour, IBullet
     {
         yield return new WaitForSeconds(toDieTime);
         OnDie();
-        GameEvents.onBulletDie(gameObject);
+        //GameEvents.onBulletDie(gameObject);
+        spawnedObject.Die();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,7 +84,8 @@ public class SimpleBullet : MonoBehaviour, IBullet
                     other.gameObject.GetComponent<IDamageble>().ApplyDamage(data);
                 }
                 OnDie();
-                GameEvents.onBulletDie(gameObject);
+                spawnedObject.Die();
+                // GameEvents.onBulletDie(gameObject);
             }
         }
         else
@@ -90,7 +93,8 @@ public class SimpleBullet : MonoBehaviour, IBullet
             if ( (layer.value & (1 << other.gameObject.layer)) != 0)
             {
                 OnDie();
-                GameEvents.onBulletDie(gameObject);
+                //GameEvents.onBulletDie(gameObject);
+                spawnedObject.Die();
             }
         }
         

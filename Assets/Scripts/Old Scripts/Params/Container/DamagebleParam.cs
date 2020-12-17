@@ -169,7 +169,7 @@ public class DamagebleParam
     /// Увеличение параметра не превышая максимального значения
     /// </summary>
     /// <param name="enlarge"> величина увеличения</param>
-    public void Enalrge(float enlarge)
+    public void Enlarge(float enlarge)
     {
         value += enlarge;
 

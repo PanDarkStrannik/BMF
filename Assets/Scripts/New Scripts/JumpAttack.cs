@@ -5,13 +5,14 @@ using UnityEngine.Events;
 
 public class JumpAttack : AWeapon
 {
-
     [SerializeReference] private Rigidbody body;
+   // [SerializeField] private List<DamageByType> weaponData;
     [SerializeField] private float forceValue=3f;
     [SerializeField] private float damageTime = 3f;
     [SerializeField] private float reloadTime = 3f;
     [SerializeField] private DamageArea damageArea;
     [SerializeField] private UnityEvent<bool> damaging;
+    [SerializeField] private ForceMode forceMode;
 
     //private Vector3 startBodyPosition;
     //private Quaternion startBodyRotation;
@@ -20,12 +21,20 @@ public class JumpAttack : AWeapon
     private float reloadTimer = 0f;
 
 
+    public override WeaponType WeaponType
+    {
+        get
+        {
+            return WeaponType.Jump;
+        }
+    }
+
 
 
 
     private void Start()
     {
-        damageArea.AddDamage(weaponData);
+      //  damageArea.AddDamage(weaponData);
         //startBodyRotation = body.transform.localRotation;
         //startBodyPosition = body.transform.localPosition;
     }
@@ -34,7 +43,8 @@ public class JumpAttack : AWeapon
     {
         state = WeaponState.Attack;
         Debug.Log("Должна была произойти атака");
-        body.AddForce(forceValue * body.transform.forward, ForceMode.Impulse);
+        body.velocity = Vector3.zero;
+        body.AddForce(forceValue * body.transform.forward, forceMode);
     }
 
     public void FixedUpdate()
@@ -64,6 +74,7 @@ public class JumpAttack : AWeapon
         else
         {
             damageArea.gameObject.SetActive(false);
+            //body.Sleep();
             damaging?.Invoke(false);
         }
 

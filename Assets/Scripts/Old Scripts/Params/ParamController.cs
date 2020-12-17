@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 public class ParamController : MonoBehaviour
 {
@@ -10,24 +12,80 @@ public class ParamController : MonoBehaviour
 
     [SerializeField] protected List<MonoBehaviour> deactiveScripts;
 
+    [SerializeReference] private Rigidbody body;
+
+    [SerializeReference] private AFaling faling;
+
+    [SerializeField] private List<HeigthAndDamage> heigthsAndDamages;
+
+    
+
     //private void Awake()
     //{
     //    paramSum.OnParamNull += CheckType;
     //    paramSum.OnParamChanged += CheckTypeAndValues; 
     //}
 
-    private void OnEnable()
+    public DamagebleParamSum DamagebleParams
     {
+        get
+        {
+            return paramSum;
+        }
+    }
+
+    protected virtual void OnEnable()
+    {
+        heigthsAndDamages.OrderBy(x => x.Heigth);
+        heigthsAndDamages.Reverse();
         paramSum.OnParamNull += CheckType;
         paramSum.OnParamChanged += CheckTypeAndValues;
+        faling.FallEvent += FallingDamage;
+
+        var tempADamagebles = paramSum.Damagebles;
+        foreach (var damageble in tempADamagebles)
+        {
+            damageble.PushEvent += Pusher;
+        }
+
+        foreach (var e in deactiveScripts)
+        {
+            e.enabled = true;
+        }
+
         paramSum.Initialize();
     }
 
-    private void OnDisable()
+    //private void Start()
+    //{
+    //    heigthsAndDamages.OrderBy(x => x.Heigth);
+    //    heigthsAndDamages.Reverse();
+    //    paramSum.OnParamNull += CheckType;
+    //    paramSum.OnParamChanged += CheckTypeAndValues;
+    //    faling.FallEvent += FallingDamage;
+
+    //    var tempADamagebles = paramSum.Damagebles;
+    //    foreach (var damageble in tempADamagebles)
+    //    {
+    //        damageble.PushEvent += Pusher;
+    //    }
+
+    //    paramSum.Initialize();
+    //}
+
+    protected virtual void OnDisable()
     {
         paramSum.Unsubscribe();
         paramSum.OnParamNull -= CheckType;
         paramSum.OnParamChanged -= CheckTypeAndValues;
+
+        faling.FallEvent -= FallingDamage;
+
+        var tempADamagebles = paramSum.Damagebles;
+        foreach (var damageble in tempADamagebles)
+        {
+            damageble.PushEvent -= Pusher;
+        }
     }
 
     private void CheckType(DamagebleParam.ParamType type)
@@ -42,15 +100,11 @@ public class ParamController : MonoBehaviour
     }
 
     protected virtual IEnumerator NullHealth()
-    {      
+    {
+        yield return new WaitForSeconds(timeToDeactive);
         foreach (var e in deactiveScripts)
         {
             e.enabled = false;
-        }
-        yield return new WaitForSeconds(timeToDeactive);
-        foreach(var e in deactiveScripts)
-        {
-            e.gameObject.SetActive(false);
         }
     }
 
@@ -62,6 +116,50 @@ public class ParamController : MonoBehaviour
                 Debug.Log($"{type} + {value} + {maxValue}");
                 break;
         }
+    }
+
+    protected void Pusher(Vector3 direction, ForceMode forceMode)
+    {        
+        body.AddForce(direction, forceMode);
+    }
+
+    protected void FallingDamage(float heigth)
+    {
+        Debug.Log("Сработало падение!");
+        for (int i = 0; i < heigthsAndDamages.Count; i++)
+        {
+            if (Math.Abs(heigth) >= heigthsAndDamages[i].Heigth)
+            {
+                paramSum.DamageAllByType(heigthsAndDamages[i].Damage);
+                Debug.Log("Урон от падения: " + heigthsAndDamages[i].Damage.DamageValue);
+                break;
+            }
+        }
+    }
+
+
+    [System.Serializable]
+    public class HeigthAndDamage
+    {
+        [SerializeField] private float heigth = 0f;
+        [SerializeField] private DamageByType damage;
+
+        public float Heigth
+        {
+            get
+            {
+                return heigth;
+            }
+        }
+
+        public DamageByType Damage
+        {
+            get
+            {
+                return damage;
+            }
+        }
+
     }
 
 }

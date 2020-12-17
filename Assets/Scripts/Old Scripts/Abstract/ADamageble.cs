@@ -9,9 +9,14 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
 
     public delegate void OnDamagedHelper();
     public event OnDamagedHelper OnDamaged;
+    public event OnDamagedHelper OnHeal;
 
     public delegate void OnDamagedValueHelper(float damageValue, ADamageble damageblePlace);
     public event OnDamagedValueHelper OnDamagedWithValue;
+    public event OnDamagedValueHelper OnHealWithValue;
+
+    public delegate void OnPushHelper(Vector3 push, ForceMode forceMode);
+    public event OnPushHelper PushEvent;
 
     public DamagebleParamDatas Datas
     {
@@ -33,6 +38,8 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
 
     public abstract void ApplyDamage(DamageByType weapon);
 
+    public abstract void ApplyHeal(DamageByType healWeapon);
+
     protected void DamageEvent()
     {
         OnDamaged?.Invoke();
@@ -42,4 +49,20 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
     {
         OnDamagedWithValue?.Invoke(value, damageblePlace);
     }
+
+    protected void HealEvent()
+    {
+        OnHeal?.Invoke();
+    }
+
+    protected void HealEventWithValue(float value, ADamageble damageblePlace)
+    {
+        OnHealWithValue?.Invoke(value, damageblePlace);
+    }
+
+    public virtual void Push(Vector3 pushValue, ForceMode forceMode)
+    {
+        PushEvent?.Invoke(pushValue, forceMode);
+    }
+
 }

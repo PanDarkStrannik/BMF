@@ -9,7 +9,7 @@ public class PlayerCameraShaking : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     private Shaker shaker;
-
+    private bool shakinAlready=false;
 
     private void Start()
     {
@@ -35,7 +35,18 @@ public class PlayerCameraShaking : MonoBehaviour
 
     private void Shaking(float duration, float strength)
     {
-        shaker.ShakePosition(playerCamera.transform, duration, strength);
+        if (shakinAlready == false)
+        {
+            shakinAlready = true;
+            shaker.ShakePosition(playerCamera.transform, duration, strength);
+            StartCoroutine(ReturnToMainPos(duration));
+        }
+    }
+
+    private IEnumerator ReturnToMainPos(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        shakinAlready = false;
     }
 
     private void OnDestroy()

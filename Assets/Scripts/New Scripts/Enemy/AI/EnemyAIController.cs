@@ -33,21 +33,46 @@ public class EnemyAIController : MonoBehaviour
     private List<AttackAI> attackAIs;
     private List<AEnemyMovement> movementsAIs;
 
+    private bool faling = false;
+
     private void OnEnable()
     {
 
         behaviours = new List<AEnemyAI>(animator.GetBehaviours<AEnemyAI>());
 
+        movementController.FalingEvent += delegate (bool value) { faling = value; };
+
         foreach (var beh in behaviours)
         {
             beh.AIAgent = enemyObject;
-            beh.RigidbodyActiveEvent += delegate (bool value) { rb.isKinematic = value; };
-            beh.NavMeshAgentActiveEvent += delegate (bool value) { navMeshAgent.enabled = value; };
+            beh.RigidbodyActiveEvent += delegate (bool value)
+            {
+                if (faling)
+                {
+                    rb.isKinematic = false;
+                }
+                else
+                {
+                    rb.isKinematic = value;
+                }
+            };
+            beh.NavMeshAgentActiveEvent += delegate (bool value)
+            {
+                if (faling)
+                {
+                    navMeshAgent.enabled = false;
+                }
+                else
+                {
+                    navMeshAgent.enabled = value;
+                }
+            };
         }
 
-
         detection.DetectedObjectsEvent += ChangeInterestingAIObjects;
-       // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
+        // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
+
+        PlayerInformation.GetInstance().PlayerController.PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
 
         attackAIs = new List<AttackAI>(animator.GetBehaviours<AttackAI>());
         attackController.Initialize(attackAIs);      
@@ -59,7 +84,9 @@ public class EnemyAIController : MonoBehaviour
     private void OnDisable()
     {
         detection.DetectedObjectsEvent -= ChangeInterestingAIObjects;
-       // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent -= PlayerWeaponControllerEventListener;
+        // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent -= PlayerWeaponControllerEventListener;
+        PlayerInformation.GetInstance().PlayerController.PlayerWeaponControlEvent -= PlayerWeaponControllerEventListener;
+
 
         attackController.Deinitialize(attackAIs);
         movementController.Deinitialize(movementsAIs);
@@ -83,32 +110,34 @@ public class EnemyAIController : MonoBehaviour
     //        beh.RigidbodyActiveEvent += delegate (bool value) { rb.isKinematic = value; };
     //        beh.NavMeshAgentActiveEvent += delegate (bool value) { navMeshAgent.enabled = value; };
     //    }
-        
+
     //}
 
     private void ChangeInterestingAIObjects(List<GameObject> detectedObjects)
     {
-        foreach(var obj in detectedObjects)
+
+        foreach (var obj in detectedObjects)
         {
-            if(obj.CompareTag("Player"))
+            if (obj.CompareTag("Player"))
             {
                 PlayerDetectedEvent.StartEvent(true);
-               // mainEvents.DetectedObjectEvent(obj.transform);
+                // mainEvents.DetectedObjectEvent(obj.transform);
                 var distance = Vector3.Distance(obj.transform.position, enemyObject.transform.position);
-                PlayerDistanceEvent.StartEvent(distance);              
+                PlayerDistanceEvent.StartEvent(distance);
 
                 break;
             }
             else
-            {                
+            {
                 PlayerDetectedEvent.StartEvent(false);
             }
         }
 
-        foreach(var beh in behaviours)
+        foreach (var beh in behaviours)
         {
             beh.InterestingObjects = detectedObjects;
         }
+
     }
 
     private void PlayerWeaponControllerEventListener(AWeapon.WeaponState controlType)

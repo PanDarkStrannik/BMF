@@ -9,6 +9,7 @@ public class POPUP : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private int speedMinim = 1;
     [SerializeField] private float timeToChangeSize = 1f;
+    [SerializeReference] private SpawnedObject spawnedObject;
 
     private GameObject player;
 
@@ -53,6 +54,7 @@ public class POPUP : MonoBehaviour
             yield return new WaitForSeconds(timeToChangeSize);
         }
         isInit = false;
+        spawnedObject.Die();
         OnPopupDie(gameObject);
     }
 }

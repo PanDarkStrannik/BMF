@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(APlayerMovement))]
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform cameraOnPlayer;
@@ -14,20 +14,23 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private PlayerUI playerUI;
 
-    [SerializeField] private Blink blinkAbility;
+    //[SerializeField] private Blink blinkAbility;
 
     [SerializeField] private List<GunPush> gunPushes;
 
 
-    private APlayerMovement movement;
-    private PlayerInput input;
-
-    private bool isShiftNotInput = true;
-
-    private float moveX, moveY;
+    [SerializeReference] private APlayerMovement movement;
 
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
+
+
+
+    private PlayerInput input;
+    private bool isShiftNotInput = true;
+    private float moveX, moveY;
+    private WeaponHealing weaponHealing;
+
 
 
     public List<GunPush> GunPushes
@@ -39,10 +42,16 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private PlayerController()
+    {
+        PlayerInformation.GetInstance().PlayerController = this;     
+    }
+
     private void Awake()
     {
+        PlayerInformation.GetInstance().Player = gameObject;
         input = new PlayerInput();
-        movement = GetComponent<APlayerMovement>();
+        //movement = GetComponent<APlayerMovement>();
         weaponChanger.ChangeWeapon(0);
     }
 
@@ -51,6 +60,9 @@ public class PlayerController : MonoBehaviour
         ButtonsInput();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        weaponHealing = weaponChanger.AllWeapons.Find(x => x is WeaponHealing) as WeaponHealing; 
+        
     }
 
     private void OnEnable()
@@ -67,16 +79,20 @@ public class PlayerController : MonoBehaviour
     {
         WeaponChecker();
         RotationInput();
-    }
-
-
-    private void FixedUpdate()
-    {
         var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
         var correctMove = new Vector3(moveDirection.x, input.ButtonInputs.Jump.ReadValue<float>(), moveDirection.y);
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
     }
+
+
+    //private void FixedUpdate()
+    //{
+    //    var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
+    //    var correctMove = new Vector3(moveDirection.x, input.ButtonInputs.Jump.ReadValue<float>(), moveDirection.y);
+    //    correctMove = transform.TransformDirection(correctMove);
+    //    movement.Move(correctMove);
+    //}
 
 
 
@@ -101,14 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private void WeaponChecker()
     {
-        //if(weaponChanger.CurrentWeapon.State == AWeapon.WeaponState.Attack)
-        //{
-        //    PlayerWeaponControlEvent?.Invoke(PlayerWeaponControlType.PlayerAttack);
-        //}
-        //else if (weaponChanger.CurrentWeapon.State == AWeapon.WeaponState.Reload)
-        //{
-        //    PlayerWeaponControlEvent?.Invoke(PlayerWeaponControlType.PlayerReload);
-        //}
+     
 
         switch (weaponChanger.CurrentWeapon.State)
         {
@@ -139,7 +148,7 @@ public class PlayerController : MonoBehaviour
                     if (weaponChanger.CurrentWeapon.WeaponType == e.WeaponType)
                     {
                         var push = transform.TransformDirection(e.PushForce);
-                        movement.ImpulseMove(push, e.ForceMode);
+                        StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
                         e.ShakingParams.ShakeEventInvoke();
                     }
                 }
@@ -149,10 +158,30 @@ public class PlayerController : MonoBehaviour
 
 
 
-        input.ButtonInputs.ChangeWeapon.performed += context =>
+        input.ButtonInputs.ChangeWeaponByKeyboard.performed += context =>
         {
-            weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeapon.ReadValue<float>());
+            weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
             ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
+        };
+
+        input.ButtonInputs.MouseScroll.performed += context =>
+        {
+            var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
+            Debug.Log(testValue);
+            if (testValue > 0)
+            {
+                weaponChanger.NextWeapon();
+            }
+            else if (testValue < 0)
+            {
+                weaponChanger.PrevWeapon();
+            }
+            else
+            {
+                throw new System.Exception("Почему-то при скролле выдало 0");
+            }
+            //weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeaponByMouse.ReadValue<Vector2>().y);
+            //ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
         };
 
 
@@ -183,11 +212,16 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.Blink.performed += context =>
         {
-            if(!blinkAbility.IsAttack)
+            if (weaponHealing.State == AWeapon.WeaponState.Serenity)
             {
-                blinkAbility.Attack();
-                StartCoroutine(playerUI.ReloadTP(blinkAbility.ReloadTime));
+                weaponHealing.Attack(gameObject);
             }
+            
+            //if(!blinkAbility.IsAttack)
+            //{
+            //    blinkAbility.Attack();
+            //   // StartCoroutine(playerUI.ReloadTP(blinkAbility.ReloadTime));
+            //}
         };
 
        
@@ -221,6 +255,7 @@ public class PlayerController : MonoBehaviour
         [SerializeField] private WeaponType weaponType;
         [SerializeField] private Vector3 pushForce;
         [SerializeField] private ForceMode forceMode;
+        [SerializeField] private float timeToPush;
         [SerializeField] private ShakingParams shakingParams;
 
         public WeaponType WeaponType
@@ -245,6 +280,14 @@ public class PlayerController : MonoBehaviour
             get
             {
                 return forceMode;
+            }
+        }
+
+        public float TimeToPush
+        {
+            get
+            {
+                return timeToPush;
             }
         }
 

@@ -77,7 +77,7 @@ public class AttackAI : AEnemyAI
         [SerializeField] private bool damaging = false;
         [SerializeField] private bool isRigidBodyKinematick = false;
         [SerializeField] private bool isNavMeshAgentActive = false;
-
+        [SerializeField] private bool attackAnyway = true;
 
         public bool IsRigidbodyKinematick
         {
@@ -126,6 +126,14 @@ public class AttackAI : AEnemyAI
             get
             {
                 return damaging;
+            }
+        }
+
+        public bool AttackAnyway
+        {
+            get
+            {
+                return attackAnyway;
             }
         }
 

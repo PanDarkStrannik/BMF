@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
-public class EnemyMovementController : MonoBehaviour
+public class EnemyMovementController : AFaling
 {
     //[SerializeReference] private Animator animator;
     [SerializeReference] private NavMeshAgent navAgent;
     [SerializeField] private List<ObjectAimMod> objectAim;
-
+    [SerializeField] private CustomEventValue<bool> moving;
 
     //void Start()
     //{
@@ -20,6 +21,21 @@ public class EnemyMovementController : MonoBehaviour
     //    }
 
     //}
+
+    private void Start()
+    {
+       // navAgent.updateRotation = false;
+    }
+
+    private void Update()
+    {
+        Falling();
+        if(!grounded)
+        {
+            body.AddForce(new Vector3(0, -9.8f, 0) * Time.deltaTime);
+        }
+    }
+
 
     public void Initialize(List<AEnemyMovement> enemyAIs)
     {
@@ -45,6 +61,7 @@ public class EnemyMovementController : MonoBehaviour
     {
         if (navAgent.isActiveAndEnabled)
         {
+            moving.StartEvent(true);
             navAgent.speed = speed;
             if (warp)
             {
@@ -54,6 +71,10 @@ public class EnemyMovementController : MonoBehaviour
             {
                 navAgent.SetDestination(point);
             }
+        }
+        else
+        {
+            moving.StartEvent(false);
         }
     }
 
@@ -65,22 +86,30 @@ public class EnemyMovementController : MonoBehaviour
         }
     }
 
-    //private void Aim(Transform target)
+    //private void FixedUpdate()
     //{
 
-    //    switch (weapon.ObjectAim.Mod)
+
+    //    grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
+    //          groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
+
+    //    if (!grounded && !faling)
     //    {
-    //        case ObjectAimMod.AimMod.Full:
-    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.None);
-    //            break;
-    //        case ObjectAimMod.AimMod.LockYaw:
-    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.Yaw);
-    //            break;
-    //        case ObjectAimMod.AimMod.LockPitch:
-    //            TargetRotationFixator.Looking(weapon.ObjectAim.LookingObject, target.position + weapon.ObjectAim.CorrectTargetPosition, TargetRotationFixator.LockRotationAngle.Pitch);
-    //            break;
+    //        faling = true;
+    //        groundedPos = body.transform.position.y;
+    //    }
+
+    //    if (grounded && faling)
+    //    {
+    //        faling = false;
+    //        var fallPos = body.transform.position.y;
+    //        var heigth = groundedPos - fallPos;
+    //        if (Mathf.Abs(heigth) != Mathf.Abs(fallPos))
+    //        {
+    //            test = heigth;
+    //            FallingEvent?.Invoke(heigth);
+    //        }
     //    }
 
     //}
-
 }

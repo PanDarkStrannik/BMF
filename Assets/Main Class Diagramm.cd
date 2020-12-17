@@ -1,0 +1,851 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DeathMenuScript" Collapsed="true">
+    <Position X="26.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAACAAAAAAAAAIAAAAAAAAAAAAAAAAAAgAAQA=</HashCode>
+      <FileName>Assets\DeathMenuScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeathUI" Collapsed="true">
+    <Position X="28" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\DeathUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="disolveAmoint" Collapsed="true">
+    <Position X="29.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\disolveAmoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DissolvePS" Collapsed="true">
+    <Position X="19.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIABAAEA=</HashCode>
+      <FileName>Assets\DissolvePS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iTween" Collapsed="true">
+    <Position X="19.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>0QWpuFQJxrrrL29pRXNGpw+DYp3JlM6MpupDFX+571c=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Pixelplacement\iTween\iTween.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveSample" Collapsed="true">
+    <Position X="26.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Pixelplacement\iTween\Sample\MoveSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RotateSample" Collapsed="true">
+    <Position X="22.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Pixelplacement\iTween\Sample\RotateSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SampleInfo" Collapsed="true">
+    <Position X="24.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Pixelplacement\iTween\Sample\SampleInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="rotate" Collapsed="true">
+    <Position X="21" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\rotate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AEnemyAI" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgqAQgACAAAAYgAAIAAAABYAAIAAAQAAAEMAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Abstract\AEnemyAI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFaling" Collapsed="true">
+    <Position X="1.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABgAAAEAAAAAAAgAAAAAAQAAAAAIAACAAAgCAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\AFaling.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AttackAI" Collapsed="true">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAAAAAAQAQAAEAAABAAAIAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\Attack and Aim\AttackAI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AttackController" Collapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAQAAAAAQAAIQIAAAAAAJQAAAAAEEAAEIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\Attack and Aim\AttackController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyAIController" Collapsed="true">
+    <Position X="21" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgIAABAAAAAgAKAEAACAAAAAAAQBAQAYEAACAAAACAg=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\EnemyAIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CustomEventNotValue" Collapsed="true">
+    <Position X="26.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAACAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\EnemyAIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CustomEventValue&lt;T&gt;" Collapsed="true">
+    <Position X="28" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAACAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\EnemyAIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CustomEventValue&lt;T, A&gt;" Collapsed="true">
+    <Position X="29.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAiAAAAAAACAgAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\EnemyAIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AEnemyMovement" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAEIAAAAAAAAAAAAAABgEIAUAAEAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\Movement\AEnemyMovement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EnemyChaseAI" Collapsed="true">
+    <Position X="3" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\Movement\EnemyChaseAI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyMovementController" Collapsed="true">
+    <Position X="2.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQggAAAQAAAAIAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\Movement\EnemyMovementController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyNearAI" Collapsed="true">
+    <Position X="5.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAYAAAIABAAAAAAAAAAAAAAAAAAAAAAAAAIAggAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\Movement\EnemyNearAI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyRetreatAI" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Enemy\AI\Movement\EnemyRetreatAI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemySpawner" Collapsed="true">
+    <Position X="28" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACIAAAAgAAAAAAAAACACAAAIAAAAAEAACNI=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\EnemySpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealArea" Collapsed="true">
+    <Position X="17.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEIBAACAgAABBAEAAAQAAAAEAAAIAKRAAIBIUAAEA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\HealArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JumpAttack" Collapsed="true">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAAAAAAiAAAAAAAAgAIAAAIYAAAAIIAAAABAQACAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\JumpAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewDamageArea" Collapsed="true">
+    <Position X="15.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEIBAACAgAABBAEAAAQAAAAEAAAAAKBAAABIUAAEA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\NewDamageArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyParamController" Collapsed="true">
+    <Position X="3" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAQAEAAAQAAAAARAAAAAAQAAAAEAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Others\EnemyParamController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewAim" Collapsed="true">
+    <Position X="29.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Others\NewAim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleTrigger" Collapsed="true">
+    <Position X="17.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACCAAAAAAAAAAAAAAAAAAAAAAQAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\Others\SimpleTrigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerInformation" Collapsed="true">
+    <Position X="26.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAEBIBAAAAAAAAAAQAAEAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\PlayerInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PointCounter" Collapsed="true">
+    <Position X="29.75" Y="5.5" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="PointCounter.PointCounterHelper" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\New Scripts\PointCounter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAUgAAAAAAAAAAAAIBBAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\PointCounter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnedObject" Collapsed="true">
+    <Position X="19.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\SpawnedObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SummoningWeapon" Collapsed="true">
+    <Position X="12.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAABAAAAGAAAAAAAAAAIAAQAIAAQACAAEAAABgAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\SummoningWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponBlink" Collapsed="true">
+    <Position X="1" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgAEQAAAAAACAAIEAAAAQRgAIIgAAAACCAAgBIAAABA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\WeaponBlink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponEventController" Collapsed="true">
+    <Position X="24.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\WeaponEventController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponHealing" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgAAAAAACAAAAAAAAAAAAAAAAIgAIAIAAAAABAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\WeaponHealing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponMili" Collapsed="true">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgAAAAAAAAAAAAAEAAgAAAAAAIAAEAIICAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\WeaponMili.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponRange" Collapsed="true">
+    <Position X="10" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgAQQAAACAAAAAAEAAAAAAAAAIgAIAIIKAAABAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\New Scripts\WeaponRange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ADamageble" Collapsed="true">
+    <Position X="5.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAIAQAAAAAAAAAAAAAAAAUAAAAAEACAADABgCAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Abstract\ADamageble.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="APlayerMovement" Collapsed="true">
+    <Position X="0.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIQAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Abstract\APlayerMovement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AWeapon" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgABAAAEAAAAAAAEAAAAAAAAAIAAAAIECEAABAhAAEA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Abstract\AWeapon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MainEvents" Collapsed="true">
+    <Position X="24.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAIAAAQAAAAAAQAIAAAAAAAAAIBASAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Abstract\MainEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OldAEnemyMovement" Collapsed="true">
+    <Position X="11" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEIAAAAAAAAAAAAAAAgAAAQAAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Abstract\OldAEnemyMovement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Spawner" Collapsed="true">
+    <Position X="21" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAYAAABSAAAAAAAAQAAAAAEAAAABAACAAAAAAgAI=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Abstract\Spawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyNearMovement" Collapsed="true">
+    <Position X="8.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAYAAAKABAAAAAAAAAAAAAAAACEACAAAAAIAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\Enemy Movement\EnemyNearMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyRetreatMove" Collapsed="true">
+    <Position X="11" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAAAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\Enemy Movement\EnemyRetreatMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyToPointMove" Collapsed="true">
+    <Position X="13.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\Enemy Movement\EnemyToPointMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OldEnemyMovementController" Collapsed="true">
+    <Position X="17.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAKgEAAAAIAgBIAAAEAQAAAAAQAAAAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\Enemy Movement\OldEnemyMovementController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyController" Collapsed="true">
+    <Position X="22.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIEAgAEACgEAAAAAAAIAAAACAJAAAAMAAAAAAQAAoA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\EnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyEventMoveType" Collapsed="true">
+    <Position X="26.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAEACAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\EnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerEventMoveType" Collapsed="true">
+    <Position X="24.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAABAAAAAAAAAEAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\EnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyDetection" Collapsed="true">
+    <Position X="24.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgGBABCAyAAAAMAAEAAAABAAAAAAgwAAAAEACCAgAg=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\EnemyDetection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColliderChance" Collapsed="true">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAoIAAAECAAAAAACAAAAAAAABAAAAAACAAAAAEAIAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\EnemyDetection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyWeaponLogic" Collapsed="true">
+    <Position X="29.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEBAAEgCAAAIAAAAAAAAAAAIAAAEAAAAAAEAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\EnemyWeaponLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponDistance" Collapsed="true">
+    <Position X="22.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAACACAAAgAACAAAAAAAACEAAAAhCAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\EnemyWeaponLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TargetRotationFixator" Collapsed="true">
+    <Position X="29.75" Y="7.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="TargetRotationFixator.LockRotationAngle" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Old Scripts\Enemy\TargetRotationFixator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Enemy\TargetRotationFixator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIMObjectToTarget" Collapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACgAAAAAAQAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\AIMObjectToTarget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimationController" Collapsed="true">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABIAACIgCAAAAAAAAAABAAAAEAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\AnimationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponAnimTriggerName" Collapsed="true">
+    <Position X="19.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAwAgAQAAAQCAAACBCAkABQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\AnimationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateTypeAnimAction" Collapsed="true">
+    <Position X="26.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAACIAIA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\AnimationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EffectsController" Collapsed="true">
+    <Position X="19.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACgAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\EffectsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEvents" Collapsed="true">
+    <Position X="15.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\GameEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NavMeshBaker" Collapsed="true">
+    <Position X="28" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAQAAAQAAAAQAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\NavMeshBaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PauseController" Collapsed="true">
+    <Position X="19.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAgAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAgAIQA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\PauseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerCameraShaking" Collapsed="true">
+    <Position X="21" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACBAAAAAAAAAAAAAAAAAQAAAAABACCAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\PlayerCameraShaking.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PopupCreater" Collapsed="true">
+    <Position X="17.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAABAAIAAAAEAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\PopupCreater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shaker" Collapsed="true">
+    <Position X="26.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAFABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\Shaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakingParams" Collapsed="true">
+    <Position X="28" Y="6.5" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="ShakingParams.ShakeEventHelper" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Old Scripts\Other\Shaker.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAgQAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\Shaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateController" Collapsed="true">
+    <Position X="24.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\StateController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BossParamController" Collapsed="true">
+    <Position X="0.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAEhAAAAAAAAAAAQAAAAAIAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\BossParamController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamagebleParam" Collapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAACAAAAAgEAAAAAAEABACQIgQIiCAIAAIA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\Container\DamagebleParam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamagebleParamDatas" Collapsed="true">
+    <Position X="19.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAgAgAAAADAAAAAAAAAAAAAAAKAQAAAgAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\Container\DamagebleParamDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamagebleParamSum" Collapsed="true">
+    <Position X="21" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAwAAEAACABABAAAIQIAAQAAAAAMAAEA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\Container\DamagebleParamSum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageByType" Collapsed="true">
+    <Position X="22.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAEAAAAEAgAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\Container\DamageByType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageblePlace" Collapsed="true">
+    <Position X="5.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\DamagebleObject\DamageblePlace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleDestruct" Collapsed="true">
+    <Position X="15.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQBCgIAAAAgAAAAAAgAAACAAAAAAEAAsAJAAAAAICIA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\DamagebleObject\SimpleDestruct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParamController" Collapsed="true">
+    <Position X="3" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAABAAAAAAAAABBAAAAAAARQRAAAAIAAAAABAICIA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\ParamController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerParamController" Collapsed="true">
+    <Position X="5.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEABABACAQKCAAAAAAAAAARAABAAAIAAAAgAAACEQ=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\PlayerParamController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="22.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwEIAAAACAcAAAAABAABAQQAIQIABAIAAAAQAAEDEI=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Player\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="@PlayerInput" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAICCABFAAACACCBiREAgBAWAGgIAgAAASgAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Player\PlayerInput.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PlayerMovement" Collapsed="true">
+    <Position X="0.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAKQAACAAAAAAIAAAAQAAAUQIEAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Player\PlayerMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponChanger" Collapsed="true">
+    <Position X="21" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAgAAAAIAAAAAAAAAAAAAAAAQAAAAAEAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Player\WeaponChanger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BossUI" Collapsed="true">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgIAACAEAAABAEAAAABCIABAUBAIAAAAABAAAIQ=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\UI\BossUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Death" Collapsed="true">
+    <Position X="24.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\UI\Death.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerUI" Collapsed="true">
+    <Position X="28" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAABgAAAAiAAAAAAAAAKAAAAJAAAEAAAKABAAIggAQQ=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\UI\PlayerUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POPUP" Collapsed="true">
+    <Position X="15.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAEAAAACIAAABAgAAQAhAAACAAAIKAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\UI\POPUP.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI" Collapsed="true">
+    <Position X="15.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8IAAgAAAAKgABAAIAAACIAAABAAIEEABAAAAAAgAAQA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\UI\UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIMenuController" Collapsed="true">
+    <Position X="17.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgAlgABgACAAgAAAAEAAQACCRAAAEBAAAABAAAgAAUA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\UI\UIMenuController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletWithDamageArea" Collapsed="true">
+    <Position X="10.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Weapon\Bullets\BulletWithDamageArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleBullet" Collapsed="true">
+    <Position X="10.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAIAAEIAAAAAAAAAQAAAQIAQAACBEAQCAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Weapon\Bullets\SimpleBullet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DamageArea" Collapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEIBAACAgAABBAEAAAQAAAAEAAAIAKRAAIBIUAAEA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Weapon\Others\DamageArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResetPosition" Collapsed="true">
+    <Position X="19.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAABAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\UMotionExamples\Miscellaneous\Scripts\ResetPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisolveSphere" Collapsed="true">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAACAABAAAAAAACAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VFX\CircleShield\DisolveSphere.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnPS" Collapsed="true">
+    <Position X="22.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAgAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VFX\Crack\SpawnPS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kargas_1" Collapsed="true">
+    <Position X="21" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAACAAEAgAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\VFX\Karga's\Kargas_1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laser" Collapsed="true">
+    <Position X="22.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAABAAAAAA=</HashCode>
+      <FileName>Assets\VFX\Laser\Laser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Displacement" Collapsed="true">
+    <Position X="17.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwBAAAAACAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VFX\Shaders\Displacement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Super" Collapsed="true">
+    <Position X="28" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAkAAAAAgAAAAAAAAAgQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VFX\Super.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DG.Tweening.DOTweenModuleAudio" Collapsed="true">
+    <Position X="22.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAIAAEAEgAAAAAAAAAACCBIAEghQ=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DG.Tweening.DOTweenModulePhysics" Collapsed="true">
+    <Position X="24.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAGBBAAAQAACAAAAEAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DG.Tweening.DOTweenModulePhysics2D" Collapsed="true">
+    <Position X="26.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAGBAAAAAAACAAAAEAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DG.Tweening.DOTweenModuleSprite" Collapsed="true">
+    <Position X="28" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAQAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DG.Tweening.DOTweenModuleUI" Collapsed="true">
+    <Position X="29.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAIQABAAAAgAgKAgAAAIAAQCLQEFAABAQAABBQAAAAg=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DG.Tweening.DOTweenModuleUnityVersion" Collapsed="true">
+    <Position X="15.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAQAAAAEAIACAAAAgAgAQAAAAAAQEAUCAACAAAAABA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DG.Tweening.DOTweenCYInstruction" Collapsed="true">
+    <Position X="21" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DG.Tweening.DOTweenModuleUtils" Collapsed="true">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAACABCAAAAAAA=</HashCode>
+      <FileName>Assets\NavMeshComponents\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityTemplateProjects.SimpleCameraController" Collapsed="true">
+    <Position X="29.75" Y="6.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="UnityTemplateProjects.SimpleCameraController.CameraState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Old Scripts\SimpleCameraController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAwgAAAAAAAAAIJAAAAAAAAAAAAAAAAAECAACAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\SimpleCameraController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ObjectAimMod" Collapsed="true">
+    <Position X="17.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAABBAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\AIMObjectToTarget.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Effects" Collapsed="true">
+    <Position X="15.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAECAAAAAAAAAAAAAAAAAAAACAAAAAgEAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\EffectsController.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PopupData" Collapsed="true">
+    <Position X="19.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAgAAgAAQAAAAEAAIAAAgCAECAAgBQgAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Other\PopupCreater.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="IBullet" Collapsed="true">
+    <Position X="15.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Interfaces\IBullet.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IDamageble" Collapsed="true">
+    <Position X="17.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABACAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Interfaces\IDamageble.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IMovement" Collapsed="true">
+    <Position X="19.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Interfaces\IMovement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IWeapon" Collapsed="true">
+    <Position X="21" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Interfaces\IWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="WeaponType" Collapsed="true">
+    <Position X="17.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAAAQgAACAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Abstract\AWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DamageType" Collapsed="true">
+    <Position X="15.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAEAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Old Scripts\Params\Container\DamageByType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

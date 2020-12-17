@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Plasma
+  m_Shader: {fileID: -6465566751694194690, guid: ba0536999581b714882a8f0bd55e0560, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_3E8875A:
+        m_Texture: {fileID: 2800000, guid: 36149b49a69d66c4ca705069afcef054, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_16E3D9FA: 1
+    - Vector1_4BE0CCF3: 0.01
+    - Vector1_4DD6AB1B: 0
+    - Vector1_5A11ED6B: 0.05
+    - Vector1_874E22DF: 1
+    - Vector1_AC311567: 10
+    - Vector1_B707D8A: 1
+    - Vector1_C2FD21E7: 5
+    - Vector1_CE8A147A: 0.15
+    - Vector1_EB0593F3: 0.1
+    m_Colors:
+    - Color_8C76789A: {r: 32.82998, g: 1.9311752, b: 1.4483813, a: 1}
+    - Color_9129764A: {r: 0.60784316, g: 0, b: 0.007843138, a: 1}
+  m_BuildTextureStacks: []

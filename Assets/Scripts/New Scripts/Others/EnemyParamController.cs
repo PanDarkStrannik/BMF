@@ -9,6 +9,7 @@ public class EnemyParamController : ParamController
     [SerializeField] private float damageToStopAttack = 1f;
     [SerializeField] private float timeToStopAttack = 1f;
     [SerializeField] protected int pointsForKill = 1;
+    [SerializeReference] private SpawnedObject spawnedObject;   
 
     public delegate void OnEnemyDieEventHelper();
     public event OnEnemyDieEventHelper OnEnemyDie;
@@ -30,9 +31,14 @@ public class EnemyParamController : ParamController
 
     protected override IEnumerator NullHealth()
     {
+        foreach(var e in deactiveScripts)
+        {
+            e.enabled = false;
+        }
         yield return new WaitForSeconds(timeToDeactive);
-        PointCounter.GetPointCounter().AddPoints(pointsForKill);
+        PointCounter.Instance.AddPoints(pointsForKill);
         OnEnemyDie?.Invoke();
+        spawnedObject.Die();
         paramSum.SetDefault();
     }
 

@@ -10,23 +10,41 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<SpawnStages> spawnStages;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private UnityEvent spawnEvent;
+    [SerializeField] private UnityEvent<bool> spawnStart;
     [SerializeField] private float toSpawnTime;
+
+    private bool firstInit = false;
 
     private SpawnStages currentStage;
 
     private void Awake()
     {
-        enemySpawner.CreateSpawner();
-        spawnStages.OrderBy(stage => stage.StagePoint);
-        foreach (var enemy in enemySpawner.spawned_objects)
-        {
-            enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
-        }
+        //enemySpawner.CreateSpawner();
+        //spawnStages.OrderBy(stage => stage.StagePoint);
+        //foreach (var enemy in enemySpawner.spawned_objects)
+        //{
+         //  enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
+        //}
     }
 
     private void Start()
     {
-      
+
+        enemySpawner.CreateSpawner();
+        spawnStages.OrderBy(stage => stage.StagePoint);
+        foreach (var enemy in enemySpawner.spawned_objects)
+        {
+            //enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
+        }
+
+        Subscribe();
+        
+        firstInit = true;
+    }
+
+
+    private void StartSpawn()
+    {
         if (spawnStages.Count > 0)
         {
             currentStage = spawnStages[0];
@@ -35,19 +53,41 @@ public class EnemySpawner : MonoBehaviour
         {
             throw new System.Exception("Не введён лист спавна врагов");
         }
-    
+
         StartCoroutine(SpawnBetweenTime());
+    }
+
+    private void Subscribe()
+    {
+        GlobalGameEvents.Instance.OnEnemySpawnStart += StartSpawn;
+        PointCounter.Instance.PointEvent += ChangeStage;
+    }
+
+    private void Unsubscribe()
+    {
+        GlobalGameEvents.Instance.OnEnemySpawnStart -= StartSpawn;
+        StopCoroutine(SpawnBetweenTime());
+        PointCounter.Instance.PointEvent -= ChangeStage;
     }
 
     private void OnEnable()
     {
-        PointCounter.GetPointCounter().PointEvent += ChangeStage;
+        if (firstInit == true)
+        {
+            Subscribe();
+        }
     }
 
     private void OnDisable()
     {
-        PointCounter.GetPointCounter().PointEvent -= ChangeStage;
+        Unsubscribe();
     }
+
+    //private void OnDestroy()
+    //{
+    //    GlobalGameEvents.Instance.OnEnemySpawnStart -= StartSpawn;
+    //    StopCoroutine(SpawnBetweenTime());
+    //}
 
     private void ChangeStage(int point)
     {
@@ -68,12 +108,14 @@ public class EnemySpawner : MonoBehaviour
         while(true)
         {
             spawnEvent?.Invoke();
+            spawnStart?.Invoke(true);
             yield return new WaitForSeconds(toSpawnTime);
             for (int i = 0; i < currentStage.EnemyValue; i++)
             {
-                enemySpawner.SpawnObject(spawnPosition.position, spawnPosition.rotation);                
+                enemySpawner.SpawnFirstObjectInQueue(spawnPosition.position, spawnPosition.rotation);                
             }
-            yield return new WaitForSeconds(currentStage.TimeBetweenSpawn);           
+            yield return new WaitForSeconds(currentStage.TimeBetweenSpawn);
+            spawnStart?.Invoke(false);
         }
     }
 
