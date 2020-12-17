@@ -48,6 +48,11 @@ public class ParamController : MonoBehaviour
             damageble.PushEvent += Pusher;
         }
 
+        foreach (var e in deactiveScripts)
+        {
+            e.enabled = true;
+        }
+
         paramSum.Initialize();
     }
 
@@ -95,15 +100,11 @@ public class ParamController : MonoBehaviour
     }
 
     protected virtual IEnumerator NullHealth()
-    {      
+    {
+        yield return new WaitForSeconds(timeToDeactive);
         foreach (var e in deactiveScripts)
         {
             e.enabled = false;
-        }
-        yield return new WaitForSeconds(timeToDeactive);
-        foreach(var e in deactiveScripts)
-        {
-            e.gameObject.SetActive(false);
         }
     }
 
