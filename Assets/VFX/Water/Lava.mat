@@ -29,6 +29,6 @@ Material:
     - Vector1_79C85ED9: 5
     - Vector1_88D1CA4D: 20
     m_Colors:
-    - Color_ADACD5FC: {r: 30.92184, g: 1.1332612, b: 0, a: 0}
-    - Color_F381CE2B: {r: 0, g: 2.775568, b: 0.05863876, a: 0}
+    - Color_ADACD5FC: {r: 1.9326155, g: 0.07082884, b: 0, a: 0}
+    - Color_F381CE2B: {r: 0, g: 0.69389206, b: 0.018164713, a: 0}
   m_BuildTextureStacks: []
