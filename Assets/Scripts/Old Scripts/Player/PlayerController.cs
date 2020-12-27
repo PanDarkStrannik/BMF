@@ -42,11 +42,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private PlayerController()
+    {
+        PlayerInformation.GetInstance().PlayerController = this;     
+    }
+
     private void Awake()
     {
-        PlayerInformation.GetInstance().PlayerController = this;
         PlayerInformation.GetInstance().Player = gameObject;
-
         input = new PlayerInput();
         //movement = GetComponent<APlayerMovement>();
         weaponChanger.ChangeWeapon(0);

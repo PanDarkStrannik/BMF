@@ -41,9 +41,12 @@ public class PlayerParamController : ParamController
     {
         //heigthsAndDamages.OrderBy(x => x.Heigth);
         //heigthsAndDamages.Reverse();
-        PlayerInformation.GetInstance().PlayerParamController = this;
     }
 
+    private PlayerParamController()
+    {
+        PlayerInformation.GetInstance().PlayerParamController = this;
+    }
   
 
     private void Start()

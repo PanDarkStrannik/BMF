@@ -48,15 +48,15 @@ public class PlayerUI : MonoBehaviour
 
         maxPlayerHealth = PlayerInformation.GetInstance().PlayerParamController.MaxHealth;
         PlayerInformation.GetInstance().PlayerParamController.PlayerDamaged += ViewHealth;
-        PointCounter.GetPointCounter().PointEvent += PlayerUI_PointEvent;
+        PointCounter.Instance.PointEvent += PlayerUI_PointEvent;
 
     }
 
     private void OnDestroy()
     {
-        PointCounter.GetPointCounter().RefreshPoints();
+        PointCounter.Instance.RefreshPoints();
         PlayerInformation.GetInstance().PlayerParamController.PlayerDamaged -= ViewHealth;
-        PointCounter.GetPointCounter().PointEvent -= PlayerUI_PointEvent;
+        PointCounter.Instance.PointEvent -= PlayerUI_PointEvent;
     }
 
     private void PlayerUI_PointEvent(int value)
