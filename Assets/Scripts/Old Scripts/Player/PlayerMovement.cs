@@ -71,7 +71,9 @@ public class PlayerMovement : APlayerMovement
 
         if (grounded && body.velocity.magnitude > 0)
         {
-            body.AddForce(-body.velocity * friction * Time.deltaTime);
+            var newDirection = -body.velocity * friction;
+            newDirection.y = 0;
+            body.AddForce(newDirection * Time.deltaTime);
         }
     }
 
