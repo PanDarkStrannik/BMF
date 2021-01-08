@@ -11,11 +11,10 @@ public class PlayerParamController : ParamController
     [SerializeField] protected List<GameObject> deactiveObjects;
     [SerializeField] private Vector3 torgueForceOnDeath;
 
-    [SerializeField] private UnityEvent PlayerDamagedEvent;
+   // [SerializeField] private UnityEvent PlayerDamagedEvent;
 
     [SerializeField] private ShakingParams shakingParams;
 
-    //[SerializeField] private List<HeigthAndDamage> heigthsAndDamages;
 
 
     public ShakingParams ShakingParams
@@ -34,13 +33,20 @@ public class PlayerParamController : ParamController
 
     private bool isFirstCheck = true;
 
-    public delegate void PlayerDamagedHelper(float damageValue);
-    public event PlayerDamagedHelper PlayerDamaged;
+    //public delegate void OnPlayerChangedParamHelper(float damageValue, DamagebleParam.ParamType paramType);
+    //public event OnPlayerChangedParamHelper PlayerDamaged;
 
-    private void Awake()
+
+    protected override void OnEnable()
     {
-        //heigthsAndDamages.OrderBy(x => x.Heigth);
-        //heigthsAndDamages.Reverse();
+        base.OnEnable();
+        paramSum.OnParamsDamaged += OnParamsDamagedListener;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        paramSum.OnParamsDamaged -= OnParamsDamagedListener;
     }
 
     private PlayerParamController()
@@ -54,6 +60,10 @@ public class PlayerParamController : ParamController
         //PlayerInformation.GetInstance().PlayerMovement.FallingEvent += FallingDamage;
     }
 
+    private void OnParamsDamagedListener()
+    {
+        shakingParams.ShakeEventInvoke();
+    }
 
 
 
@@ -69,14 +79,14 @@ public class PlayerParamController : ParamController
                     //PlayerDamaged?.Invoke(maxValue);
                     MaxHealth = maxValue;
                     isFirstCheck = false;
-                    PlayerDamaged?.Invoke(value);
-                    PlayerDamagedEvent?.Invoke();
+                 //   PlayerDamaged?.Invoke(value);
+                    //PlayerDamagedEvent?.Invoke();
                 }
                 else
                 {
-                    PlayerDamaged?.Invoke(value);
-                    PlayerDamagedEvent?.Invoke();
-                    shakingParams.ShakeEventInvoke();
+                 //   PlayerDamaged?.Invoke(value);
+                  //  PlayerDamagedEvent?.Invoke();
+                  //  shakingParams.ShakeEventInvoke();
                 }
                // playerUI.ViewHealth(value);
                 break;
@@ -100,29 +110,5 @@ public class PlayerParamController : ParamController
         Cursor.lockState = CursorLockMode.None;
     }
 
-
-    //[System.Serializable]
-    //public class HeigthAndDamage
-    //{
-    //    [SerializeField] private float heigth = 0f;
-    //    [SerializeField] private DamageByType damage;
-
-    //    public float Heigth
-    //    {
-    //        get
-    //        {
-    //            return heigth;
-    //        }
-    //    }
-
-    //    public DamageByType Damage
-    //    {
-    //        get
-    //        {
-    //            return damage;
-    //        }
-    //    }
-
-    //}
 
 }

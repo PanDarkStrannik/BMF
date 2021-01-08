@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WeaponHealing : AWeapon, IHeallingWeapon
 {
-    [SerializeField] private HealingData waterHealingData;
+    [SerializeField] protected HealingData waterHealingData;
   //  [SerializeField] private ObjectFinder objectFinder;
 
-    private GameObject healingObject;
+    protected GameObject healingObject;
 
 
-    private int currentHealCount = 0;
+    protected int currentHealCount = 0;
 
     public override WeaponType WeaponType
     {
@@ -53,7 +53,7 @@ public class WeaponHealing : AWeapon, IHeallingWeapon
         }
     }
 
-    public void Heal(GameObject healingObject)
+    public virtual void Heal(GameObject healingObject)
     {
         this.healingObject = healingObject;
         if (state != WeaponState.ImposibleAttack && currentHealCount >= waterHealingData.HealCount)
@@ -104,12 +104,12 @@ public class WeaponHealing : AWeapon, IHeallingWeapon
         StopAllCoroutines();
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         state = WeaponState.Serenity;
     }
 
-    private bool FindComponentInIerarhy<T>(GameObject searchObject, out T finded) where T : MonoBehaviour
+    protected bool FindComponentInIerarhy<T>(GameObject searchObject, out T finded) where T : MonoBehaviour
     {
         finded = default(T);
         if (searchObject.GetComponent<T>() != null)
@@ -168,7 +168,7 @@ public class WeaponHealing : AWeapon, IHeallingWeapon
     //}
 
     [System.Serializable]
-    private class HealingData
+    protected class HealingData
     {
         [SerializeField] private List<DamageByType> weaponData;
         [SerializeField] private float attackTime;

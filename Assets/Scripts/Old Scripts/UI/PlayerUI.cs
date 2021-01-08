@@ -32,7 +32,7 @@ public class PlayerUI : MonoBehaviour
 
     private bool alreadyDamaged = false;
 
-    private float maxPlayerHealth;
+    //private float maxPlayerHealth;
 
     public delegate void OnPlayerDeathEventHelper();
     public event OnPlayerDeathEventHelper OnPlayerDeathEvent;
@@ -46,8 +46,9 @@ public class PlayerUI : MonoBehaviour
 
         score.text = "0";
 
-        maxPlayerHealth = PlayerInformation.GetInstance().PlayerParamController.MaxHealth;
-        PlayerInformation.GetInstance().PlayerParamController.PlayerDamaged += ViewHealth;
+        //maxPlayerHealth = PlayerInformation.GetInstance().PlayerParamController.MaxHealth;
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ViewHealth;
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamsDamaged += OnPlayerParamDamagedViewer;
         PointCounter.Instance.PointEvent += PlayerUI_PointEvent;
 
     }
@@ -55,7 +56,8 @@ public class PlayerUI : MonoBehaviour
     private void OnDestroy()
     {
         PointCounter.Instance.RefreshPoints();
-        PlayerInformation.GetInstance().PlayerParamController.PlayerDamaged -= ViewHealth;
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged -= ViewHealth;
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamsDamaged -= OnPlayerParamDamagedViewer;
         PointCounter.Instance.PointEvent -= PlayerUI_PointEvent;
     }
 
@@ -87,25 +89,40 @@ public class PlayerUI : MonoBehaviour
     //    TPCDimage.enabled = false;
     //}
 
-    private void ViewHealth(float currentHP)
+    private void ViewHealth(DamagebleParam.ParamType paramType, float value, float maxValue)
     {
         //textPlayerHP.text = currentHP.ToString();
-        if (currentHP <= 0)
+
+        if (paramType == DamagebleParam.ParamType.Health)
         {
-            OnPlayerDeathEvent?.Invoke();
-            StartCoroutine(GameOver());
-        }
-        else
-        {
-            if (!alreadyDamaged)
+            if (value <= 0)
             {
-                alreadyDamaged = true;
-                damagedEffect.SetActive(true);
-                damagedEffectAnim.SetTrigger("Damaged");
-                StartCoroutine(ToDamagedEffectDisable());
+                OnPlayerDeathEvent?.Invoke();
+                StartCoroutine(GameOver());
             }
+            //else
+            //{
+            //    if (!alreadyDamaged)
+            //    {
+            //        alreadyDamaged = true;
+            //        damagedEffect.SetActive(true);
+            //        damagedEffectAnim.SetTrigger("Damaged");
+            //        StartCoroutine(ToDamagedEffectDisable());
+            //    }
+            //}
+            playerBar.fillAmount = value / maxValue;
         }
-        playerBar.fillAmount = currentHP / maxPlayerHealth;
+    }
+
+    private void OnPlayerParamDamagedViewer()
+    {
+        if (!alreadyDamaged)
+        {
+            alreadyDamaged = true;
+            damagedEffect.SetActive(true);
+            damagedEffectAnim.SetTrigger("Damaged");
+            StartCoroutine(ToDamagedEffectDisable());
+        }
     }
 
     private IEnumerator ToDamagedEffectDisable()
