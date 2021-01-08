@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponRange : AWeapon
+public class WeaponRange : AWeapon, IDamagingWeapon
 {
     [SerializeField] protected Spawner bulletSpawner;
     [SerializeField] protected Transform gunPosition;
@@ -13,7 +13,7 @@ public class WeaponRange : AWeapon
     [SerializeField] protected int attackValues = 3;
     [Min(1)]
     [SerializeField] protected int bulletsOnAttack = 1;
-    [SerializeField] private Spread spread;
+    [SerializeField] protected Spread spread;
 
 
     public override WeaponType WeaponType
@@ -44,7 +44,7 @@ public class WeaponRange : AWeapon
         state = WeaponState.Serenity;
     }
 
-    public override void Attack()
+    public virtual void Attack()
     {
         if (state != WeaponState.ImposibleAttack && attackCount >= attackValues)
         {
@@ -54,6 +54,11 @@ public class WeaponRange : AWeapon
         {
             StartCoroutine(Damaging(toAttackTime));
         }
+    }
+
+    public override void UseWeapon()
+    {
+        Attack();
     }
 
 
@@ -93,7 +98,7 @@ public class WeaponRange : AWeapon
     }
 
     [System.Serializable]
-    private class Spread
+    protected class Spread
     {
         [Range(0, 90)]
         [SerializeField] private int coneAngle = 0;
