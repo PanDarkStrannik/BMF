@@ -6,13 +6,14 @@ public class WeaponRange : AWeapon, IDamagingWeapon
 {
     [SerializeField] protected Spawner bulletSpawner;
     [SerializeField] protected Transform gunPosition;
-    [SerializeField] private List<DamageByType> weaponData;
-    [SerializeField] protected LayerMask layer;
-    [SerializeField] protected float toAttackTime;
-    [SerializeField] protected float reloadTime = 0f;
-    [SerializeField] protected int attackValues = 3;
-    [Min(1)]
-    [SerializeField] protected int bulletsOnAttack = 1;
+    //[SerializeField] private List<DamageByType> weaponData;
+    //[SerializeField] protected LayerMask layer;
+    //[SerializeField] protected float toAttackTime;
+    //[SerializeField] protected float reloadTime = 0f;
+    //[SerializeField] protected int attackValues = 3;
+    //[Min(1)]
+    //[SerializeField] protected int bulletsOnAttack = 1;
+    [SerializeField] protected AttackParametres attackParametres;
     [SerializeField] protected Spread spread;
 
 
@@ -33,7 +34,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         bulletSpawner.CreateSpawner();
         foreach (var e in bulletSpawner.spawned_objects)
         {
-            e.GetComponent<IBullet>().Init(weaponData, layer);
+            e.GetComponent<IBullet>().Init(attackParametres.WeaponData, attackParametres.Layer);
         }
     }
 
@@ -46,13 +47,13 @@ public class WeaponRange : AWeapon, IDamagingWeapon
 
     public virtual void Attack()
     {
-        if (state != WeaponState.ImposibleAttack && attackCount >= attackValues)
+        if (state != WeaponState.ImposibleAttack && attackCount >= attackParametres.AttackValues)
         {
-            StartCoroutine(Reload(reloadTime));
+            StartCoroutine(Reload(attackParametres.ReloadTime));
         }
         else if (state == WeaponState.Serenity)
         {
-            StartCoroutine(Damaging(toAttackTime));
+            StartCoroutine(Damaging(attackParametres.ToAttackTime));
         }
     }
 
@@ -69,7 +70,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         if (state == WeaponState.Attack)
         {
             yield return new WaitForSecondsRealtime(time);
-            for (int i = 0; i < bulletsOnAttack; i++)
+            for (int i = 0; i < attackParametres.BulletsOnAttack; i++)
             {
                 bulletSpawner.SpawnFirstObjectInQueue(gunPosition.position, spread.SpreadAngle(gunPosition.rotation));
             }
@@ -83,7 +84,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         State = WeaponState.Reload;
         if (state == WeaponState.Reload)
         {
-            StopCoroutine(Damaging(toAttackTime));
+            StopCoroutine(Damaging(attackParametres.ToAttackTime));
             yield return new WaitForSecondsRealtime(time);
             attackCount = 0;
             StartCoroutine(Serenity(0f));
@@ -123,6 +124,69 @@ public class WeaponRange : AWeapon, IDamagingWeapon
 
             var spreadAngle = Quaternion.Euler(coneRandomAngle);
             return spreadAngle;
+        }
+    }
+
+
+    [System.Serializable]
+    protected class AttackParametres
+    {
+        [SerializeField] private List<DamageByType> weaponData;
+        [SerializeField] private LayerMask layer;
+        [Min(0)]
+        [SerializeField] private float toAttackTime;
+        [Min(0)]
+        [SerializeField] private float reloadTime = 0f;
+        [Min(0)]
+        [SerializeField] private int attackValues = 3;
+        [Min(1)]
+        [SerializeField] private int bulletsOnAttack = 1;
+
+        public List<DamageByType> WeaponData
+        {
+            get
+            {
+                return weaponData;
+            }
+        }
+        public LayerMask Layer
+        {
+            get
+            {
+                return layer;
+            }
+        }
+
+        public float ToAttackTime
+        {
+            get
+            {
+                return toAttackTime;
+            }
+        }
+
+        public float ReloadTime
+        {
+            get
+            {
+                return reloadTime;
+            }
+        }
+
+        public int AttackValues
+        {
+            get
+            {
+                return attackValues;
+            }
+        }
+
+        public int BulletsOnAttack
+        {
+            get
+            {
+                return bulletsOnAttack;
+            }
         }
     }
 

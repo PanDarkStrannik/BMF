@@ -9,13 +9,14 @@ public class DeathMenuScript : MonoBehaviour
 
     private void Start()
     {
-        PlayerDamagedListener();
-        PlayerInformation.GetInstance().PlayerParamController.PlayerDamaged += delegate { PlayerDamagedListener(); };     
+        PlayerPointsListener(0);
+        PointCounter.Instance.PointEvent += PlayerPointsListener;
+       // PlayerInformation.GetInstance().PlayerParamController.PlayerDamaged += delegate { PlayerDamagedListener(); };     
     }
 
-    private void PlayerDamagedListener()
+    private void PlayerPointsListener(int value)
     {
-        score.text = $"YOUR SCORE: {PointCounter.Instance.Points}";
+        score.text = $"YOUR SCORE: {value}";
     }
 
 
