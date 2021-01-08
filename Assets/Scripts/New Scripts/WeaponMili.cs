@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponMili : AWeapon
+public class WeaponMili : AWeapon, IDamagingWeapon
 {
     [SerializeField] private float toAttackTime = 1f;
     [SerializeField] private float damagingTime = 0.3f;
@@ -18,13 +18,18 @@ public class WeaponMili : AWeapon
     }
 
 
-    public override void Attack()
+    public void Attack()
     {
         if (state == AWeapon.WeaponState.Serenity)
         {
             StopAllCoroutines();
             StartCoroutine(Damaging(toAttackTime));
         }        
+    }
+
+    public override void UseWeapon()
+    {
+        Attack();
     }
 
     protected override IEnumerator Damaging(float time)

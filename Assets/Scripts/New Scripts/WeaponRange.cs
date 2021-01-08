@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponRange : AWeapon
+public class WeaponRange : AWeapon, IDamagingWeapon
 {
     [SerializeField] protected Spawner bulletSpawner;
     [SerializeField] protected Transform gunPosition;
@@ -10,7 +10,10 @@ public class WeaponRange : AWeapon
     [SerializeField] protected LayerMask layer;
     [SerializeField] protected float toAttackTime;
     [SerializeField] protected float reloadTime = 0f;
-    [SerializeField] protected int bulletsValue = 3;
+    [SerializeField] protected int attackValues = 3;
+    [Min(1)]
+    [SerializeField] protected int bulletsOnAttack = 1;
+    [SerializeField] protected Spread spread;
 
 
     public override WeaponType WeaponType
@@ -22,7 +25,7 @@ public class WeaponRange : AWeapon
     }
 
 
-    protected int bulletsCount = 0;
+    protected int attackCount = 0;
 
     protected override void Awake()
     {
@@ -41,9 +44,9 @@ public class WeaponRange : AWeapon
         state = WeaponState.Serenity;
     }
 
-    public override void Attack()
+    public virtual void Attack()
     {
-        if (state != WeaponState.ImposibleAttack && bulletsCount >= bulletsValue)
+        if (state != WeaponState.ImposibleAttack && attackCount >= attackValues)
         {
             StartCoroutine(Reload(reloadTime));
         }
@@ -51,6 +54,11 @@ public class WeaponRange : AWeapon
         {
             StartCoroutine(Damaging(toAttackTime));
         }
+    }
+
+    public override void UseWeapon()
+    {
+        Attack();
     }
 
 
@@ -61,8 +69,11 @@ public class WeaponRange : AWeapon
         if (state == WeaponState.Attack)
         {
             yield return new WaitForSecondsRealtime(time);
-            bulletSpawner.SpawnFirstObjectInQueue(gunPosition.position, gunPosition.rotation);
-            bulletsCount++;
+            for (int i = 0; i < bulletsOnAttack; i++)
+            {
+                bulletSpawner.SpawnFirstObjectInQueue(gunPosition.position, spread.SpreadAngle(gunPosition.rotation));
+            }
+            attackCount++;
             StartCoroutine(Serenity(0f));
         }
     }
@@ -74,7 +85,7 @@ public class WeaponRange : AWeapon
         {
             StopCoroutine(Damaging(toAttackTime));
             yield return new WaitForSecondsRealtime(time);
-            bulletsCount = 0;
+            attackCount = 0;
             StartCoroutine(Serenity(0f));
         }
     }
@@ -86,6 +97,43 @@ public class WeaponRange : AWeapon
         StopAllCoroutines();
     }
 
+    [System.Serializable]
+    protected class Spread
+    {
+        [Range(0, 90)]
+        [SerializeField] private int coneAngle = 0;
+        [SerializeField] private bool spreadInY = false;
+        [SerializeField] private bool spreadInX = false;
 
-   
+        public Quaternion SpreadAngle(Quaternion currentAngle)
+        {
+            var randX = Random.Range(-1f, 1f);
+            var randY = Random.Range(-1f, 1f);
+            if (!spreadInX)
+            {
+                randX = 0;
+            }
+            if (!spreadInY)
+            {
+                randY = 0;
+            }
+            var coneRandomAngle = new Vector3(currentAngle.eulerAngles.x + coneAngle * randX,
+               currentAngle.eulerAngles.y + coneAngle * randY,
+               currentAngle.eulerAngles.z);
+
+            var spreadAngle = Quaternion.Euler(coneRandomAngle);
+            return spreadAngle;
+        }
+    }
+
+    //[System.Serializable]
+    //private class AttackParametres
+    //{
+    //    [Range(0, 90)]
+    //    [SerializeField] private int coneAngle = 0;
+    //    [SerializeField] private bool spreadInY = false;
+    //    [SerializeField] private bool spreadInX = false;
+
+        
+    //}
 }

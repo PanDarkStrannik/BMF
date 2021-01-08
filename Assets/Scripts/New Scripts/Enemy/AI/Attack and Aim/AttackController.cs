@@ -140,7 +140,10 @@ public class AttackController : MonoBehaviour
 
     private void Attack(WeaponAiData weapon)
     {
-        weapon.Weapon.Attack();
+        if(weapon.Weapon.TryReturnNeededWeaponType<IDamagingWeapon>(out IDamagingWeapon returnedWeapon))
+        {
+            returnedWeapon.Attack();
+        }
     }
 
 
@@ -328,5 +331,15 @@ public class AttackController : MonoBehaviour
             gizmosColor = Color.black;
         }
 
+        //public bool TryReturnNeededWeaponType<T>(out T neededWeaponType) where T : class
+        //{
+        //    neededWeaponType = null;
+        //    if(weapon is T)
+        //    {
+        //        neededWeaponType = weapon as T;
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }
