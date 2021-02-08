@@ -361,34 +361,34 @@ MonoBehaviour:
   Properties:
     LiveUpdate:
       Value: 0
-      HasValue: 1
+      HasValue: 0
     Overlay:
       Value: 0
-      HasValue: 1
+      HasValue: 0
     Logging:
       Value: 0
       HasValue: 0
     SampleRate:
       Value: 0
-      HasValue: 1
+      HasValue: 0
     BuildDirectory:
-      Value: Animations
-      HasValue: 1
+      Value: 
+      HasValue: 0
     SpeakerMode:
-      Value: 3
-      HasValue: 1
+      Value: 0
+      HasValue: 0
     VirtualChannelCount:
-      Value: 128
-      HasValue: 1
+      Value: 0
+      HasValue: 0
     RealChannelCount:
-      Value: 32
-      HasValue: 1
+      Value: 0
+      HasValue: 0
     DSPBufferLength:
       Value: 0
-      HasValue: 1
+      HasValue: 0
     DSPBufferCount:
       Value: 0
-      HasValue: 1
+      HasValue: 0
     Plugins:
       Value: []
       HasValue: 1
@@ -397,7 +397,7 @@ MonoBehaviour:
       HasValue: 1
     CallbackHandler:
       Value: {fileID: 0}
-      HasValue: 1
+      HasValue: 0
   outputType: 
 --- !u!114 &-2430224819281689398
 MonoBehaviour:
@@ -469,10 +469,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 0
-  HasPlatforms: 0
+  HasSourceProject: 1
+  HasPlatforms: 1
   sourceProjectPath: 
-  sourceBankPath: C:\Users\Zver\Desktop\Skillbox\Gamebox\BMF\Assets
+  sourceBankPath: 
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0

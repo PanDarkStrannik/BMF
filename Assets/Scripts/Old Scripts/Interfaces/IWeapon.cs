@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamagingWeapon
+public interface IWeapon
 {
     void Attack();
 
-    //void Attack(GameObject attackObject);
+    void Attack(GameObject attackObject);
 }

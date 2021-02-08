@@ -48,11 +48,6 @@ public class ParamController : MonoBehaviour
             damageble.PushEvent += Pusher;
         }
 
-        foreach (var e in deactiveScripts)
-        {
-            e.enabled = true;
-        }
-
         paramSum.Initialize();
     }
 
@@ -100,11 +95,15 @@ public class ParamController : MonoBehaviour
     }
 
     protected virtual IEnumerator NullHealth()
-    {
-        yield return new WaitForSeconds(timeToDeactive);
+    {      
         foreach (var e in deactiveScripts)
         {
             e.enabled = false;
+        }
+        yield return new WaitForSeconds(timeToDeactive);
+        foreach(var e in deactiveScripts)
+        {
+            e.gameObject.SetActive(false);
         }
     }
 
@@ -160,39 +159,6 @@ public class ParamController : MonoBehaviour
             }
         }
 
-    }
-
-    [System.Serializable]
-    public class ResourcesUser
-    {
-        [SerializeReference] private ParamController paramController;
-        [SerializeField] private DamagebleParam.ParamType paramType;
-        [SerializeField] private float minValueToUse;
-        [SerializeField] private float changeParamOnUse;
-
-        public ParamController ParamController
-        {
-            get
-            {
-                return paramController;
-            }
-        }
-
-        public bool TryUseResource()
-        {
-            if(paramController.paramSum.typesValues.ContainsKey(paramType))
-            {
-                if (paramController.paramSum.typesValues[paramType] >= minValueToUse)
-                {
-                    paramController.paramSum.ChangeParam(paramType, changeParamOnUse);
-                    return true;
-                }
-                Debug.Log("В Param Controller ресурса " + paramType + " меньше чем " + minValueToUse);
-                return false;
-            }
-            Debug.Log("Param controller не содержит " + paramType);
-            return false;
-        }
     }
 
 }

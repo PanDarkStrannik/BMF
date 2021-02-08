@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponBlink : AWeapon, IDamagingWeapon
+public class WeaponBlink : AWeapon
 {
     [SerializeField] private float toBlinkTime = 0.2f;
     [SerializeField] private float afterBlink = 5f;
@@ -35,12 +35,7 @@ public class WeaponBlink : AWeapon, IDamagingWeapon
         }
     }
 
-    public override void UseWeapon()
-    {
-        Attack();
-    }
-
-    public void Attack()
+    public override void Attack()
     {
         if (state == WeaponState.Serenity)
         {

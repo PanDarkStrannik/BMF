@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
 
-public class SummoningWeapon : AWeapon, IDamagingWeapon
+public class SummoningWeapon : AWeapon
 {
     [SerializeField] private Spawner spawner;
 
@@ -35,12 +35,7 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
 
     }
 
-    public override void UseWeapon()
-    {
-        Attack();
-    }
-
-    public void Attack()
+    public override void Attack()
     {
         if (state == WeaponState.Serenity)
         {

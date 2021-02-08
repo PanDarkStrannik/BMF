@@ -31,10 +31,6 @@ public class EnemyParamController : ParamController
 
     protected override IEnumerator NullHealth()
     {
-        foreach(var e in deactiveScripts)
-        {
-            e.enabled = false;
-        }
         yield return new WaitForSeconds(timeToDeactive);
         PointCounter.Instance.AddPoints(pointsForKill);
         OnEnemyDie?.Invoke();

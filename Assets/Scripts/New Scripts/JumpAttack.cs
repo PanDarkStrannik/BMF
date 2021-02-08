@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class JumpAttack : AWeapon, IDamagingWeapon
+public class JumpAttack : AWeapon
 {
     [SerializeReference] private Rigidbody body;
    // [SerializeField] private List<DamageByType> weaponData;
@@ -39,17 +39,12 @@ public class JumpAttack : AWeapon, IDamagingWeapon
         //startBodyPosition = body.transform.localPosition;
     }
 
-    public void Attack()
+    public override void Attack()
     {
         state = WeaponState.Attack;
         Debug.Log("Должна была произойти атака");
         body.velocity = Vector3.zero;
         body.AddForce(forceValue * body.transform.forward, forceMode);
-    }
-
-    public override void UseWeapon()
-    {
-        Attack();
     }
 
     public void FixedUpdate()

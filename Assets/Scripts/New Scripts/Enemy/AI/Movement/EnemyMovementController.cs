@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 
 public class EnemyMovementController : AFaling
 {
     //[SerializeReference] private Animator animator;
     [SerializeReference] private NavMeshAgent navAgent;
     [SerializeField] private List<ObjectAimMod> objectAim;
-    [SerializeField] private CustomEventValue<bool> moving;
+
 
     //void Start()
     //{
@@ -24,7 +23,7 @@ public class EnemyMovementController : AFaling
 
     private void Start()
     {
-       // navAgent.updateRotation = false;
+        navAgent.updateRotation = false;
     }
 
     private void Update()
@@ -61,7 +60,6 @@ public class EnemyMovementController : AFaling
     {
         if (navAgent.isActiveAndEnabled)
         {
-            moving.StartEvent(true);
             navAgent.speed = speed;
             if (warp)
             {
@@ -71,10 +69,6 @@ public class EnemyMovementController : AFaling
             {
                 navAgent.SetDestination(point);
             }
-        }
-        else
-        {
-            moving.StartEvent(false);
         }
     }
 

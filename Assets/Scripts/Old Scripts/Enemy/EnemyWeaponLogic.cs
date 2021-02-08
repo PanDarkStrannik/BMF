@@ -92,11 +92,8 @@ public class EnemyWeaponLogic : MonoBehaviour
             {
                 wantDamagedObject = hit.transform.gameObject;
                 Debug.Log("По идее произошла атака");
-                if (currentWeapon.Weapon.TryReturnNeededWeaponType<IDamagingWeapon>(out IDamagingWeapon returnedWeapon))
-                {
-                    returnedWeapon.Attack();
-                    return true;
-                }
+                currentWeapon.Weapon.Attack();
+                return true;
             }
         }
         return false;

@@ -25,10 +25,6 @@ public class DamagebleParamSum
     public delegate void ParamNullHelper(DamagebleParam.ParamType paramType);
     public event ParamNullHelper OnParamNull;
 
-    public delegate void OnParamEventsHelper();
-    public event OnParamEventsHelper OnParamsDamaged;
-    public event OnParamEventsHelper OnParamsHeals;
-
     public delegate void ParamChangedHelper(DamagebleParam.ParamType paramType, float value, float maxValue);
     public event ParamChangedHelper OnParamChanged;
 
@@ -45,25 +41,14 @@ public class DamagebleParamSum
             foreach (var placeDamage in damagebles)
             {
                 sumDatas.ParamDatas.AddRange(placeDamage.Datas.ParamDatas);
-                placeDamage.OnDamaged += OnParamDamagedListener;
-                placeDamage.OnHeal += OnParamHealListener;
+                placeDamage.OnDamaged += ChangeParam;
+                placeDamage.OnHeal += ChangeParam;
 
             }
 
-            SumParams();
+            ChangeParam();
         }
 
-    }
-
-    private void OnParamDamagedListener()
-    {
-        OnParamsDamaged?.Invoke();
-        SumParams();
-    }
-    private void OnParamHealListener()
-    {
-        OnParamsHeals?.Invoke();
-        SumParams();
     }
 
     public void Unsubscribe()
@@ -71,14 +56,14 @@ public class DamagebleParamSum
         if (damagebles.Count > 0)
         {
             foreach (var placeDamage in damagebles)
-            {
-                placeDamage.OnDamaged -= OnParamDamagedListener;
-                placeDamage.OnHeal -= OnParamHealListener;
+            {                
+                placeDamage.OnDamaged -= ChangeParam;
+                placeDamage.OnHeal -= ChangeParam;
             }
         }
     }
 
-    private void SumParams()
+    private void ChangeParam()
     {
         typesValues.Clear();
         typesMaxValues.Clear();
@@ -131,12 +116,4 @@ public class DamagebleParamSum
         }
     }
 
-    public void ChangeParam(DamagebleParam.ParamType type, float value)
-    {
-        foreach(var place in damagebles)
-        {
-            place.ChangeParam(type, value);
-        }
-        SumParams();
-    }
 }
