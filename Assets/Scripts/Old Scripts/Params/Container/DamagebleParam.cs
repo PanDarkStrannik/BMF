@@ -122,6 +122,7 @@ public class DamagebleParam
     /// <param name="damage">величина урона</param>
     public void ApplyDamage(float damage)
     {
+        damage = Mathf.Abs(damage);
         value -= damage;
     }
 
@@ -132,6 +133,7 @@ public class DamagebleParam
     /// <param name="damage">величина урона</param>
     public void ApplyDamageWithMax(float damage)
     {
+        damage = Mathf.Abs(damage);
         value -= damage;
         maxValue -= damage;
     }
@@ -143,6 +145,7 @@ public class DamagebleParam
     /// <param name="proc_damage">Процент от 0 до 1</param>
     public void ApplyProcentDamage(float proc_damage)
     {
+        proc_damage = Mathf.Clamp(proc_damage, 0, 1);
         value -= maxValue * proc_damage;
     }
 
@@ -154,6 +157,7 @@ public class DamagebleParam
     /// <param name="proc_damage">Процент от 0 до 1</param>
     public void ApplyProcentDamageWithMax(float proc_damage)
     {
+        proc_damage = Mathf.Clamp(proc_damage, 0, 1);
         value -= maxValue * proc_damage;
         maxValue -= maxValue * proc_damage;
     }
@@ -171,6 +175,7 @@ public class DamagebleParam
     /// <param name="enlarge"> величина увеличения</param>
     public void Enlarge(float enlarge)
     {
+        enlarge = Mathf.Abs(enlarge);
         value += enlarge;
 
         if (value > maxValue)
@@ -185,6 +190,7 @@ public class DamagebleParam
     /// <param name="enlarge"> величина увеличения</param>
     public void EnlargeWithMax(float enlarge)
     {
+        enlarge = Mathf.Abs(enlarge);
         value += enlarge;
         maxValue += enlarge;
     }
@@ -201,7 +207,7 @@ public class DamagebleParam
 
     public enum ParamType
     {
-        Health, Test
+        Health, HolyWater
     }
 
 }

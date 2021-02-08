@@ -148,17 +148,25 @@
             "id": "7e21ab00-bdba-48eb-871d-4deb5abf5877",
             "actions": [
                 {
-                    "name": "Reload",
+                    "name": "MainAttack",
                     "type": "Button",
-                    "id": "d454fa5c-8eea-4eaa-92e4-3f2b91614e60",
+                    "id": "bc458cfe-e4ec-4eb0-80a7-e03bb64078e2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Shoot",
+                    "name": "SecondAttack",
                     "type": "Button",
-                    "id": "bc458cfe-e4ec-4eb0-80a7-e03bb64078e2",
+                    "id": "28f7f73c-0b3d-48d5-8f61-e426a14ae936",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "d454fa5c-8eea-4eaa-92e4-3f2b91614e60",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -221,28 +229,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "f22215fc-8137-4e0c-8c88-365806612a2c",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c0c73c44-05b3-4316-b7a5-52f23d8ec975",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "f9254611-3d50-48dc-826d-e70bd9371c4c",
@@ -440,6 +426,39 @@
                     "action": "MouseScroll",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8e3c3ae8-f538-4306-a6c6-30953a5f8910",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "SecondAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0c73c44-05b3-4316-b7a5-52f23d8ec975",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "MainAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f22215fc-8137-4e0c-8c88-365806612a2c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
