@@ -61,6 +61,7 @@ public class FlyCamera : MonoBehaviour
 
         rotateVector.y += rotationInput.x * sensY;
         rotateVector.x -= rotationInput.y * sensX;
+        rotateVector.x = ClampAngle(rotateVector.x, -90, 90);
 
         currentCamera.transform.rotation = Quaternion.Euler(rotateVector.x, rotateVector.y, 0);
 
