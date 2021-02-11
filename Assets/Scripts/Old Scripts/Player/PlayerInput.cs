@@ -161,17 +161,25 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             ""id"": ""7e21ab00-bdba-48eb-871d-4deb5abf5877"",
             ""actions"": [
                 {
-                    ""name"": ""Reload"",
+                    ""name"": ""MainAttack"",
                     ""type"": ""Button"",
-                    ""id"": ""d454fa5c-8eea-4eaa-92e4-3f2b91614e60"",
+                    ""id"": ""bc458cfe-e4ec-4eb0-80a7-e03bb64078e2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""SecondAttack"",
                     ""type"": ""Button"",
-                    ""id"": ""bc458cfe-e4ec-4eb0-80a7-e03bb64078e2"",
+                    ""id"": ""28f7f73c-0b3d-48d5-8f61-e426a14ae936"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""d454fa5c-8eea-4eaa-92e4-3f2b91614e60"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -234,28 +242,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""f22215fc-8137-4e0c-8c88-365806612a2c"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c0c73c44-05b3-4316-b7a5-52f23d8ec975"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""f9254611-3d50-48dc-826d-e70bd9371c4c"",
@@ -453,6 +439,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""MouseScroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e3c3ae8-f538-4306-a6c6-30953a5f8910"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""SecondAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0c73c44-05b3-4316-b7a5-52f23d8ec975"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""MainAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f22215fc-8137-4e0c-8c88-365806612a2c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -484,8 +503,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_RotationInput_GetRotation = m_RotationInput.FindAction("GetRotation", throwIfNotFound: true);
         // ButtonInputs
         m_ButtonInputs = asset.FindActionMap("ButtonInputs", throwIfNotFound: true);
+        m_ButtonInputs_MainAttack = m_ButtonInputs.FindAction("MainAttack", throwIfNotFound: true);
+        m_ButtonInputs_SecondAttack = m_ButtonInputs.FindAction("SecondAttack", throwIfNotFound: true);
         m_ButtonInputs_Reload = m_ButtonInputs.FindAction("Reload", throwIfNotFound: true);
-        m_ButtonInputs_Shoot = m_ButtonInputs.FindAction("Shoot", throwIfNotFound: true);
         m_ButtonInputs_ChangeSpeed = m_ButtonInputs.FindAction("ChangeSpeed", throwIfNotFound: true);
         m_ButtonInputs_Heal = m_ButtonInputs.FindAction("Heal", throwIfNotFound: true);
         m_ButtonInputs_ChangeWeaponByKeyboard = m_ButtonInputs.FindAction("ChangeWeaponByKeyboard", throwIfNotFound: true);
@@ -608,8 +628,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     // ButtonInputs
     private readonly InputActionMap m_ButtonInputs;
     private IButtonInputsActions m_ButtonInputsActionsCallbackInterface;
+    private readonly InputAction m_ButtonInputs_MainAttack;
+    private readonly InputAction m_ButtonInputs_SecondAttack;
     private readonly InputAction m_ButtonInputs_Reload;
-    private readonly InputAction m_ButtonInputs_Shoot;
     private readonly InputAction m_ButtonInputs_ChangeSpeed;
     private readonly InputAction m_ButtonInputs_Heal;
     private readonly InputAction m_ButtonInputs_ChangeWeaponByKeyboard;
@@ -621,8 +642,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         private @PlayerInput m_Wrapper;
         public ButtonInputsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MainAttack => m_Wrapper.m_ButtonInputs_MainAttack;
+        public InputAction @SecondAttack => m_Wrapper.m_ButtonInputs_SecondAttack;
         public InputAction @Reload => m_Wrapper.m_ButtonInputs_Reload;
-        public InputAction @Shoot => m_Wrapper.m_ButtonInputs_Shoot;
         public InputAction @ChangeSpeed => m_Wrapper.m_ButtonInputs_ChangeSpeed;
         public InputAction @Heal => m_Wrapper.m_ButtonInputs_Heal;
         public InputAction @ChangeWeaponByKeyboard => m_Wrapper.m_ButtonInputs_ChangeWeaponByKeyboard;
@@ -639,12 +661,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_ButtonInputsActionsCallbackInterface != null)
             {
+                @MainAttack.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainAttack;
+                @MainAttack.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainAttack;
+                @MainAttack.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainAttack;
+                @SecondAttack.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnSecondAttack;
+                @SecondAttack.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnSecondAttack;
+                @SecondAttack.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnSecondAttack;
                 @Reload.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnReload;
-                @Shoot.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnShoot;
                 @ChangeSpeed.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
                 @ChangeSpeed.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
                 @ChangeSpeed.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
@@ -670,12 +695,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             m_Wrapper.m_ButtonInputsActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @MainAttack.started += instance.OnMainAttack;
+                @MainAttack.performed += instance.OnMainAttack;
+                @MainAttack.canceled += instance.OnMainAttack;
+                @SecondAttack.started += instance.OnSecondAttack;
+                @SecondAttack.performed += instance.OnSecondAttack;
+                @SecondAttack.canceled += instance.OnSecondAttack;
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
                 @ChangeSpeed.started += instance.OnChangeSpeed;
                 @ChangeSpeed.performed += instance.OnChangeSpeed;
                 @ChangeSpeed.canceled += instance.OnChangeSpeed;
@@ -720,8 +748,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     }
     public interface IButtonInputsActions
     {
+        void OnMainAttack(InputAction.CallbackContext context);
+        void OnSecondAttack(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
         void OnChangeSpeed(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnChangeWeaponByKeyboard(InputAction.CallbackContext context);

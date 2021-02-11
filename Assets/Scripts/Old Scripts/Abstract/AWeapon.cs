@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class AWeapon : MonoBehaviour, IWeapon
+public abstract class AWeapon : MonoBehaviour
 {
     [SerializeField] protected GameObject weaponObject;
     [SerializeField] private List<EventOnAttackState> events;
@@ -73,18 +73,15 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
         }
     }
 
-    public virtual void Attack()
-    {
-       throw new System.Exception("Ненаправленная атака нереализована");      
-    }
+    //public virtual void Attack()
+    //{
+    //   throw new System.Exception("Ненаправленная атака нереализована");      
+    //}
 
-    public virtual void Attack(GameObject attackedObject)
-    {
-        throw new System.Exception("Направленная атака нереализована");
-    }
-
-
-
+    //public virtual void Attack(GameObject attackedObject)
+    //{
+    //    throw new System.Exception("Направленная атака нереализована");
+    //}
 
 
     #region Переопределяемые методы
@@ -130,6 +127,11 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
         State = WeaponState.Serenity;
         Debug.Log("Разрешили Атаку!");
     }
+
+
+    public abstract void UseWeapon();
+   
+
     #endregion
 
 
@@ -139,6 +141,18 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
     }
 
 
+    public bool TryReturnNeededWeaponType<T>(out T neededWeaponType) where T : class
+    {
+        neededWeaponType = null;
+        if (this is T)
+        {
+            neededWeaponType = this as T;
+            Debug.Log($"Оружие может использоваться как: {typeof(T).Name}");
+            return true;
+        }
+        Debug.Log($"Оружие не может использоваться как: {typeof(T).Name}");
+        return false;
+    }
 
 
 

@@ -10,11 +10,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float SensX = 5, SensY = 10;
     [SerializeField] private Vector2 MinMax_Y = new Vector2(-40, 40);
 
-    [SerializeField] private WeaponChanger weaponChanger;
+    [SerializeField] private PlayerWeaponChanger weaponChanger;
 
     [SerializeField] private PlayerUI playerUI;
 
-    //[SerializeField] private Blink blinkAbility;
 
     [SerializeField] private List<GunPush> gunPushes;
 
@@ -29,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput input;
     private bool isShiftNotInput = true;
     private float moveX, moveY;
-    private WeaponHealing weaponHealing;
+   // private AWeapon weaponHealing;
 
 
 
@@ -51,7 +50,6 @@ public class PlayerController : MonoBehaviour
     {
         PlayerInformation.GetInstance().Player = gameObject;
         input = new PlayerInput();
-        //movement = GetComponent<APlayerMovement>();
         weaponChanger.ChangeWeapon(0);
     }
 
@@ -61,7 +59,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        weaponHealing = weaponChanger.AllWeapons.Find(x => x is WeaponHealing) as WeaponHealing; 
+      //  weaponHealing = weaponChanger.AllWeapons.Find(x => x is IHeallingWeapon) as AWeapon; 
         
     }
 
@@ -77,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        WeaponChecker();
+       // WeaponChecker();
         RotationInput();
         var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
         var correctMove = new Vector3(moveDirection.x, input.ButtonInputs.Jump.ReadValue<float>(), moveDirection.y);
@@ -85,14 +83,6 @@ public class PlayerController : MonoBehaviour
         movement.Move(correctMove);
     }
 
-
-    //private void FixedUpdate()
-    //{
-    //    var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
-    //    var correctMove = new Vector3(moveDirection.x, input.ButtonInputs.Jump.ReadValue<float>(), moveDirection.y);
-    //    correctMove = transform.TransformDirection(correctMove);
-    //    movement.Move(correctMove);
-    //}
 
 
 
@@ -118,34 +108,35 @@ public class PlayerController : MonoBehaviour
     private void WeaponChecker()
     {
      
+        //лучше подписаться на стейты самого оружия игрока
 
-        switch (weaponChanger.CurrentWeapon.State)
-        {
-            case AWeapon.WeaponState.Attack:
-                PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Attack);
-                break;
-            case AWeapon.WeaponState.Reload:
-                PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Reload);
-                break;
-            case AWeapon.WeaponState.ImposibleAttack:
-                PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.ImposibleAttack);
-                break;
-            case AWeapon.WeaponState.Serenity:
-                PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Serenity);
-                break;
-        }
+        //switch (weaponChanger.CurrentWeapon.State)
+        //{
+        //    case AWeapon.WeaponState.Attack:
+        //        PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Attack);
+        //        break;
+        //    case AWeapon.WeaponState.Reload:
+        //        PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Reload);
+        //        break;
+        //    case AWeapon.WeaponState.ImposibleAttack:
+        //        PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.ImposibleAttack);
+        //        break;
+        //    case AWeapon.WeaponState.Serenity:
+        //        PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Serenity);
+        //        break;
+        //}
 
     }
 
     private void ButtonsInput()
     {
-        input.ButtonInputs.Shoot.performed += context =>
+        input.ButtonInputs.MainAttack.performed += context =>
         {
-            if (weaponChanger.CurrentWeapon.State == AWeapon.WeaponState.Serenity)
+            if (weaponChanger.CurrentWeapon.TryUseFirstWeapon())
             {
                 foreach (var e in gunPushes)
                 {
-                    if (weaponChanger.CurrentWeapon.WeaponType == e.WeaponType)
+                    if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == e.WeaponType)
                     {
                         var push = transform.TransformDirection(e.PushForce);
                         StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
@@ -153,15 +144,35 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-            weaponChanger.CurrentWeapon.Attack();
+            //if(weaponChanger.CurrentWeapon.TryReturnNeededWeaponType<IDamagingWeapon>(out IDamagingWeapon returnedWeapon))
+            //{
+            //    returnedWeapon.Attack();
+            //}
+         
+        };
+
+        input.ButtonInputs.SecondAttack.performed += context =>
+        {
+            if (weaponChanger.CurrentWeapon.TryUseSecoundWeapon())
+            {
+                foreach (var e in gunPushes)
+                {
+                    if (weaponChanger.CurrentWeapon.Weapon2.WeaponType == e.WeaponType)
+                    {
+                        var push = transform.TransformDirection(e.PushForce);
+                        StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
+                        e.ShakingParams.ShakeEventInvoke();
+                    }
+                }
+            }
         };
 
 
 
         input.ButtonInputs.ChangeWeaponByKeyboard.performed += context =>
         {
-            weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
-            ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
+            weaponChanger.ChangeWeapon((int)input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
+         //   ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
         };
 
         input.ButtonInputs.MouseScroll.performed += context =>
@@ -180,8 +191,6 @@ public class PlayerController : MonoBehaviour
             {
                 throw new System.Exception("Почему-то при скролле выдало 0");
             }
-            //weaponChanger.ChangeWeapon(input.ButtonInputs.ChangeWeaponByMouse.ReadValue<Vector2>().y);
-            //ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
         };
 
 
@@ -200,27 +209,22 @@ public class PlayerController : MonoBehaviour
                 isShiftNotInput = true;
 
             }
-            ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
+           // ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
 
         };
 
 
-        input.MovementInput.GetDirection.performed += context =>
-        {
-            ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
-        };
+        //input.MovementInput.GetDirection.performed += context =>
+        //{
+        //   // ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
+        //};
 
         input.ButtonInputs.Blink.performed += context =>
         {
-            if (weaponHealing.State == AWeapon.WeaponState.Serenity)
-            {
-                weaponHealing.Attack(gameObject);
-            }
-            
-            //if(!blinkAbility.IsAttack)
+            //if (weaponHealing.State == AWeapon.WeaponState.Serenity)
             //{
-            //    blinkAbility.Attack();
-            //   // StartCoroutine(playerUI.ReloadTP(blinkAbility.ReloadTime));
+            //    weaponHealing.TryReturnNeededWeaponType<IHeallingWeapon>(out IHeallingWeapon returnedObject);
+            //    returnedObject.Heal(gameObject);
             //}
         };
 
@@ -229,17 +233,17 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private bool ChangeAbilityBecauseWeapon(WeaponType type)
-    {
-        switch(type)
-        {
+    //private bool ChangeAbilityBecauseWeapon(WeaponType type)
+    //{
+    //    switch(type)
+    //    {
 
-            case WeaponType.Range:
-                movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
-                return true;
-        }
-        return false;
-    }
+    //        case WeaponType.Range:
+    //            movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
+    //            return true;
+    //    }
+    //    return false;
+    //}
 
 
     private float ClampAngle(float angle, float min, float max)

@@ -11,9 +11,9 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
     public event OnDamagedHelper OnDamaged;
     public event OnDamagedHelper OnHeal;
 
-    public delegate void OnDamagedValueHelper(float damageValue, ADamageble damageblePlace);
-    public event OnDamagedValueHelper OnDamagedWithValue;
-    public event OnDamagedValueHelper OnHealWithValue;
+    public delegate void OnChangedParamHelper(float damageValue, ADamageble damageblePlace);
+    public event OnChangedParamHelper OnDamagedWithValue;
+    public event OnChangedParamHelper OnHealWithValue;
 
     public delegate void OnPushHelper(Vector3 push, ForceMode forceMode);
     public event OnPushHelper PushEvent;
@@ -39,6 +39,30 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
     public abstract void ApplyDamage(DamageByType weapon);
 
     public abstract void ApplyHeal(DamageByType healWeapon);
+
+    public virtual void ChangeParam(DamagebleParam.ParamType type, float value)
+    {
+        var temp = datas.FindAllByParamType(type);
+
+        if (value == 0)
+        {
+            return;
+        }
+        else if (value > 0)
+        {
+            foreach(var e in temp)
+            {
+                e.Enlarge(value);
+            }
+        }
+        else if (value < 0)
+        {
+            foreach(var e in temp)
+            {
+                e.ApplyDamage(value);
+            }
+        }        
+    }
 
     protected void DamageEvent()
     {
