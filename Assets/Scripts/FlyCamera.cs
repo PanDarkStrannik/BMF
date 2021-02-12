@@ -62,6 +62,22 @@ public class FlyCamera : MonoBehaviour
     private void RotationInput()
     {
         var rotationInput = input.RotationInput.GetRotation.ReadValue<Vector2>();
+        if (rotationInput.x > 0)
+        {
+            rotationInput.x = 1;
+        }
+        else if(rotationInput.x<0)
+        {
+            rotationInput.x = -1;
+        }
+        if (rotationInput.y > 0)
+        {
+            rotationInput.y = 1;
+        }
+        else if (rotationInput.y < 0)
+        {
+            rotationInput.y = -1;
+        }
 
         rotateVector.y += rotationInput.x * sensY;
         rotateVector.x -= rotationInput.y * sensX;
