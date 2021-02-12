@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponMili : AWeapon
+public class WeaponMili : AWeapon, IDamagingWeapon
 {
-    [SerializeField] private float damagingTime = 1f;
-    [SerializeField] private float reloadTime = 0.3f;
-    [SerializeField] private float timeToWeaponAttack = 0f;
+    [SerializeField] private float toAttackTime = 1f;
+    [SerializeField] private float damagingTime = 0.3f;
+    [SerializeField] private float reloadAttack = 0.7f;
     [SerializeReference] private DamageArea damageArea;
 
     public override WeaponType WeaponType
@@ -18,12 +18,18 @@ public class WeaponMili : AWeapon
     }
 
 
-    public override void Attack()
+    public void Attack()
     {
         if (state == AWeapon.WeaponState.Serenity)
         {
-            StartCoroutine(Damaging(damagingTime));
+            StopAllCoroutines();
+            StartCoroutine(Damaging(toAttackTime));
         }        
+    }
+
+    public override void UseWeapon()
+    {
+        Attack();
     }
 
     protected override IEnumerator Damaging(float time)
@@ -31,10 +37,9 @@ public class WeaponMili : AWeapon
         State = WeaponState.Attack;
         if (state == WeaponState.Attack)
         {
-            damageArea.gameObject.SetActive(true);
             yield return new WaitForSecondsRealtime(time);
-            damageArea.gameObject.SetActive(false);
-            StartCoroutine(Serenity(reloadTime));
+            damageArea.gameObject.SetActive(true);
+            StartCoroutine(Reload(damagingTime));
         }
     }
 
@@ -44,14 +49,19 @@ public class WeaponMili : AWeapon
         if (state == WeaponState.Reload)
         {
             yield return new WaitForSecondsRealtime(time);
-            StartCoroutine(Serenity(0f));
+            damageArea.gameObject.SetActive(false);
+            StartCoroutine(Serenity(reloadAttack));
         }
     }
 
     protected override IEnumerator Serenity(float time)
     {
-        yield return new WaitForSecondsRealtime(time);
-        State = WeaponState.Serenity;
+        if (state != WeaponState.Serenity)
+        {
+            yield return new WaitForSecondsRealtime(time);
+            State = WeaponState.Serenity;
+            StopAllCoroutines();
+        }
     }
 
 

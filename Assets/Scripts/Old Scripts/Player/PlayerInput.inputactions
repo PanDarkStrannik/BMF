@@ -12,6 +12,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "NormalizeVector2",
                     "interactions": ""
+                },
+                {
+                    "name": "VectorUp(temp)",
+                    "type": "Value",
+                    "id": "a2513fc2-10dd-4e41-9c7c-2afa686e1359",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -67,6 +75,39 @@
                     "processors": "Clamp(max=1)",
                     "groups": "Mouse And Keybord",
                     "action": "GetDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "3a3ff48a-e0b7-4277-9cc6-926c904b8197",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VectorUp(temp)",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "10a9940f-886f-4ce9-8c46-acbba919be75",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "VectorUp(temp)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "fea8b569-9a21-46fe-b994-452ee6fcf495",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "VectorUp(temp)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
@@ -148,17 +189,25 @@
             "id": "7e21ab00-bdba-48eb-871d-4deb5abf5877",
             "actions": [
                 {
-                    "name": "Reload",
+                    "name": "MainAttack",
                     "type": "Button",
-                    "id": "d454fa5c-8eea-4eaa-92e4-3f2b91614e60",
+                    "id": "bc458cfe-e4ec-4eb0-80a7-e03bb64078e2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Shoot",
+                    "name": "SecondAttack",
                     "type": "Button",
-                    "id": "bc458cfe-e4ec-4eb0-80a7-e03bb64078e2",
+                    "id": "28f7f73c-0b3d-48d5-8f61-e426a14ae936",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "d454fa5c-8eea-4eaa-92e4-3f2b91614e60",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -221,28 +270,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "f22215fc-8137-4e0c-8c88-365806612a2c",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c0c73c44-05b3-4316-b7a5-52f23d8ec975",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "f9254611-3d50-48dc-826d-e70bd9371c4c",
@@ -440,6 +467,66 @@
                     "action": "MouseScroll",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8e3c3ae8-f538-4306-a6c6-30953a5f8910",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "SecondAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0c73c44-05b3-4316-b7a5-52f23d8ec975",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "MainAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f22215fc-8137-4e0c-8c88-365806612a2c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interaction(For Teaser)",
+            "id": "ca2c7f20-02ab-476a-9df0-fc2e02aab928",
+            "actions": [
+                {
+                    "name": "TurnOn Animation",
+                    "type": "Button",
+                    "id": "874e6c6e-fe4d-4523-8307-07f365e114fc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "64660c8c-996c-4356-9f61-d36320e19518",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "TurnOn Animation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

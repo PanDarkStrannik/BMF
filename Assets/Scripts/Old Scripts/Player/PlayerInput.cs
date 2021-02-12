@@ -25,6 +25,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""VectorUp(temp)"",
+                    ""type"": ""Value"",
+                    ""id"": ""a2513fc2-10dd-4e41-9c7c-2afa686e1359"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -80,6 +88,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": ""Clamp(max=1)"",
                     ""groups"": ""Mouse And Keybord"",
                     ""action"": ""GetDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""3a3ff48a-e0b7-4277-9cc6-926c904b8197"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VectorUp(temp)"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""10a9940f-886f-4ce9-8c46-acbba919be75"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""VectorUp(temp)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""fea8b569-9a21-46fe-b994-452ee6fcf495"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""VectorUp(temp)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -161,17 +202,25 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             ""id"": ""7e21ab00-bdba-48eb-871d-4deb5abf5877"",
             ""actions"": [
                 {
-                    ""name"": ""Reload"",
+                    ""name"": ""MainAttack"",
                     ""type"": ""Button"",
-                    ""id"": ""d454fa5c-8eea-4eaa-92e4-3f2b91614e60"",
+                    ""id"": ""bc458cfe-e4ec-4eb0-80a7-e03bb64078e2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""SecondAttack"",
                     ""type"": ""Button"",
-                    ""id"": ""bc458cfe-e4ec-4eb0-80a7-e03bb64078e2"",
+                    ""id"": ""28f7f73c-0b3d-48d5-8f61-e426a14ae936"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""d454fa5c-8eea-4eaa-92e4-3f2b91614e60"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -234,28 +283,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""f22215fc-8137-4e0c-8c88-365806612a2c"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c0c73c44-05b3-4316-b7a5-52f23d8ec975"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""f9254611-3d50-48dc-826d-e70bd9371c4c"",
@@ -453,6 +480,66 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""MouseScroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e3c3ae8-f538-4306-a6c6-30953a5f8910"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""SecondAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0c73c44-05b3-4316-b7a5-52f23d8ec975"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""MainAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f22215fc-8137-4e0c-8c88-365806612a2c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Interaction(For Teaser)"",
+            ""id"": ""ca2c7f20-02ab-476a-9df0-fc2e02aab928"",
+            ""actions"": [
+                {
+                    ""name"": ""TurnOn Animation"",
+                    ""type"": ""Button"",
+                    ""id"": ""874e6c6e-fe4d-4523-8307-07f365e114fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""64660c8c-996c-4356-9f61-d36320e19518"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""TurnOn Animation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -479,13 +566,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         // MovementInput
         m_MovementInput = asset.FindActionMap("MovementInput", throwIfNotFound: true);
         m_MovementInput_GetDirection = m_MovementInput.FindAction("GetDirection", throwIfNotFound: true);
+        m_MovementInput_VectorUptemp = m_MovementInput.FindAction("VectorUp(temp)", throwIfNotFound: true);
         // RotationInput
         m_RotationInput = asset.FindActionMap("RotationInput", throwIfNotFound: true);
         m_RotationInput_GetRotation = m_RotationInput.FindAction("GetRotation", throwIfNotFound: true);
         // ButtonInputs
         m_ButtonInputs = asset.FindActionMap("ButtonInputs", throwIfNotFound: true);
+        m_ButtonInputs_MainAttack = m_ButtonInputs.FindAction("MainAttack", throwIfNotFound: true);
+        m_ButtonInputs_SecondAttack = m_ButtonInputs.FindAction("SecondAttack", throwIfNotFound: true);
         m_ButtonInputs_Reload = m_ButtonInputs.FindAction("Reload", throwIfNotFound: true);
-        m_ButtonInputs_Shoot = m_ButtonInputs.FindAction("Shoot", throwIfNotFound: true);
         m_ButtonInputs_ChangeSpeed = m_ButtonInputs.FindAction("ChangeSpeed", throwIfNotFound: true);
         m_ButtonInputs_Heal = m_ButtonInputs.FindAction("Heal", throwIfNotFound: true);
         m_ButtonInputs_ChangeWeaponByKeyboard = m_ButtonInputs.FindAction("ChangeWeaponByKeyboard", throwIfNotFound: true);
@@ -493,6 +582,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ButtonInputs_Blink = m_ButtonInputs.FindAction("Blink", throwIfNotFound: true);
         m_ButtonInputs_ESC = m_ButtonInputs.FindAction("ESC", throwIfNotFound: true);
         m_ButtonInputs_MouseScroll = m_ButtonInputs.FindAction("MouseScroll", throwIfNotFound: true);
+        // Interaction(For Teaser)
+        m_InteractionForTeaser = asset.FindActionMap("Interaction(For Teaser)", throwIfNotFound: true);
+        m_InteractionForTeaser_TurnOnAnimation = m_InteractionForTeaser.FindAction("TurnOn Animation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -543,11 +635,13 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_MovementInput;
     private IMovementInputActions m_MovementInputActionsCallbackInterface;
     private readonly InputAction m_MovementInput_GetDirection;
+    private readonly InputAction m_MovementInput_VectorUptemp;
     public struct MovementInputActions
     {
         private @PlayerInput m_Wrapper;
         public MovementInputActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @GetDirection => m_Wrapper.m_MovementInput_GetDirection;
+        public InputAction @VectorUptemp => m_Wrapper.m_MovementInput_VectorUptemp;
         public InputActionMap Get() { return m_Wrapper.m_MovementInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -560,6 +654,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GetDirection.started -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
                 @GetDirection.performed -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
                 @GetDirection.canceled -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
+                @VectorUptemp.started -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnVectorUptemp;
+                @VectorUptemp.performed -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnVectorUptemp;
+                @VectorUptemp.canceled -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnVectorUptemp;
             }
             m_Wrapper.m_MovementInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -567,6 +664,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GetDirection.started += instance.OnGetDirection;
                 @GetDirection.performed += instance.OnGetDirection;
                 @GetDirection.canceled += instance.OnGetDirection;
+                @VectorUptemp.started += instance.OnVectorUptemp;
+                @VectorUptemp.performed += instance.OnVectorUptemp;
+                @VectorUptemp.canceled += instance.OnVectorUptemp;
             }
         }
     }
@@ -608,8 +708,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     // ButtonInputs
     private readonly InputActionMap m_ButtonInputs;
     private IButtonInputsActions m_ButtonInputsActionsCallbackInterface;
+    private readonly InputAction m_ButtonInputs_MainAttack;
+    private readonly InputAction m_ButtonInputs_SecondAttack;
     private readonly InputAction m_ButtonInputs_Reload;
-    private readonly InputAction m_ButtonInputs_Shoot;
     private readonly InputAction m_ButtonInputs_ChangeSpeed;
     private readonly InputAction m_ButtonInputs_Heal;
     private readonly InputAction m_ButtonInputs_ChangeWeaponByKeyboard;
@@ -621,8 +722,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         private @PlayerInput m_Wrapper;
         public ButtonInputsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MainAttack => m_Wrapper.m_ButtonInputs_MainAttack;
+        public InputAction @SecondAttack => m_Wrapper.m_ButtonInputs_SecondAttack;
         public InputAction @Reload => m_Wrapper.m_ButtonInputs_Reload;
-        public InputAction @Shoot => m_Wrapper.m_ButtonInputs_Shoot;
         public InputAction @ChangeSpeed => m_Wrapper.m_ButtonInputs_ChangeSpeed;
         public InputAction @Heal => m_Wrapper.m_ButtonInputs_Heal;
         public InputAction @ChangeWeaponByKeyboard => m_Wrapper.m_ButtonInputs_ChangeWeaponByKeyboard;
@@ -639,12 +741,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_ButtonInputsActionsCallbackInterface != null)
             {
+                @MainAttack.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainAttack;
+                @MainAttack.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainAttack;
+                @MainAttack.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainAttack;
+                @SecondAttack.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnSecondAttack;
+                @SecondAttack.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnSecondAttack;
+                @SecondAttack.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnSecondAttack;
                 @Reload.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnReload;
-                @Shoot.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnShoot;
                 @ChangeSpeed.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
                 @ChangeSpeed.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
                 @ChangeSpeed.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
@@ -670,12 +775,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             m_Wrapper.m_ButtonInputsActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @MainAttack.started += instance.OnMainAttack;
+                @MainAttack.performed += instance.OnMainAttack;
+                @MainAttack.canceled += instance.OnMainAttack;
+                @SecondAttack.started += instance.OnSecondAttack;
+                @SecondAttack.performed += instance.OnSecondAttack;
+                @SecondAttack.canceled += instance.OnSecondAttack;
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
                 @ChangeSpeed.started += instance.OnChangeSpeed;
                 @ChangeSpeed.performed += instance.OnChangeSpeed;
                 @ChangeSpeed.canceled += instance.OnChangeSpeed;
@@ -701,6 +809,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         }
     }
     public ButtonInputsActions @ButtonInputs => new ButtonInputsActions(this);
+
+    // Interaction(For Teaser)
+    private readonly InputActionMap m_InteractionForTeaser;
+    private IInteractionForTeaserActions m_InteractionForTeaserActionsCallbackInterface;
+    private readonly InputAction m_InteractionForTeaser_TurnOnAnimation;
+    public struct InteractionForTeaserActions
+    {
+        private @PlayerInput m_Wrapper;
+        public InteractionForTeaserActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TurnOnAnimation => m_Wrapper.m_InteractionForTeaser_TurnOnAnimation;
+        public InputActionMap Get() { return m_Wrapper.m_InteractionForTeaser; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionForTeaserActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionForTeaserActions instance)
+        {
+            if (m_Wrapper.m_InteractionForTeaserActionsCallbackInterface != null)
+            {
+                @TurnOnAnimation.started -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
+                @TurnOnAnimation.performed -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
+                @TurnOnAnimation.canceled -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
+            }
+            m_Wrapper.m_InteractionForTeaserActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @TurnOnAnimation.started += instance.OnTurnOnAnimation;
+                @TurnOnAnimation.performed += instance.OnTurnOnAnimation;
+                @TurnOnAnimation.canceled += instance.OnTurnOnAnimation;
+            }
+        }
+    }
+    public InteractionForTeaserActions @InteractionForTeaser => new InteractionForTeaserActions(this);
     private int m_MouseAndKeybordSchemeIndex = -1;
     public InputControlScheme MouseAndKeybordScheme
     {
@@ -713,6 +854,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     public interface IMovementInputActions
     {
         void OnGetDirection(InputAction.CallbackContext context);
+        void OnVectorUptemp(InputAction.CallbackContext context);
     }
     public interface IRotationInputActions
     {
@@ -720,8 +862,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     }
     public interface IButtonInputsActions
     {
+        void OnMainAttack(InputAction.CallbackContext context);
+        void OnSecondAttack(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
         void OnChangeSpeed(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnChangeWeaponByKeyboard(InputAction.CallbackContext context);
@@ -729,5 +872,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnBlink(InputAction.CallbackContext context);
         void OnESC(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
+    }
+    public interface IInteractionForTeaserActions
+    {
+        void OnTurnOnAnimation(InputAction.CallbackContext context);
     }
 }
