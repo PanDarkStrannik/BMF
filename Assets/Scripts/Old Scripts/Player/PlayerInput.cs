@@ -25,6 +25,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""VectorUp(temp)"",
+                    ""type"": ""Value"",
+                    ""id"": ""a2513fc2-10dd-4e41-9c7c-2afa686e1359"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -80,6 +88,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": ""Clamp(max=1)"",
                     ""groups"": ""Mouse And Keybord"",
                     ""action"": ""GetDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""3a3ff48a-e0b7-4277-9cc6-926c904b8197"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VectorUp(temp)"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""10a9940f-886f-4ce9-8c46-acbba919be75"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""VectorUp(temp)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""fea8b569-9a21-46fe-b994-452ee6fcf495"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""VectorUp(temp)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -474,6 +515,33 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Interaction(For Teaser)"",
+            ""id"": ""ca2c7f20-02ab-476a-9df0-fc2e02aab928"",
+            ""actions"": [
+                {
+                    ""name"": ""TurnOn Animation"",
+                    ""type"": ""Button"",
+                    ""id"": ""874e6c6e-fe4d-4523-8307-07f365e114fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""64660c8c-996c-4356-9f61-d36320e19518"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""TurnOn Animation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -498,6 +566,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         // MovementInput
         m_MovementInput = asset.FindActionMap("MovementInput", throwIfNotFound: true);
         m_MovementInput_GetDirection = m_MovementInput.FindAction("GetDirection", throwIfNotFound: true);
+        m_MovementInput_VectorUptemp = m_MovementInput.FindAction("VectorUp(temp)", throwIfNotFound: true);
         // RotationInput
         m_RotationInput = asset.FindActionMap("RotationInput", throwIfNotFound: true);
         m_RotationInput_GetRotation = m_RotationInput.FindAction("GetRotation", throwIfNotFound: true);
@@ -513,6 +582,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ButtonInputs_Blink = m_ButtonInputs.FindAction("Blink", throwIfNotFound: true);
         m_ButtonInputs_ESC = m_ButtonInputs.FindAction("ESC", throwIfNotFound: true);
         m_ButtonInputs_MouseScroll = m_ButtonInputs.FindAction("MouseScroll", throwIfNotFound: true);
+        // Interaction(For Teaser)
+        m_InteractionForTeaser = asset.FindActionMap("Interaction(For Teaser)", throwIfNotFound: true);
+        m_InteractionForTeaser_TurnOnAnimation = m_InteractionForTeaser.FindAction("TurnOn Animation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -563,11 +635,13 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_MovementInput;
     private IMovementInputActions m_MovementInputActionsCallbackInterface;
     private readonly InputAction m_MovementInput_GetDirection;
+    private readonly InputAction m_MovementInput_VectorUptemp;
     public struct MovementInputActions
     {
         private @PlayerInput m_Wrapper;
         public MovementInputActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @GetDirection => m_Wrapper.m_MovementInput_GetDirection;
+        public InputAction @VectorUptemp => m_Wrapper.m_MovementInput_VectorUptemp;
         public InputActionMap Get() { return m_Wrapper.m_MovementInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -580,6 +654,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GetDirection.started -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
                 @GetDirection.performed -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
                 @GetDirection.canceled -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
+                @VectorUptemp.started -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnVectorUptemp;
+                @VectorUptemp.performed -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnVectorUptemp;
+                @VectorUptemp.canceled -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnVectorUptemp;
             }
             m_Wrapper.m_MovementInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -587,6 +664,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GetDirection.started += instance.OnGetDirection;
                 @GetDirection.performed += instance.OnGetDirection;
                 @GetDirection.canceled += instance.OnGetDirection;
+                @VectorUptemp.started += instance.OnVectorUptemp;
+                @VectorUptemp.performed += instance.OnVectorUptemp;
+                @VectorUptemp.canceled += instance.OnVectorUptemp;
             }
         }
     }
@@ -729,6 +809,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         }
     }
     public ButtonInputsActions @ButtonInputs => new ButtonInputsActions(this);
+
+    // Interaction(For Teaser)
+    private readonly InputActionMap m_InteractionForTeaser;
+    private IInteractionForTeaserActions m_InteractionForTeaserActionsCallbackInterface;
+    private readonly InputAction m_InteractionForTeaser_TurnOnAnimation;
+    public struct InteractionForTeaserActions
+    {
+        private @PlayerInput m_Wrapper;
+        public InteractionForTeaserActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TurnOnAnimation => m_Wrapper.m_InteractionForTeaser_TurnOnAnimation;
+        public InputActionMap Get() { return m_Wrapper.m_InteractionForTeaser; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionForTeaserActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionForTeaserActions instance)
+        {
+            if (m_Wrapper.m_InteractionForTeaserActionsCallbackInterface != null)
+            {
+                @TurnOnAnimation.started -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
+                @TurnOnAnimation.performed -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
+                @TurnOnAnimation.canceled -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
+            }
+            m_Wrapper.m_InteractionForTeaserActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @TurnOnAnimation.started += instance.OnTurnOnAnimation;
+                @TurnOnAnimation.performed += instance.OnTurnOnAnimation;
+                @TurnOnAnimation.canceled += instance.OnTurnOnAnimation;
+            }
+        }
+    }
+    public InteractionForTeaserActions @InteractionForTeaser => new InteractionForTeaserActions(this);
     private int m_MouseAndKeybordSchemeIndex = -1;
     public InputControlScheme MouseAndKeybordScheme
     {
@@ -741,6 +854,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     public interface IMovementInputActions
     {
         void OnGetDirection(InputAction.CallbackContext context);
+        void OnVectorUptemp(InputAction.CallbackContext context);
     }
     public interface IRotationInputActions
     {
@@ -758,5 +872,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnBlink(InputAction.CallbackContext context);
         void OnESC(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
+    }
+    public interface IInteractionForTeaserActions
+    {
+        void OnTurnOnAnimation(InputAction.CallbackContext context);
     }
 }

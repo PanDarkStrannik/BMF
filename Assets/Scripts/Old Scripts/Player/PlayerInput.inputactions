@@ -12,6 +12,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "NormalizeVector2",
                     "interactions": ""
+                },
+                {
+                    "name": "VectorUp(temp)",
+                    "type": "Value",
+                    "id": "a2513fc2-10dd-4e41-9c7c-2afa686e1359",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -67,6 +75,39 @@
                     "processors": "Clamp(max=1)",
                     "groups": "Mouse And Keybord",
                     "action": "GetDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "3a3ff48a-e0b7-4277-9cc6-926c904b8197",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VectorUp(temp)",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "10a9940f-886f-4ce9-8c46-acbba919be75",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "VectorUp(temp)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "fea8b569-9a21-46fe-b994-452ee6fcf495",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "VectorUp(temp)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
@@ -457,6 +498,33 @@
                     "processors": "",
                     "groups": "Mouse And Keybord",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interaction(For Teaser)",
+            "id": "ca2c7f20-02ab-476a-9df0-fc2e02aab928",
+            "actions": [
+                {
+                    "name": "TurnOn Animation",
+                    "type": "Button",
+                    "id": "874e6c6e-fe4d-4523-8307-07f365e114fc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "64660c8c-996c-4356-9f61-d36320e19518",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "TurnOn Animation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

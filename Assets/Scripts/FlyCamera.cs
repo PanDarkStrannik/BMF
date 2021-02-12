@@ -32,6 +32,7 @@ public class FlyCamera : MonoBehaviour
         input.Enable();
         input.RotationInput.GetRotation.performed += _ => RotationInput();
         input.MovementInput.GetDirection.performed += _ => MovementInput();
+        input.MovementInput.VectorUptemp.performed += context => MovementInput();
     }
 
     private void OnDisable()
@@ -39,6 +40,7 @@ public class FlyCamera : MonoBehaviour
         input.Disable();
         input.RotationInput.GetRotation.performed -= _ => RotationInput();
         input.MovementInput.GetDirection.performed -= _ => MovementInput();
+        input.MovementInput.VectorUptemp.performed += context => MovementInput();
     }
 
     private void Update()
@@ -49,7 +51,9 @@ public class FlyCamera : MonoBehaviour
     private void MovementInput()
     {
         var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
-        var correctMove = new Vector3(moveDirection.x, 0, moveDirection.y) * speedMove;
+        var moveUpDown = input.MovementInput.VectorUptemp.ReadValue<Vector2>(); // KeyCodes : "E" n "Q"
+        
+        var correctMove = new Vector3(moveDirection.x, moveUpDown.y, moveDirection.y) * speedMove;
 
         currentCamera.transform.Translate(correctMove);
 
