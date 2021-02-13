@@ -4,6 +4,8 @@ using UnityEngine;
 public class Coffin_anim_script : MonoBehaviour
 {
     private Animator _anim;
+    [SerializeField]
+    private Animator _screamAnim;
     private PlayerInput _input;
 
     private void Awake()
@@ -20,6 +22,11 @@ public class Coffin_anim_script : MonoBehaviour
 
     public void NextAnimationCoffin() => _anim.SetBool("NextAnim", true);
 
-    private void StartAnimation() => _anim.enabled = true;
+    private void StartAnimation()
+    {
+        _anim.enabled = true;
+        _screamAnim.SetTrigger("Attack");
+    } 
+
 
 }

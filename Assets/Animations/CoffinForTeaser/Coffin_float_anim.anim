@@ -530,7 +530,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 4
-    functionName: NextAnim
+    functionName: NextAnimationCoffin
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
