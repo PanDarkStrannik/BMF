@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AFaling : MonoBehaviour
 {
-    [SerializeReference] protected Rigidbody body;
+    [SerializeReference] public Rigidbody body;
     [SerializeField] protected SphereCollider groundCheckSphere;
     [SerializeField] protected LayerMask groundCheckMask;
 

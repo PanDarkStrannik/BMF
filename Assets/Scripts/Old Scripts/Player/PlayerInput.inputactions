@@ -396,8 +396,8 @@
                     "id": "2d207e94-7b84-45c6-ac15-f26391360e6f",
                     "path": "<Keyboard>/space",
                     "interactions": "",
-                    "processors": "Scale",
-                    "groups": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false

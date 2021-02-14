@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerInformation.GetInstance().Player = gameObject;
         input = new PlayerInput();
+        
         weaponChanger.ChangeWeapon(0);
     }
 
@@ -78,22 +79,32 @@ public class PlayerController : MonoBehaviour
        // WeaponChecker();
         RotationInput();
         var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
-        var correctMove = new Vector3(moveDirection.x, input.ButtonInputs.Jump.ReadValue<float>(), moveDirection.y);
+        PlayerJump();
+
+        var correctMove = new Vector3(moveDirection.x, 0, moveDirection.y).normalized;
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
     }
 
-
+    private void PlayerJump()
+    {
+        // На доработку
+        input.ButtonInputs.Jump.performed += context =>
+        {
+            float jumpforce = 10;
+            movement.body.velocity = jumpforce * Vector3.up;
+        };
+    }
 
 
     private void RotationInput()
     {
         var rotationInput = input.RotationInput.GetRotation.ReadValue<Vector2>();
 
-        moveY -= rotationInput.y * SensY;
+        moveY -= rotationInput.y * SensY * Time.deltaTime;
         moveY = ClampAngle(moveY, MinMax_Y.x, MinMax_Y.y);
 
-        moveX = transform.rotation.eulerAngles.y + rotationInput.x * SensX;
+        moveX = transform.rotation.eulerAngles.y + rotationInput.x * SensX * Time.deltaTime;
 
         transform.rotation = Quaternion.Euler(0, moveX, 0);
 
