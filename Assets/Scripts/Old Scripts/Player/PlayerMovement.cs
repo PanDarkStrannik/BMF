@@ -96,7 +96,7 @@ public class PlayerMovement : APlayerMovement
                 else
                 {
                     var newDirection = direction / speedInAir;
-                    newDirection.y = -g;
+                    newDirection.y = -g ;
                     body.AddForce(newDirection * Time.deltaTime * acceleration);
                 }
 

@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         // На доработку
         input.ButtonInputs.Jump.performed += context =>
         {
-            float jumpforce = 4;
+            float jumpforce = 5;
             movement.body.velocity = jumpforce * Vector3.up;
         };
     }
