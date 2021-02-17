@@ -10,6 +10,7 @@ public class PlayerMovement : APlayerMovement
     [SerializeField] private float friction=3f;
     [SerializeField] private float acceleration = 10f;
     [SerializeField] private float jumpForce = 1f;
+                     public float JumpForce { get => jumpForce;}
     //[SerializeField] private Rigidbody body;
     //[SerializeField] private SphereCollider groundCheckSphere;
     //[SerializeField] private LayerMask groundCheckMask;
@@ -43,11 +44,13 @@ public class PlayerMovement : APlayerMovement
         {
             moveTypeSpeeds.Add(moveTypes[i], speeds[i]);
         }
+
     }
 
     private void Update()
     {
         Falling();
+        Friction();
         //grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
         //  groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
 
@@ -69,6 +72,12 @@ public class PlayerMovement : APlayerMovement
         //    }
         //} 
 
+        
+    }
+
+
+    private void Friction()
+    {
         if (grounded && body.velocity.magnitude > 0)
         {
             var newDirection = -body.velocity * friction;
@@ -76,6 +85,8 @@ public class PlayerMovement : APlayerMovement
             body.AddForce(newDirection * Time.deltaTime);
         }
     }
+
+
 
     public override void Move(Vector3 direction)
     {
@@ -96,7 +107,7 @@ public class PlayerMovement : APlayerMovement
                 else
                 {
                     var newDirection = direction / speedInAir;
-                    newDirection.y = -g ;
+                    newDirection.y = -g / speedInAir;
                     body.AddForce(newDirection * Time.deltaTime * acceleration);
                 }
 

@@ -9,6 +9,7 @@ public class AFaling : MonoBehaviour
     [SerializeField] protected LayerMask groundCheckMask;
 
     protected bool grounded = false;
+    public bool Grounded { get => grounded; }
 
     public delegate void FallEventHelper(float heigth);
     public event FallEventHelper FallEvent;
@@ -26,6 +27,7 @@ public class AFaling : MonoBehaviour
     {
         grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
             groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
+
 
         if (!grounded && !faling)
         {

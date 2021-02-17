@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeReference] private APlayerMovement movement;
+    private PlayerMovement PM;
 
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
@@ -28,9 +29,9 @@ public class PlayerController : MonoBehaviour
     private PlayerInput input;
     private bool isShiftNotInput = true;
     private float moveX, moveY;
-   // private AWeapon weaponHealing;
+    // private AWeapon weaponHealing;
 
-
+    [SerializeField] private PhysicMaterial playerPhysMaterial;
 
     public List<GunPush> GunPushes
     {
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         PlayerInformation.GetInstance().Player = gameObject;
+        PM = FindObjectOfType<PlayerMovement>();
         input = new PlayerInput();
         
         weaponChanger.ChangeWeapon(0);
@@ -78,8 +80,9 @@ public class PlayerController : MonoBehaviour
     {
        // WeaponChecker();
         RotationInput();
-        var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
         PlayerJump();
+        SlopeFriction();
+        var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
 
         var correctMove = new Vector3(moveDirection.x, 0, moveDirection.y).normalized;
         correctMove = transform.TransformDirection(correctMove);
@@ -88,12 +91,28 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump()
     {
-        // На доработку
         input.ButtonInputs.Jump.performed += context =>
         {
-            float jumpforce = 5;
-            movement.body.velocity = jumpforce * Vector3.up;
+            
+          if(movement.Grounded)
+            {
+             movement.body.velocity = PM.JumpForce * Vector3.up;
+            }
         };
+    }
+
+    private void SlopeFriction()
+    {
+        var inputValue = input.MovementInput.GetDirection.ReadValue<Vector2>();
+        if(inputValue == Vector2.zero && movement.Grounded)
+        {
+            playerPhysMaterial.frictionCombine = PhysicMaterialCombine.Average;
+        }
+        else
+        {
+            playerPhysMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
+        }
+
     }
 
 

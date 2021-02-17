@@ -111,7 +111,7 @@ MonoBehaviour:
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
   interestingObjects: []
-  speed: 10
+  speed: 6
   warp: 0
   randomizeInterestingTimer: 3
   moveType: 2
@@ -431,7 +431,7 @@ MonoBehaviour:
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
   interestingObjects: []
-  speed: 10
+  speed: 6
   warp: 0
   randomizeInterestingTimer: 20
   moveType: 1
@@ -559,7 +559,7 @@ MonoBehaviour:
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
   interestingObjects: []
-  speed: 10
+  speed: 6
   warp: 0
   randomizeInterestingTimer: 20
   moveType: 0
