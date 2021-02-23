@@ -10,6 +10,7 @@ public class WeaponUI : MonoBehaviour
     private void OnEnable()
     {
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
+        
     }
 
     private void OnDisable()
@@ -23,11 +24,10 @@ public class WeaponUI : MonoBehaviour
 
       if(paramType == DamagebleParam.ParamType.HolyWater)
         {
-            if(value < maxValue)
-            {
-                ammoAmout.text = value.ToString();
-            }
+           ammoAmout.text = value.ToString();
         }
     }
+
+   
 
 }
