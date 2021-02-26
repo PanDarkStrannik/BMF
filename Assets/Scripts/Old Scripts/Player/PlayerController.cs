@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum ControlMoveType {Ground,Rope }
+    public ControlMoveType controlMoveType;
+
+
     [SerializeField] private Transform cameraOnPlayer;
 
     [SerializeField] private float SensX = 5, SensY = 10;
@@ -79,9 +83,31 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
        // WeaponChecker();
-        RotationInput();
-        PlayerJump();
-        SlopeFriction();
+
+        switch(controlMoveType)
+        {
+            case ControlMoveType.Ground:
+                RotationInput();
+                PlayerJump();
+                SlopeFriction();
+                PlayerGroundMovement();
+                break;
+
+            case ControlMoveType.Rope:
+                RotationInput();
+                PlayerRopeMovement();
+                break;
+        }
+        
+    }
+
+    private void PlayerRopeMovement()
+    {
+        //bla-bla
+    }
+
+    private void PlayerGroundMovement()
+    {
         var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
 
         var correctMove = new Vector3(moveDirection.x, 0, moveDirection.y).normalized;

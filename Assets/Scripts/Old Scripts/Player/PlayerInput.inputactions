@@ -502,33 +502,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "Interaction(For Teaser)",
-            "id": "ca2c7f20-02ab-476a-9df0-fc2e02aab928",
-            "actions": [
-                {
-                    "name": "TurnOn Animation",
-                    "type": "Button",
-                    "id": "874e6c6e-fe4d-4523-8307-07f365e114fc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "64660c8c-996c-4356-9f61-d36320e19518",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "TurnOn Animation",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
         }
     ],
     "controlSchemes": [

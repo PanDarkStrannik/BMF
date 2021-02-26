@@ -515,33 +515,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Interaction(For Teaser)"",
-            ""id"": ""ca2c7f20-02ab-476a-9df0-fc2e02aab928"",
-            ""actions"": [
-                {
-                    ""name"": ""TurnOn Animation"",
-                    ""type"": ""Button"",
-                    ""id"": ""874e6c6e-fe4d-4523-8307-07f365e114fc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""64660c8c-996c-4356-9f61-d36320e19518"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""TurnOn Animation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -582,9 +555,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ButtonInputs_Blink = m_ButtonInputs.FindAction("Blink", throwIfNotFound: true);
         m_ButtonInputs_ESC = m_ButtonInputs.FindAction("ESC", throwIfNotFound: true);
         m_ButtonInputs_MouseScroll = m_ButtonInputs.FindAction("MouseScroll", throwIfNotFound: true);
-        // Interaction(For Teaser)
-        m_InteractionForTeaser = asset.FindActionMap("Interaction(For Teaser)", throwIfNotFound: true);
-        m_InteractionForTeaser_TurnOnAnimation = m_InteractionForTeaser.FindAction("TurnOn Animation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -809,39 +779,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         }
     }
     public ButtonInputsActions @ButtonInputs => new ButtonInputsActions(this);
-
-    // Interaction(For Teaser)
-    private readonly InputActionMap m_InteractionForTeaser;
-    private IInteractionForTeaserActions m_InteractionForTeaserActionsCallbackInterface;
-    private readonly InputAction m_InteractionForTeaser_TurnOnAnimation;
-    public struct InteractionForTeaserActions
-    {
-        private @PlayerInput m_Wrapper;
-        public InteractionForTeaserActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @TurnOnAnimation => m_Wrapper.m_InteractionForTeaser_TurnOnAnimation;
-        public InputActionMap Get() { return m_Wrapper.m_InteractionForTeaser; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InteractionForTeaserActions set) { return set.Get(); }
-        public void SetCallbacks(IInteractionForTeaserActions instance)
-        {
-            if (m_Wrapper.m_InteractionForTeaserActionsCallbackInterface != null)
-            {
-                @TurnOnAnimation.started -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
-                @TurnOnAnimation.performed -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
-                @TurnOnAnimation.canceled -= m_Wrapper.m_InteractionForTeaserActionsCallbackInterface.OnTurnOnAnimation;
-            }
-            m_Wrapper.m_InteractionForTeaserActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @TurnOnAnimation.started += instance.OnTurnOnAnimation;
-                @TurnOnAnimation.performed += instance.OnTurnOnAnimation;
-                @TurnOnAnimation.canceled += instance.OnTurnOnAnimation;
-            }
-        }
-    }
-    public InteractionForTeaserActions @InteractionForTeaser => new InteractionForTeaserActions(this);
     private int m_MouseAndKeybordSchemeIndex = -1;
     public InputControlScheme MouseAndKeybordScheme
     {
@@ -872,9 +809,5 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnBlink(InputAction.CallbackContext context);
         void OnESC(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
-    }
-    public interface IInteractionForTeaserActions
-    {
-        void OnTurnOnAnimation(InputAction.CallbackContext context);
     }
 }
