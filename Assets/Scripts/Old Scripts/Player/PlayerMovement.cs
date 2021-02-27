@@ -9,6 +9,8 @@ public class PlayerMovement : APlayerMovement
     [SerializeField] private List<float> speeds;
     [SerializeField] private float friction=3f;
     [SerializeField] private float acceleration = 10f;
+    [SerializeField] private float vercticalAcceleration = 5f;
+                     public float VerticalAcceleration { get => vercticalAcceleration; }
     [SerializeField] private float jumpForce = 1f;
                      public float JumpForce { get => jumpForce;}
     //[SerializeField] private Rigidbody body;
@@ -90,6 +92,7 @@ public class PlayerMovement : APlayerMovement
 
     public override void Move(Vector3 direction)
     {
+        body.isKinematic = false;
         bool isCallAlready = false;
         direction = direction.normalized;
         foreach (var type in moveTypeSpeeds)
@@ -110,11 +113,12 @@ public class PlayerMovement : APlayerMovement
                     newDirection.y = -g / speedInAir;
                     body.AddForce(newDirection * Time.deltaTime * acceleration);
                 }
-
                 
             }
         }
     }
+
+
 
     public override IEnumerator ImpulseMove(Vector3 direction, ForceMode forceMode, float time)
     {

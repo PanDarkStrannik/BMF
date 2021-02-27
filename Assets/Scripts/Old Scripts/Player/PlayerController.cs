@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum ControlMoveType {Ground,Rope }
+    public enum ControlMoveType {Ground,Vertical }
     public ControlMoveType controlMoveType;
 
 
@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
-
 
 
     private PlayerInput input;
@@ -93,17 +92,22 @@ public class PlayerController : MonoBehaviour
                 PlayerGroundMovement();
                 break;
 
-            case ControlMoveType.Rope:
+            case ControlMoveType.Vertical:
                 RotationInput();
-                PlayerRopeMovement();
+                PlayerVerticalMovement();
                 break;
         }
         
     }
 
-    private void PlayerRopeMovement()
+    private void PlayerVerticalMovement()
     {
-        //bla-bla
+        var moveDir = input.MovementInput.GetDirection.ReadValue<Vector2>();
+        var d = new Vector3(moveDir.x, moveDir.y, 0).normalized;
+
+        //в дальнейшем лучше убрать в класс PlayerMovement
+        transform.Translate(d * PM.VerticalAcceleration * Time.deltaTime);
+        PM.body.isKinematic = true;
     }
 
     private void PlayerGroundMovement()
@@ -113,6 +117,9 @@ public class PlayerController : MonoBehaviour
         var correctMove = new Vector3(moveDirection.x, 0, moveDirection.y).normalized;
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
+
+        //в дальнейшем лучше убрать в класс PlayerMovement
+        PM.body.isKinematic = false;
     }
 
     private void PlayerJump()
