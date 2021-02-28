@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeReference] private APlayerMovement movement;
+
+    [SerializeField] private float angle = 45f;
+
+    private float arcSin = 0f;
+
     private PlayerMovement PM;
 
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
@@ -105,7 +110,25 @@ public class PlayerController : MonoBehaviour
     private void PlayerVerticalMovement()
     {
         var moveDir = input.MovementInput.GetDirection.ReadValue<Vector2>();
+
+        var cameraRot = cameraOnPlayer.transform.forward;
+
         var d = new Vector3(moveDir.x, moveDir.y, 0).normalized;
+
+        cameraRot = transform.InverseTransformDirection(cameraRot);
+
+        arcSin = Mathf.Asin(cameraRot.y) * Mathf.Rad2Deg;
+
+        if (Math.Abs(arcSin) < angle)
+        {
+            d = new Vector3(d.x, 0, d.y);
+        }
+        else
+        {
+            d = new Vector3(d.x, d.y * cameraRot.y, d.z * cameraRot.z);
+        }
+
+       
 
         //в дальнейшем лучше убрать в класс PlayerMovement
         transform.Translate(d * PM.VerticalAcceleration * Time.deltaTime);
