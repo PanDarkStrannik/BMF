@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class PlayerController : MonoBehaviour
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
 
+    public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
 
     private PlayerInput input;
     private bool isShiftNotInput = true;
@@ -235,6 +237,10 @@ public class PlayerController : MonoBehaviour
         input.ButtonInputs.ChangeWeaponByKeyboard.performed += context =>
         {
             weaponChanger.ChangeWeapon((int)input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
+            if(weaponChanger.CurrentWeapon != null)
+            {
+                OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
+            }
          //   ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
         };
 
@@ -253,6 +259,10 @@ public class PlayerController : MonoBehaviour
             else
             {
                 throw new System.Exception("Почему-то при скролле выдало 0");
+            }
+            if (weaponChanger.CurrentWeapon != null)
+            {
+                OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
             }
         };
 
