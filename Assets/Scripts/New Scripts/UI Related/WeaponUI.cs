@@ -11,15 +11,23 @@ public class WeaponUI : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
         waterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
-
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
         PlayerInformation.GetInstance().PlayerController.OnChangeWeapon += PlayerController_OnChangeWeapon;
     }
 
     private void PlayerController_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
     {
-        Debug.Log($"Первое оружие: {obj.Weapon1.name}, Второе оружие: {obj.Weapon2.name}");
+       if(obj.Weapon1.WeaponType == WeaponType.Mili)
+        {
+            ammoAmout.enabled = false;
+        }
+
+       if(obj.Weapon1.WeaponType == WeaponType.Range)
+        {
+            ammoAmout.enabled = true;
+            ammoAmout.text = waterValue.ToString();
+        }
     }
 
     private void OnDisable()
@@ -35,7 +43,7 @@ public class WeaponUI : MonoBehaviour
       if(paramType == DamagebleParam.ParamType.HolyWater)
         {
             waterValue = value;
-           ammoAmout.text = value.ToString();
+            ammoAmout.text = value.ToString();
         }
     }
 

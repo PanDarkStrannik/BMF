@@ -13,25 +13,24 @@ public class PlayerMovement : APlayerMovement
                      public float VerticalAcceleration { get => vercticalAcceleration; }
     [SerializeField] private float jumpForce = 1f;
                      public float JumpForce { get => jumpForce;}
-    //[SerializeField] private Rigidbody body;
-    //[SerializeField] private SphereCollider groundCheckSphere;
-    //[SerializeField] private LayerMask groundCheckMask;
     [SerializeField] private float g = 9.8f;
     [SerializeField] private float speedInAir=4f;
     [SerializeField] private float correctToAnim = 100f;
     [SerializeField] private CustomEventValue<float> movementSpeedEvent;
 
-    //public float test;
-
     private Dictionary<PlayerMoveType, float> moveTypeSpeeds;
-    //private bool grounded = false;
 
+    private Transform playerTransform;
+
+    //public float test;
+    //private bool grounded = false;
     //public delegate void FallingEventHelper(float heigth);
     //public event FallingEventHelper FallingEvent;
-
     //private bool faling = false;
-
     //private float groundedPos=0f;
+    //[SerializeField] private Rigidbody body;
+    //[SerializeField] private SphereCollider groundCheckSphere;
+    //[SerializeField] private LayerMask groundCheckMask;
 
     private PlayerMovement()
     {
@@ -40,6 +39,7 @@ public class PlayerMovement : APlayerMovement
 
     private void Start()
     {
+        playerTransform = transform.parent;
         moveTypeSpeeds = new Dictionary<PlayerMoveType, float>();
 
         for (int i = 0; i < moveTypes.Count; i++)
@@ -118,6 +118,12 @@ public class PlayerMovement : APlayerMovement
         }
     }
 
+
+    public void VerticalMove(Vector3 dir)
+    {
+        body.isKinematic = true;
+        playerTransform.Translate(dir * vercticalAcceleration * Time.deltaTime);
+    }
 
 
     public override IEnumerator ImpulseMove(Vector3 direction, ForceMode forceMode, float time)

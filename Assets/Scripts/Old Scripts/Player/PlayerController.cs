@@ -128,11 +128,7 @@ public class PlayerController : MonoBehaviour
             d = new Vector3(d.x, d.y * cameraRot.y, d.z * cameraRot.z);
         }
 
-       
-
-        //в дальнейшем лучше убрать в класс PlayerMovement
-        transform.Translate(d * PM.VerticalAcceleration * Time.deltaTime);
-        PM.body.isKinematic = true;
+        PM.VerticalMove(d);
     }
 
     private void PlayerGroundMovement()
@@ -142,9 +138,6 @@ public class PlayerController : MonoBehaviour
         var correctMove = new Vector3(moveDirection.x, 0, moveDirection.y).normalized;
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
-
-        //в дальнейшем лучше убрать в класс PlayerMovement
-        PM.body.isKinematic = false;
     }
 
     private void PlayerJump()
