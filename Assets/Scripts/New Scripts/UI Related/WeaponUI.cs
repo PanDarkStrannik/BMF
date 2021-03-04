@@ -9,11 +9,21 @@ public class WeaponUI : MonoBehaviour
 
     public float waterValue = 0f;
 
-    private void OnEnable()
+    private void Start()
     {
         waterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
+    }
+    private void OnEnable()
+    {
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
         PlayerInformation.GetInstance().PlayerController.OnChangeWeapon += PlayerController_OnChangeWeapon;
+    }
+
+
+    private void OnDisable()
+    {
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged -= UpdateAmmo;
+        PlayerInformation.GetInstance().PlayerController.OnChangeWeapon -= PlayerController_OnChangeWeapon;
     }
 
     private void PlayerController_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
@@ -29,13 +39,6 @@ public class WeaponUI : MonoBehaviour
             ammoAmout.text = waterValue.ToString();
         }
     }
-
-    private void OnDisable()
-    {
-        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged -= UpdateAmmo;
-        PlayerInformation.GetInstance().PlayerController.OnChangeWeapon -= PlayerController_OnChangeWeapon;
-    }
-
 
     public void UpdateAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
     {

@@ -22,4 +22,5 @@ public class Rope : MonoBehaviour
             player.controlMoveType = PlayerController.ControlMoveType.Ground;
         }
     }
+
 }

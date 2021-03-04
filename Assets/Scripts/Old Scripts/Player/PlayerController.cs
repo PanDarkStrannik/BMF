@@ -9,39 +9,41 @@ public class PlayerController : MonoBehaviour
     public enum ControlMoveType {Ground,Vertical }
     public ControlMoveType controlMoveType;
 
-
+    [Header("Camera Settings")]
     [SerializeField] private Transform cameraOnPlayer;
-
     [SerializeField] private float SensX = 5, SensY = 10;
     [SerializeField] private Vector2 MinMax_Y = new Vector2(-40, 40);
+    private float moveX, moveY;
 
+    [Header("Ref's to other Classes")]
     [SerializeField] private PlayerWeaponChanger weaponChanger;
-
     [SerializeField] private PlayerUI playerUI;
-
-
-    [SerializeField] private List<GunPush> gunPushes;
-
-
     [SerializeReference] private APlayerMovement movement;
+    [SerializeField] private List<GunPush> gunPushes;
+    private PlayerMovement PM;
+    private PlayerInput input;
 
+    [Header("Vertical Movement Settings")]
     [SerializeField] private float angle = 45f;
-
+    [SerializeField] private float minTransformYToJump;
+    [SerializeField] private float ropeJumpForce = 8f;
     private float arcSin = 0f;
 
-    private PlayerMovement PM;
-
+    //Events
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
-
     public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
 
-    private PlayerInput input;
+    //bools
     private bool isShiftNotInput = true;
-    private float moveX, moveY;
+
+    [Header("Other Components")]
+    [SerializeField] private PhysicMaterial playerPhysMaterial;
+
+
+
     // private AWeapon weaponHealing;
 
-    [SerializeField] private PhysicMaterial playerPhysMaterial;
 
     public List<GunPush> GunPushes
     {
@@ -122,13 +124,23 @@ public class PlayerController : MonoBehaviour
         if (Math.Abs(arcSin) < angle)
         {
             d = new Vector3(d.x, 0, d.y);
+            VerticalJump(d, moveDir);
         }
         else
         {
             d = new Vector3(d.x, d.y * cameraRot.y, d.z * cameraRot.z);
         }
-
+        
         PM.VerticalMove(d);
+    }
+
+    public void VerticalJump(Vector3 d, Vector3 moveDir)
+    {
+        var temp = new Vector3(0, 0, d.z);
+        if (temp != Vector3.zero && transform.position.y > minTransformYToJump)
+        {
+          StartCoroutine(movement.ImpulseMove(moveDir * ropeJumpForce, ForceMode.Impulse, 0));
+        }
     }
 
     private void PlayerGroundMovement()
@@ -136,6 +148,7 @@ public class PlayerController : MonoBehaviour
         var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
 
         var correctMove = new Vector3(moveDirection.x, 0, moveDirection.y).normalized;
+
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
     }
