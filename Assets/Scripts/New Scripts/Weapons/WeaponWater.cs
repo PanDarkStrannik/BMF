@@ -7,6 +7,7 @@ public class WeaponWater : WeaponRange
     [SerializeField] private ParamController.ResourcesUser resourcesUser;
 
 
+
     public override void Attack()
     {
         if (resourcesUser.ParamController == null)
@@ -34,8 +35,10 @@ public class WeaponWater : WeaponRange
 
     public void Reload()
     {
+       // resourcesUser.ParamController.DamagebleParams.ChangeParam(DamagebleParam.ParamType.HolyWater, 10);
         StopAllCoroutines();
         StartCoroutine(Reload(attackParametres.ReloadTime));
+       
     }
 
 

@@ -6,12 +6,27 @@ using UnityEngine.UI;
 public class WeaponUI : MonoBehaviour
 {
     [SerializeField] private Text ammoAmout;
+    [SerializeField] private WeaponRange rangeWeapon;
+    [SerializeField] private Image reloadImage;
+    
 
-    public float waterValue = 0f;
+    private float waterValue = 0f;
+    public float reloadingTime;
 
     private void Start()
     {
         waterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
+        reloadingTime = rangeWeapon.attackParametres.ReloadTime;
+         
+    }
+
+    private void Update()
+    {
+        if(reloadImage.IsActive())
+        {
+            Debug.Log("time--");
+            reloadImage.fillAmount = reloadingTime / reloadingTime;
+        }
     }
     private void OnEnable()
     {

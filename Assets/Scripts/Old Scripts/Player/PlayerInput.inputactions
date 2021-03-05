@@ -12,14 +12,6 @@
                     "expectedControlType": "Vector2",
                     "processors": "NormalizeVector2",
                     "interactions": ""
-                },
-                {
-                    "name": "RopeDirection",
-                    "type": "Value",
-                    "id": "a2513fc2-10dd-4e41-9c7c-2afa686e1359",
-                    "expectedControlType": "Vector2",
-                    "processors": "NormalizeVector2",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -75,61 +67,6 @@
                     "processors": "Clamp(max=1)",
                     "groups": "Mouse And Keybord",
                     "action": "GetDirection",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "8a83a603-7bb6-4286-aa44-1c2c0466a940",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RopeDirection",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "a79d4976-2d36-4072-bc00-dae49f9ad4f1",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "RopeDirection",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "bb0a3091-d52e-4fa8-87d4-e8f1cc0e9d3b",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "RopeDirection",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "e0aca976-b98e-43f0-a9f5-62ff50cf29fc",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "RopeDirection",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "2a68f296-1915-4be2-9df4-10a27482472b",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "RopeDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

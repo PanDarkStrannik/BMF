@@ -25,14 +25,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""RopeDirection"",
-                    ""type"": ""Value"",
-                    ""id"": ""a2513fc2-10dd-4e41-9c7c-2afa686e1359"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -88,61 +80,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": ""Clamp(max=1)"",
                     ""groups"": ""Mouse And Keybord"",
                     ""action"": ""GetDirection"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""8a83a603-7bb6-4286-aa44-1c2c0466a940"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RopeDirection"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""a79d4976-2d36-4072-bc00-dae49f9ad4f1"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""RopeDirection"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""bb0a3091-d52e-4fa8-87d4-e8f1cc0e9d3b"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""RopeDirection"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""e0aca976-b98e-43f0-a9f5-62ff50cf29fc"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""RopeDirection"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""2a68f296-1915-4be2-9df4-10a27482472b"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""RopeDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -561,7 +498,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         // MovementInput
         m_MovementInput = asset.FindActionMap("MovementInput", throwIfNotFound: true);
         m_MovementInput_GetDirection = m_MovementInput.FindAction("GetDirection", throwIfNotFound: true);
-        m_MovementInput_RopeDirection = m_MovementInput.FindAction("RopeDirection", throwIfNotFound: true);
         // RotationInput
         m_RotationInput = asset.FindActionMap("RotationInput", throwIfNotFound: true);
         m_RotationInput_GetRotation = m_RotationInput.FindAction("GetRotation", throwIfNotFound: true);
@@ -627,13 +563,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_MovementInput;
     private IMovementInputActions m_MovementInputActionsCallbackInterface;
     private readonly InputAction m_MovementInput_GetDirection;
-    private readonly InputAction m_MovementInput_RopeDirection;
     public struct MovementInputActions
     {
         private @PlayerInput m_Wrapper;
         public MovementInputActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @GetDirection => m_Wrapper.m_MovementInput_GetDirection;
-        public InputAction @RopeDirection => m_Wrapper.m_MovementInput_RopeDirection;
         public InputActionMap Get() { return m_Wrapper.m_MovementInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -646,9 +580,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GetDirection.started -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
                 @GetDirection.performed -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
                 @GetDirection.canceled -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnGetDirection;
-                @RopeDirection.started -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnRopeDirection;
-                @RopeDirection.performed -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnRopeDirection;
-                @RopeDirection.canceled -= m_Wrapper.m_MovementInputActionsCallbackInterface.OnRopeDirection;
             }
             m_Wrapper.m_MovementInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -656,9 +587,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GetDirection.started += instance.OnGetDirection;
                 @GetDirection.performed += instance.OnGetDirection;
                 @GetDirection.canceled += instance.OnGetDirection;
-                @RopeDirection.started += instance.OnRopeDirection;
-                @RopeDirection.performed += instance.OnRopeDirection;
-                @RopeDirection.canceled += instance.OnRopeDirection;
             }
         }
     }
@@ -813,7 +741,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     public interface IMovementInputActions
     {
         void OnGetDirection(InputAction.CallbackContext context);
-        void OnRopeDirection(InputAction.CallbackContext context);
     }
     public interface IRotationInputActions
     {

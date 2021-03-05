@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
+
+[System.Serializable]
+public class UnityBoolEvent : UnityEvent<bool> { }
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,9 +37,11 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
     public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
+    public UnityBoolEvent OnReloading;
 
     //bools
     private bool isShiftNotInput = true;
+    public bool isReloading = false;
 
     [Header("Other Components")]
     [SerializeField] private PhysicMaterial playerPhysMaterial;
@@ -90,9 +96,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-       // WeaponChecker();
+        // WeaponChecker();
 
-        switch(controlMoveType)
+        switch (controlMoveType)
         {
             case ControlMoveType.Ground:
                 RotationInput();
@@ -106,7 +112,6 @@ public class PlayerController : MonoBehaviour
                 PlayerVerticalMovement();
                 break;
         }
-        
     }
 
     private void PlayerVerticalMovement()
@@ -295,6 +300,24 @@ public class PlayerController : MonoBehaviour
             }
         };
 
+        input.ButtonInputs.Reload.performed += _ =>
+        {
+            if(WaterReloader.isReadyToReload)
+            {
+                isReloading = true;
+                if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == WeaponType.Range)
+                {
+                    weaponChanger.CurrentWeapon.TryGetWeaponByType<WeaponWater>(out WeaponWater returnedWeapon);
+                    OnReloading?.Invoke(isReloading);
+                    returnedWeapon.Reload();
+                }
+            }
+           
+
+        };
+
+
+
 
         input.ButtonInputs.ChangeSpeed.performed += context =>
         {
@@ -332,6 +355,11 @@ public class PlayerController : MonoBehaviour
 
        
 
+    }
+
+    private void Reload_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        throw new NotImplementedException();
     }
 
 

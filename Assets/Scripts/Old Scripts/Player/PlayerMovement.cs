@@ -51,8 +51,10 @@ public class PlayerMovement : APlayerMovement
 
     private void Update()
     {
-        Falling();
-        Friction();
+       Falling();
+       Friction();
+
+
         //grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
         //  groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
 

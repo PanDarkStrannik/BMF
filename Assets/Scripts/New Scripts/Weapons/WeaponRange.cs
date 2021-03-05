@@ -13,8 +13,9 @@ public class WeaponRange : AWeapon, IDamagingWeapon
     //[SerializeField] protected int attackValues = 3;
     //[Min(1)]
     //[SerializeField] protected int bulletsOnAttack = 1;
-    [SerializeField] protected AttackParametres attackParametres;
+    [SerializeField] public AttackParametres attackParametres;
     [SerializeField] protected Spread spread;
+      private ParamController weaponParam;
 
 
     public override WeaponType WeaponType
@@ -30,6 +31,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
 
     protected override void Awake()
     {
+        weaponParam = FindObjectOfType<ParamController>();
         base.Awake();
         bulletSpawner.CreateSpawner();
         foreach (var e in bulletSpawner.spawned_objects)
@@ -86,9 +88,18 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         {
             StopCoroutine(Damaging(attackParametres.ToAttackTime));
             yield return new WaitForSecondsRealtime(time);
+            if(WeaponType == WeaponType.Range)
+            {
+                if(TryReturnNeededWeaponType<WeaponWater>(out WeaponWater water))
+                {
+                    Debug.Log("Должна быть перезарядка через 5 сек");
+                    weaponParam.DamagebleParams.ChangeParam(DamagebleParam.ParamType.HolyWater, 10);
+                }
+            }
             attackCount = 0;
             StartCoroutine(Serenity(0f));
         }
+        
     }
 
     protected override IEnumerator Serenity(float time)
@@ -129,7 +140,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
 
 
     [System.Serializable]
-    protected class AttackParametres
+    public class AttackParametres
     {
         [SerializeField] private List<DamageByType> weaponData;
         [SerializeField] private LayerMask layer;
