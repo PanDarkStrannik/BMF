@@ -6,28 +6,48 @@ using UnityEngine.UI;
 public class WeaponUI : MonoBehaviour
 {
     [SerializeField] private Text ammoAmout;
+    [SerializeField] private Text reloadHint;
+    [SerializeField] private Text textReload;
     [SerializeField] private WeaponRange rangeWeapon;
-    [SerializeField] private Image reloadImage;
-    
 
-    private float waterValue = 0f;
-    public float reloadingTime;
 
-    private void Start()
+    private float waterValue;
+    private float maxWaterValue;
+    private float currentReloadingTime;
+    public float maxReloadingTime;
+
+
+    private void Awake()
     {
+        currentReloadingTime = rangeWeapon.attackParametres.ReloadTime;
         waterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
-        reloadingTime = rangeWeapon.attackParametres.ReloadTime;
-         
+        maxWaterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesMaxValues[DamagebleParam.ParamType.HolyWater];
     }
+
 
     private void Update()
     {
-        if(reloadImage.IsActive())
+        // потом переделать по-человечекси  \/
+        CheckReloaZone();
+    }
+
+    private void CheckReloaZone()
+    {
+        if (PlayerInformation.GetInstance().PlayerController.IsReadyToReload && waterValue < maxWaterValue)
         {
-            Debug.Log("time--");
-            reloadImage.fillAmount = reloadingTime / reloadingTime;
+            reloadHint.text = "Pres R to Reload";
+        }
+        else if (PlayerInformation.GetInstance().PlayerController.IsReadyToReload && waterValue >= maxWaterValue)
+        {
+            reloadHint.text = "Ammo is full";
+        }
+        else
+        {
+            reloadHint.text = null;
         }
     }
+
+   
     private void OnEnable()
     {
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += UpdateAmmo;

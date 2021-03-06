@@ -96,6 +96,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""ff027cb9-7148-4d4c-a2dc-7ae2821f44ba"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -153,6 +161,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""GetRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fcfba257-898a-4121-9b21-b095e2f3a834"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""MouseDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -501,6 +520,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         // RotationInput
         m_RotationInput = asset.FindActionMap("RotationInput", throwIfNotFound: true);
         m_RotationInput_GetRotation = m_RotationInput.FindAction("GetRotation", throwIfNotFound: true);
+        m_RotationInput_MouseDelta = m_RotationInput.FindAction("MouseDelta", throwIfNotFound: true);
         // ButtonInputs
         m_ButtonInputs = asset.FindActionMap("ButtonInputs", throwIfNotFound: true);
         m_ButtonInputs_MainAttack = m_ButtonInputs.FindAction("MainAttack", throwIfNotFound: true);
@@ -596,11 +616,13 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_RotationInput;
     private IRotationInputActions m_RotationInputActionsCallbackInterface;
     private readonly InputAction m_RotationInput_GetRotation;
+    private readonly InputAction m_RotationInput_MouseDelta;
     public struct RotationInputActions
     {
         private @PlayerInput m_Wrapper;
         public RotationInputActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @GetRotation => m_Wrapper.m_RotationInput_GetRotation;
+        public InputAction @MouseDelta => m_Wrapper.m_RotationInput_MouseDelta;
         public InputActionMap Get() { return m_Wrapper.m_RotationInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -613,6 +635,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GetRotation.started -= m_Wrapper.m_RotationInputActionsCallbackInterface.OnGetRotation;
                 @GetRotation.performed -= m_Wrapper.m_RotationInputActionsCallbackInterface.OnGetRotation;
                 @GetRotation.canceled -= m_Wrapper.m_RotationInputActionsCallbackInterface.OnGetRotation;
+                @MouseDelta.started -= m_Wrapper.m_RotationInputActionsCallbackInterface.OnMouseDelta;
+                @MouseDelta.performed -= m_Wrapper.m_RotationInputActionsCallbackInterface.OnMouseDelta;
+                @MouseDelta.canceled -= m_Wrapper.m_RotationInputActionsCallbackInterface.OnMouseDelta;
             }
             m_Wrapper.m_RotationInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -620,6 +645,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GetRotation.started += instance.OnGetRotation;
                 @GetRotation.performed += instance.OnGetRotation;
                 @GetRotation.canceled += instance.OnGetRotation;
+                @MouseDelta.started += instance.OnMouseDelta;
+                @MouseDelta.performed += instance.OnMouseDelta;
+                @MouseDelta.canceled += instance.OnMouseDelta;
             }
         }
     }
@@ -745,6 +773,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     public interface IRotationInputActions
     {
         void OnGetRotation(InputAction.CallbackContext context);
+        void OnMouseDelta(InputAction.CallbackContext context);
     }
     public interface IButtonInputsActions
     {

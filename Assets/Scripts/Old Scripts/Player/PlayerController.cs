@@ -26,12 +26,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private List<GunPush> gunPushes;
     private PlayerMovement PM;
     private PlayerInput input;
+    private IRay rayCreation;
 
     [Header("Vertical Movement Settings")]
     [SerializeField] private float angle = 45f;
     [SerializeField] private float minTransformYToJump;
     [SerializeField] private float ropeJumpForce = 8f;
     private float arcSin = 0f;
+
+    [Header("Other Components")]
+    [SerializeField] private PhysicMaterial playerPhysMaterial;
+    [SerializeField] private LayerMask whatIsReloadZone;
+    [SerializeField] private float rayCastLenght = 3f;
+
 
     //Events
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
@@ -41,16 +48,9 @@ public class PlayerController : MonoBehaviour
 
     //bools
     private bool isShiftNotInput = true;
-    public bool isReloading = false;
+    private bool isReadyToReload;
 
-    [Header("Other Components")]
-    [SerializeField] private PhysicMaterial playerPhysMaterial;
-
-
-
-    // private AWeapon weaponHealing;
-
-
+    //properties
     public List<GunPush> GunPushes
     {
         get
@@ -58,6 +58,14 @@ public class PlayerController : MonoBehaviour
             return gunPushes;
         }
     }
+
+    public bool IsReadyToReload { get => isReadyToReload; }
+
+
+
+    // private AWeapon weaponHealing;
+
+
 
 
     private PlayerController()
@@ -68,8 +76,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         PlayerInformation.GetInstance().Player = gameObject;
+
         PM = FindObjectOfType<PlayerMovement>();
         input = new PlayerInput();
+        rayCreation = GetComponent<IRay>();
         
         weaponChanger.ChangeWeapon(0);
     }
@@ -97,6 +107,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // WeaponChecker();
+        CheckingReloadZone();
 
         switch (controlMoveType)
         {
@@ -203,6 +214,20 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void CheckingReloadZone()
+    {
+        Ray ray = rayCreation.CreateRayFromPlayer(input);
+        RaycastHit hitInfo;
+
+        isReadyToReload = Physics.Raycast(ray, out hitInfo, rayCastLenght, whatIsReloadZone);
+
+        Debug.DrawLine(ray.origin, hitInfo.point, Color.blue);
+    }
+
+
+
+
+
 
     private void WeaponChecker()
     {
@@ -302,18 +327,16 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.Reload.performed += _ =>
         {
-            if(WaterReloader.isReadyToReload)
+            if(isReadyToReload)
             {
-                isReloading = true;
                 if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == WeaponType.Range)
                 {
-                    weaponChanger.CurrentWeapon.TryGetWeaponByType<WeaponWater>(out WeaponWater returnedWeapon);
-                    OnReloading?.Invoke(isReloading);
-                    returnedWeapon.Reload();
+                    weaponChanger.CurrentWeapon.TryGetWeaponByType<WeaponWater>(out WeaponWater water);
+                     OnReloading?.Invoke(isReadyToReload);
+                    water.Reload();
                 }
             }
-           
-
+                
         };
 
 
