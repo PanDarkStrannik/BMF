@@ -6,6 +6,23 @@ public class WeaponWater : WeaponRange
 {
     [SerializeField] private ParamController.ResourcesUser resourcesUser;
 
+    private float waterCharges;
+    private float maxWaterCharges;
+
+
+    private void Start()
+    {
+        waterCharges = resourcesUser.ParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
+        maxWaterCharges = resourcesUser.ParamController.DamagebleParams.typesMaxValues[DamagebleParam.ParamType.HolyWater];
+
+       resourcesUser.ParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
+    }
+
+    protected override void OnDestroy()
+    {
+       resourcesUser.ParamController.DamagebleParams.OnParamChanged -= UpdateAmmo;
+    }
+   
 
 
     public override void Attack()
@@ -35,11 +52,34 @@ public class WeaponWater : WeaponRange
 
     public void Reload()
     {
-       // resourcesUser.ParamController.DamagebleParams.ChangeParam(DamagebleParam.ParamType.HolyWater, 10);
-        StopAllCoroutines();
-        StartCoroutine(Reload(attackParametres.ReloadTime));
+        if(waterCharges >= maxWaterCharges)
+        {
+            Debug.Log("Перезарядка не требуется");
+            return;
+        }
+        else
+        {
+            StopAllCoroutines();
+            Debug.Log("Перезаряжаем...");
+            StartCoroutine(Reload(attackParametres.ReloadTime));
+        
+        }
        
     }
+
+
+    public void UpdateAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
+    {
+
+        if (paramType == DamagebleParam.ParamType.HolyWater)
+        {
+            waterCharges = value;
+            maxWaterCharges = maxValue;
+        }
+    }
+
+
+
 
 
 }

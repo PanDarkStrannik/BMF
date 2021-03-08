@@ -123,6 +123,7 @@ public class PlayerMovement : APlayerMovement
 
     public void VerticalMove(Vector3 dir)
     {
+        faling = false;
         body.isKinematic = true;
         playerTransform.Translate(dir * vercticalAcceleration * Time.deltaTime);
     }

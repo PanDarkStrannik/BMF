@@ -37,18 +37,15 @@ public class PlayerController : MonoBehaviour
     [Header("Other Components")]
     [SerializeField] private PhysicMaterial playerPhysMaterial;
     [SerializeField] private LayerMask whatIsReloadZone;
-    [SerializeField] private float rayCastLenght = 3f;
-
 
     //Events
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
     public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
-    public UnityBoolEvent OnReloading;
 
     //bools
     private bool isShiftNotInput = true;
-    private bool isReadyToReload;
+    private bool isReadyToReload = false;
 
     //properties
     public List<GunPush> GunPushes
@@ -90,6 +87,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+
       //  weaponHealing = weaponChanger.AllWeapons.Find(x => x is IHeallingWeapon) as AWeapon; 
         
     }
@@ -108,6 +106,8 @@ public class PlayerController : MonoBehaviour
     {
         // WeaponChecker();
         CheckingReloadZone();
+
+
 
         switch (controlMoveType)
         {
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         PM.VerticalMove(d);
     }
 
-    public void VerticalJump(Vector3 d, Vector3 moveDir)
+    private void VerticalJump(Vector3 d, Vector3 moveDir)
     {
         var temp = new Vector3(0, 0, d.z);
         if (temp != Vector3.zero && transform.position.y > minTransformYToJump)
@@ -219,9 +219,9 @@ public class PlayerController : MonoBehaviour
         Ray ray = rayCreation.CreateRayFromPlayer(input);
         RaycastHit hitInfo;
 
-        isReadyToReload = Physics.Raycast(ray, out hitInfo, rayCastLenght, whatIsReloadZone);
+        isReadyToReload = Physics.Raycast(ray, out hitInfo, rayCreation.rayDist, whatIsReloadZone);
 
-        Debug.DrawLine(ray.origin, hitInfo.point, Color.blue);
+        Debug.DrawLine(ray.origin, transform.forward * rayCreation.rayDist, Color.blue);
     }
 
 
@@ -327,12 +327,12 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.Reload.performed += _ =>
         {
-            if(isReadyToReload)
+
+            if (isReadyToReload)
             {
                 if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == WeaponType.Range)
                 {
                     weaponChanger.CurrentWeapon.TryGetWeaponByType<WeaponWater>(out WeaponWater water);
-                     OnReloading?.Invoke(isReadyToReload);
                     water.Reload();
                 }
             }

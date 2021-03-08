@@ -15,8 +15,13 @@ public class WeaponRange : AWeapon, IDamagingWeapon
     //[SerializeField] protected int bulletsOnAttack = 1;
     [SerializeField] public AttackParametres attackParametres;
     [SerializeField] protected Spread spread;
-      private ParamController weaponParam;
+                     private ParamController weaponParam;
 
+    public UnityBoolEvent OnReloading;
+
+    protected int attackCount = 0;
+    public bool isReloading = false;
+    public bool IsReloading { get => isReloading; }
 
     public override WeaponType WeaponType
     {
@@ -27,11 +32,11 @@ public class WeaponRange : AWeapon, IDamagingWeapon
     }
 
 
-    protected int attackCount = 0;
 
     protected override void Awake()
     {
         weaponParam = FindObjectOfType<ParamController>();
+
         base.Awake();
         bulletSpawner.CreateSpawner();
         foreach (var e in bulletSpawner.spawned_objects)
@@ -66,6 +71,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
 
 
 
+
     protected override IEnumerator Damaging(float time)
     {
         State = WeaponState.Attack;
@@ -87,15 +93,15 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         if (state == WeaponState.Reload)
         {
             StopCoroutine(Damaging(attackParametres.ToAttackTime));
+            isReloading = true;
+            OnReloading?.Invoke(isReloading);
+
             yield return new WaitForSecondsRealtime(time);
-            if(WeaponType == WeaponType.Range)
-            {
-                if(TryReturnNeededWeaponType<WeaponWater>(out WeaponWater water))
-                {
-                    Debug.Log("Должна быть перезарядка через 5 сек");
-                    weaponParam.DamagebleParams.ChangeParam(DamagebleParam.ParamType.HolyWater, 10);
-                }
-            }
+
+            isReloading = false;
+            OnReloading?.Invoke(isReloading);
+            ReloadCharges();
+
             attackCount = 0;
             StartCoroutine(Serenity(0f));
         }
@@ -108,6 +114,22 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         State = WeaponState.Serenity;
         StopAllCoroutines();
     }
+
+
+    private void ReloadCharges()
+    {
+        if (WeaponType == WeaponType.Range)
+        {
+            if (TryReturnNeededWeaponType<WeaponWater>(out WeaponWater water))
+            {
+                weaponParam.DamagebleParams.ChangeParam(DamagebleParam.ParamType.HolyWater, 10f);
+                Debug.Log("Перезарядка прошла успешно");
+            }
+        }
+    }
+
+
+
 
     [System.Serializable]
     protected class Spread
@@ -152,6 +174,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         [SerializeField] private int attackValues = 3;
         [Min(1)]
         [SerializeField] private int bulletsOnAttack = 1;
+
 
         public List<DamageByType> WeaponData
         {
@@ -199,7 +222,14 @@ public class WeaponRange : AWeapon, IDamagingWeapon
                 return bulletsOnAttack;
             }
         }
+
+
     }
+
+
+
+
+
 
     //[System.Serializable]
     //private class AttackParametres
