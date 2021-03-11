@@ -26,17 +26,14 @@ public class WeaponUI : MonoBehaviour
 
         waterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
         maxWaterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesMaxValues[DamagebleParam.ParamType.HolyWater];
-
     }
 
 
     private void Update()
     {
         CheckReloadZone();
-       if(rangeWeapon.IsReloading)
-        {
-         UpdateReloadingTimer();
-        }
+        UpdateReloadingTimer();
+
     }
 
     private void CheckReloadZone()
@@ -77,19 +74,25 @@ public class WeaponUI : MonoBehaviour
     {
         currentReloadingTime -= Time.deltaTime;
         reloadImageTimer.fillAmount = currentReloadingTime / maxReloadingTime;
-
-        if(currentReloadingTime <= 0 || !rangeWeapon.IsReloading)
+        if(currentReloadingTime <= 0)
         {
             currentReloadingTime = maxReloadingTime;
         }
+        
     }
 
+    private void WeaponWater_OnDisturbReload()
+    {
+        currentReloadingTime = maxReloadingTime;
+        reloadImageTimer.gameObject.SetActive(false);
+    }
 
 
     private void OnEnable()
     {
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += UpdateUIAmmo;
         PlayerInformation.GetInstance().PlayerController.OnChangeWeapon += PlayerController_OnChangeWeapon;
+        WeaponWater.OnDisturbReload += WeaponWater_OnDisturbReload;
     }
 
 
@@ -97,7 +100,9 @@ public class WeaponUI : MonoBehaviour
     {
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged -= UpdateUIAmmo;
         PlayerInformation.GetInstance().PlayerController.OnChangeWeapon -= PlayerController_OnChangeWeapon;
+        WeaponWater.OnDisturbReload -= WeaponWater_OnDisturbReload;
     }
+
 
     private void PlayerController_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
     {

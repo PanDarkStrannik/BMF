@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class WeaponWater : WeaponRange
 {
@@ -9,24 +10,28 @@ public class WeaponWater : WeaponRange
     private float waterCharges;
     private float maxWaterCharges;
 
+    public static event Action OnDisturbReload;
    
     private void Start()
     {
         waterCharges = resourcesUser.ParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
         maxWaterCharges = resourcesUser.ParamController.DamagebleParams.typesMaxValues[DamagebleParam.ParamType.HolyWater];
 
-       resourcesUser.ParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
+        resourcesUser.ParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
         PlayerInformation.GetInstance().PlayerController.OnPlayerMoved += PlayerController_OnPlayerMoved;
+        PlayerInformation.GetInstance().PlayerController.OnChangeWeapon += PlayerController_OnChangeWeapon;
     }
 
-    
+    private void PlayerController_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
+    {
+       DisturbReloading();
+    }
+
     private void PlayerController_OnPlayerMoved(Vector3 obj)
     {
        if(isReloading && obj != Vector3.zero)
         {
-            StopAllCoroutines();
-            isReloading = false;
-            Debug.Log(isReloading);
+            DisturbReloading();
         }
     }
 
@@ -34,6 +39,7 @@ public class WeaponWater : WeaponRange
     {
         resourcesUser.ParamController.DamagebleParams.OnParamChanged -= UpdateAmmo;
         PlayerInformation.GetInstance().PlayerController.OnPlayerMoved -= PlayerController_OnPlayerMoved;
+        PlayerInformation.GetInstance().PlayerController.OnChangeWeapon -= PlayerController_OnChangeWeapon;
     }
 
 
@@ -78,6 +84,12 @@ public class WeaponWater : WeaponRange
         }
     }
 
+    private void DisturbReloading()
+    {
+        StopAllCoroutines();// надо бы заменить на только корутину Reload
+        isReloading = false;
+        OnDisturbReload?.Invoke();
+    }
 
     public void UpdateAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
     {

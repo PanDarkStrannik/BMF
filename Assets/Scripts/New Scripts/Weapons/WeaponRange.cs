@@ -17,6 +17,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
     [SerializeField] protected Spread spread;
                      private ParamController weaponParam;
 
+
     public UnityBoolEvent OnReloading;
 
     protected int attackCount = 0;
