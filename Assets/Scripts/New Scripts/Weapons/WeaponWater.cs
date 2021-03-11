@@ -9,20 +9,33 @@ public class WeaponWater : WeaponRange
     private float waterCharges;
     private float maxWaterCharges;
 
-
+   
     private void Start()
     {
         waterCharges = resourcesUser.ParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
         maxWaterCharges = resourcesUser.ParamController.DamagebleParams.typesMaxValues[DamagebleParam.ParamType.HolyWater];
 
        resourcesUser.ParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
+        PlayerInformation.GetInstance().PlayerController.OnPlayerMoved += PlayerController_OnPlayerMoved;
+    }
+
+    
+    private void PlayerController_OnPlayerMoved(Vector3 obj)
+    {
+       if(isReloading && obj != Vector3.zero)
+        {
+            StopAllCoroutines();
+            isReloading = false;
+            Debug.Log(isReloading);
+        }
     }
 
     protected override void OnDestroy()
     {
-       resourcesUser.ParamController.DamagebleParams.OnParamChanged -= UpdateAmmo;
+        resourcesUser.ParamController.DamagebleParams.OnParamChanged -= UpdateAmmo;
+        PlayerInformation.GetInstance().PlayerController.OnPlayerMoved -= PlayerController_OnPlayerMoved;
     }
-   
+
 
 
     public override void Attack()
@@ -62,9 +75,7 @@ public class WeaponWater : WeaponRange
             StopAllCoroutines();
             Debug.Log("Перезаряжаем...");
             StartCoroutine(Reload(attackParametres.ReloadTime));
-        
         }
-       
     }
 
 

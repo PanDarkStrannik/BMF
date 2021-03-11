@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerUI playerUI;
     [SerializeReference] private APlayerMovement movement;
     [SerializeField] private List<GunPush> gunPushes;
+    private WeaponRange rangeW;
     private PlayerMovement PM;
     private PlayerInput input;
     private IRay rayCreation;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
     public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
+    public event Action<Vector3> OnPlayerMoved;
 
     //bools
     private bool isShiftNotInput = true;
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour
         PlayerInformation.GetInstance().Player = gameObject;
 
         PM = FindObjectOfType<PlayerMovement>();
+        rangeW = FindObjectOfType<WeaponRange>();
         input = new PlayerInput();
         rayCreation = GetComponent<IRay>();
         
@@ -86,7 +89,6 @@ public class PlayerController : MonoBehaviour
         ButtonsInput();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
 
       //  weaponHealing = weaponChanger.AllWeapons.Find(x => x is IHeallingWeapon) as AWeapon; 
         
@@ -106,8 +108,6 @@ public class PlayerController : MonoBehaviour
     {
         // WeaponChecker();
         CheckingReloadZone();
-
-
 
         switch (controlMoveType)
         {
@@ -167,7 +167,9 @@ public class PlayerController : MonoBehaviour
 
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
+        OnPlayerMoved?.Invoke(moveDirection);
     }
+
 
     private void PlayerJump()
     {

@@ -20,7 +20,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
     public UnityBoolEvent OnReloading;
 
     protected int attackCount = 0;
-    public bool isReloading = false;
+    protected bool isReloading = false;
     public bool IsReloading { get => isReloading; }
 
     public override WeaponType WeaponType
@@ -45,7 +45,10 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         }
     }
 
-
+    private void Update()
+    {
+        OnReloading?.Invoke(IsReloading);
+    }
 
     private void OnDisable()
     {
@@ -94,12 +97,10 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         {
             StopCoroutine(Damaging(attackParametres.ToAttackTime));
             isReloading = true;
-            OnReloading?.Invoke(isReloading);
 
             yield return new WaitForSecondsRealtime(time);
 
             isReloading = false;
-            OnReloading?.Invoke(isReloading);
             ReloadCharges();
 
             attackCount = 0;

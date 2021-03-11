@@ -33,23 +33,30 @@ public class WeaponUI : MonoBehaviour
     private void Update()
     {
         CheckReloadZone();
-        UpdateReloadingTimer();
+       if(rangeWeapon.IsReloading)
+        {
+         UpdateReloadingTimer();
+        }
     }
 
     private void CheckReloadZone()
     {
-        if (PlayerInformation.GetInstance().PlayerController.IsReadyToReload && waterValue < maxWaterValue)
+        bool isPlayerInRange = PlayerInformation.GetInstance().PlayerController.IsReadyToReload;
+
+        if (isPlayerInRange && waterValue < maxWaterValue)
         {
             if(!isThisMeleeWeapon && isThisRangeWeapon)
             {
-             reloadHint.text = "Press R to Reload";
+              reloadHint.text = "R - Наполнить кропильницу";
             }
             
         }
-        else if (PlayerInformation.GetInstance().PlayerController.IsReadyToReload && waterValue >= maxWaterValue)
+        else if(isPlayerInRange && waterValue >= maxWaterValue)
         {
             if (!isThisMeleeWeapon && isThisRangeWeapon)
-                reloadHint.text = "Ammo is full";
+            {
+              reloadHint.text = "Кропильница полна!";
+            }
         }
         else
         {
@@ -61,6 +68,7 @@ public class WeaponUI : MonoBehaviour
     {
         if(rangeWeapon.IsReloading)
         {
+            reloadHint.text = null;
             ReloadTimer();
         }
     }
@@ -70,7 +78,7 @@ public class WeaponUI : MonoBehaviour
         currentReloadingTime -= Time.deltaTime;
         reloadImageTimer.fillAmount = currentReloadingTime / maxReloadingTime;
 
-        if(currentReloadingTime <= 0)
+        if(currentReloadingTime <= 0 || !rangeWeapon.IsReloading)
         {
             currentReloadingTime = maxReloadingTime;
         }
