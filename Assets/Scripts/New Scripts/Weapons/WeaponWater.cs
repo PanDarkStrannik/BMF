@@ -24,14 +24,17 @@ public class WeaponWater : WeaponRange
 
     private void PlayerController_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
     {
-       DisturbReloading();
+        if(isReloading)
+        {
+          DisturbReloading();
+        }
     }
 
     private void PlayerController_OnPlayerMoved(Vector3 obj)
     {
        if(isReloading && obj != Vector3.zero)
         {
-            DisturbReloading();
+          DisturbReloading();
         }
     }
 
@@ -86,9 +89,19 @@ public class WeaponWater : WeaponRange
 
     private void DisturbReloading()
     {
-        StopAllCoroutines();// надо бы заменить на только корутину Reload
+        StopAllCoroutines();
         isReloading = false;
         OnDisturbReload?.Invoke();
+
+        if (!this.gameObject.activeSelf)
+        {
+            return;
+        }
+        else
+        {
+            StartCoroutine(Serenity(0f));
+        }
+       
     }
 
     public void UpdateAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
