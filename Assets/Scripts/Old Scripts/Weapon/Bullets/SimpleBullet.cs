@@ -58,7 +58,7 @@ public class SimpleBullet : MonoBehaviour, IBullet
                 bulletDieEffect.transform.parent = transform.parent;
 
             }
-            body.velocity = transform.forward * speed;
+             body.velocity = transform.forward * speed;
             StartCoroutine(ToDie());
         }
     }
@@ -94,6 +94,11 @@ public class SimpleBullet : MonoBehaviour, IBullet
             {
                 OnDie();
                 //GameEvents.onBulletDie(gameObject);
+                spawnedObject.Die();
+            }
+            if(other.gameObject.CompareTag("PhysCollider"))
+            {
+                OnDie();
                 spawnedObject.Die();
             }
         }
