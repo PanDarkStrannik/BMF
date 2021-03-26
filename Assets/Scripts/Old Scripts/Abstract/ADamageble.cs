@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public abstract class ADamageble : MonoBehaviour, IDamageble
 {
@@ -9,6 +11,7 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
 
     public delegate void OnDamagedHelper();
     public event OnDamagedHelper OnDamaged;
+    public UnityEvent Damaged;
     public event OnDamagedHelper OnHeal;
 
     public delegate void OnChangedParamHelper(float damageValue, ADamageble damageblePlace);
@@ -67,6 +70,7 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
     protected void DamageEvent()
     {
         OnDamaged?.Invoke();
+        Damaged?.Invoke();
     }
 
     protected void DamageEventWithValue(float value, ADamageble damageblePlace)
