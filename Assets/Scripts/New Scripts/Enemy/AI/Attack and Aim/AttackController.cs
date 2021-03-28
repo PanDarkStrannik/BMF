@@ -123,7 +123,8 @@ public class AttackController : MonoBehaviour
         {
             foreach (var aim in weapon.ObjectAim)
             {
-                NewAim.Aim(target, aim);
+               // NewAim.Aim(target, aim);
+                NewAim.NormalAim(target, aim);
             }
         }
     }

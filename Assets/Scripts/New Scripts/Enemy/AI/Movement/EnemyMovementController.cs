@@ -82,7 +82,8 @@ public class EnemyMovementController : AFaling
     {
         foreach(var e in objectAim)
         {
-            NewAim.Aim(target, e);
+            //  NewAim.Aim(target, e);
+            NewAim.NormalAim(target, e);
         }
     }
 

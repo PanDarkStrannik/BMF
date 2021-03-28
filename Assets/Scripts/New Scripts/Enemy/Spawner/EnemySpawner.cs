@@ -34,7 +34,8 @@ public class EnemySpawner : MonoBehaviour
         spawnStages.OrderBy(stage => stage.StagePoint);
         foreach (var enemy in enemySpawner.spawned_objects)
         {
-            //enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
+           // enemy.GetComponentInChildren<EnemyParamController>().OnEnemyDie += delegate { enemySpawner.ReturnObject(enemy); };
+
         }
 
         Subscribe();

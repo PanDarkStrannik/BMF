@@ -11,8 +11,9 @@ public class EnemyParamController : ParamController
     [SerializeField] protected int pointsForKill = 1;
     [SerializeReference] private SpawnedObject spawnedObject;   
 
-    public delegate void OnEnemyDieEventHelper();
-    public event OnEnemyDieEventHelper OnEnemyDie;
+    //public delegate void OnEnemyDieEventHelper();
+    //public event OnEnemyDieEventHelper OnEnemyDie;
+    public UnityEvent OnEnemyDie;
 
 
     protected override void CheckTypeAndValues(DamagebleParam.ParamType type, float value, float maxValue)
@@ -35,9 +36,9 @@ public class EnemyParamController : ParamController
         {
             e.enabled = false;
         }
+        OnEnemyDie?.Invoke();
         yield return new WaitForSeconds(timeToDeactive);
         PointCounter.Instance.AddPoints(pointsForKill);
-        OnEnemyDie?.Invoke();
         spawnedObject.Die();
         paramSum.SetDefault();
     }

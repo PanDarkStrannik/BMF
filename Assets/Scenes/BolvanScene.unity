@@ -281,6 +281,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5230783753773112003, guid: e74d0925683e879479c1a5a6ab274c51, type: 3}
+      propertyPath: push.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8260683266840183478, guid: e74d0925683e879479c1a5a6ab274c51, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -416,7 +420,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1328704
+  m_Name: pb_Mesh3831720
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -699,11 +703,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 369f5423a1c0efa4bb99d7ebfb00cc63, type: 3}
---- !u!95 &962570611 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021583498131, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-  m_PrefabInstance: {fileID: 1257205910}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &981686025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,7 +1919,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1328752
+  m_Name: pb_Mesh3831768
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2120,10 +2119,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132149483514707, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: m_Name
-      value: Model
-      objectReference: {fileID: 0}
     - target: {fileID: 3728133181177378282, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.313896
@@ -2171,42 +2166,6 @@ PrefabInstance:
     - target: {fileID: 3728133181177378287, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
       propertyPath: m_Name
       value: Drekavc Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728133181177378287, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086577601829153359, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: Damaged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086577601829153359, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: Damaged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086577601829153359, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: Damaged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086577601829153359, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: Damaged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 962570611}
-    - target: {fileID: 9086577601829153359, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: Damaged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Animator, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086577601829153359, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: Damaged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTrigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086577601829153359, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: Damaged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086577601829153359, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
-      propertyPath: Damaged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Hit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a508ba4a5a6764847bea41814ad8a119, type: 3}
@@ -4831,7 +4790,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1328730
+  m_Name: pb_Mesh3831746
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6095,18 +6054,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2858897297000851156, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}
-      propertyPath: blinkDistance
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3161101565865093036, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}
-      propertyPath: animations.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4698231995530538735, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4698231997016598288, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6151,21 +6098,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4698231997016598290, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}
-      propertyPath: m_Speed
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4698231997016598293, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}
       propertyPath: m_Name
       value: Chert_Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4698231997016598293, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8406357061547784657, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d0c391cfe8b38349a2d33d474518a45, type: 3}

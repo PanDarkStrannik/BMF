@@ -8,6 +8,7 @@ public class WeaponBlink : AWeapon, IDamagingWeapon
     [SerializeField] private float afterBlink = 5f;
     [SerializeField] private Transform blinkBody;
     [SerializeField] private float blinkDistance = 3f;
+    [SerializeField] private float collisionCheckDist = 0.5f;
     [SerializeField] private Color gizmosColor;
     [SerializeField] private Transform blinkGun;
     [SerializeField] private float minDistanceToBlink = 1f;
@@ -50,21 +51,25 @@ public class WeaponBlink : AWeapon, IDamagingWeapon
 
     protected override IEnumerator Damaging(float time)
     {
-        isLayerBlink = false;
-        State = WeaponState.Attack;
-        PauseController.ChangeTime(timeScaleBeforeBlink);
-        yield return new WaitForSecondsRealtime(toBlinkTime);
-        Teleport();
-        if (isLayerBlink)
+        if(Teleport(out Vector3 blinkPos))
         {
-            for (int i = 0; i < secondsInLayerBlinkSloumo; i++)
+            isLayerBlink = false;
+            State = WeaponState.Attack;
+            PauseController.ChangeTime(timeScaleBeforeBlink);
+            yield return new WaitForSecondsRealtime(toBlinkTime);
+            blinkBody.position = blinkPos;
+            if (isLayerBlink)
             {
-                PauseController.ChangeTime(timeScaleUntilLayerBlink);
-                yield return new WaitForSecondsRealtime(1f);
+                for (int i = 0; i < secondsInLayerBlinkSloumo; i++)
+                {
+                    PauseController.ChangeTime(timeScaleUntilLayerBlink);
+                    yield return new WaitForSecondsRealtime(1f);
+                }
             }
+            PauseController.ChangeTime(1f);
+            StartCoroutine(Serenity(afterBlink));
         }
-        PauseController.ChangeTime(1f);
-        StartCoroutine(Serenity(afterBlink));
+      
     }
 
     protected override IEnumerator Reload(float time)
@@ -80,13 +85,25 @@ public class WeaponBlink : AWeapon, IDamagingWeapon
         State = WeaponState.Serenity;
     }
 
-    private void Teleport()
+    private bool Teleport(out Vector3 blinkPos)
     {
+        blinkPos = Vector3.zero;
         Ray checkRay = new Ray(blinkGun.position, blinkGun.forward);
         if (Physics.Raycast(checkRay, out RaycastHit hit, blinkDistance, layer))
         {
             Debug.Log("Через препятсвие можно пройти");
-            blinkBody.transform.position = hit.point + (hit.point - blinkGun.position).normalized * inLayerBlinkDistance;
+            blinkPos = hit.point + (hit.point - blinkGun.position).normalized * inLayerBlinkDistance;
+            Vector3 blinkDir = blinkBody.position - blinkPos;
+            blinkDir.Normalize();
+
+            if(Physics.Raycast(blinkPos, blinkDir, out RaycastHit hitInfo))
+            {
+                if((layer.value & 1 << hitInfo.collider.gameObject.layer) == 0)
+                {
+                    return false;
+                }
+            }
+            
             isLayerBlink = true;
             blinkBody.transform.LookAt(hit.point);
         }
@@ -98,13 +115,14 @@ public class WeaponBlink : AWeapon, IDamagingWeapon
             {
                 correctDistance = 0;
             }
-            blinkBody.transform.position = blinkGun.position + blinkGun.forward * correctDistance;
+            blinkPos = blinkGun.position + blinkGun.forward * correctDistance;
         }
         else
         {
             Debug.Log("Препятствия не было");
-            blinkBody.transform.position = blinkGun.position + blinkGun.forward * blinkDistance;
+            blinkPos = blinkGun.position + blinkGun.forward * blinkDistance;
         }
+        return true;
     }
 
     private void OnDrawGizmos()

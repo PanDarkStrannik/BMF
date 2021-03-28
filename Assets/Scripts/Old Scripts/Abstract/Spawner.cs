@@ -73,6 +73,7 @@ public class Spawner
         spawned_object.transform.position = position;
         spawned_object.transform.rotation = rotation;
         spawned_object.SetActive(true);
+        spawned_object.GetComponent<SpawnedObject>().Reincornate();
     }
 
     #endregion

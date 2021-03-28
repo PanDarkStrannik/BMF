@@ -55,6 +55,7 @@ public struct ObjectAimMod
     [SerializeField] private Transform lookingObject;
     [SerializeField] private AimMod aimMod;
     [SerializeField] private Vector3 correctTargetPosition;
+    [SerializeField] private float rotateSmoothSpeed;
 
     public Transform LookingObject
     {
@@ -63,6 +64,9 @@ public struct ObjectAimMod
             return lookingObject;
         }
     }
+
+    public float RotateSmoothSpeed { get => rotateSmoothSpeed; }
+
 
     public AimMod Mod
     {

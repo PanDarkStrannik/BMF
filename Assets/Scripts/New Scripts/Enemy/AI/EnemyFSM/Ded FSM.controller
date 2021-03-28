@@ -415,7 +415,7 @@ MonoBehaviour:
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
   interestingObjects: []
-  speed: 3
+  speed: 2
   warp: 0
   randomizeInterestingTimer: 20
   moveType: 0
