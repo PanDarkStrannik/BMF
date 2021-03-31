@@ -285,6 +285,10 @@ PrefabInstance:
       propertyPath: push.z
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6943165170122457503, guid: e74d0925683e879479c1a5a6ab274c51, type: 3}
+      propertyPath: deactiveScripts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8260683266840183478, guid: e74d0925683e879479c1a5a6ab274c51, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -320,6 +324,10 @@ PrefabInstance:
     - target: {fileID: 8260683267350174597, guid: e74d0925683e879479c1a5a6ab274c51, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016914113538016232, guid: e74d0925683e879479c1a5a6ab274c51, type: 3}
+      propertyPath: OnReloading.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e74d0925683e879479c1a5a6ab274c51, type: 3}
