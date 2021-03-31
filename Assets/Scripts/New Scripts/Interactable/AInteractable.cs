@@ -20,10 +20,13 @@ public abstract class AInteractable : MonoBehaviour
 
 
     // не работает 
-    public virtual void Unsubsribe(UnityAction action)
+    public virtual void Unsubsribe(List<UnityAction> action)
     {
-        OnDetect.RemoveListener(action);
-        OnUndetect.RemoveListener(action);
+        foreach (var e in action)
+        {
+            OnDetect.RemoveListener(e);
+            OnUndetect.RemoveListener(e);
+        } 
     }
 
     public virtual void Unsubscribe()

@@ -11,6 +11,9 @@ public class ReloadZone : AInteractable
     public UnityEvent OnReloadFailed;
     public UnityEvent OnReloading;
 
+    
+
+
     private bool isReload = false;
     private bool isInRange = false;
 
@@ -19,14 +22,28 @@ public class ReloadZone : AInteractable
     [SerializeField, Min (0)]
     private float reloadTime;
 
+    
 
     #region PROPERTIES
 
     public float CurrentReloadTime { get; private set; }
     public float ReloadTime { get => reloadTime; }
-    
+
 
     #endregion
+
+
+    private void Start()
+    {
+        OnReloadComplete.AddListener(AddWater);
+    }
+
+
+    private void AddWater()
+    {
+        var damagebleParam = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams;
+        damagebleParam.ChangeParam(DamagebleParam.ParamType.HolyWater, damagebleParam.typesMaxValues[DamagebleParam.ParamType.HolyWater]);
+    }
 
 
     public override void Use()
@@ -65,12 +82,15 @@ public class ReloadZone : AInteractable
     }
 
 
-    public override void Unsubsribe(UnityAction action)
+    public override void Unsubsribe(List<UnityAction> actions)
     {
-        base.Unsubsribe(action);
-        OnReloadComplete.RemoveListener(action);
-        OnReloading.RemoveListener(action);
-        OnReloadFailed.RemoveListener(action);
+        base.Unsubsribe(actions);
+        foreach (var e in actions)
+        {
+            OnReloadComplete.RemoveListener(e);
+            OnReloading.RemoveListener(e);
+            OnReloadFailed.RemoveListener(e);
+        }
     }
 
     public override void Unsubscribe()

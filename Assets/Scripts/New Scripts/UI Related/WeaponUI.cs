@@ -9,9 +9,10 @@ public class WeaponUI : MonoBehaviour
 {
     [SerializeField] private Image reloadTimerImage;
     [SerializeField] private Text description;
+    [SerializeField] private Text ammoCount;
     
     private PlayerController player;
-    private UnityAction action;
+    private List<UnityAction> actions = new List<UnityAction>();
 
 
     private void Start()
@@ -19,31 +20,52 @@ public class WeaponUI : MonoBehaviour
         player = PlayerInformation.GetInstance().PlayerController;
 
         description.text = null;
-        player.OnPlayerInteractedSet += Player_OnPlayerInteractedSet;
         ActionCompare();
+        player.OnPlayerInteractedSet += Player_OnPlayerInteractedSet;
+        player.OnChangeWeapon += Player_OnChangeWeapon;
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ChangeAmmo;
        
+    }
+
+    private void Player_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
+    {
+        if (obj.TryGetWeaponByType(out WeaponRange weaponRange))
+        {
+            ammoCount.enabled = true;
+        }
+        else
+        {
+            ammoCount.enabled = false;
+        }
+    }
+
+    private void ChangeAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
+    {
+        if (paramType == DamagebleParam.ParamType.HolyWater)
+        {
+            ammoCount.text = value.ToString();
+        }
     }
 
     private void Player_OnPlayerInteractedSet()
     {
         if(player.Interactable != null)
         {
-           player.Interactable.OnDetect.AddListener(InteractableDescriptionIn);
-           player.Interactable.OnUndetect.AddListener(InteractableDescriptionOut);
+           player.Interactable.OnDetect.AddListener(actions[0]);
+           player.Interactable.OnUndetect.AddListener(actions[1]);
          
            if(player.Interactable is ReloadZone reloadZone)
            {
-               reloadZone.OnReloading.AddListener(InteractableGettingDescription);
+               reloadZone.OnReloading.AddListener(actions[2]);
            }
         }
     }
 
     private void ActionCompare()
     {
-        action += Player_OnPlayerInteractedSet;
-        action += InteractableDescriptionIn;
-        action += InteractableDescriptionOut;
-        action += InteractableGettingDescription;
+        actions.Add(new UnityAction(InteractableDescriptionIn));
+        actions.Add(new UnityAction(InteractableDescriptionOut));
+        actions.Add(new UnityAction(InteractableGettingDescription));
     }
 
     private void InteractableDescriptionIn()
@@ -58,8 +80,8 @@ public class WeaponUI : MonoBehaviour
     private void InteractableDescriptionOut()
     {
         description.text = null;
-        // player.Interactable.Unsubsribe(action);
-        player.Interactable.Unsubscribe();
+        player.Interactable.Unsubsribe(actions);
+        //player.Interactable.Unsubscribe();
     }
 
     private void InteractableGettingDescription()
@@ -67,4 +89,6 @@ public class WeaponUI : MonoBehaviour
         var reloadZone = player.Interactable as ReloadZone;
         reloadTimerImage.fillAmount = reloadZone.CurrentReloadTime / reloadZone.ReloadTime;
     }
+
+    
 }
