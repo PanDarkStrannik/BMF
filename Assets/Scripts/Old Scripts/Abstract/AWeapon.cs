@@ -232,5 +232,5 @@ public abstract class AWeapon : MonoBehaviour
 
 public enum WeaponType
 {
-    Mili, Range, Jump, Summon, Blink, Directional
+    Mili, Range, Jump, Summon, Blink, Directional, Special
 }

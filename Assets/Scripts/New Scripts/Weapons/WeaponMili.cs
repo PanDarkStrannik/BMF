@@ -8,12 +8,13 @@ public class WeaponMili : AWeapon, IDamagingWeapon
     [SerializeField] private float damagingTime = 0.3f;
     [SerializeField] private float reloadAttack = 0.7f;
     [SerializeReference] private DamageArea damageArea;
+    [SerializeField] private WeaponType weaponType;
 
     public override WeaponType WeaponType
     {
         get
         {
-            return WeaponType.Mili;
+            return weaponType;
         }
     }
 

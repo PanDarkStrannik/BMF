@@ -136,7 +136,8 @@ public class DamageArea : MonoBehaviour
         {
            other.GetComponent<IDamageble>().ApplyDamage(damage);
            var tempPush = transform.TransformDirection(push);
-           other.GetComponent<IDamageble>().Push(tempPush, forceMode);
+            var unit = other.GetComponent<IDamageble>();
+            unit.Push(tempPush, forceMode);
         }
         Debug.Log("Зафиксили урон");
         yield return new WaitForSeconds(timeBetweenDamage);
