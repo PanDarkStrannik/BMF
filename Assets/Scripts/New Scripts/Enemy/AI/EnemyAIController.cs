@@ -40,15 +40,15 @@ public class EnemyAIController : MonoBehaviour
 
         behaviours = new List<AEnemyAI>(animator.GetBehaviours<AEnemyAI>());
 
-        movementController.FalingEvent += delegate (bool value)
-        {
-            faling = value;
-            if(faling == true)
-            {
-                rb.isKinematic = false;
-                navMeshAgent.enabled = false;
-            }
-        };
+        //movementController.FalingEvent += delegate (bool value)
+        //{
+        //    faling = value;
+        //    if(faling == true)
+        //    {
+        //        rb.isKinematic = false;
+        //        navMeshAgent.enabled = false;
+        //    }
+        //};
 
         foreach (var beh in behaviours)
         {
