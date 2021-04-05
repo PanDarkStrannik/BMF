@@ -28,23 +28,6 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement PM;
     private PlayerInput input;
     private IRay rayCreation;
-    private AInteractable interactable = null;
-
-    public AInteractable Interactable 
-    {
-        get { return interactable; }
-
-        set 
-        {
-            interactable = value;
-            if(interactable != null)
-            {
-             OnPlayerInteractedSet?.Invoke();
-            }
-        }
-
-    }
-
 
     [Header("Vertical Movement Settings")]
     [SerializeField] private float angle = 45f;
@@ -61,7 +44,6 @@ public class PlayerController : MonoBehaviour
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
     public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
     public event Action<Vector3> OnPlayerMoved;
-    public event Action OnPlayerInteractedSet;
 
     //bools
     private bool isShiftNotInput = true;
@@ -125,7 +107,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // WeaponChecker();
-       // CheckingReloadZone();
+        CheckingReloadZone();
 
         switch (controlMoveType)
         {
@@ -234,7 +216,43 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
+    private void CheckingReloadZone()
+    {
+        Ray ray = rayCreation.CreateRayFromPlayer(input);
+        RaycastHit hitInfo;
+
+        isReadyToReload = Physics.Raycast(ray, out hitInfo, rayCreation.rayDist, whatIsReloadZone);
+
+        Debug.DrawLine(ray.origin, transform.forward * rayCreation.rayDist, Color.blue);
+    }
+
+
+
+
+
+
+    private void WeaponChecker()
+    {
+     
+        //лучше подписаться на стейты самого оружия игрока
+
+        //switch (weaponChanger.CurrentWeapon.State)
+        //{
+        //    case AWeapon.WeaponState.Attack:
+        //        PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Attack);
+        //        break;
+        //    case AWeapon.WeaponState.Reload:
+        //        PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Reload);
+        //        break;
+        //    case AWeapon.WeaponState.ImposibleAttack:
+        //        PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.ImposibleAttack);
+        //        break;
+        //    case AWeapon.WeaponState.Serenity:
+        //        PlayerWeaponControlEvent?.Invoke(AWeapon.WeaponState.Serenity);
+        //        break;
+        //}
+
+    }
 
     private void ButtonsInput()
     {
@@ -309,37 +327,19 @@ public class PlayerController : MonoBehaviour
             }
         };
 
-
-
-
-
-
-
-
-
-
         input.ButtonInputs.Reload.performed += _ =>
         {
-              
-            if(interactable != null)
-            {
-                interactable.Use();
-            }
 
-                //if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == WeaponType.Range)
-                //{
-                //    weaponChanger.CurrentWeapon.TryGetWeaponByType<WeaponWater>(out WeaponWater water);
-                //    water.Reload();
-                //}
+            if (isReadyToReload)
+            {
+                if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == WeaponType.Range)
+                {
+                    weaponChanger.CurrentWeapon.TryGetWeaponByType<WeaponWater>(out WeaponWater water);
+                    water.Reload();
+                }
+            }
                 
         };
-
-
-
-
-
-
-
 
 
 
@@ -382,7 +382,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    private void Reload_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        throw new NotImplementedException();
+    }
 
 
     //private bool ChangeAbilityBecauseWeapon(WeaponType type)

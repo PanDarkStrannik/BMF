@@ -12,21 +12,6 @@ public class AttackController : MonoBehaviour
     private AttackAI.AttackStopVariants stopVariant = AttackAI.AttackStopVariants.None;
 
     private Transform currentTarget;
-
-    private List<AttackAI> attackAIs=null;
-
-    private bool alreadySubscribe = false;
-
-    private void OnEnable()
-    {
-        SubscribeOnEvents();
-    }
-
-    private void OnDisable()
-    {
-        UnSubscribeOnEvents();
-    }
-
     public void Initialize(List<AttackAI> enemyAIs)
     {
         if (weapons.Count > 0)
@@ -38,47 +23,19 @@ public class AttackController : MonoBehaviour
             throw new System.Exception("Нечего эккипировать!");
         }
 
-        attackAIs = enemyAIs;
-
-        SubscribeOnEvents();
-
-    }
-
-    private void SubscribeOnEvents()
-    {
-        if (attackAIs != null)
+        foreach (var e in enemyAIs)
         {
-            if (alreadySubscribe == false)
-            {
-                foreach (var e in attackAIs)
-                {
-                    e.AttackAIEvent += AttackOnStage;
-                }
-            }
-            alreadySubscribe = true;
-        }
-    }
-
-    private void UnSubscribeOnEvents()
-    {
-        if (attackAIs != null)
-        {
-            if (alreadySubscribe == true)
-            {
-                foreach (var e in attackAIs)
-                {
-                    e.AttackAIEvent -= AttackOnStage;
-                }
-            }
-            alreadySubscribe = false;
+            e.AttackAIEvent += AttackOnStage;
         }
     }
 
 
     public void Deinitialize(List<AttackAI> enemyAIs)
     {
-        UnSubscribeOnEvents();
-        attackAIs = null;
+        foreach (var e in enemyAIs)
+        {
+            e.AttackAIEvent -= AttackOnStage;
+        }
     }
 
 
@@ -241,9 +198,8 @@ public class AttackController : MonoBehaviour
 
 
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-
         foreach (var weapon in weapons)
         {
             if (weapon.GizmosColor != null && weapon.Point != null)
@@ -258,9 +214,9 @@ public class AttackController : MonoBehaviour
             }
         }
 
-        foreach (var aimSphere in aimSpheres)
+        foreach(var aimSphere in aimSpheres)
         {
-            if (aimSphere.GizmosColor != null && aimSphere.Point != null)
+            if(aimSphere.GizmosColor != null && aimSphere.Point != null)
             {
                 Gizmos.color = aimSphere.GizmosColor;
                 Gizmos.DrawSphere(aimSphere.Point.position, aimSphere.Radius);
@@ -268,6 +224,7 @@ public class AttackController : MonoBehaviour
                 Gizmos.DrawSphere(aimSphere.Point.position + aimSphere.Point.forward * aimSphere.Distance, aimSphere.Radius);
             }
         }
+
     }
 
     [System.Serializable]

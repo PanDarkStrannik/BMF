@@ -40,15 +40,7 @@ public class EnemyAIController : MonoBehaviour
 
         behaviours = new List<AEnemyAI>(animator.GetBehaviours<AEnemyAI>());
 
-        movementController.FalingEvent += delegate (bool value)
-        {
-            faling = value;
-            if(faling == true)
-            {
-                rb.isKinematic = false;
-                navMeshAgent.enabled = false;
-            }
-        };
+        movementController.FalingEvent += delegate (bool value) { faling = value; };
 
         foreach (var beh in behaviours)
         {
@@ -107,6 +99,19 @@ public class EnemyAIController : MonoBehaviour
 
     }
 
+
+    //private void Start()
+    //{
+    //    behaviours = new List<AEnemyAI>(animator.GetBehaviours<AEnemyAI>());
+
+    //    foreach(var beh in behaviours)
+    //    {
+    //        beh.AIAgent = enemyObject;
+    //        beh.RigidbodyActiveEvent += delegate (bool value) { rb.isKinematic = value; };
+    //        beh.NavMeshAgentActiveEvent += delegate (bool value) { navMeshAgent.enabled = value; };
+    //    }
+
+    //}
 
     private void ChangeInterestingAIObjects(List<GameObject> detectedObjects)
     {
