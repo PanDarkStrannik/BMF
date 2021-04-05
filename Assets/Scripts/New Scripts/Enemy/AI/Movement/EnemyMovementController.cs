@@ -90,6 +90,9 @@ public class EnemyMovementController : AFaling
 
     private void Moving(Vector3 point, float speed, bool warp)
     {
+        if (faling)
+            return;
+
         if (navAgent.isActiveAndEnabled)
         {
             moving.StartEvent(true);

@@ -5,18 +5,17 @@ using UnityEngine;
 public class DamageArea : MonoBehaviour
 {
     [SerializeField] private List<DamageByType> damages;
-    [SerializeField] private Collider damageCollider;
+    [SerializeField] protected Collider damageCollider;
     [SerializeField] private Vector3 colliderScale;
     [SerializeField] private Color gizmosColor = Color.red;
     [SerializeField] private float timeBetweenDamage = 1f;
     [SerializeField] private LayerMask layer;
 
-    [SerializeField] private Transform parent = null;
+    [SerializeField] protected Transform parent = null;
+    [SerializeField] protected Vector3 push;
+    [SerializeField] protected ForceMode forceMode;
 
-    [SerializeField] private Vector3 push;
-    [SerializeField] private ForceMode forceMode;
-
-    private Dictionary<Collider,bool> enterColiders;
+    protected Dictionary<Collider,bool> enterColiders;
 
     public Transform Parent
     {
