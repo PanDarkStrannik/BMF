@@ -2,135 +2,93 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
 
 public class WeaponUI : MonoBehaviour
 {
-    [SerializeField] private Text ammoAmout;
-    [SerializeField] private Text reloadHint;
-    [SerializeField] private Image reloadImageTimer;
-    [SerializeField] private WeaponRange rangeWeapon;
+    [SerializeField] private Image reloadTimerImage;
+    [SerializeField] private Text description;
+    [SerializeField] private Text ammoCount;
+    
+    private PlayerController player;
+    private List<UnityAction> actions = new List<UnityAction>();
 
 
-    private float waterValue;
-    private float maxWaterValue;
-    private float currentReloadingTime;
-    private float maxReloadingTime;
-
-    private bool isThisRangeWeapon;
-    private bool isThisMeleeWeapon;
-
-    private void Awake()
+    private void Start()
     {
-        maxReloadingTime = rangeWeapon.attackParametres.ReloadTime;
-        currentReloadingTime = maxReloadingTime;
+        player = PlayerInformation.GetInstance().PlayerController;
 
-        waterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesValues[DamagebleParam.ParamType.HolyWater];
-        maxWaterValue = PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.typesMaxValues[DamagebleParam.ParamType.HolyWater];
+        description.text = null;
+        ActionCompare();
+        player.OnPlayerInteractedSet += Player_OnPlayerInteractedSet;
+        player.OnChangeWeapon += Player_OnChangeWeapon;
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ChangeAmmo;
+       
     }
 
-
-    private void Update()
+    private void Player_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
     {
-        CheckReloadZone();
-        UpdateReloadingTimer();
-
-    }
-
-    private void CheckReloadZone()
-    {
-        bool isPlayerInRange = PlayerInformation.GetInstance().PlayerController.IsReadyToReload;
-
-        if (isPlayerInRange && waterValue < maxWaterValue)
+        if (obj.TryGetWeaponByType(out WeaponRange weaponRange))
         {
-            if(!isThisMeleeWeapon && isThisRangeWeapon)
-            {
-              reloadHint.text = "R - Наполнить кропильницу";
-            }
-            
-        }
-        else if(isPlayerInRange && waterValue >= maxWaterValue)
-        {
-            if (!isThisMeleeWeapon && isThisRangeWeapon)
-            {
-              reloadHint.text = "Кропильница полна!";
-            }
+            ammoCount.enabled = true;
         }
         else
         {
-            reloadHint.text = null;
+            ammoCount.enabled = false;
         }
     }
 
-   private void UpdateReloadingTimer()
+    private void ChangeAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
     {
-        if(rangeWeapon.IsReloading)
+        if (paramType == DamagebleParam.ParamType.HolyWater)
         {
-            reloadHint.text = null;
-            ReloadTimer();
+            ammoCount.text = value.ToString();
         }
     }
 
-    private void ReloadTimer()
+    private void Player_OnPlayerInteractedSet()
     {
-        currentReloadingTime -= Time.deltaTime;
-        reloadImageTimer.fillAmount = currentReloadingTime / maxReloadingTime;
-        if(currentReloadingTime <= 0)
+        if(player.Interactable != null)
         {
-            currentReloadingTime = maxReloadingTime;
+           player.Interactable.OnDetect.AddListener(actions[0]);
+           player.Interactable.OnUndetect.AddListener(actions[1]);
+         
+           if(player.Interactable is ReloadZone reloadZone)
+           {
+               reloadZone.OnReloading.AddListener(actions[2]);
+           }
         }
-        
     }
 
-    private void WeaponWater_OnDisturbReload()
+    private void ActionCompare()
     {
-        currentReloadingTime = maxReloadingTime;
-        reloadImageTimer.gameObject.SetActive(false);
+        actions.Add(new UnityAction(InteractableDescriptionIn));
+        actions.Add(new UnityAction(InteractableDescriptionOut));
+        actions.Add(new UnityAction(InteractableGettingDescription));
     }
 
-
-    private void OnEnable()
+    private void InteractableDescriptionIn()
     {
-        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += UpdateUIAmmo;
-        PlayerInformation.GetInstance().PlayerController.OnChangeWeapon += PlayerController_OnChangeWeapon;
-        WeaponWater.OnDisturbReload += WeaponWater_OnDisturbReload;
-    }
-
-
-    private void OnDisable()
-    {
-        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged -= UpdateUIAmmo;
-        PlayerInformation.GetInstance().PlayerController.OnChangeWeapon -= PlayerController_OnChangeWeapon;
-        WeaponWater.OnDisturbReload -= WeaponWater_OnDisturbReload;
-    }
-
-
-    private void PlayerController_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
-    {
-        isThisMeleeWeapon = obj.Weapon1.WeaponType == WeaponType.Mili;
-        isThisRangeWeapon = obj.Weapon1.WeaponType == WeaponType.Range;
-
-       if(isThisMeleeWeapon)
+        if(player.Interactable == null)
         {
-            ammoAmout.enabled = false;
+            Debug.Log("interactable null");
         }
-
-       if(isThisRangeWeapon)
-        {
-            ammoAmout.enabled = true;
-            ammoAmout.text = waterValue.ToString();
-        }
+        description.text = player.Interactable.GetDescription();
     }
 
-    private void UpdateUIAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
+    private void InteractableDescriptionOut()
     {
-
-      if(paramType == DamagebleParam.ParamType.HolyWater)
-        {
-            waterValue = value;
-            ammoAmout.text = value.ToString();
-        }
+        description.text = null;
+        player.Interactable.Unsubsribe(actions);
+        //player.Interactable.Unsubscribe();
     }
 
-   
+    private void InteractableGettingDescription()
+    {
+        var reloadZone = player.Interactable as ReloadZone;
+        reloadTimerImage.fillAmount = reloadZone.CurrentReloadTime / reloadZone.ReloadTime;
+    }
 
+    
 }

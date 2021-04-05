@@ -46,10 +46,10 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         }
     }
 
-    private void Update()
-    {
-        OnReloading?.Invoke(IsReloading);
-    }
+    //private void Update()
+    //{
+    //    OnReloading?.Invoke(IsReloading);
+    //}
 
     private void OnDisable()
     {

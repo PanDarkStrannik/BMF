@@ -161,7 +161,7 @@ public class DamageArea : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         ChangeArea(colliderScale);
         Gizmos.color = gizmosColor;
