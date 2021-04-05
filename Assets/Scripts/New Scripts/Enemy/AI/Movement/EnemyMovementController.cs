@@ -6,85 +6,54 @@ using UnityEngine.Events;
 
 public class EnemyMovementController : AFaling
 {
+    //[SerializeReference] private Animator animator;
     [SerializeReference] private NavMeshAgent navAgent;
     [SerializeField] private List<ObjectAimMod> objectAim;
     [SerializeField] private CustomEventValue<bool> moving;
 
-    private bool alreadySubscribe = false;
-    private List<AEnemyMovement> enemyMovements = null;
+    //void Start()
+    //{
+    //    var temp = new List<AEnemyMovement>(animator.GetBehaviours<AEnemyMovement>());
+    //    foreach (var e in temp)
+    //    {
+    //        e.MoveToPoint += Moving;
+    //        e.LookToObject += Looking;
+    //    }
+
+    //}
+
+    private void Start()
+    {
+       // navAgent.updateRotation = false;
+    }
 
     private void Update()
     {
         Falling();
-        if(grounded==false)
+        if(!grounded)
         {
-            navAgent.enabled = false;
             body.AddForce(new Vector3(0, -9.8f, 0) * Time.deltaTime);
-        }
-        else
-        {
-            //navAgent.enabled = true;
-        }
-    }
-
-
-    private void OnEnable()
-    {
-        SubscribeOnEvents();
-    }
-
-    private void OnDisable()
-    {
-        UnSubscribeOnEvents();
-    }
-
-
-    private void SubscribeOnEvents()
-    {
-        if (enemyMovements != null)
-        {
-            if (alreadySubscribe == false)
-            {
-                foreach (var e in enemyMovements)
-                {
-                    e.MoveToPoint += Moving;
-                    e.LookToObject += Looking;
-                }
-            }
-            alreadySubscribe = true;
-        }
-    }
-
-    private void UnSubscribeOnEvents()
-    {
-        if (enemyMovements != null)
-        {
-            if (alreadySubscribe == true)
-            {
-                foreach (var e in enemyMovements)
-                {
-                    e.MoveToPoint -= Moving;
-                    e.LookToObject -= Looking;
-                }
-            }
-            alreadySubscribe = false;
         }
     }
 
 
     public void Initialize(List<AEnemyMovement> enemyAIs)
     {
-        enemyMovements = enemyAIs;
-        SubscribeOnEvents();
+        foreach (var e in enemyAIs)
+        {
+            e.MoveToPoint += Moving;
+            e.LookToObject += Looking;
+        }
     }
-
-
 
 
     public void Deinitialize(List<AEnemyMovement> enemyAIs)
     {
-        UnSubscribeOnEvents();
-        enemyMovements = null;
+        foreach (var e in enemyAIs)
+        {
+            e.MoveToPoint -= Moving;
+            e.LookToObject -= Looking;
+        }
     }
 
 
@@ -113,7 +82,35 @@ public class EnemyMovementController : AFaling
     {
         foreach(var e in objectAim)
         {
+            //  NewAim.Aim(target, e);
             NewAim.NormalAim(target, e);
         }
     }
+
+    //private void FixedUpdate()
+    //{
+
+
+    //    grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
+    //          groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
+
+    //    if (!grounded && !faling)
+    //    {
+    //        faling = true;
+    //        groundedPos = body.transform.position.y;
+    //    }
+
+    //    if (grounded && faling)
+    //    {
+    //        faling = false;
+    //        var fallPos = body.transform.position.y;
+    //        var heigth = groundedPos - fallPos;
+    //        if (Mathf.Abs(heigth) != Mathf.Abs(fallPos))
+    //        {
+    //            test = heigth;
+    //            FallingEvent?.Invoke(heigth);
+    //        }
+    //    }
+
+    //}
 }

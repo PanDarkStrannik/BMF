@@ -174,14 +174,15 @@ public class EnemyDetection : MonoBehaviour
         isForgoting = false;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        foreach (var e in colliderChances)
+        foreach(var e in colliderChances)
         {
             Gizmos.color = e.GizmosColor;
             Gizmos.DrawSphere(e.Center, e.Radius);
         }
     }
+
 }
 
 [System.Serializable]

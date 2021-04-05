@@ -155,21 +155,15 @@ public class PlayerWeaponChanger
 
         public bool TryGetWeaponByType<T>(out T returnedWeapon) where T : class
         {
-            if (weapon1 != null)
+            if(weapon1.TryReturnNeededWeaponType(out T component1))
             {
-                if (weapon1.TryReturnNeededWeaponType(out T component1))
-                {
-                    returnedWeapon = weapon1 as T;
-                    return true;
-                }
+                returnedWeapon = weapon1 as T;
+                return true;
             }
-            if (weapon2 != null)
+            else if(weapon2.TryReturnNeededWeaponType(out T component2))
             {
-                if (weapon2.TryReturnNeededWeaponType(out T component2))
-                {
-                    returnedWeapon = weapon2 as T;
-                    return true;
-                }
+                returnedWeapon = weapon2 as T;
+                return true;
             }
             returnedWeapon = null;
             return false;
