@@ -121,7 +121,6 @@ public class ParamController : MonoBehaviour
     protected void Pusher(Vector3 direction, ForceMode forceMode)
     {        
         body.AddForce(direction, forceMode);
-        Debug.Log("Push event!");
     }
 
     protected void FallingDamage(float heigth)
