@@ -107,6 +107,11 @@ public class DamageArea : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        var bodyChild = other.gameObject.GetComponentInChildren<Rigidbody>();
+        var bodyGO = other.gameObject.GetComponent<Rigidbody>();
+        var bodyParent = other.gameObject.GetComponentInParent<Rigidbody>();
+
+
         if (other.gameObject.GetComponent<IDamageble>() != null)
         {
             if (!enterColiders[other])
@@ -117,6 +122,21 @@ public class DamageArea : MonoBehaviour
                 }
             }
         }
+        else if (bodyGO != null)
+        {
+           // var body = other.GetComponent<Rigidbody>();
+            PushArea(bodyGO);
+        }
+        else if( bodyChild != null)
+        {
+            PushArea(bodyChild);
+        }
+        else if (bodyParent != null)
+        {
+            PushArea(bodyParent);
+        }
+
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -160,6 +180,15 @@ public class DamageArea : MonoBehaviour
         }
         gameObject.SetActive(false);
     }
+
+
+    private void PushArea(Rigidbody body)
+    {
+        var tempPush = transform.TransformDirection(push);
+        body.AddForce(tempPush, forceMode);
+
+    }
+
 
     private void OnDrawGizmosSelected()
     {
