@@ -74,15 +74,18 @@ public class NewDestruct : MonoBehaviour
 
     private void DestructObjects()
     {
-        rigidbodysForcesComparer.OrderBy(x => x.DestructNumber);
-        rigidbodysForcesComparer.Reverse();
-        foreach (var e in rigidbodysForcesComparer)
+        if (rigidbodysForcesComparer.Count > 0)
         {
-            e.EnableRigidbody();
-        }
-        for (int i = 0; i < rigidbodysForcesComparer.Count; i++)
-        {
-            rigidbodysForcesComparer[i].AddForce();
+            rigidbodysForcesComparer.OrderBy(x => x.DestructNumber);
+            rigidbodysForcesComparer.Reverse();
+            foreach (var e in rigidbodysForcesComparer)
+            {
+                e.EnableRigidbody();
+            }
+            for (int i = 0; i < rigidbodysForcesComparer.Count; i++)
+            {
+                rigidbodysForcesComparer[i].AddForce();
+            }
         }
         OnDestruct?.Invoke();
     }
