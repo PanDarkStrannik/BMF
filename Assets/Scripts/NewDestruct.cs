@@ -88,6 +88,7 @@ public class NewDestruct : MonoBehaviour
             }
         }
         OnDestruct?.Invoke();
+        Debug.Log("Destruct");
     }
 
 
