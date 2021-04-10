@@ -110,7 +110,7 @@ public class PlayerUI : MonoBehaviour
             //        StartCoroutine(ToDamagedEffectDisable());
             //    }
             //}
-            playerBar.fillAmount = value / maxValue;
+             playerBar.fillAmount = value / maxValue;
         }
     }
 
