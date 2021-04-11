@@ -37,6 +37,7 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
 
     public override void UseWeapon()
     {
+        Debug.Log("Summon");
         Attack();
     }
 
@@ -44,6 +45,7 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
     {
         if (state == WeaponState.Serenity)
         {
+            Debug.Log("Summon");
             StartCoroutine(MultiplieSummonSpawn());
         }
     }

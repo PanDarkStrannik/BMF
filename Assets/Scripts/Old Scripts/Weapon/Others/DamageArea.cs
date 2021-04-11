@@ -124,7 +124,6 @@ public class DamageArea : MonoBehaviour
         }
         else if (bodyGO != null)
         {
-           // var body = other.GetComponent<Rigidbody>();
             PushArea(bodyGO);
         }
         else if( bodyChild != null)

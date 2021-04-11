@@ -311,36 +311,13 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
         input.ButtonInputs.Reload.performed += _ =>
         {
-              
             if(interactable != null)
             {
                 interactable.Use();
             }
-
-                //if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == WeaponType.Range)
-                //{
-                //    weaponChanger.CurrentWeapon.TryGetWeaponByType<WeaponWater>(out WeaponWater water);
-                //    water.Reload();
-                //}
-                
         };
-
-
-
-
-
-
-
-
 
 
 
