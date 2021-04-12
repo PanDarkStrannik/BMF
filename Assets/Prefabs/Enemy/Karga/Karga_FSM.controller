@@ -18,7 +18,7 @@ MonoBehaviour:
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
   interestingObjects: []
-  speed: 3
+  speed: 2.5
   warp: 0
   randomizeInterestingTimer: 3
   moveType: 0
@@ -223,19 +223,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: DistanceToPlayer
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PlayerAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -295,7 +295,7 @@ MonoBehaviour:
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
   interestingObjects: []
-  speed: 2.5
+  speed: 2
   warp: 0
   randomizeInterestingTimer: 3
   moveType: 0
@@ -387,7 +387,8 @@ MonoBehaviour:
     m_Bits: 256
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
-  interestingObjects: []
+  interestingObjects:
+  - {fileID: 292153541926432627, guid: e74d0925683e879479c1a5a6ab274c51, type: 3}
   attackStages:
   - stageName: Summoning
     during: 1
