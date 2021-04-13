@@ -16,9 +16,9 @@ MonoBehaviour:
   geometryLayerID: 1
   geometryTag: Untagged
   geometryRenderQueue: 3000
-  _RenderPipeline: 0
+  _RenderPipeline: 1
   _RenderingMode: 1
-  ditheringFactor: 0
+  ditheringFactor: 0.018
   sharedMeshSides: 24
   sharedMeshSegments: 5
   globalNoiseScale: 0.5
