@@ -18,8 +18,8 @@ MonoBehaviour:
   geometryRenderQueue: 3000
   _RenderPipeline: 1
   _RenderingMode: 1
-  ditheringFactor: 0.018
-  sharedMeshSides: 24
+  ditheringFactor: 0
+  sharedMeshSides: 71
   sharedMeshSegments: 5
   globalNoiseScale: 0.5
   globalNoiseVelocity: {x: 0.07, y: 0.18, z: 0.05}
