@@ -227,7 +227,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: DistanceToPlayer
-    m_EventTreshold: 1.8
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2829971930151025246}
   m_Solo: 0
@@ -415,7 +415,7 @@ MonoBehaviour:
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
   interestingObjects: []
-  speed: 2
+  speed: 1
   warp: 0
   randomizeInterestingTimer: 20
   moveType: 0
