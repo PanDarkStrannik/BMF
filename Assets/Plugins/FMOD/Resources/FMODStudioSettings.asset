@@ -469,10 +469,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 0
-  HasPlatforms: 0
+  HasSourceProject: 1
+  HasPlatforms: 1
   sourceProjectPath: 
-  sourceBankPath: C:\Users\Zver\Desktop\Skillbox\Gamebox\BMF\Assets
+  sourceBankPath: 
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
   EnableMemoryTracking: 0
   AndroidUseOBB: 0
   MeterChannelOrdering: 0
-  MigratedPlatforms: 0c000000150000000b0000000a00000009000000120000000800000005000000060000000200000001000000
+  MigratedPlatforms: 0900000001000000150000000a0000000c0000000b0000000200000005000000060000001200000008000000
 --- !u!114 &6795706563115032421
 MonoBehaviour:
   m_ObjectHideFlags: 0

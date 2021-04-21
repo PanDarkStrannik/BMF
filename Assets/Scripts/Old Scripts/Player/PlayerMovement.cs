@@ -21,6 +21,7 @@ public class PlayerMovement : APlayerMovement
     private Dictionary<PlayerMoveType, float> moveTypeSpeeds;
 
     private Transform playerTransform;
+    private bool isMoving;
 
     //public float test;
     //private bool grounded = false;
@@ -97,6 +98,7 @@ public class PlayerMovement : APlayerMovement
         body.isKinematic = false;
         bool isCallAlready = false;
         direction = direction.normalized;
+        
         foreach (var type in moveTypeSpeeds)
         {
             if (moveType == type.Key && !isCallAlready)

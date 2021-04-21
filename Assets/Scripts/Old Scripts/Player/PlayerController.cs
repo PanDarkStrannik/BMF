@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
     public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
     public event Action<Vector3> OnPlayerMoved;
-    public event Action<Vector3, float, Transform> OnPlayerMovedWithRotation;
     public event Action OnPlayerInteractedSet;
+    public event Action<bool> OnPlayerSprint;
 
     #endregion
 
@@ -221,7 +221,6 @@ public class PlayerController : MonoBehaviour
 
     private void RotationInput()
     {
-        OnPlayerMovedWithRotation?.Invoke(movementDirection, mouseMoveX, cameraOnPlayer);
         var rotationInput = input.RotationInput.GetRotation.ReadValue<Vector2>();
 
         mouseMoveY -= rotationInput.y * SensY * Time.deltaTime;
@@ -353,8 +352,8 @@ public class PlayerController : MonoBehaviour
                 isShiftNotInput = true;
 
             }
-           // ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
-
+            // ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
+            OnPlayerSprint?.Invoke(isShiftNotInput);
         };
 
 
