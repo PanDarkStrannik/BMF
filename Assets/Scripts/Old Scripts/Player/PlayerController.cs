@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using DG.Tweening;
 
 
 [System.Serializable]
@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private Transform cameraOnPlayer;
     [SerializeField] private float SensX = 5, SensY = 10;
+    [Range(0, 2)] [SerializeField] private float sideWaysAngle;
     [SerializeField] private Vector2 MinMax_Y = new Vector2(-40, 40);
-    private float moveX, moveY;
+    private float mouseMoveX, mouseMoveY;
 
     [Header("Ref's to other Classes")]
     [SerializeField] private PlayerWeaponChanger weaponChanger;
@@ -30,6 +31,34 @@ public class PlayerController : MonoBehaviour
     private IRay rayCreation;
     private AInteractable interactable = null;
 
+
+
+    [Header("Vertical Movement Settings")]
+    [SerializeField] private float angle = 45f;
+    [SerializeField] private float minTransformYToJump;
+    [SerializeField] private float ropeJumpForce = 8f;
+    private float arcSin = 0f;
+
+    [Header("Other Components")]
+    [SerializeField] private PhysicMaterial playerPhysMaterial;
+    [SerializeField] private LayerMask whatIsReloadZone;
+
+    private Vector3 movementDirection;
+
+    #region EVENTS
+    public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
+    public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
+    public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
+    public event Action<Vector3> OnPlayerMoved;
+    public event Action<Vector3, float, Transform> OnPlayerMovedWithRotation;
+    public event Action OnPlayerInteractedSet;
+
+    #endregion
+
+    private bool isShiftNotInput = true;
+    private bool isReadyToReload = false;
+
+    #region PROPERITES
     public AInteractable Interactable 
     {
         get { return interactable; }
@@ -45,29 +74,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
-    [Header("Vertical Movement Settings")]
-    [SerializeField] private float angle = 45f;
-    [SerializeField] private float minTransformYToJump;
-    [SerializeField] private float ropeJumpForce = 8f;
-    private float arcSin = 0f;
-
-    [Header("Other Components")]
-    [SerializeField] private PhysicMaterial playerPhysMaterial;
-    [SerializeField] private LayerMask whatIsReloadZone;
-
-    //Events
-    public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
-    public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
-    public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
-    public event Action<Vector3> OnPlayerMoved;
-    public event Action OnPlayerInteractedSet;
-
-    //bools
-    private bool isShiftNotInput = true;
-    private bool isReadyToReload = false;
-
-    //properties
     public List<GunPush> GunPushes
     {
         get
@@ -76,12 +82,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool IsReadyToReload { get => isReadyToReload; }
-
-
-
-    // private AWeapon weaponHealing;
-
+    public Transform CameraOnPlayer { get => cameraOnPlayer; }
+    public float MouseMoveX { get => mouseMoveX; }
+    public float MouseMoveY { get => mouseMoveY; }
+    public Vector3 MovementDirection { get => movementDirection; }
+    #endregion
 
 
 
@@ -145,11 +150,9 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerVerticalMovement()
     {
-        var moveDir = input.MovementInput.GetDirection.ReadValue<Vector2>();
-
         var cameraRot = cameraOnPlayer.transform.forward;
 
-        var d = new Vector3(moveDir.x, moveDir.y, 0).normalized;
+        var d = new Vector3(movementDirection.x, movementDirection.y, 0).normalized;
 
         cameraRot = transform.InverseTransformDirection(cameraRot);
 
@@ -158,7 +161,7 @@ public class PlayerController : MonoBehaviour
         if (Math.Abs(arcSin) < angle)
         {
             d = new Vector3(d.x, 0, d.y);
-            VerticalJump(d, moveDir);
+            VerticalJump(d, movementDirection);
         }
         else
         {
@@ -179,13 +182,13 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerGroundMovement()
     {
-        var moveDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
+        movementDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
 
-        var correctMove = new Vector3(moveDirection.x, 0, moveDirection.y).normalized;
+        var correctMove = new Vector3(movementDirection.x, 0, movementDirection.y).normalized;
 
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
-        OnPlayerMoved?.Invoke(moveDirection);
+        OnPlayerMoved?.Invoke(movementDirection);
     }
 
 
@@ -218,18 +221,32 @@ public class PlayerController : MonoBehaviour
 
     private void RotationInput()
     {
+        OnPlayerMovedWithRotation?.Invoke(movementDirection, mouseMoveX, cameraOnPlayer);
         var rotationInput = input.RotationInput.GetRotation.ReadValue<Vector2>();
 
-        moveY -= rotationInput.y * SensY * Time.deltaTime;
-        moveY = ClampAngle(moveY, MinMax_Y.x, MinMax_Y.y);
+        mouseMoveY -= rotationInput.y * SensY * Time.deltaTime;
+        mouseMoveY = ClampAngle(mouseMoveY, MinMax_Y.x, MinMax_Y.y);
 
-        moveX = transform.rotation.eulerAngles.y + rotationInput.x * SensX * Time.deltaTime;
+        mouseMoveX = transform.rotation.eulerAngles.y + rotationInput.x * SensX * Time.deltaTime;
 
-        transform.rotation = Quaternion.Euler(0, moveX, 0);
+        transform.rotation = Quaternion.Euler(0, mouseMoveX, 0);
 
         if (cameraOnPlayer != null)
         {
-            cameraOnPlayer.rotation = Quaternion.Euler(moveY, cameraOnPlayer.eulerAngles.y, 0);
+            cameraOnPlayer.rotation = Quaternion.Euler(mouseMoveY, cameraOnPlayer.eulerAngles.y, 0);
+
+            if(movementDirection.x > 0)
+            {
+                cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, -sideWaysAngle), 0.1f);
+            }
+            else if(movementDirection.x < 0)
+            {
+                cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, sideWaysAngle), 0.1f);
+            }
+            else
+            {
+                cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, 0f), 0.1f);
+            }
         }
 
     }

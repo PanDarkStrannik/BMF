@@ -1,16 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WeaponAnimations : MonoBehaviour
 {
     [SerializeField] protected Animator weaponAnimator;
     [SerializeField] protected string blendTreeFloat;
 
-  
-    public virtual void OnPlayerMove()
+
+    private void OnEnable()
     {
-        var movespeed = PlayerInformation.GetInstance().PlayerMovement.body.velocity.magnitude;
-        weaponAnimator.SetFloat(blendTreeFloat, movespeed, 0.1f, Time.deltaTime);
+        PlayerInformation.GetInstance().PlayerController.OnPlayerMoved += OnPlayerMove;
     }
+
+    public virtual void OnPlayerMove(Vector3 obj)
+    {
+        weaponAnimator.SetFloat(blendTreeFloat, obj.magnitude, 0.1f, Time.deltaTime);
+    }
+
 }

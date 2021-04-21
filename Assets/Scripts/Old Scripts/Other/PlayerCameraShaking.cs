@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerCameraShaking : MonoBehaviour
 {
@@ -26,12 +27,6 @@ public class PlayerCameraShaking : MonoBehaviour
 
     }
 
-    //private void Shaking()
-    //{
-
-    //    shaker.ShakePosition(playerCamera.transform, duration, strength);
-
-    //}
 
     private void Shaking(float duration, float strength)
     {
