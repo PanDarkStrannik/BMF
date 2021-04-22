@@ -18,31 +18,27 @@ public class WeaponWater : WeaponRange
         maxWaterCharges = resourcesUser.ParamController.DamagebleParams.typesMaxValues[DamagebleParam.ParamType.HolyWater];
 
         resourcesUser.ParamController.DamagebleParams.OnParamChanged += UpdateAmmo;
-        PlayerInformation.GetInstance().PlayerController.OnPlayerMoved += PlayerController_OnPlayerMoved;
-        PlayerInformation.GetInstance().PlayerController.OnChangeWeapon += PlayerController_OnChangeWeapon;
     }
 
-    private void PlayerController_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
-    {
-        if(isReloading)
-        {
-          DisturbReloading();
-        }
-    }
+    //private void PlayerController_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
+    //{
+    //    if(isReloading)
+    //    {
+    //      DisturbReloading();
+    //    }
+    //}
 
-    private void PlayerController_OnPlayerMoved(Vector3 obj)
-    {
-       if(isReloading && obj != Vector3.zero)
-        {
-          DisturbReloading();
-        }
-    }
+    //private void PlayerController_OnPlayerMoved(Vector3 obj)
+    //{
+    //   if(isReloading && obj != Vector3.zero)
+    //    {
+    //      DisturbReloading();
+    //    }
+    //}
 
     protected override void OnDestroy()
     {
         resourcesUser.ParamController.DamagebleParams.OnParamChanged -= UpdateAmmo;
-        PlayerInformation.GetInstance().PlayerController.OnPlayerMoved -= PlayerController_OnPlayerMoved;
-        PlayerInformation.GetInstance().PlayerController.OnChangeWeapon -= PlayerController_OnChangeWeapon;
     }
 
 
@@ -72,37 +68,37 @@ public class WeaponWater : WeaponRange
         }
     }
 
-    public void Reload()
-    {
-        if(waterCharges >= maxWaterCharges)
-        {
-            Debug.Log("Перезарядка не требуется");
-            return;
-        }
-        else
-        {
-            StopAllCoroutines();
-            Debug.Log("Перезаряжаем...");
-            StartCoroutine(Reload(attackParametres.ReloadTime));
-        }
-    }
+    //public void Reload()
+    //{
+    //    if(waterCharges >= maxWaterCharges)
+    //    {
+    //        Debug.Log("Перезарядка не требуется");
+    //        return;
+    //    }
+    //    else
+    //    {
+    //        StopAllCoroutines();
+    //        Debug.Log("Перезаряжаем...");
+    //        StartCoroutine(Reload(attackParametres.ReloadTime));
+    //    }
+    //}
 
-    private void DisturbReloading()
-    {
-        StopAllCoroutines();
-        isReloading = false;
-        OnDisturbReload?.Invoke();
+    //private void DisturbReloading()
+    //{
+    //    StopAllCoroutines();
+    //    isReloading = false;
+    //    OnDisturbReload?.Invoke();
 
-        if (!this.gameObject.activeSelf)
-        {
-            return;
-        }
-        else
-        {
-            StartCoroutine(Serenity(0f));
-        }
+    //    if (!this.gameObject.activeSelf)
+    //    {
+    //        return;
+    //    }
+    //    else
+    //    {
+    //        StartCoroutine(Serenity(0f));
+    //    }
        
-    }
+    //}
 
     public void UpdateAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
     {

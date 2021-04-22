@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
     public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
-    public event Action<Vector3> OnPlayerMoved;
+    public event Action<Vector3, bool> OnPlayerMoved;
     public event Action OnPlayerInteractedSet;
     public event Action<bool> OnPlayerSprint;
 
@@ -136,7 +136,6 @@ public class PlayerController : MonoBehaviour
         {
             case ControlMoveType.Ground:
                 RotationInput();
-                PlayerJump();
                 SlopeFriction();
                 PlayerGroundMovement();
                 break;
@@ -188,21 +187,11 @@ public class PlayerController : MonoBehaviour
 
         correctMove = transform.TransformDirection(correctMove);
         movement.Move(correctMove);
-        OnPlayerMoved?.Invoke(movementDirection);
+        
+        OnPlayerMoved?.Invoke(movementDirection, isShiftNotInput);
     }
 
 
-    private void PlayerJump()
-    {
-        input.ButtonInputs.Jump.performed += context =>
-        {
-            
-          if(movement.Grounded)
-            {
-             movement.body.velocity = PM.JumpForce * Vector3.up;
-            }
-        };
-    }
 
     private void SlopeFriction()
     {
@@ -263,7 +252,7 @@ public class PlayerController : MonoBehaviour
                     if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == e.WeaponType)
                     {
                         var push = transform.TransformDirection(e.PushForce);
-                        StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
+                       // StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
                         e.ShakingParams.ShakeEventInvoke();
                     }
                 }
@@ -325,6 +314,16 @@ public class PlayerController : MonoBehaviour
             }
         };
 
+        input.ButtonInputs.Jump.performed += context =>
+        {
+
+            if (movement.Grounded)
+            {
+                movement.body.velocity = PM.JumpForce * Vector3.up;
+                var audioM = AudioManager.instance;
+                audioM.PlayOneShot("PlayerJump");
+            }
+        };
 
 
         input.ButtonInputs.Reload.performed += _ =>

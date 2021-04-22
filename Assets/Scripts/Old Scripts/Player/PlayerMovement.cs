@@ -21,7 +21,7 @@ public class PlayerMovement : APlayerMovement
     private Dictionary<PlayerMoveType, float> moveTypeSpeeds;
 
     private Transform playerTransform;
-    private bool isMoving;
+    private float stepTime;
 
     //public float test;
     //private bool grounded = false;
@@ -47,7 +47,6 @@ public class PlayerMovement : APlayerMovement
         {
             moveTypeSpeeds.Add(moveTypes[i], speeds[i]);
         }
-
     }
 
     private void Update()
@@ -98,7 +97,7 @@ public class PlayerMovement : APlayerMovement
         body.isKinematic = false;
         bool isCallAlready = false;
         direction = direction.normalized;
-        
+        ApplyingStepSound(direction);
         foreach (var type in moveTypeSpeeds)
         {
             if (moveType == type.Key && !isCallAlready)
@@ -130,6 +129,25 @@ public class PlayerMovement : APlayerMovement
         playerTransform.Translate(dir * vercticalAcceleration * Time.deltaTime);
     }
 
+    private void ApplyingStepSound(Vector3 dir)
+    {
+        if(dir != Vector3.zero && grounded)
+        {
+           switch(moveType)
+           {
+               case PlayerMoveType.Slow:
+                   stepTime = 0.5f;
+                   break;
+               case PlayerMoveType.Fast:
+                   stepTime = 0.3f;
+                   break;
+           }
+            var audioM = AudioManager.instance;
+            audioM.PlayOneShotWithTime("PlayerSteps", stepTime);
+        }
+    }
+
+    
 
     public override IEnumerator ImpulseMove(Vector3 direction, ForceMode forceMode, float time)
     {

@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     [SerializeField] private List<Sound> sounds = new List<Sound>();
+    private float currentTime;
 
 
     private void Start()
@@ -34,45 +35,53 @@ public class AudioManager : MonoBehaviour
 
     private void Init()
     {
-        foreach (var s in sounds)
+        if(sounds.Count > 0)
         {
-            if (s.OriginOfTheSound == null)
-            {
-                s.OriginOfTheSound = this.transform;
-            }
-
-            if(s.AudioClip == null && s.AudioClips.Length == 0)
-            {
-                Debug.LogError($"{s.Name} DOESN'T HAVE ANY SOUNDS IN ARRAY");
-            }
-            else
-            {
-               s.AudioSource = s.OriginOfTheSound.gameObject.AddComponent<AudioSource>();
-               s.AudioSource.clip = s.AudioClip;
-                if(s.AudioClips.Length > 0)
-                {
-                  s.AudioSource.clip = s.AudioClips[Random.Range(0, s.AudioClips.Length)];
-                }
-               s.AudioSource.volume = s.Volume;
-               s.AudioSource.pitch = s.Pitch;
-               s.AudioSource.loop = s.isLooping;
-               s.AudioSource.playOnAwake = s.PlayOnAwake;
-               s.AudioSource.spatialBlend = s.SpatialBlend;
-            }
-
+             foreach (var s in sounds)
+             {
+                 if (s.OriginOfTheSound == null)
+                 {
+                     s.OriginOfTheSound = this.transform;
+                 }
+            
+                 if(s.AudioClip == null && s.AudioClips.Length == 0)
+                 {
+                     Debug.LogError($"{s.Name} DOESN'T HAVE ANY SOUNDS IN ARRAY");
+                 }
+                 else
+                 {
+                    s.AudioSource = s.OriginOfTheSound.gameObject.AddComponent<AudioSource>();
+                    s.AudioSource.clip = s.AudioClip;
+                     if(s.AudioClips.Length > 0)
+                     {
+                         s.AudioSource.clip = s.AudioClips[Random.Range(0, s.AudioClips.Length)];
+                     }
+                    s.AudioSource.volume = s.Volume;
+                    s.AudioSource.pitch = s.Pitch;
+                    s.AudioSource.loop = s.isLooping;
+                    s.AudioSource.playOnAwake = s.PlayOnAwake;
+                    s.AudioSource.spatialBlend = s.SpatialBlend;
+                 }
+            
+             }
         }
     }
 
 
     #region PUBLIC METHODS
-    public void PlayOneShot(string name, float time)
-    {
-        StartCoroutine(OneShotAudioAfterTime(name, time));
-    }
-
     public void PlayOneShot(string name)
     {
         PlaySoundOneShot(name);
+    }
+
+    public void PlayOneShot(string name, float delay)
+    {
+        StartCoroutine(OneShotAudioDelayed(name, delay));
+    }
+
+    public void PlayOneShotWithTime(string name, float inBetweenTime)
+    {
+        StartCoroutine(OneShotAudioWithTime(name, inBetweenTime));
     }
 
     #endregion
@@ -91,18 +100,31 @@ public class AudioManager : MonoBehaviour
                     s.Pitch = Random.Range(s.MinPitch, s.MaxPitch);
                     if(s.AudioClips.Length > 0)
                     {
-                      s.AudioSource.PlayOneShot(s.AudioClips[Random.Range(0, s.AudioClips.Length)]);
-                      s.AudioSource.clip = s.AudioClips[Random.Range(0, s.AudioClips.Length)];
+                        s.AudioSource.PlayOneShot(s.AudioClips[Random.Range(0, s.AudioClips.Length)]);
+                        s.AudioSource.clip = s.AudioClips[Random.Range(0, s.AudioClips.Length)];
                     }
                }
            }
         }
     }
-    private IEnumerator OneShotAudioAfterTime(string name, float time)
+    private IEnumerator OneShotAudioDelayed(string name, float delay)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(delay);
         PlaySoundOneShot(name);
     }
+
+    private IEnumerator OneShotAudioWithTime(string name, float inBetweenTime)
+    {
+        currentTime -= Time.deltaTime;
+        if(currentTime <= 0)
+        {
+            PlaySoundOneShot(name);
+            currentTime = inBetweenTime;
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
+
 
     #endregion
 
@@ -126,10 +148,11 @@ public class Sound
 
 
     [Header("Random Params")]
-    public float MinVolume;
-    public float MaxVolume;
-    public float MinPitch;
-    public float MaxPitch;
+
+    [Range(0.01f, 1)] public float MinVolume;
+    [Range(0.01f, 1)] public float MaxVolume;
+    [Range(0.5f, 3)] public float MinPitch;
+    [Range(0.5f, 3)] public float MaxPitch;
 
     [Header("Other")]
     public Transform OriginOfTheSound;
