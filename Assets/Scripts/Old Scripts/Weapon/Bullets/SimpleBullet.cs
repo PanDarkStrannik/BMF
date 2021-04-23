@@ -10,6 +10,8 @@ public class SimpleBullet : MonoBehaviour, IBullet
     [SerializeField] private List<DamageByType> bulletDatas;
     [SerializeReference] private ParticleSystem bulletDieEffect;
     [SerializeReference] private SpawnedObject spawnedObject;
+    [SerializeField] private AudioSource splashSound;
+    [SerializeField] private AudioClip splashClip;
 
     private LayerMask layer;
     private bool notFistInit = false;

@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
 
     #endregion
 
+    [SerializeField] private List<Music> music = new List<Music>();
     [SerializeField] private List<Sound> sounds = new List<Sound>();
     private float currentTime;
 
@@ -35,7 +36,9 @@ public class AudioManager : MonoBehaviour
 
     private void Init()
     {
-        if(sounds.Count > 0)
+        #region Sounds Init
+
+        if (sounds.Count > 0)
         {
              foreach (var s in sounds)
              {
@@ -46,7 +49,7 @@ public class AudioManager : MonoBehaviour
             
                  if(s.AudioClip == null && s.AudioClips.Length == 0)
                  {
-                     Debug.LogError($"{s.Name} DOESN'T HAVE ANY SOUNDS IN ARRAY");
+                     Debug.LogError($"{s.Name} doesn't have any clips in array");
                  }
                  else
                  {
@@ -65,6 +68,33 @@ public class AudioManager : MonoBehaviour
             
              }
         }
+        #endregion
+
+        #region Music Init
+        
+        if(music.Count > 0)
+        {
+            foreach (var m in music)
+            {
+                if(m.AudioClip1 == null)
+                {
+                    Debug.LogError($"{m.Name} doesn't have any clips in array");
+                }
+                else
+                {
+                   m.AudioSource = gameObject.AddComponent<AudioSource>();
+                   m.AudioSource.clip = m.AudioClip1;
+                   m.AudioSource.volume = m.Volume;
+                   m.AudioSource.loop = m.isLopping;
+                   m.AudioSource.playOnAwake = m.PlayOnAwake;
+                }
+
+                if (m.PlayOnAwake)
+                    m.AudioSource.Play();
+            }
+        }
+
+        #endregion
     }
 
 
@@ -83,6 +113,19 @@ public class AudioManager : MonoBehaviour
     {
         StartCoroutine(OneShotAudioWithTime(name, inBetweenTime));
     }
+
+    public void PlayMusicByName(string name)
+    {
+        PlayMusic(name);
+    }
+
+    public void PlayMusicWithFade(string name, float time)
+    {
+        StartCoroutine(FadeMusicAndPlayNext(name, time));
+    }
+
+    
+
 
     #endregion
 
@@ -107,6 +150,53 @@ public class AudioManager : MonoBehaviour
            }
         }
     }
+
+    private void PlayMusic(string name)
+    {
+        if(music.Count > 0)
+        {
+            foreach (var m in music)
+            {
+                if(m.Name == name && m.AudioClip1 != null)
+                {
+                    m.AudioSource.Play();
+                }
+            }
+        }
+    }
+
+
+    private IEnumerator FadeMusicAndPlayNext(string name, float transitionTime = 1f)
+    {
+        foreach (var m in music)
+        {
+            if (m.AudioClip1 != null && m.AudioClip2 != null)
+            {
+                if (m.AudioSource.isPlaying)
+                {
+                   for (float i = 0; i < transitionTime; i+= Time.deltaTime)
+                   {
+                       m.AudioSource.volume = (m.Volume - (i / transitionTime));
+                       yield return null;
+                   }
+                }
+                m.AudioSource.Stop();
+                m.AudioSource.clip = m.AudioClip2;
+                m.AudioSource.Play();
+
+                for (float i = 0; i < transitionTime; i += Time.deltaTime)
+                {
+                  m.AudioSource.volume =  ((i/ transitionTime));
+                  yield return null;
+                }
+            }
+
+        }
+    }
+
+    
+
+
     private IEnumerator OneShotAudioDelayed(string name, float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -134,7 +224,6 @@ public class AudioManager : MonoBehaviour
 [System.Serializable]
 public class Sound
 {
-
     public string Name;
 
     [Header("Clips")]
@@ -148,7 +237,6 @@ public class Sound
 
 
     [Header("Random Params")]
-
     [Range(0.01f, 1)] public float MinVolume;
     [Range(0.01f, 1)] public float MaxVolume;
     [Range(0.5f, 3)] public float MinPitch;
@@ -160,5 +248,26 @@ public class Sound
     public bool PlayOnAwake;
 
    [HideInInspector] public AudioSource AudioSource;
+
+}
+
+[System.Serializable]
+public class Music
+{
+    public string Name;
+
+    [Header("Clip")]
+    public AudioClip AudioClip1;
+    public AudioClip AudioClip2;
+
+    [Header("Audio Settings")]
+    [Range(0, 1)] public float Volume;
+    public bool isLopping;
+    public bool PlayOnAwake;
+
+    [HideInInspector] public AudioSource AudioSource;
+
+
+
 
 }

@@ -222,24 +222,26 @@ public class PlayerController : MonoBehaviour
         if (cameraOnPlayer != null)
         {
             cameraOnPlayer.rotation = Quaternion.Euler(mouseMoveY, cameraOnPlayer.eulerAngles.y, 0);
-
-            if(movementDirection.x > 0)
-            {
-                cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, -sideWaysAngle), 0.1f);
-            }
-            else if(movementDirection.x < 0)
-            {
-                cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, sideWaysAngle), 0.1f);
-            }
-            else
-            {
-                cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, 0f), 0.1f);
-            }
+            CameraSideAngles();
         }
 
     }
 
-    
+    private void CameraSideAngles()
+    {
+        if (movementDirection.x > 0)
+        {
+            cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, -sideWaysAngle), 0.1f);
+        }
+        else if (movementDirection.x < 0)
+        {
+            cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, sideWaysAngle), 0.1f);
+        }
+        else
+        {
+            cameraOnPlayer.DORotate(new Vector3(cameraOnPlayer.eulerAngles.x, mouseMoveX, 0f), 0.2f);
+        }
+    }
 
     private void ButtonsInput()
     {
