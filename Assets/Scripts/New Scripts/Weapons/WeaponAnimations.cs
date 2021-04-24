@@ -20,7 +20,7 @@ public class WeaponAnimations : MonoBehaviour
     private void OnPlayerMove(Vector3 obj, bool shifting)
     {
         weaponAnimator.SetFloat(blendTreeFloat, obj.magnitude, 0.1f, Time.deltaTime);
-        if(obj != Vector3.zero)
+        if(obj != Vector3.zero && shiftBool != null)
         {
             weaponAnimator.SetBool(shiftBool, !shifting);
         }

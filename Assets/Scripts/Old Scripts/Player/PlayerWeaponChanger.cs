@@ -98,7 +98,9 @@ public class PlayerWeaponChanger
     {
         [SerializeReference] private AWeapon weapon1;
         [SerializeReference] private AWeapon weapon2;
-        [SerializeReference] private GameObject weaponObject;
+        [SerializeReference] private GameObject ObjectWithScript;
+        [SerializeReference] private GameObject Model;
+
 
         public AWeapon Weapon1
         {
@@ -119,12 +121,14 @@ public class PlayerWeaponChanger
 
         public void DisableWeaponObject()
         {
-            weaponObject.SetActive(false);
+            ObjectWithScript.SetActive(false);
+            Model.SetActive(false);
         }
 
         public void EnableWeaponObject()
         {
-            weaponObject.SetActive(true);
+            ObjectWithScript.SetActive(true);
+            Model.SetActive(true);
         }
 
         public bool TryUseFirstWeapon()
