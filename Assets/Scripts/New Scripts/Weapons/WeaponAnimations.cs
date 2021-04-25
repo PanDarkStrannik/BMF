@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.Events;
+
 
 public class WeaponAnimations : MonoBehaviour
 {
@@ -6,6 +9,7 @@ public class WeaponAnimations : MonoBehaviour
     [SerializeField] private string blendTreeFloat;
     [SerializeField] private string shiftBool;
     [SerializeField] private WAnimationRandomizer randomAnimation;
+    [SerializeField] private List<AnimationEvents> animationEvents;
 
     private void OnEnable()
     {
@@ -35,6 +39,17 @@ public class WeaponAnimations : MonoBehaviour
         randomAnimation.RandomizeAnimation(weaponAnimator);
     }
 
+    public void InvokeAnimationEvent()
+    {
+        if(animationEvents.Count > 0)
+        {
+            foreach (var a in animationEvents)
+            {
+                a.Invoke();
+            }
+        }
+    }
+
 }
 
 [System.Serializable]
@@ -50,5 +65,16 @@ public class WAnimationRandomizer
             string triggerName = triggers[index];
             anim.SetTrigger(triggerName);
         }
+    }
+}
+
+[System.Serializable]
+public class AnimationEvents
+{
+    public UnityEvent AnimationEvent;
+
+    public void Invoke()
+    {
+        AnimationEvent?.Invoke();
     }
 }

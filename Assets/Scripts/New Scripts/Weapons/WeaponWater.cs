@@ -41,7 +41,7 @@ public class WeaponWater : WeaponRange
         resourcesUser.ParamController.DamagebleParams.OnParamChanged -= UpdateAmmo;
     }
 
-
+   
 
     public override void Attack()
     {

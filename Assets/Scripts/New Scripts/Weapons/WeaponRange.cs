@@ -46,10 +46,6 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         }
     }
 
-    //private void Update()
-    //{
-    //    OnReloading?.Invoke(IsReloading);
-    //}
 
     private void OnDisable()
     {
@@ -87,7 +83,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
                 bulletSpawner.SpawnFirstObjectInQueue(gunPosition.position, spread.SpreadAngle(gunPosition.rotation));
             }
             attackCount++;
-            StartCoroutine(Serenity(0f));
+            StartCoroutine(Reload(attackParametres.ToAttackTime));
         }
     }
 
@@ -96,16 +92,10 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         State = WeaponState.Reload;
         if (state == WeaponState.Reload)
         {
-            StopCoroutine(Damaging(attackParametres.ToAttackTime));
-            isReloading = true;
-
+           // StopCoroutine(Serenity(attackParametres.ToAttackTime));
             yield return new WaitForSecondsRealtime(time);
-
-            isReloading = false;
-            ReloadCharges();
-
             attackCount = 0;
-            StartCoroutine(Serenity(0f));
+            StartCoroutine(Serenity(attackParametres.TimeBetweenAttack));
         }
         
     }
@@ -171,6 +161,8 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         [Min(0)]
         [SerializeField] private float toAttackTime;
         [Min(0)]
+        [SerializeField] private float timeBetweenAttack = 0f;
+        [Min(0)]
         [SerializeField] private float reloadTime = 0f;
         [Min(0)]
         [SerializeField] private int attackValues = 3;
@@ -206,6 +198,14 @@ public class WeaponRange : AWeapon, IDamagingWeapon
             get
             {
                 return reloadTime;
+            }
+        }
+
+        public float TimeBetweenAttack
+        {
+            get
+            {
+                return timeBetweenAttack;
             }
         }
 
