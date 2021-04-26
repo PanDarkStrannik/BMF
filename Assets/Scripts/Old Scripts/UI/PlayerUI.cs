@@ -1,52 +1,30 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private GameObject deathMenu;
-    //[SerializeField] private GameObject mainMenu;
-    //[SerializeField] private Text textPlayerMaxHP;
-    //[SerializeField] private Text textPlayerHP;
-    [SerializeField] private Image playerBar;
-    [SerializeField] private GameObject damagedEffect;
-    [SerializeField] private Animator damagedEffectAnim;
-    //[SerializeField] private Text HealCDtext;
-    //[SerializeField] private Image HealCDimage;
-
-    //[SerializeField] private Text TPCDtext;
-    //[SerializeField] private Image TPCDimage;
-
+    [SerializeField] private Image healthBarFill;
+    [SerializeField] private Image damagedImage;
     [SerializeField] private float timeToGameOver = 3f;
-    [SerializeField] private float timeDamagedAnim;
 
     [SerializeField] private Text score;
 
-    /*if(спелл на кулдауне) HealCDtext.enabled = true;
-     * else HealCDtext.enabled = false;
-     * HealCDtext.text = (время перезарядки скилла).ToString();
-     * HealCDimage.fillAmount = (оставшееся время перезарядки) / (время перезарядки);
-     * то же самое и для тп
-     */
 
     private bool alreadyDamaged = false;
-
-    //private float maxPlayerHealth;
-
+    
     public delegate void OnPlayerDeathEventHelper();
     public event OnPlayerDeathEventHelper OnPlayerDeathEvent;
 
     private void Start()
     {
-        //TPCDimage.enabled = false;
-        //TPCDtext.enabled = false;
         deathMenu.SetActive(false);
-        damagedEffect.SetActive(false);
+        damagedImage.enabled = false;
 
         score.text = "0";
 
-        //maxPlayerHealth = PlayerInformation.GetInstance().PlayerParamController.MaxHealth;
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ViewHealth;
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamsDamaged += OnPlayerParamDamagedViewer;
         PointCounter.Instance.PointEvent += PlayerUI_PointEvent;
@@ -66,33 +44,8 @@ public class PlayerUI : MonoBehaviour
         score.text = value.ToString();
     }
 
-    //public void InitializePlayerView(float maxPlayerHP)
-    //{
-    //    maxPlayerHealth = maxPlayerHP;
-    //    textPlayerMaxHP.text = maxPlayerHP.ToString();
-    //    textPlayerHP.text = maxPlayerHP.ToString();
-    //}
-
-    //public IEnumerator ReloadTP(float value)
-    //{
-    //    TPCDtext.enabled = true;
-    //    TPCDimage.enabled = true;
-    //    var tmp = value;
-    //    for (float i = 0; i < value; i += Time.fixedDeltaTime)
-    //    {
-    //        TPCDtext.text =  ((int)tmp).ToString();
-    //        TPCDimage.fillAmount = tmp / value;
-    //        yield return new WaitForFixedUpdate();
-    //        tmp -= Time.fixedDeltaTime;
-    //    }
-    //    TPCDtext.enabled = false;
-    //    TPCDimage.enabled = false;
-    //}
-
     private void ViewHealth(DamagebleParam.ParamType paramType, float value, float maxValue)
     {
-        //textPlayerHP.text = currentHP.ToString();
-
         if (paramType == DamagebleParam.ParamType.Health)
         {
             if (value <= 0)
@@ -100,17 +53,8 @@ public class PlayerUI : MonoBehaviour
                 OnPlayerDeathEvent?.Invoke();
                 StartCoroutine(GameOver());
             }
-            //else
-            //{
-            //    if (!alreadyDamaged)
-            //    {
-            //        alreadyDamaged = true;
-            //        damagedEffect.SetActive(true);
-            //        damagedEffectAnim.SetTrigger("Damaged");
-            //        StartCoroutine(ToDamagedEffectDisable());
-            //    }
-            //}
-             playerBar.fillAmount = value / maxValue;
+            
+             healthBarFill.fillAmount = value / maxValue;
         }
     }
 
@@ -119,17 +63,18 @@ public class PlayerUI : MonoBehaviour
         if (!alreadyDamaged)
         {
             alreadyDamaged = true;
-            damagedEffect.SetActive(true);
-            damagedEffectAnim.SetTrigger("Damaged");
+            damagedImage.enabled = true;
             StartCoroutine(ToDamagedEffectDisable());
         }
     }
 
     private IEnumerator ToDamagedEffectDisable()
     {
-        yield return new WaitForSeconds(timeDamagedAnim);
+        damagedImage.DOFade(0, 1f);
+        yield return new WaitForSeconds(1f);
+        damagedImage.enabled = false;
+        damagedImage.DOFade(1, 0);
         alreadyDamaged = false;
-        damagedEffect.SetActive(false);
     }
 
 

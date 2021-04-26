@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class PlayerWeaponChanger
@@ -11,8 +12,11 @@ public class PlayerWeaponChanger
    // private AWeapon currentWeapon = null;
 
     private WeaponSpellsHolder currentWeapon = null;
-
     private int currentWeaponNum = 0;
+
+    #region PROPERTIES
+
+    public int CurrentWeaponNum { get => currentWeaponNum; }
 
     public WeaponSpellsHolder CurrentWeapon
     {
@@ -33,6 +37,9 @@ public class PlayerWeaponChanger
             return weapons;
         }
     }
+
+    #endregion
+
 
     public bool TryGetCurrentWeaponHolder(out WeaponSpellsHolder returnedHolder)
     {
@@ -84,7 +91,6 @@ public class PlayerWeaponChanger
             currentWeapon = weapons[weaponNum];
             currentWeapon.EnableWeaponObject();
             currentWeaponNum = weaponNum;
-
         }
         else
         {

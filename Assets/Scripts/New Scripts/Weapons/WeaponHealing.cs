@@ -58,13 +58,13 @@ public class WeaponHealing : AWeapon, IHeallingWeapon
         this.healingObject = healingObject;
         if (state != WeaponState.ImposibleAttack && currentHealCount >= waterHealingData.HealCount)
         {
-            StopCoroutine(Damaging(waterHealingData.AttackTime));
+            StopCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
             StartCoroutine(Reload(waterHealingData.ReloadTime));
         }
         else if (state == WeaponState.Serenity)
         {
             currentHealCount++;
-            StartCoroutine(Damaging(waterHealingData.AttackTime));
+            StartCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
         }
     }
 
@@ -171,7 +171,7 @@ public class WeaponHealing : AWeapon, IHeallingWeapon
     protected class HealingData
     {
         [SerializeField] private List<DamageByType> weaponData;
-        [SerializeField] private float attackTime;
+        [SerializeField] private float timeBetweenUse;
         [SerializeField] private float reloadTime = 0f;
         [SerializeField] private float healCount = 0;
 
@@ -183,11 +183,11 @@ public class WeaponHealing : AWeapon, IHeallingWeapon
             }
         }
 
-        public float AttackTime
+        public float TimeBetweeenUse
         {
             get
             {
-                return attackTime;
+                return timeBetweenUse;
             }
         }
 

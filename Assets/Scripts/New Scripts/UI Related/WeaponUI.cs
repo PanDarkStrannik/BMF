@@ -9,41 +9,60 @@ public class WeaponUI : MonoBehaviour
 {
     [SerializeField] private Image reloadTimerImage;
     [SerializeField] private Text description;
-    [SerializeField] private Text ammoCount;
+    [SerializeField] private Image waterFill;
+
+    [SerializeField] private List<WeaponUISelection> weaponSelectionUI = new List<WeaponUISelection>();
     
+    
+
     private PlayerController player;
     private List<UnityAction> actions = new List<UnityAction>();
 
 
     private void Start()
     {
-        player = PlayerInformation.GetInstance().PlayerController;
-
-        description.text = null;
         ActionCompare();
-        player.OnPlayerInteractedSet += Player_OnPlayerInteractedSet;
-        player.OnChangeWeapon += Player_OnChangeWeapon;
-        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ChangeAmmo;
-       
+        description.text = null;
     }
 
-    private void Player_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder obj)
+    private void OnEnable()
     {
-        if (obj.TryGetWeaponByType(out WeaponRange weaponRange))
+        player = PlayerInformation.GetInstance().PlayerController;
+        player.OnPlayerInteractedSet += Player_OnPlayerInteractedSet;
+        player.OnChangeWeapon += Player_OnChangeWeapon;
+        player.OnCurrentWeaponNumber += Player_OnCurrentWeaponNumber;
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ChangeAmmo;
+    }
+
+    private void OnDestroy()
+    {
+        player.OnPlayerInteractedSet -= Player_OnPlayerInteractedSet;
+        player.OnChangeWeapon -= Player_OnChangeWeapon;
+        player.OnCurrentWeaponNumber -= Player_OnCurrentWeaponNumber;
+        PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged -= ChangeAmmo;
+    }
+
+    private void Player_OnCurrentWeaponNumber(int weaponNum)
+    {
+        foreach (var w in weaponSelectionUI)
         {
-            ammoCount.enabled = true;
+            if(w.CurrentWeapon == weaponNum)
+            {
+                w.Invoke();
+            }
         }
-        else
-        {
-            ammoCount.enabled = false;
-        }
+    }
+
+    private void Player_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder curWeapon)
+    {
+        // перекати-поле...
     }
 
     private void ChangeAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)
     {
         if (paramType == DamagebleParam.ParamType.HolyWater)
         {
-            ammoCount.text = value.ToString();
+            waterFill.fillAmount = value / maxValue;
         }
     }
 
@@ -91,4 +110,17 @@ public class WeaponUI : MonoBehaviour
     }
 
     
+}
+
+[System.Serializable]
+public class WeaponUISelection
+{
+    public string name;
+    public int CurrentWeapon;
+    public UnityEvent OnCurrentWeaponSelected;
+
+    public void Invoke()
+    {
+        OnCurrentWeaponSelected?.Invoke();
+    }
 }

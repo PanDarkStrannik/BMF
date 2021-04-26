@@ -11,7 +11,6 @@ public class DeathMenuScript : MonoBehaviour
     {
         PlayerPointsListener(0);
         PointCounter.Instance.PointEvent += PlayerPointsListener;
-       // PlayerInformation.GetInstance().PlayerParamController.PlayerDamaged += delegate { PlayerDamagedListener(); };     
     }
 
     private void PlayerPointsListener(int value)

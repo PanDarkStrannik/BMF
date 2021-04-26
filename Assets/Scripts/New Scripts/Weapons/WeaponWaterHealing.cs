@@ -13,13 +13,13 @@ public class WeaponWaterHealing : WeaponHealing
         {
             if (state != WeaponState.ImposibleAttack && currentHealCount >= waterHealingData.HealCount)
             {
-                StopCoroutine(Damaging(waterHealingData.AttackTime));
+                StopCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
                 StartCoroutine(Reload(waterHealingData.ReloadTime));
             }
             else if (state == WeaponState.Serenity)
             {
                 currentHealCount++;
-                StartCoroutine(Damaging(waterHealingData.AttackTime));
+                StartCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
             }
         }
         else
@@ -28,7 +28,7 @@ public class WeaponWaterHealing : WeaponHealing
             {
                 if(resourcesUser.TryUseResource())
                 {
-                    StartCoroutine(Damaging(waterHealingData.AttackTime));
+                    StartCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
                 }
             }
         }

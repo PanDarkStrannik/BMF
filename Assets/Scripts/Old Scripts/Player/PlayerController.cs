@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
@@ -49,14 +50,13 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
     public event PlayerWeaponControlHelper PlayerWeaponControlEvent;
     public event Action<PlayerWeaponChanger.WeaponSpellsHolder> OnChangeWeapon;
+    public event Action<int> OnCurrentWeaponNumber;
     public event Action<Vector3, bool> OnPlayerMoved;
     public event Action OnPlayerInteractedSet;
-    public event Action<bool> OnPlayerSprint;
-
     #endregion
 
     private bool isShiftNotInput = true;
-    private bool isReadyToReload = false;
+    private bool isReadyToChangeWeapon = true;
 
     #region PROPERITES
     public AInteractable Interactable 
@@ -112,9 +112,6 @@ public class PlayerController : MonoBehaviour
         ButtonsInput();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-      //  weaponHealing = weaponChanger.AllWeapons.Find(x => x is IHeallingWeapon) as AWeapon; 
-        
     }
 
     private void OnEnable()
@@ -129,9 +126,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // WeaponChecker();
-       // CheckingReloadZone();
-
         switch (controlMoveType)
         {
             case ControlMoveType.Ground:
@@ -243,6 +237,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StopChangingWeapon(float time)
+    {
+        StartCoroutine(StopWeaponChange(time));
+    }
+
+    private IEnumerator StopWeaponChange(float time)
+    {
+        isReadyToChangeWeapon = false;
+        yield return new WaitForSeconds(time);
+        isReadyToChangeWeapon = true;
+    }
+
+
+
+
     private void ButtonsInput()
     {
         input.ButtonInputs.MainAttack.performed += context =>
@@ -286,33 +295,40 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.ChangeWeaponByKeyboard.performed += context =>
         {
-            weaponChanger.ChangeWeapon((int)input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
-            if(weaponChanger.CurrentWeapon != null)
+            if(isReadyToChangeWeapon)
             {
-                OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
+               weaponChanger.ChangeWeapon((int)input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
+               if(weaponChanger.CurrentWeapon != null)
+               {
+                   OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
+                   OnCurrentWeaponNumber?.Invoke(weaponChanger.CurrentWeaponNum);
+               }
             }
-         //   ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
         };
 
         input.ButtonInputs.MouseScroll.performed += context =>
         {
-            var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
-            Debug.Log(testValue);
-            if (testValue > 0)
+            if(isReadyToChangeWeapon)
             {
-                weaponChanger.NextWeapon();
-            }
-            else if (testValue < 0)
-            {
-                weaponChanger.PrevWeapon();
-            }
-            else
-            {
-                throw new System.Exception("Почему-то при скролле выдало 0");
-            }
-            if (weaponChanger.CurrentWeapon != null)
-            {
-                OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
+                var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
+                Debug.Log(testValue);
+                if (testValue > 0)
+                {
+                    weaponChanger.NextWeapon();
+                }
+                else if (testValue < 0)
+                {
+                    weaponChanger.PrevWeapon();
+                }
+                else
+                {
+                    throw new System.Exception("Почему-то при скролле выдало 0");
+                }
+                if (weaponChanger.CurrentWeapon != null)
+                {
+                    OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
+                    OnCurrentWeaponNumber?.Invoke(weaponChanger.CurrentWeaponNum);
+                }
             }
         };
 
@@ -354,7 +370,6 @@ public class PlayerController : MonoBehaviour
 
             }
             // ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
-            OnPlayerSprint?.Invoke(isShiftNotInput);
         };
 
 
