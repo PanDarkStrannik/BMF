@@ -131,19 +131,22 @@ public class PlayerMovement : APlayerMovement
 
     private void ApplyingStepSound(Vector3 dir)
     {
-        if(dir != Vector3.zero && grounded)
+        var audioM = AudioManager.instance;
+        if(audioM != null)
         {
-           switch(moveType)
+           if(dir != Vector3.zero && grounded)
            {
-               case PlayerMoveType.Slow:
-                   stepTime = 0.5f;
-                   break;
-               case PlayerMoveType.Fast:
-                   stepTime = 0.3f;
-                   break;
+              switch(moveType)
+              {
+                  case PlayerMoveType.Slow:
+                      stepTime = 0.5f;
+                      break;
+                  case PlayerMoveType.Fast:
+                      stepTime = 0.3f;
+                      break;
+              }
+               audioM.PlayOneShotWithTime("PlayerSteps", stepTime);
            }
-            var audioM = AudioManager.instance;
-            audioM.PlayOneShotWithTime("PlayerSteps", stepTime);
         }
     }
 

@@ -339,7 +339,10 @@ public class PlayerController : MonoBehaviour
             {
                 movement.body.velocity = PM.JumpForce * Vector3.up;
                 var audioM = AudioManager.instance;
-                audioM.PlayOneShot("PlayerJump");
+                if(audioM != null)
+                {
+                 audioM.PlayOneShot("PlayerJump");
+                }
             }
         };
 
