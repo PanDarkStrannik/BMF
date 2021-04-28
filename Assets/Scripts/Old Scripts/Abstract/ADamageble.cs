@@ -37,6 +37,10 @@ public abstract class ADamageble : MonoBehaviour, IDamageble
         {
             return layer;
         }
+        set
+        {
+            layer = value;
+        }
     }
 
     public abstract void ApplyDamage(DamageByType weapon);
