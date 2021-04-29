@@ -245,6 +245,14 @@
                     "expectedControlType": "",
                     "processors": "Clamp(min=-1,max=1)",
                     "interactions": ""
+                },
+                {
+                    "name": "Ability1",
+                    "type": "Button",
+                    "id": "cfc186c5-73a6-466c-8f3c-3c4192760611",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -476,6 +484,17 @@
                     "processors": "",
                     "groups": "Mouse And Keybord",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d2d7f98-6158-4bea-9381-a015ba9ec4a0",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse And Keybord",
+                    "action": "Ability1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

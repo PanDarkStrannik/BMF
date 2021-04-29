@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerUI playerUI;
     [SerializeReference] private APlayerMovement movement;
     [SerializeField] private List<GunPush> gunPushes;
+    [SerializeField] private AAbility ability;
     private WeaponRange rangeW;
     private PlayerMovement PM;
     private PlayerInput input;
@@ -73,6 +74,8 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public AAbility Ability { get => ability; }
 
     public List<GunPush> GunPushes
     {
@@ -343,6 +346,14 @@ public class PlayerController : MonoBehaviour
                 {
                  audioM.PlayOneShot("PlayerJump");
                 }
+            }
+        };
+
+        input.ButtonInputs.Ability1.performed += _ =>
+        {
+            if(ability.AbilityState == AbilityState.Enabled)
+            {
+                ability.UseAbility();
             }
         };
 

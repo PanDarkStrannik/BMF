@@ -9,7 +9,9 @@ public class ActiveAbility : AAbility
     [SerializeField] protected ActiveSkillParams activeSkillParams;
     [SerializeField] protected ActiveSkillEvent activeSkillEvent;
 
+
     protected override AbilityType AbilityType => AbilityType.ActiveSkill;
+
 
     public override void UseAbility()
     {
@@ -28,7 +30,6 @@ public class ActiveAbility : AAbility
         if(AbilityState == AbilityState.Enabled)
         {
             yield return new WaitForSecondsRealtime(time); // time for Start
-            activeSkillEvent.InvokeAbilityEvent(AbilityState); // start event
             StartCoroutine(Using(activeSkillParams.ActiveTime));
         }
 
@@ -40,7 +41,6 @@ public class ActiveAbility : AAbility
         if(AbilityState == AbilityState.Using)
         {
             yield return new WaitForSecondsRealtime(time); //active time
-            activeSkillEvent.InvokeAbilityEvent(AbilityState);
             StartCoroutine(CoolDown(activeSkillParams.CoolDownTime));
         }
     }
@@ -51,6 +51,7 @@ public class ActiveAbility : AAbility
        {
             AbilityState = AbilityState.Disabled;
             yield return new WaitForSecondsRealtime(time); // coolDown time
+            Debug.Log("Ability is ready!");
             StopAllCoroutines();
             AbilityState = AbilityState.Enabled;
        }
@@ -76,18 +77,18 @@ public class ActiveSkillParams
 [System.Serializable]
 public class ActiveSkillEvent
 {
-   [SerializeField] private UnityEvent EventOnEnable;
-   [SerializeField] private UnityEvent EventOnDisable;
+   [SerializeField] private UnityEvent SkillOnEnable;
+   [SerializeField] private UnityEvent SkillOnDisable;
 
     public void InvokeAbilityEvent(AbilityState state)
     {
         switch(state)
         {
             case AbilityState.Enabled:
-                EventOnEnable?.Invoke();
+                SkillOnEnable?.Invoke();
                 break;
             case AbilityState.Using:
-                EventOnDisable?.Invoke();
+                SkillOnDisable?.Invoke();
                 break;
         }
     }

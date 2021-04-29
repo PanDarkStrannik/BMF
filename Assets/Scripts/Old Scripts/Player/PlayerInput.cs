@@ -258,6 +258,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": ""Clamp(min=-1,max=1)"",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ability1"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfc186c5-73a6-466c-8f3c-3c4192760611"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -491,6 +499,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d2d7f98-6158-4bea-9381-a015ba9ec4a0"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -533,6 +552,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ButtonInputs_Blink = m_ButtonInputs.FindAction("Blink", throwIfNotFound: true);
         m_ButtonInputs_ESC = m_ButtonInputs.FindAction("ESC", throwIfNotFound: true);
         m_ButtonInputs_MouseScroll = m_ButtonInputs.FindAction("MouseScroll", throwIfNotFound: true);
+        m_ButtonInputs_Ability1 = m_ButtonInputs.FindAction("Ability1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -666,6 +686,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_ButtonInputs_Blink;
     private readonly InputAction m_ButtonInputs_ESC;
     private readonly InputAction m_ButtonInputs_MouseScroll;
+    private readonly InputAction m_ButtonInputs_Ability1;
     public struct ButtonInputsActions
     {
         private @PlayerInput m_Wrapper;
@@ -680,6 +701,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Blink => m_Wrapper.m_ButtonInputs_Blink;
         public InputAction @ESC => m_Wrapper.m_ButtonInputs_ESC;
         public InputAction @MouseScroll => m_Wrapper.m_ButtonInputs_MouseScroll;
+        public InputAction @Ability1 => m_Wrapper.m_ButtonInputs_Ability1;
         public InputActionMap Get() { return m_Wrapper.m_ButtonInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -719,6 +741,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MouseScroll.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMouseScroll;
                 @MouseScroll.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMouseScroll;
                 @MouseScroll.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMouseScroll;
+                @Ability1.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnAbility1;
+                @Ability1.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnAbility1;
+                @Ability1.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnAbility1;
             }
             m_Wrapper.m_ButtonInputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -753,6 +778,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MouseScroll.started += instance.OnMouseScroll;
                 @MouseScroll.performed += instance.OnMouseScroll;
                 @MouseScroll.canceled += instance.OnMouseScroll;
+                @Ability1.started += instance.OnAbility1;
+                @Ability1.performed += instance.OnAbility1;
+                @Ability1.canceled += instance.OnAbility1;
             }
         }
     }
@@ -787,5 +815,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnBlink(InputAction.CallbackContext context);
         void OnESC(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
+        void OnAbility1(InputAction.CallbackContext context);
     }
 }

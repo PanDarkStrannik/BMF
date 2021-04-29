@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum AbilityType 
 { 
@@ -15,13 +16,23 @@ public enum AbilityState
 public abstract class AAbility : MonoBehaviour
 {
     [SerializeField] protected GameObject abilityObject;
+    [SerializeField] protected AbilityTimeEvents abilityTimeEvents;
 
+    #region PROPERITES
     protected abstract AbilityType AbilityType
     {
         get;
     }
 
+    public AbilityTimeEvents AbilityTimeEvents
+    {
+        get => abilityTimeEvents;
+    }
+
+    #endregion
+
     public AbilityState AbilityState = AbilityState.Enabled;
+
 
 
     public abstract void UseAbility();
@@ -48,4 +59,14 @@ public abstract class AAbility : MonoBehaviour
    
 
 
+}
+public class AbilityTimeEvents
+{
+    public event Action<float> OnTimeChanged;
+
+
+    public void Invoke(float time)
+    {
+        OnTimeChanged?.Invoke(time);
+    }
 }

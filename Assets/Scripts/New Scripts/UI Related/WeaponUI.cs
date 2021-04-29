@@ -10,19 +10,24 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] private Image reloadTimerImage;
     [SerializeField] private Text description;
     [SerializeField] private Image waterFill;
+    [SerializeField] private Image melFill;
 
     [SerializeField] private List<WeaponUISelection> weaponSelectionUI = new List<WeaponUISelection>();
-    
     
 
     private PlayerController player;
     private List<UnityAction> actions = new List<UnityAction>();
 
+    private float maxAbilityTime = 20f;
+
 
     private void Start()
     {
         ActionCompare();
-        description.text = null;
+        if(description != null)
+        {
+          description.text = null;
+        }
     }
 
     private void OnEnable()
@@ -33,6 +38,8 @@ public class WeaponUI : MonoBehaviour
         player.OnCurrentWeaponNumber += Player_OnCurrentWeaponNumber;
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ChangeAmmo;
     }
+
+    
 
     private void OnDestroy()
     {
