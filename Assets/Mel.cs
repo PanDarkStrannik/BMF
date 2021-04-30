@@ -30,7 +30,8 @@ public class Mel : ActiveAbility
         if(AbilityState == AbilityState.Enabled)
         {
             yield return new WaitForSecondsRealtime(time);
-            spawner.SpawnFirstObjectInQueue(transform.position, Quaternion.identity);
+            var melPos = new Vector3(transform.position.x, transform.position.y - 0.03f, transform.position.z);
+            spawner.SpawnFirstObjectInQueue(melPos, Quaternion.identity);
             activeSkillEvent.InvokeAbilityEvent(AbilityState);
             StartCoroutine(Using(activeSkillParams.ActiveTime));
         }
@@ -41,7 +42,6 @@ public class Mel : ActiveAbility
         AbilityState = AbilityState.Using;
         if(AbilityState == AbilityState.Using)
         {
-            abilityTimeEvents.Invoke(time);
             yield return new WaitForSecondsRealtime(time);
             activeSkillEvent.InvokeAbilityEvent(AbilityState);
             spawnShield.Die();

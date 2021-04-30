@@ -138,7 +138,6 @@ public class AudioManager : MonoBehaviour
            {
                if (s.Name == name)
                {
-                    s.AudioSource.PlayOneShot(s.AudioClip);
                     s.Volume = Random.Range(s.MinVolume, s.MaxVolume);
                     s.Pitch = Random.Range(s.MinPitch, s.MaxPitch);
                     if(s.AudioClips.Length > 0)
@@ -146,6 +145,8 @@ public class AudioManager : MonoBehaviour
                         s.AudioSource.PlayOneShot(s.AudioClips[Random.Range(0, s.AudioClips.Length)]);
                         s.AudioSource.clip = s.AudioClips[Random.Range(0, s.AudioClips.Length)];
                     }
+                    if(s.AudioClip != null)
+                       s.AudioSource.PlayOneShot(s.AudioClip);
                }
            }
         }
@@ -186,7 +187,7 @@ public class AudioManager : MonoBehaviour
 
                 for (float i = 0; i < transitionTime; i += Time.deltaTime)
                 {
-                  m.AudioSource.volume =  ((i/ transitionTime));
+                  m.AudioSource.volume =  ((i/ transitionTime) * 1);
                   yield return null;
                 }
             }
