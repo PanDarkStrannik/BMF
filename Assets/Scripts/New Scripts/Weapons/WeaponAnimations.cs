@@ -39,13 +39,16 @@ public class WeaponAnimations : MonoBehaviour
         randomAnimation.RandomizeAnimation(weaponAnimator);
     }
 
-    public void InvokeAnimationEvent()
+    public void InvokeAnimationEvent(string eventName)
     {
         if(animationEvents.Count > 0)
         {
             foreach (var a in animationEvents)
             {
-                a.Invoke();
+                if(a.Name == eventName)
+                {
+                  a.Invoke();
+                }
             }
         }
     }
