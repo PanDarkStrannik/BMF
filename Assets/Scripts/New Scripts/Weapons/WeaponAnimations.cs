@@ -71,6 +71,7 @@ public class WAnimationRandomizer
 [System.Serializable]
 public class AnimationEvents
 {
+    public string Name;
     public UnityEvent AnimationEvent;
 
     public void Invoke()
