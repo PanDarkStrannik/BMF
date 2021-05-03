@@ -17,7 +17,7 @@ public class CameraTilt : MonoBehaviour
     public void TiltByY(float angle)
     {
         var rotationAngle = new Vector3(angle, 0f, 0f);
-        cam.DOLocalRotate(rotationAngle, 0.1f);
+        cam.DOLocalRotate(rotationAngle, 0.2f);
     }
     
     public void TiltByX(float angle)
@@ -26,8 +26,15 @@ public class CameraTilt : MonoBehaviour
         cam.DOLocalRotate(rotationAngle, 0.2f);
     }
 
+    public void TiltByYFromTo(float angle)
+    {
+        var rotationAngle = new Vector3(angle, 0f, 0f);
+        cam.DOLocalRotate(rotationAngle, 0.1f).From(-rotationAngle, false);
+       
+    }
+
     public void DefaultTilt()
     {
-        cam.DOLocalRotate(defaultCamLocalRotation, 0.1f);
+        cam.DOLocalRotate(defaultCamLocalRotation, 0.15f);
     }
 }

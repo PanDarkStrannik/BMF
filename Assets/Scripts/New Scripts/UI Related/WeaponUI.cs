@@ -2,31 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Events;
 
 
 public class WeaponUI : MonoBehaviour
 {
-    [SerializeField] private Image reloadTimerImage;
-    [SerializeField] private Text description;
+    [Header("Holy Water")]
+    [SerializeField] private Image waterReloadTimerImage;
+    [SerializeField] private TMP_Text waterReloadDescriptionText;
     [SerializeField] private Image waterFill;
-    [SerializeField] private Image melFill;
 
+    [Header("Mel")]
+    [SerializeField] private Image melFill;
+    private float melStartUsingTime;
+    private float melMaxUsingTime;
+    private bool isMelReloading = false;
+
+    [Header("Icon change")]
     [SerializeField] private List<WeaponUISelection> weaponSelectionUI = new List<WeaponUISelection>();
-    
 
     private PlayerController player;
     private List<UnityAction> actions = new List<UnityAction>();
-
-    private float maxAbilityTime = 20f;
 
 
     private void Start()
     {
         ActionCompare();
-        if(description != null)
+        if(waterReloadDescriptionText != null)
         {
-          description.text = null;
+          waterReloadDescriptionText.text = null;
         }
     }
 
@@ -37,6 +42,7 @@ public class WeaponUI : MonoBehaviour
         player.OnChangeWeapon += Player_OnChangeWeapon;
         player.OnCurrentWeaponNumber += Player_OnCurrentWeaponNumber;
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ChangeAmmo;
+        melMaxUsingTime = player.Ability.AbilityParams.ActiveTime;
     }
 
     
@@ -58,6 +64,30 @@ public class WeaponUI : MonoBehaviour
                 w.Invoke();
             }
         }
+    }
+
+    public void MelTimerOn()
+    {
+        Debug.Log("A");
+        StartCoroutine(MelTick());
+    }
+    
+    private IEnumerator MelTick()
+    {
+        //need fix
+        isMelReloading = true;
+        for (float i = 0; 0 < melStartUsingTime; i-= Time.deltaTime)
+        {
+            melMaxUsingTime = i;
+            melFill.fillAmount = melStartUsingTime/melMaxUsingTime;
+            if(!isMelReloading)
+            {
+                melStartUsingTime = 0f;
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        isMelReloading = false;
     }
 
     private void Player_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder curWeapon)
@@ -100,12 +130,12 @@ public class WeaponUI : MonoBehaviour
         {
             Debug.Log("interactable null");
         }
-        description.text = player.Interactable.GetDescription();
+        waterReloadDescriptionText.text = player.Interactable.GetDescription();
     }
 
     private void InteractableDescriptionOut()
     {
-        description.text = null;
+        waterReloadDescriptionText.text = null;
         player.Interactable.Unsubsribe(actions);
         //player.Interactable.Unsubscribe();
     }
@@ -113,7 +143,7 @@ public class WeaponUI : MonoBehaviour
     private void InteractableGettingDescription()
     {
         var reloadZone = player.Interactable as ReloadZone;
-        reloadTimerImage.fillAmount = reloadZone.CurrentReloadTime / reloadZone.ReloadTime;
+        waterReloadTimerImage.fillAmount = reloadZone.CurrentReloadTime / reloadZone.ReloadTime;
     }
 
     

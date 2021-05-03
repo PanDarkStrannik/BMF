@@ -7,8 +7,9 @@ public class Mel : ActiveAbility
     [SerializeField] private Spawner spawner;
     [SerializeField] private SpawnedObject spawnShield;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         spawner.CreateSpawner();
         foreach (var s in spawner.spawned_objects)
         {
@@ -18,42 +19,40 @@ public class Mel : ActiveAbility
 
     public override void UseAbility()
     {
-        if(AbilityState == AbilityState.Enabled)
+        if(abilityState == AbilityState.Enabled)
         {
-            StartCoroutine(StartUse(activeSkillParams.TimeForUse));
+            StartCoroutine(StartUse(abilityParams.TimeForUse));
         }
     }
 
     protected override IEnumerator StartUse(float time)
     {
         AbilityState = AbilityState.Enabled;
-        if(AbilityState == AbilityState.Enabled)
+        if(abilityState == AbilityState.Enabled)
         {
             yield return new WaitForSecondsRealtime(time);
             var melPos = new Vector3(transform.position.x, transform.position.y - 0.03f, transform.position.z);
             spawner.SpawnFirstObjectInQueue(melPos, Quaternion.identity);
-            activeSkillEvent.InvokeAbilityEvent(AbilityState);
-            StartCoroutine(Using(activeSkillParams.ActiveTime));
+            StartCoroutine(Using(abilityParams.ActiveTime));
         }
     }
 
     protected override IEnumerator Using(float time)
     {
         AbilityState = AbilityState.Using;
-        if(AbilityState == AbilityState.Using)
+        if(abilityState == AbilityState.Using)
         {
             yield return new WaitForSecondsRealtime(time);
-            activeSkillEvent.InvokeAbilityEvent(AbilityState);
             spawnShield.Die();
-            StartCoroutine(CoolDown(activeSkillParams.CoolDownTime));
+            StartCoroutine(CoolDown(abilityParams.CoolDownTime));
         }
     }
 
     protected override IEnumerator CoolDown(float time)
     {
-        if(AbilityState != AbilityState.Disabled)
+        if(abilityState != AbilityState.Disabled)
         {
-            AbilityState = AbilityState.Disabled;
+           AbilityState = AbilityState.Disabled;
             yield return new WaitForSecondsRealtime(time);
             StopAllCoroutines();
             AbilityState = AbilityState.Enabled;
