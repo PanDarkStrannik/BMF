@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using System;
 using UnityEngine.Events;
-
+using DG.Tweening;
 public class SimpleMenuController : MonoBehaviour
 {
     [SerializeField] private AudioMixer mainMixer;

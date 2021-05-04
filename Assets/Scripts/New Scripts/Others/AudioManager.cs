@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using DG.Tweening;
 public class AudioManager : MonoBehaviour
 {
     #region SINGLETON
@@ -94,15 +93,14 @@ public class AudioManager : MonoBehaviour
 
                 if (m.PlayWithFade)
                 {
-                    m.AudioSource.Play();//убивает твин моментально
-                    m.AudioSource.DOFade(m.Volume, 5f).From(0).Kill(true);
+                    Debug.Log("Check");
+                    FadeMusic(10f);
                 }
             }
         }
 
         #endregion
     }
-
 
     #region PUBLIC METHODS
     public void PlayOneShot(string name)
@@ -130,7 +128,10 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeMusicAndPlayNext(name, time));
     }
 
-    
+    public void FadeMusic(float transitionTime)
+    {
+        StartCoroutine(MusicFadeIn(transitionTime));
+    }
 
 
     #endregion
@@ -172,6 +173,20 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+
+    private IEnumerator MusicFadeIn(float transitionTime)
+    {
+        foreach (var m in music)
+        {
+            m.AudioSource.Stop();
+            m.AudioSource.Play();
+            for (float i = 0; i < transitionTime; i+= Time.deltaTime)
+            {
+                m.AudioSource.volume = ((i / transitionTime) * m.Volume);
+               yield return null;
+            }
+        }
+    }
 
     private IEnumerator FadeMusicAndPlayNext(string name, float transitionTime = 1f)
     {
