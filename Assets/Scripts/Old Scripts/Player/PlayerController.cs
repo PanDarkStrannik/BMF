@@ -259,15 +259,18 @@ public class PlayerController : MonoBehaviour
     {
         input.ButtonInputs.MainAttack.performed += context =>
         {
-            if (weaponChanger.CurrentWeapon.TryUseFirstWeapon())
+            if(!PauseController.isPaused)
             {
-                foreach (var e in gunPushes)
+                if (weaponChanger.CurrentWeapon.TryUseFirstWeapon())
                 {
-                    if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == e.WeaponType)
+                    foreach (var e in gunPushes)
                     {
-                        var push = transform.TransformDirection(e.PushForce);
-                       // StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
-                        e.ShakingParams.ShakeEventInvoke();
+                        if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == e.WeaponType)
+                        {
+                            var push = transform.TransformDirection(e.PushForce);
+                           // StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
+                            e.ShakingParams.ShakeEventInvoke();
+                        }
                     }
                 }
             }
@@ -280,15 +283,18 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.SecondAttack.performed += context =>
         {
-            if (weaponChanger.CurrentWeapon.TryUseSecoundWeapon())
+            if(!PauseController.isPaused)
             {
-                foreach (var e in gunPushes)
+                if (weaponChanger.CurrentWeapon.TryUseSecoundWeapon())
                 {
-                    if (weaponChanger.CurrentWeapon.Weapon2.WeaponType == e.WeaponType)
+                    foreach (var e in gunPushes)
                     {
-                        var push = transform.TransformDirection(e.PushForce);
-                        StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
-                        e.ShakingParams.ShakeEventInvoke();
+                        if (weaponChanger.CurrentWeapon.Weapon2.WeaponType == e.WeaponType)
+                        {
+                            var push = transform.TransformDirection(e.PushForce);
+                            StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
+                            e.ShakingParams.ShakeEventInvoke();
+                        }
                     }
                 }
             }
@@ -298,62 +304,73 @@ public class PlayerController : MonoBehaviour
 
         input.ButtonInputs.ChangeWeaponByKeyboard.performed += context =>
         {
-            if(isReadyToChangeWeapon)
+            if(!PauseController.isPaused)
             {
-               weaponChanger.ChangeWeapon((int)input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
-               if(weaponChanger.CurrentWeapon != null)
+               if(isReadyToChangeWeapon)
                {
-                   OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
-                   OnCurrentWeaponNumber?.Invoke(weaponChanger.CurrentWeaponNum);
+                  weaponChanger.ChangeWeapon((int)input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
+                  if(weaponChanger.CurrentWeapon != null)
+                  {
+                      OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
+                      OnCurrentWeaponNumber?.Invoke(weaponChanger.CurrentWeaponNum);
+                  }
                }
             }
         };
 
         input.ButtonInputs.MouseScroll.performed += context =>
         {
-            if(isReadyToChangeWeapon)
+            if(!PauseController.isPaused)
             {
-                var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
-                Debug.Log(testValue);
-                if (testValue > 0)
+                if(isReadyToChangeWeapon)
                 {
-                    weaponChanger.NextWeapon();
-                }
-                else if (testValue < 0)
-                {
-                    weaponChanger.PrevWeapon();
-                }
-                else
-                {
-                    throw new System.Exception("Почему-то при скролле выдало 0");
-                }
-                if (weaponChanger.CurrentWeapon != null)
-                {
-                    OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
-                    OnCurrentWeaponNumber?.Invoke(weaponChanger.CurrentWeaponNum);
+                    var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
+                    Debug.Log(testValue);
+                    if (testValue > 0)
+                    {
+                        weaponChanger.NextWeapon();
+                    }
+                    else if (testValue < 0)
+                    {
+                        weaponChanger.PrevWeapon();
+                    }
+                    else
+                    {
+                        throw new System.Exception("Почему-то при скролле выдало 0");
+                    }
+                    if (weaponChanger.CurrentWeapon != null)
+                    {
+                        OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
+                        OnCurrentWeaponNumber?.Invoke(weaponChanger.CurrentWeaponNum);
+                    }
                 }
             }
         };
 
         input.ButtonInputs.Jump.performed += context =>
         {
-
-            if (movement.Grounded)
+            if(!PauseController.isPaused)
             {
-                movement.body.velocity = PM.JumpForce * Vector3.up;
-                var audioM = AudioManager.instance;
-                if(audioM != null)
+                if (movement.Grounded)
                 {
-                 audioM.PlayOneShot("PlayerJump");
+                    movement.body.velocity = PM.JumpForce * Vector3.up;
+                    var audioM = AudioManager.instance;
+                    if(audioM != null)
+                    {
+                     audioM.PlayOneShot("PlayerJump");
+                    }
                 }
             }
         };
 
         input.ButtonInputs.Ability1.performed += _ =>
         {
-            if(ability.AbilityState == AbilityState.Enabled)
+            if(!PauseController.isPaused)
             {
-                ability.UseAbility();
+                if(ability.AbilityState == AbilityState.Enabled)
+                {
+                    ability.UseAbility();
+                }
             }
         };
 

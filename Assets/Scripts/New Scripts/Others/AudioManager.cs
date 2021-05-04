@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+using DG.Tweening;
 public class AudioManager : MonoBehaviour
 {
     #region SINGLETON
@@ -18,8 +18,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(this);
     }
 
     #endregion
@@ -54,6 +52,7 @@ public class AudioManager : MonoBehaviour
                  else
                  {
                     s.AudioSource = s.OriginOfTheSound.gameObject.AddComponent<AudioSource>();
+                    s.AudioSource.outputAudioMixerGroup = s.soundMixer;
                     s.AudioSource.clip = s.AudioClip;
                      if(s.AudioClips.Length > 0)
                      {
@@ -83,6 +82,7 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                    m.AudioSource = gameObject.AddComponent<AudioSource>();
+                    m.AudioSource.outputAudioMixerGroup = m.musicMixer;
                    m.AudioSource.clip = m.AudioClip1;
                    m.AudioSource.volume = m.Volume;
                    m.AudioSource.loop = m.isLopping;
@@ -91,6 +91,12 @@ public class AudioManager : MonoBehaviour
 
                 if (m.PlayOnAwake)
                     m.AudioSource.Play();
+
+                if (m.PlayWithFade)
+                {
+                    m.AudioSource.Play();//убивает твин моментально
+                    m.AudioSource.DOFade(m.Volume, 5f).From(0).Kill(true);
+                }
             }
         }
 
@@ -226,6 +232,7 @@ public class AudioManager : MonoBehaviour
 public class Sound
 {
     public string Name;
+    public AudioMixerGroup soundMixer;
 
     [Header("Clips")]
     public AudioClip[] AudioClips;
@@ -256,6 +263,7 @@ public class Sound
 public class Music
 {
     public string Name;
+    public AudioMixerGroup musicMixer;
 
     [Header("Clip")]
     public AudioClip AudioClip1;
@@ -265,6 +273,7 @@ public class Music
     [Range(0, 1)] public float Volume;
     public bool isLopping;
     public bool PlayOnAwake;
+    public bool PlayWithFade;
 
     [HideInInspector] public AudioSource AudioSource;
 

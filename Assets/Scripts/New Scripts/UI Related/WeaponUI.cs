@@ -15,7 +15,6 @@ public class WeaponUI : MonoBehaviour
 
     [Header("Mel")]
     [SerializeField] private Image melFill;
-    private float melStartUsingTime;
     private bool isMelReloading = false;
 
     [Header("Icon change")]
@@ -23,6 +22,7 @@ public class WeaponUI : MonoBehaviour
 
     private PlayerController player;
     private List<UnityAction> actions = new List<UnityAction>();
+
 
 
     private void Start()
@@ -66,17 +66,16 @@ public class WeaponUI : MonoBehaviour
 
     #region  Либо убрать в другой класс,либо хз чо
 
-    //второй раз эта хуйня не работает почему-то :< check!!!
-    public void MelDecrement(float maxTime)
+    public void MelDecrement()
     {
         StopAllCoroutines();
-        StartCoroutine(MelDecrementTime(maxTime));
+        StartCoroutine(MelDecrementTime(player.Ability.AbilityParams.ActiveTime));
     }
     
-    public void MelIncrement(float maxTime)
+    public void MelIncrement()
     {
         StopAllCoroutines();
-        StartCoroutine(MelIncrementTime(maxTime));
+        StartCoroutine(MelIncrementTime(player.Ability.AbilityParams.CoolDownTime));
     }
 
     private IEnumerator MelIncrementTime(float maxTime)
@@ -97,14 +96,15 @@ public class WeaponUI : MonoBehaviour
 
     private IEnumerator MelDecrementTime(float maxTime)
     {
+        var startTime = 0f;
         isMelReloading = true;
-        for (float i = maxTime; 0f <= melStartUsingTime; i -= Time.deltaTime)
+        for (float i = maxTime; 0f <= startTime; i -= Time.deltaTime)
         {
-            melStartUsingTime = i;
+            startTime = i;
             melFill.fillAmount = i / maxTime;
             if(!isMelReloading)
             {
-                melStartUsingTime = 0f;
+                startTime = 0f;
             }
             yield return new WaitForEndOfFrame();
         }
