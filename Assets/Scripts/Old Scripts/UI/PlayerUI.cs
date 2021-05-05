@@ -8,6 +8,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject deathMenu;
     [SerializeField] private Image healthBarFill;
     [SerializeField] private Image damagedImage;
+    [SerializeField] private Image blackScreen;
     [SerializeField] private float timeToGameOver = 3f;
 
     [SerializeField] private Text score;
@@ -22,6 +23,7 @@ public class PlayerUI : MonoBehaviour
     {
         deathMenu.SetActive(false);
         damagedImage.enabled = false;
+        blackScreen.DOFade(0f, 5f).OnComplete(() => blackScreen.enabled = false);
 
         score.text = "0";
 

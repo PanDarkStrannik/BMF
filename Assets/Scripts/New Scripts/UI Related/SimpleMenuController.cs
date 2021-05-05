@@ -12,8 +12,14 @@ public class SimpleMenuController : MonoBehaviour
 
     public event Action<float> OnProgressChanged;
 
+    private void Awake()
+    {
+        PauseController.Resume();
+    }
+
     public void SelectScene(int levelIndex)
     {
+        DOTween.Clear(true);
         StartCoroutine(LoadingScene(levelIndex));
     }
 

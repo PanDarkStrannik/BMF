@@ -93,7 +93,6 @@ public class AudioManager : MonoBehaviour
 
                 if (m.PlayWithFade)
                 {
-                    Debug.Log("Check");
                     FadeMusic(10f);
                 }
             }
