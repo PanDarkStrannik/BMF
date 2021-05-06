@@ -17,10 +17,15 @@ public class SimpleMenuController : MonoBehaviour
         PauseController.Resume();
     }
 
-    public void SelectScene(int levelIndex)
+    public void SelectSceneAsync(int levelIndex)
     {
         DOTween.Clear(true);
         StartCoroutine(LoadingScene(levelIndex));
+    }
+
+    public void SelectScene(int levelIndex)
+    {
+        SceneManager.LoadScene(levelIndex);
     }
 
     public void QuitGame()

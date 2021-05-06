@@ -70,8 +70,8 @@ public class SOAudio : ScriptableObject
 
                 if (m.PlayWithFade)
                 {
-                    m.AudioSource.Play();
-                    m.AudioSource.DOFade(m.Volume, m.FadeInTime).From(0f);
+                    source.Play();
+                    source.DOFade(m.Volume, m.FadeInTime).From(0f).SetAutoKill(false);
                 }
             }
         }

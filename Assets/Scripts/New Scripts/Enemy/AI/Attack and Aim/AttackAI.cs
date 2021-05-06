@@ -27,27 +27,30 @@ public class AttackAI : AEnemyAI
 
     protected override void InStateUpdate()
     {
-        base.InStateUpdate();
-        if (attackStages.Count > 0)
+        if(!PauseController.isPaused)
         {
-            if (timer < currentStage.During)
-            {
-                AttackAIEvent?.Invoke(layerMask, currentStage);
-                isRigidbodyKinematick = currentStage.IsRigidbodyKinematick;
-                isNavMeshAgentActive = currentStage.IsNavMeshAgentActive;
-               // Debug.Log($"{currentStage.During} : {timer}");
-            }
-            else
-            {
-                if (currentNumber < attackStages.Count - 1)
-                {
-                    currentNumber++;
-                 //   Debug.Log(currentNumber);
-                }
-                currentStage = attackStages[currentNumber];
-                timer = 0f;
-            }
-            timer += Time.deltaTime;
+             base.InStateUpdate();
+             if (attackStages.Count > 0)
+             {
+                 if (timer < currentStage.During)
+                 {
+                     AttackAIEvent?.Invoke(layerMask, currentStage);
+                     isRigidbodyKinematick = currentStage.IsRigidbodyKinematick;
+                     isNavMeshAgentActive = currentStage.IsNavMeshAgentActive;
+                    // Debug.Log($"{currentStage.During} : {timer}");
+                 }
+                 else
+                 {
+                     if (currentNumber < attackStages.Count - 1)
+                     {
+                         currentNumber++;
+                      //   Debug.Log(currentNumber);
+                     }
+                     currentStage = attackStages[currentNumber];
+                     timer = 0f;
+                 }
+                 timer += Time.deltaTime;
+             }
         }
 
     }

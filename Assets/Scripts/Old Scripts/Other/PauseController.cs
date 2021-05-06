@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 public class PauseController
 {
     public static bool isPaused=false;
@@ -11,6 +12,7 @@ public class PauseController
     {
         if (!isPaused)
         {
+            DOTween.PauseAll();
             Time.timeScale = 0;
             isPaused = true;
         }
@@ -23,6 +25,7 @@ public class PauseController
     {
         if (isPaused)
         {
+            DOTween.PlayAll();
             Time.timeScale = 1;
             isPaused = false;
         }
@@ -43,12 +46,13 @@ public class PauseController
     {
         var scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.buildIndex);
+        DOTween.Clear(true);
     }
 
 
     public static void ChangeTime(float value)
     {
-        Time.timeScale = value;
+        //Time.timeScale = value; эта штука меняет время на 1?? во время атаки черта
     }
 
 }

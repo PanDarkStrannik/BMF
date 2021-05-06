@@ -38,7 +38,10 @@ public class WeaponBlink : AWeapon, IDamagingWeapon
 
     public override void UseWeapon()
     {
-        Attack();
+       if(!PauseController.isPaused)
+       {
+         Attack();
+       }
     }
 
     public void Attack()
