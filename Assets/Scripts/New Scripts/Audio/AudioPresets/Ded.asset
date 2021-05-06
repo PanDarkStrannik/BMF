@@ -34,16 +34,16 @@ MonoBehaviour:
   - Name: Hurt
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
-    AudioClip: {fileID: 8300000, guid: ef9c38360ff5d054abafd392a3622456, type: 3}
+    AudioClip: {fileID: 8300000, guid: e42f6e035ffc9e14fbb9e34332cedf46, type: 3}
     Volume: 0.14259459
-    Pitch: 0.6614774
+    Pitch: 1
     SpatialBlend: 1
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.13
-    MaxVolume: 0.15
-    MinPitch: 0.65
-    MaxPitch: 0.7
+    MinVolume: 0.15
+    MaxVolume: 0.25
+    MinPitch: 1
+    MaxPitch: 1
     AudioSource: {fileID: 0}
   - Name: Death
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}

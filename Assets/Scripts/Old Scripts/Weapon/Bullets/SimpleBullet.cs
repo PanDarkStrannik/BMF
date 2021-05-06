@@ -11,7 +11,6 @@ public class SimpleBullet : MonoBehaviour, IBullet
     [SerializeReference] private ParticleSystem bulletDieEffect;
     [SerializeReference] private SpawnedObject spawnedObject;
     [SerializeField] private AudioSource splashSound;
-    [SerializeField] private AudioClip splashClip;
 
     private LayerMask layer;
     private bool notFistInit = false;
@@ -74,8 +73,10 @@ public class SimpleBullet : MonoBehaviour, IBullet
         spawnedObject.Die();
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.GetComponent<DamageblePlace>() != null)
         {
             if ((layer.value & other.transform.GetComponent<ADamageble>().Layer.value) != 0)
@@ -110,6 +111,7 @@ public class SimpleBullet : MonoBehaviour, IBullet
 
     protected virtual void OnDie()
     {
+
         if (bulletDieEffect != null)
         {
             bulletDieEffect.transform.parent = null;

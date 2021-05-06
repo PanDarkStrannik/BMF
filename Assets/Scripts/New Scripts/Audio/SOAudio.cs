@@ -124,8 +124,10 @@ public class SOAudio : ScriptableObject
                         source.clip = s.AudioClips[Random.Range(0, s.AudioClips.Length)];
                     }
                     if (s.AudioClip != null)
+                    {
                         source.clip = s.AudioClip;
                         source.PlayOneShot(s.AudioClip);
+                    }
                 }
             }
         }

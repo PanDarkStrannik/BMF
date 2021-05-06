@@ -8,6 +8,7 @@ public class WeaponAnimations : MonoBehaviour
     [SerializeField] private Animator weaponAnimator;
     [SerializeField] private string blendTreeFloat;
     [SerializeField] private string shiftBool;
+    [SerializeField] private bool usedByPlayer = true;
     [SerializeField] private WAnimationRandomizer randomAnimation;
     [SerializeField] private List<AnimationEvents> animationEvents;
 
@@ -23,14 +24,17 @@ public class WeaponAnimations : MonoBehaviour
 
     private void OnPlayerMove(Vector3 obj, bool shifting)
     {
-        weaponAnimator.SetFloat(blendTreeFloat, obj.magnitude, 0.1f, Time.deltaTime);
-        if(obj != Vector3.zero && shiftBool != null)
+        if(usedByPlayer)
         {
-            weaponAnimator.SetBool(shiftBool, !shifting);
-        }
-        else
-        {
-            weaponAnimator.SetBool(shiftBool, false);
+           weaponAnimator.SetFloat(blendTreeFloat, obj.magnitude, 0.1f, Time.deltaTime);
+           if(obj != Vector3.zero && shiftBool != null)
+           {
+               weaponAnimator.SetBool(shiftBool, !shifting);
+           }
+           else
+           {
+               weaponAnimator.SetBool(shiftBool, false);
+           }
         }
     }
 

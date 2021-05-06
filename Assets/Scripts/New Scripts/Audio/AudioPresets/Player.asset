@@ -96,3 +96,63 @@ MonoBehaviour:
     MinPitch: 0.9
     MaxPitch: 1
     AudioSource: {fileID: 0}
+  - Name: WaterDrink
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips: []
+    AudioClip: {fileID: 8300000, guid: c260d88e012476344b940360ed3981b0, type: 3}
+    Volume: 0.6
+    Pitch: 1
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.5
+    MaxVolume: 0.6
+    MinPitch: 0.9
+    MaxPitch: 1
+    AudioSource: {fileID: 0}
+  - Name: Whoosh
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips:
+    - {fileID: 8300000, guid: e0ecfadaeea458c4cb5e46c274c0b71b, type: 3}
+    - {fileID: 8300000, guid: d7ea38d473e4af24fa5adbec602af949, type: 3}
+    - {fileID: 8300000, guid: e00af67ce0222b04d8802c466e245130, type: 3}
+    - {fileID: 8300000, guid: 3a81a29d8b6bbfe4ca50ca5c109faadf, type: 3}
+    AudioClip: {fileID: 0}
+    Volume: 0.5
+    Pitch: 0.9
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.4
+    MaxVolume: 0.5
+    MinPitch: 0.8
+    MaxPitch: 0.9
+    AudioSource: {fileID: 0}
+  - Name: Land
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips: []
+    AudioClip: {fileID: 8300000, guid: c2a3fabea53e3a040abcf8c4eee64aac, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    SpatialBlend: 0.4
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.4
+    MaxVolume: 0.5
+    MinPitch: 0.9
+    MaxPitch: 1
+    AudioSource: {fileID: 0}
+  - Name: WaterAttack
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips: []
+    AudioClip: {fileID: 8300000, guid: c35a6fc73107d9e4597a1f8dfde2775c, type: 3}
+    Volume: 0.7
+    Pitch: 1
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.7
+    MaxVolume: 0.7
+    MinPitch: 1
+    MaxPitch: 1
+    AudioSource: {fileID: 0}
