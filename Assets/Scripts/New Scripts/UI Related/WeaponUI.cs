@@ -69,13 +69,27 @@ public class WeaponUI : MonoBehaviour
     public void MelDecrement()
     {
         StopAllCoroutines();
-        StartCoroutine(MelDecrementTime(player.Ability.AbilityParams.ActiveTime));
+        for (int i = 0; i < player.Abilities.Count; i++)
+        {
+            if (player.Abilities[i] is Mel)
+            {
+                StartCoroutine(MelDecrementTime(player.Abilities[i].AbilityParams.ActiveTime));
+            }
+        }
+       // StartCoroutine(MelDecrementTime(player.Abilities.AbilityParams.ActiveTime));
     }
     
     public void MelIncrement()
     {
         StopAllCoroutines();
-        StartCoroutine(MelIncrementTime(player.Ability.AbilityParams.CoolDownTime));
+        for (int i = 0; i < player.Abilities.Count; i++)
+        {
+            if(player.Abilities[i] is Mel)
+            {
+                StartCoroutine(MelIncrementTime(player.Abilities[i].AbilityParams.CoolDownTime));
+            }
+        }
+       // StartCoroutine(MelIncrementTime(player.Abilities.AbilityParams.CoolDownTime));
     }
 
     private IEnumerator MelIncrementTime(float maxTime)

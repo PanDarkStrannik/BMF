@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e0e3fb7e783974892c130675d4054b, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  music: []
+  sounds:
+  - Name: Steps
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips:
+    - {fileID: 8300000, guid: cd2cab23f74fdc64698b693854d7255e, type: 3}
+    - {fileID: 8300000, guid: f0d7b11c128db7945a418c1ae8fce58f, type: 3}
+    - {fileID: 8300000, guid: 0af067defa7bab346abc3575fc918a72, type: 3}
+    - {fileID: 8300000, guid: 83445181fb98c794782762e63ec5400d, type: 3}
+    - {fileID: 8300000, guid: ce9e52242335fdf47bdff7a7052d04f2, type: 3}
+    - {fileID: 8300000, guid: 77847c8b758fc4c44ba046a337de1340, type: 3}
+    - {fileID: 8300000, guid: c608c012be28ee547a54fb422c643009, type: 3}
+    - {fileID: 8300000, guid: e27d1b065cf4013489a153e24f9d58f5, type: 3}
+    - {fileID: 8300000, guid: b35eb5eca8c50c54cbabf9004a70655d, type: 3}
+    AudioClip: {fileID: 0}
+    Volume: 0.17326513
+    Pitch: 0.90091145
+    SpatialBlend: 0.2
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.15
+    MaxVolume: 0.18
+    MinPitch: 0.9
+    MaxPitch: 1
+    AudioSource: {fileID: 0}
+  - Name: Jump
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips:
+    - {fileID: 8300000, guid: 8b2ff3fe5fddfb74580e040459f1a34f, type: 3}
+    - {fileID: 8300000, guid: 17d632373c92dc943b6c6ba86b3c6404, type: 3}
+    - {fileID: 8300000, guid: f7efe3b3d7efd57419115c5084f5423f, type: 3}
+    AudioClip: {fileID: 0}
+    Volume: 0.47931492
+    Pitch: 0.97721875
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.4
+    MaxVolume: 0.5
+    MinPitch: 0.9
+    MaxPitch: 1
+    AudioSource: {fileID: 0}
+  - Name: Breath
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips:
+    - {fileID: 8300000, guid: ab55baa1d4bc0894eaaf25a1d602adcf, type: 3}
+    - {fileID: 8300000, guid: e9bfebbdecd0cbf478dcbf853863003a, type: 3}
+    - {fileID: 8300000, guid: cf6ba007fccf1e041901eade7a029c83, type: 3}
+    - {fileID: 8300000, guid: 9aa9bb11a255d0f45b86bc3789be9c80, type: 3}
+    - {fileID: 8300000, guid: 80c08b803cc8a2f409109667d9f85f90, type: 3}
+    - {fileID: 8300000, guid: 3079ec460c8fff84e8caebc71262cdcf, type: 3}
+    - {fileID: 8300000, guid: 9c43fe211046d534a9412083a52d73d6, type: 3}
+    - {fileID: 8300000, guid: 66097fa0121ed0643a998a74572a365b, type: 3}
+    AudioClip: {fileID: 0}
+    Volume: 0.3052585
+    Pitch: 0.9191651
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.3
+    MaxVolume: 0.5
+    MinPitch: 0.9
+    MaxPitch: 1
+    AudioSource: {fileID: 0}
+  - Name: Hurt
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips:
+    - {fileID: 8300000, guid: 36766476f2269364e86f19ed5392bd57, type: 3}
+    - {fileID: 8300000, guid: 7d1dcb1ee57a7a8449fae8bed37e3ad6, type: 3}
+    - {fileID: 8300000, guid: 540b1f5f6d5bd2c4fbcd8f6ec79231f8, type: 3}
+    - {fileID: 8300000, guid: a1b31b3e758b5a547a8b47cefd89da09, type: 3}
+    - {fileID: 8300000, guid: f8554e6ebf0d29945ab2ec47c2e8f735, type: 3}
+    - {fileID: 8300000, guid: 08ecdd4550b33bb4f8ba4de404d8257e, type: 3}
+    AudioClip: {fileID: 0}
+    Volume: 0.33364522
+    Pitch: 0.94339496
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.3
+    MaxVolume: 0.4
+    MinPitch: 0.9
+    MaxPitch: 1
+    AudioSource: {fileID: 0}

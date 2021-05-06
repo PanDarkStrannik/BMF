@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e0e3fb7e783974892c130675d4054b, type: 3}
+  m_Name: MainMenu
+  m_EditorClassIdentifier: 
+  music:
+  - Name: 1
+    musicMixer: {fileID: -1555917166407738957, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClip1: {fileID: 8300000, guid: 38f3720745964b84bb4d5363a435797b, type: 3}
+    AudioClip2: {fileID: 0}
+    Volume: 0.5
+    FadeInTime: 10
+    isLopping: 1
+    PlayOnAwake: 0
+    PlayWithFade: 1
+    AudioSource: {fileID: 0}
+  sounds: []

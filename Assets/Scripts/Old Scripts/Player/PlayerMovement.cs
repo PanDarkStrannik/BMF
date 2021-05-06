@@ -131,8 +131,8 @@ public class PlayerMovement : APlayerMovement
 
     private void ApplyingStepSound(Vector3 dir)
     {
-        var audioM = AudioManager.instance;
-        if(audioM != null)
+        var audioProvider = PlayerInformation.GetInstance().PlayerController.AudioProvider;
+        if(audioProvider != null)
         {
            if(dir != Vector3.zero && grounded)
            {
@@ -145,7 +145,7 @@ public class PlayerMovement : APlayerMovement
                       stepTime = 0.3f;
                       break;
               }
-               audioM.PlayOneShotWithTime("PlayerSteps", stepTime);
+                audioProvider.PlayOneShotWithTime("Steps", stepTime);
            }
         }
     }

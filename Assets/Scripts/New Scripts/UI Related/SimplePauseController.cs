@@ -11,7 +11,6 @@ public class SimplePauseController : MonoBehaviour
 
     private void Awake()
     {
-         PauseController.Resume();
         _input = new PlayerInput();
         _input.ButtonInputs.ESC.performed += ctx => Pause();
 

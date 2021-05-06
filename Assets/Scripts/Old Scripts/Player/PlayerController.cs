@@ -25,12 +25,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerWeaponChanger weaponChanger;
     [SerializeField] private PlayerUI playerUI;
     [SerializeReference] private APlayerMovement movement;
+    [SerializeField] private List<AAbility> abilities;
     [SerializeField] private List<GunPush> gunPushes;
-    [SerializeField] private AAbility ability;
-    private WeaponRange rangeW;
-    private PlayerMovement PM;
+    private PlayerMovement playerMovement;
+    private AudioProvider audioProvider;
     private PlayerInput input;
-    private IRay rayCreation;
     private AInteractable interactable = null;
 
 
@@ -75,8 +74,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public AAbility Ability { get => ability; }
-
     public List<GunPush> GunPushes
     {
         get
@@ -85,6 +82,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public AudioProvider AudioProvider { get => audioProvider; }
+    public List<AAbility> Abilities { get => abilities; }
     public Transform CameraOnPlayer { get => cameraOnPlayer; }
     public float MouseMoveX { get => mouseMoveX; }
     public float MouseMoveY { get => mouseMoveY; }
@@ -100,18 +99,16 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        input = new PlayerInput();
         PlayerInformation.GetInstance().Player = gameObject;
 
-        PM = FindObjectOfType<PlayerMovement>();
-        rangeW = FindObjectOfType<WeaponRange>();
-        input = new PlayerInput();
-        rayCreation = GetComponent<IRay>();
-        
-        weaponChanger.ChangeWeapon(0);
+        playerMovement = GetComponentInChildren<PlayerMovement>();
+        audioProvider = GetComponentInChildren<AudioProvider>();
     }
 
     void Start()
     {
+        weaponChanger.ChangeWeapon(0);
         ButtonsInput();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -164,7 +161,7 @@ public class PlayerController : MonoBehaviour
             d = new Vector3(d.x, d.y * cameraRot.y, d.z * cameraRot.z);
         }
         
-        PM.VerticalMove(d);
+        playerMovement.VerticalMove(d);
     }
 
     private void VerticalJump(Vector3 d, Vector3 moveDir)
@@ -354,12 +351,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (movement.Grounded)
                 {
-                    movement.body.velocity = PM.JumpForce * Vector3.up;
-                    var audioM = AudioManager.instance;
-                    if(audioM != null)
-                    {
-                     audioM.PlayOneShot("PlayerJump");
-                    }
+                    movement.body.velocity = playerMovement.JumpForce * Vector3.up;
+                    audioProvider.PlayOneShot("Jump");
                 }
             }
         };
@@ -368,9 +361,13 @@ public class PlayerController : MonoBehaviour
         {
             if(!PauseController.isPaused)
             {
-                if(ability.AbilityState == AbilityState.Enabled)
+                foreach (var a in abilities)
                 {
-                    ability.UseAbility();
+                    if(a is Mel)
+                    {
+                        if (a.AbilityState == AbilityState.Enabled)
+                            a.UseAbility();
+                    }
                 }
             }
         };
