@@ -38,6 +38,16 @@ public class PlayerCameraShaking : MonoBehaviour
         }
     }
 
+    public void WeaponShake(float strenth)
+    {
+        if (shakinAlready == false)
+        {
+            shakinAlready = true;
+            shaker.ShakePosition(playerCamera.transform, 0.2f, strenth);
+            StartCoroutine(ReturnToMainPos(0.3f));
+        }
+    }
+
     private IEnumerator ReturnToMainPos(float time)
     {
         yield return new WaitForSecondsRealtime(time);

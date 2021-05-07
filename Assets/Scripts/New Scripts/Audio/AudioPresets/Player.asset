@@ -158,3 +158,39 @@ MonoBehaviour:
     MinPitch: 1
     MaxPitch: 1
     AudioSource: {fileID: 0}
+  - Name: AxeEnemy
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips:
+    - {fileID: 8300000, guid: 7ce3debf4256dca428772a1faef1e5ba, type: 3}
+    - {fileID: 8300000, guid: 56e5ca1a6e5ad2b4c92d4199d1be01db, type: 3}
+    - {fileID: 8300000, guid: 388738ee85a8a3d44aadfb5fcb4bfabf, type: 3}
+    - {fileID: 8300000, guid: 4c3d7dc640478f2489f9f1176a2d06d1, type: 3}
+    AudioClip: {fileID: 0}
+    Volume: 0.45
+    Pitch: 1
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.4
+    MaxVolume: 0.45
+    MinPitch: 0.9
+    MaxPitch: 1
+    AudioSource: {fileID: 0}
+  - Name: AxeWood
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips:
+    - {fileID: 8300000, guid: 0b9f918e45026c34893ebf50bdea0a89, type: 3}
+    - {fileID: 8300000, guid: 83596a533df69b948872276153c4ec74, type: 3}
+    - {fileID: 8300000, guid: f1c2639d9c7e9bf48a32979df15d7888, type: 3}
+    - {fileID: 8300000, guid: 40ccc1eadd6cad34b87f169ed8640308, type: 3}
+    AudioClip: {fileID: 0}
+    Volume: 0.4
+    Pitch: 1
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.3
+    MaxVolume: 0.4
+    MinPitch: 0.9
+    MaxPitch: 1
+    AudioSource: {fileID: 0}

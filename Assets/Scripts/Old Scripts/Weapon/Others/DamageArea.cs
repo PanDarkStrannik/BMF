@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DamageArea : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class DamageArea : MonoBehaviour
     [SerializeField] private ForceMode forceMode;
 
     private Dictionary<Collider,bool> enterColiders;
+
+    [SerializeField] private List<EventOnDamageLayer> damageLayersEvents;
 
     public Transform Parent
     {
@@ -101,6 +104,7 @@ public class DamageArea : MonoBehaviour
     {
         if (!enterColiders.ContainsKey(other))
         {
+            CheckingLayerDamage(other);
             enterColiders.Add(other, false);
         }
     }
@@ -114,6 +118,7 @@ public class DamageArea : MonoBehaviour
 
         if (other.gameObject.GetComponent<IDamageble>() != null)
         {
+
             if (!enterColiders[other])
             {
                 if ((layer.value & other.transform.GetComponent<ADamageble>().Layer.value) != 0)
@@ -136,6 +141,26 @@ public class DamageArea : MonoBehaviour
         }
 
 
+    }
+    private void CheckingLayerDamage(Collider other)
+    {
+        for (int i = 0; i < damageLayersEvents.Count; i++)
+        {
+            if(other != null)
+            {
+                if(other.gameObject.CompareTag(damageLayersEvents[i].TagName))
+                {
+                    damageLayersEvents[i].InvokeByTag();
+                }
+            }
+
+
+            var unitLayer = other.GetComponent<DamageblePlace>();
+            if (unitLayer != null)
+            {
+                damageLayersEvents[i].InvokeByLayer(unitLayer.Layer);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -197,4 +222,25 @@ public class DamageArea : MonoBehaviour
     }
 
 
+}
+
+[System.Serializable]
+public class EventOnDamageLayer
+{
+    public string TagName;
+    public LayerMask whoIsTarget;
+    public UnityEvent OnDamaged;
+
+    public void InvokeByLayer(LayerMask layer)
+    {
+        if(whoIsTarget == layer)
+        {
+            OnDamaged?.Invoke();
+        }
+    }
+
+    public void InvokeByTag()
+    {
+         OnDamaged?.Invoke();
+    }
 }
