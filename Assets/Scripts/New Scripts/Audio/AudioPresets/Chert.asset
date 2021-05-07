@@ -32,13 +32,13 @@ MonoBehaviour:
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: b2775a26418ab234e916d94d4f797740, type: 3}
-    Volume: 0.25
+    Volume: 0.5
     Pitch: 1
     SpatialBlend: 1
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.2
-    MaxVolume: 0.25
+    MinVolume: 0.4
+    MaxVolume: 0.5
     MinPitch: 1
     MaxPitch: 1.1
     AudioSource: {fileID: 0}
@@ -46,13 +46,13 @@ MonoBehaviour:
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: a980bcaf0ae61a0429bdae954ae963db, type: 3}
-    Volume: 0.27
+    Volume: 0.5
     Pitch: 1
     SpatialBlend: 1
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.25
-    MaxVolume: 0.27
+    MinVolume: 0.4
+    MaxVolume: 0.5
     MinPitch: 1
     MaxPitch: 1
     AudioSource: {fileID: 0}

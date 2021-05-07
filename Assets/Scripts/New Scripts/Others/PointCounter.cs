@@ -10,6 +10,9 @@ public class PointCounter : SupportingScripts.Singlton<PointCounter>
     public event PointCounterHelper PointEvent;
 
     private int points;
+    private int requiermentPoints = 30;
+
+    public int RequiermentPoints { get => requiermentPoints; }
 
     public int Points
     {

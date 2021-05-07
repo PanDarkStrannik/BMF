@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using UnityEngine.Events;
 
 public class ParamController : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class ParamController : MonoBehaviour
     [SerializeReference] private AFaling faling;
 
     [SerializeField] private List<HeigthAndDamage> heigthsAndDamages;
+    [SerializeField] protected UnityEvent OnFall;
 
     
 
@@ -126,6 +128,7 @@ public class ParamController : MonoBehaviour
     protected void FallingDamage(float heigth)
     {
         Debug.Log("Сработало падение!");
+        OnFall?.Invoke();
         for (int i = 0; i < heigthsAndDamages.Count; i++)
         {
             if (Math.Abs(heigth) >= heigthsAndDamages[i].Heigth)

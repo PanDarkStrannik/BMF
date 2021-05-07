@@ -2,7 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private GameObject deathMenu;
@@ -10,22 +11,24 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Image damagedImage;
     [SerializeField] private Image blackScreen;
     [SerializeField] private float timeToGameOver = 3f;
-
     [SerializeField] private Text score;
+    [SerializeField] private Text viyAwakingText;
+    [SerializeField] private Transform scoreEndPos;
 
+    [SerializeField] private UnityEvent OnScoreReached;
 
     private bool alreadyDamaged = false;
     
     public delegate void OnPlayerDeathEventHelper();
     public event OnPlayerDeathEventHelper OnPlayerDeathEvent;
 
-    private void Start()
+    private void OnEnable()
     {
         deathMenu.SetActive(false);
         damagedImage.enabled = false;
         blackScreen.DOFade(0f, 5f).OnComplete(() => blackScreen.enabled = false);
-
-        score.text = "0";
+        ScoreAnimate();
+        PlayerUI_PointEvent(0);
 
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ViewHealth;
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamsDamaged += OnPlayerParamDamagedViewer;
@@ -33,7 +36,7 @@ public class PlayerUI : MonoBehaviour
 
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         PointCounter.Instance.RefreshPoints();
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged -= ViewHealth;
@@ -43,7 +46,40 @@ public class PlayerUI : MonoBehaviour
 
     private void PlayerUI_PointEvent(int value)
     {
-        score.text = value.ToString();
+        score.text =  value + "/" + PointCounter.Instance.RequiermentPoints;
+        if(value >= PointCounter.Instance.RequiermentPoints)
+        {
+            //for pitch
+            BlackFadeIn();
+        }
+    }
+
+    //for pitch
+    private void BlackFadeIn()
+    {
+        blackScreen.enabled = true;
+        var fadeInSeq = DOTween.Sequence();
+        fadeInSeq.Append(blackScreen.DOFade(1f, 5f).OnComplete(() => OnScoreReached?.Invoke()));
+        fadeInSeq.Append(blackScreen.DOFade(0f, 5f));
+        fadeInSeq.AppendInterval(10f);
+        fadeInSeq.Append(blackScreen.DOFade(1f, 5f).OnComplete(() => DOTween.Clear(true)).OnComplete(() => SceneManager.LoadSceneAsync(0)));
+
+    }
+
+    //for pitch
+    private void ScoreAnimate()
+    {
+        var scoreSeq = DOTween.Sequence();
+        scoreSeq.AppendInterval(3f);
+        scoreSeq.Append(score.DOFade(1f, 4f).From(0f));
+        scoreSeq.Append(score.transform.DOMove(scoreEndPos.position, 3f));
+    }
+
+    //for pitch
+    public void TextAnimate()
+    {
+        string text = "";
+        DOTween.To(() => text, x => text = x, "Вий пробуждается", 10f).OnUpdate(() => viyAwakingText.text = text);
     }
 
     private void ViewHealth(DamagebleParam.ParamType paramType, float value, float maxValue)
@@ -59,6 +95,7 @@ public class PlayerUI : MonoBehaviour
              healthBarFill.fillAmount = value / maxValue;
         }
     }
+
 
     private void OnPlayerParamDamagedViewer()
     {

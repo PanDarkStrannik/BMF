@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class AFaling : MonoBehaviour
 {
     [SerializeReference] public Rigidbody body;
@@ -16,6 +15,7 @@ public class AFaling : MonoBehaviour
 
     public delegate void FailingEventHelper(bool failing);
     public event FailingEventHelper FalingEvent;
+
 
     protected bool faling = false;
 

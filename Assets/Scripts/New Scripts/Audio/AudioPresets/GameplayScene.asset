@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameplayScene
   m_EditorClassIdentifier: 
   music:
-  - Name: 1
+  - Name: BattleMusic
     musicMixer: {fileID: -1555917166407738957, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClip1: {fileID: 8300000, guid: fa15702836602c54b873c9218953cc73, type: 3}
     AudioClip2: {fileID: 0}

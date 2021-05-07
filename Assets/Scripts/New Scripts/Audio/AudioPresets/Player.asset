@@ -130,15 +130,17 @@ MonoBehaviour:
     AudioSource: {fileID: 0}
   - Name: Land
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
-    AudioClips: []
-    AudioClip: {fileID: 8300000, guid: c2a3fabea53e3a040abcf8c4eee64aac, type: 3}
-    Volume: 0.5
+    AudioClips:
+    - {fileID: 8300000, guid: ed8a6930bf96d0645b051804c45e1f1f, type: 3}
+    - {fileID: 8300000, guid: c2a3fabea53e3a040abcf8c4eee64aac, type: 3}
+    AudioClip: {fileID: 0}
+    Volume: 0.25
     Pitch: 1
-    SpatialBlend: 0.4
+    SpatialBlend: 0
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.4
-    MaxVolume: 0.5
+    MinVolume: 0.2
+    MaxVolume: 0.25
     MinPitch: 0.9
     MaxPitch: 1
     AudioSource: {fileID: 0}

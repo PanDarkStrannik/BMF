@@ -45,14 +45,14 @@ MonoBehaviour:
   - Name: Death
     soundMixer: {fileID: 0}
     AudioClips: []
-    AudioClip: {fileID: 8300000, guid: 7664dc42720909743a9ce5a7b3bcbe24, type: 3}
-    Volume: 0.3
-    Pitch: 1
+    AudioClip: {fileID: 8300000, guid: 349a5261ddeb07d49989a5fb74b0a555, type: 3}
+    Volume: 0.5
+    Pitch: 1.1
     SpatialBlend: 1
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.2
-    MaxVolume: 0.3
-    MinPitch: 1
-    MaxPitch: 1.1
+    MinVolume: 0.4
+    MaxVolume: 0.5
+    MinPitch: 1.1
+    MaxPitch: 1.2
     AudioSource: {fileID: 0}

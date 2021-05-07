@@ -110,17 +110,23 @@ public class PlayerController : MonoBehaviour
     {
         weaponChanger.ChangeWeapon(0);
         ButtonsInput();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnEnable()
     {
         input.Enable();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnDisable()
     {
         input.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
 

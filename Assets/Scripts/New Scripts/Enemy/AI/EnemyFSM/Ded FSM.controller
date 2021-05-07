@@ -411,7 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   isRigidbodyKinematick: 1
   isNavMeshAgentActive: 1
   interestingObjects: []

@@ -17,31 +17,31 @@ MonoBehaviour:
   - Name: Attack
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips:
-    - {fileID: 8300000, guid: ec1c24ef7df9d294fb5fe5e1264a625a, type: 3}
-    - {fileID: 8300000, guid: ea55c370235095a4eb4108fe412d3b9e, type: 3}
-    - {fileID: 8300000, guid: 41e713240747afd4cab16c5801798d8a, type: 3}
+    - {fileID: 8300000, guid: 91a3f59622fd8c943b4c87f89760879f, type: 3}
+    - {fileID: 8300000, guid: a9217182a76ac40419e6595231f29256, type: 3}
+    - {fileID: 8300000, guid: ea99cfe2ab92d60458e1e55a4ef6ad2c, type: 3}
     AudioClip: {fileID: 0}
-    Volume: 0.27674377
-    Pitch: 0.60638285
+    Volume: 0.5
+    Pitch: 1
     SpatialBlend: 1
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.2
-    MaxVolume: 0.3
-    MinPitch: 0.6
-    MaxPitch: 0.7
+    MinVolume: 0.4
+    MaxVolume: 0.5
+    MinPitch: 1
+    MaxPitch: 1
     AudioSource: {fileID: 0}
   - Name: Hurt
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: e42f6e035ffc9e14fbb9e34332cedf46, type: 3}
-    Volume: 0.14259459
+    Volume: 0.5
     Pitch: 1
     SpatialBlend: 1
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.15
-    MaxVolume: 0.25
+    MinVolume: 0.4
+    MaxVolume: 0.5
     MinPitch: 1
     MaxPitch: 1
     AudioSource: {fileID: 0}
@@ -49,13 +49,13 @@ MonoBehaviour:
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: 45d450e6bb483c34da25134d2b354e63, type: 3}
-    Volume: 0.2
+    Volume: 0.3
     Pitch: 1
     SpatialBlend: 1
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.17
-    MaxVolume: 0.2
+    MinVolume: 0.4
+    MaxVolume: 0.5
     MinPitch: 1
     MaxPitch: 1
     AudioSource: {fileID: 0}

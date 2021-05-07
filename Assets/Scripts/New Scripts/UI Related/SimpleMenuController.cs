@@ -25,6 +25,7 @@ public class SimpleMenuController : MonoBehaviour
 
     public void SelectScene(int levelIndex)
     {
+        DOTween.Clear(true);
         SceneManager.LoadScene(levelIndex);
     }
 
