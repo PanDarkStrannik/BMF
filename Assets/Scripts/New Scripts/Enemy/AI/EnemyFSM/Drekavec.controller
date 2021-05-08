@@ -201,7 +201,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Range Attack
-  m_Speed: 1
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2128183679408319570}
@@ -392,7 +392,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isRigidbodyKinematick: 1
-  isNavMeshAgentActive: 1
+  isNavMeshAgentActive: 0
   interestingObjects: []
   attackStages:
   - stageName: Prepare
@@ -571,7 +571,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Range random Movement
-  m_Speed: 1
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8729547813708847253}

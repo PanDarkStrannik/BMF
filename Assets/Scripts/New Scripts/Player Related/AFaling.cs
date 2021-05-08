@@ -7,6 +7,8 @@ public class AFaling : MonoBehaviour
     [SerializeField] protected SphereCollider groundCheckSphere;
     [SerializeField] protected LayerMask groundCheckMask;
 
+    [SerializeField] private bool disableFalling = false;
+
     protected bool grounded = false;
     public bool Grounded { get => grounded; }
 
@@ -25,29 +27,35 @@ public class AFaling : MonoBehaviour
 
     protected void Falling()
     {
-        grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
+        if(disableFalling)
+        {
+            grounded = Physics.CheckSphere(groundCheckSphere.transform.position,
             groundCheckSphere.radius, groundCheckMask, QueryTriggerInteraction.Ignore);
 
-
-        if (!grounded && !faling)
-        {
-            faling = true;
-            FalingEvent?.Invoke(faling);
-            groundedPos = body.transform.position.y;
+          if (!grounded && !faling)
+          {
+              faling = true;
+              FalingEvent?.Invoke(faling);
+              groundedPos = body.transform.position.y;
+          }
+          
+          if (grounded && faling)
+          {
+              faling = false;
+              FalingEvent?.Invoke(faling);
+              var fallPos = body.transform.position.y;
+              var heigth = groundedPos - fallPos;
+              
+              //if (Mathf.Abs(heigth) != Mathf.Abs(fallPos))
+              //{
+                  test = heigth;
+                  FallEvent?.Invoke(heigth);
+             // }
+          }
         }
-
-        if (grounded && faling)
+        else
         {
-            faling = false;
-            FalingEvent?.Invoke(faling);
-            var fallPos = body.transform.position.y;
-            var heigth = groundedPos - fallPos;
-            
-            //if (Mathf.Abs(heigth) != Mathf.Abs(fallPos))
-            //{
-                test = heigth;
-                FallEvent?.Invoke(heigth);
-           // }
+            grounded = true;
         }
     }
 }
