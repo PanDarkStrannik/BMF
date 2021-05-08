@@ -23,7 +23,7 @@ public static class NewAim
     {
         Vector3 dir = target.position - aimMod.LookingObject.position;
         float angleHorizontal = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-        float angleVertical = Mathf.Asin(dir.y / dir.magnitude) * Mathf.Rad2Deg;
+        float angleVertical = -Mathf.Asin(dir.y / dir.magnitude) * Mathf.Rad2Deg;
 
         Vector3 angle = Vector3.zero;
         switch(aimMod.Mod)
