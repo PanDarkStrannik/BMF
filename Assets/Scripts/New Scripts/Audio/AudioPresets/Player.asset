@@ -173,7 +173,7 @@ MonoBehaviour:
     Looping: 0
     MinVolume: 0.4
     MaxVolume: 0.45
-    MinPitch: 0.9
+    MinPitch: 0.7
     MaxPitch: 1
     AudioSource: {fileID: 0}
   - Name: AxeWood
@@ -198,13 +198,27 @@ MonoBehaviour:
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: c69ec2a6e9a40be4998ae79e83b00c2d, type: 3}
-    Volume: 0.7
+    Volume: 1
     Pitch: 0.7
     SpatialBlend: 0
     PlayOnAwake: 0
     Looping: 0
-    MinVolume: 0.6
-    MaxVolume: 0.7
+    MinVolume: 1
+    MaxVolume: 1
+    MinPitch: 0.7
+    MaxPitch: 1
+    AudioSource: {fileID: 0}
+  - Name: MelDown
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips: []
+    AudioClip: {fileID: 8300000, guid: 5c7bf6c69e94d1243a367994ff48ae9b, type: 3}
+    Volume: 1
+    Pitch: 0.7
+    SpatialBlend: 0
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 1
+    MaxVolume: 1
     MinPitch: 0.7
     MaxPitch: 1
     AudioSource: {fileID: 0}

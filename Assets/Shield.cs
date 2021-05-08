@@ -12,12 +12,12 @@ public class Shield : MonoBehaviour
 
     [SerializeField] private DamageblePlace shieldDamagePlace;
     [SerializeField] private ParamController shieldParams;
-
-
+    [SerializeField] private AudioSource soudOnDie;
    
 
     private void OnDisable()
     {
+        soudOnDie.Play();
         SetDefaultShieldLayer();
         SetDefaultPlayerLayer();
     }

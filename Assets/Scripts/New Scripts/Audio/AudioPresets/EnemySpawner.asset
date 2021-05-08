@@ -15,7 +15,7 @@ MonoBehaviour:
   music: []
   sounds:
   - Name: Spawn
-    soundMixer: {fileID: 0}
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: 3e4afadc9a1f95c4e99ef9b5451415ce, type: 3}
     Volume: 0.8

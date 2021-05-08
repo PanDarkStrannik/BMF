@@ -99,11 +99,11 @@ public class SimpleBullet : MonoBehaviour, IBullet
                 //GameEvents.onBulletDie(gameObject);
                 spawnedObject.Die();
             }
-            //if(other.gameObject.CompareTag("PhysCollider"))
-            //{
-            //    OnDie();
-            //    spawnedObject.Die();
-            //}
+            if(other.gameObject.CompareTag("PhysCollider"))
+            {
+                OnDie();
+                spawnedObject.Die();
+            }
         }
         
 

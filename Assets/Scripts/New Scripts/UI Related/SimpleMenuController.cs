@@ -61,7 +61,7 @@ public class SimpleMenuController : MonoBehaviour
 
     public void SetFullScreen(bool fullScreen)
     {
-        Screen.fullScreen = fullScreen;
+        Screen.fullScreen = !fullScreen;
     }
 
     #endregion

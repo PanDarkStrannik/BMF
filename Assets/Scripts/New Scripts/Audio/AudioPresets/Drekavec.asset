@@ -15,7 +15,7 @@ MonoBehaviour:
   music: []
   sounds:
   - Name: Attack
-    soundMixer: {fileID: 0}
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: e46c5f4bc3b34594cb55c5104f004ef1, type: 3}
     Volume: 0.5
@@ -29,7 +29,7 @@ MonoBehaviour:
     MaxPitch: 1
     AudioSource: {fileID: 0}
   - Name: Hurt
-    soundMixer: {fileID: 0}
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: 327a7fec42e6da14a9f0c3278b786f1e, type: 3}
     Volume: 0.25
@@ -43,7 +43,7 @@ MonoBehaviour:
     MaxPitch: 1.4
     AudioSource: {fileID: 0}
   - Name: Death
-    soundMixer: {fileID: 0}
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips: []
     AudioClip: {fileID: 8300000, guid: 349a5261ddeb07d49989a5fb74b0a555, type: 3}
     Volume: 0.5

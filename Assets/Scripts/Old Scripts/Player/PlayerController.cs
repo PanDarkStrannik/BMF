@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Camera Settings")]
     [SerializeField] private Transform cameraOnPlayer;
-    [SerializeField] private float SensX = 5, SensY = 10;
+    [SerializeField][Range(0,10)] private float SensX = 5;
+    [SerializeField][Range(0,10)] private float SensY = 5;
     [Range(0, 2)] [SerializeField] private float sideWaysAngle;
     [SerializeField] private Vector2 MinMax_Y = new Vector2(-40, 40);
     private float mouseMoveX, mouseMoveY;
@@ -151,7 +152,8 @@ public class PlayerController : MonoBehaviour
     {
         var cameraRot = cameraOnPlayer.transform.forward;
 
-        var d = new Vector3(movementDirection.x, movementDirection.y, 0).normalized;
+        var moveDir = input.MovementInput.GetDirection.ReadValue<Vector2>();
+        var d = new Vector3(moveDir.x, moveDir.y, 0).normalized;
 
         cameraRot = transform.InverseTransformDirection(cameraRot);
 
@@ -160,7 +162,7 @@ public class PlayerController : MonoBehaviour
         if (Math.Abs(arcSin) < angle)
         {
             d = new Vector3(d.x, 0, d.y);
-            VerticalJump(d, movementDirection);
+            VerticalJump(d, moveDir);
         }
         else
         {
@@ -225,6 +227,16 @@ public class PlayerController : MonoBehaviour
              CameraSideAngles();
         }
 
+    }
+
+    public void SetSensX(float amount)
+    {
+        SensX = amount;
+    }
+
+    public void SetSensY(float amount)
+    {
+        SensY = amount;
     }
 
     private void CameraSideAngles()

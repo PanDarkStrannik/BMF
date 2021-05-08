@@ -59,7 +59,7 @@ public class PlayerUI : MonoBehaviour
     {
         blackScreen.enabled = true;
         var fadeInSeq = DOTween.Sequence();
-        fadeInSeq.Append(blackScreen.DOFade(1f, 5f).OnComplete(() => OnScoreReached?.Invoke()));
+        fadeInSeq.Append(blackScreen.DOFade(1f, 3f).OnComplete(() => OnScoreReached?.Invoke()));
         fadeInSeq.Append(blackScreen.DOFade(0f, 5f));
         fadeInSeq.AppendInterval(10f);
         fadeInSeq.Append(blackScreen.DOFade(1f, 5f).OnComplete(() => DOTween.Clear(true)).OnComplete(() => SceneManager.LoadSceneAsync(0)));
@@ -79,7 +79,7 @@ public class PlayerUI : MonoBehaviour
     public void TextAnimate()
     {
         string text = "";
-        DOTween.To(() => text, x => text = x, "Вий пробуждается", 10f).OnUpdate(() => viyAwakingText.text = text);
+        DOTween.To(() => text, x => text = x, "Вий пробуждается", 8f).OnUpdate(() => viyAwakingText.text = text).OnComplete(() => viyAwakingText.DOFade(0f, 5f));
     }
 
     private void ViewHealth(DamagebleParam.ParamType paramType, float value, float maxValue)
