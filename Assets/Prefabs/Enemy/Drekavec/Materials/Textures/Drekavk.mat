@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Drekavk
+  m_Shader: {fileID: -6465566751694194690, guid: 594c39638ab8e1f46ba127b16e812cdf, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_44EB9D5:
+        m_Texture: {fileID: 2800000, guid: cfb2ecb43811a3749b54b56d70d69d29, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_D118C5F9:
+        m_Texture: {fileID: 2800000, guid: d3034151bbb994f469a566a753c6ca7c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_561020BD: 0.5
+    - Vector1_5A02A1BF: 100
+    - Vector1_9D7AC086: 1
+    - Vector1_D8AF2462: -1.16
+    - Vector1_F08106E2: 0.1
+    m_Colors:
+    - Color_38ABEAFC: {r: 0, g: 0, b: 0, a: 0}
+    - Color_7B7007D6: {r: 1.370351, g: 1.370351, b: 1.370351, a: 1}
+    - Color_DC5B9C01: {r: 0, g: 1.492531, b: 16.7453, a: 0}
+  m_BuildTextureStacks: []
