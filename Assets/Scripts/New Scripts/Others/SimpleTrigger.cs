@@ -16,7 +16,7 @@ public class SimpleTrigger : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

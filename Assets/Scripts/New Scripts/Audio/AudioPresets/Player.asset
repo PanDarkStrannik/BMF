@@ -158,7 +158,7 @@ MonoBehaviour:
     MinPitch: 1
     MaxPitch: 1
     AudioSource: {fileID: 0}
-  - Name: AxeEnemy
+  - Name: AxeBodySmash
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
     AudioClips:
     - {fileID: 8300000, guid: 7ce3debf4256dca428772a1faef1e5ba, type: 3}
@@ -167,14 +167,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4c3d7dc640478f2489f9f1176a2d06d1, type: 3}
     AudioClip: {fileID: 0}
     Volume: 0.45
-    Pitch: 1
+    Pitch: 0.8
     SpatialBlend: 0
     PlayOnAwake: 0
     Looping: 0
     MinVolume: 0.4
     MaxVolume: 0.45
     MinPitch: 0.7
-    MaxPitch: 1
+    MaxPitch: 0.8
     AudioSource: {fileID: 0}
   - Name: AxeWood
     soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}

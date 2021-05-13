@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using DG.Tweening;
 
 
 public class WeaponUI : MonoBehaviour
@@ -13,9 +14,6 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] private TMP_Text waterReloadDescriptionText;
     [SerializeField] private Image waterFill;
 
-    [Header("Mel")]
-    [SerializeField] private Image melFill;
-    private bool isMelReloading = false;
 
     [Header("Icon change")]
     [SerializeField] private List<WeaponUISelection> weaponSelectionUI = new List<WeaponUISelection>();
@@ -64,68 +62,7 @@ public class WeaponUI : MonoBehaviour
         }
     }
 
-    #region  Либо убрать в другой класс,либо хз чо
-
-    public void MelDecrement()
-    {
-        StopAllCoroutines();
-        for (int i = 0; i < player.Abilities.Count; i++)
-        {
-            if (player.Abilities[i] is Mel)
-            {
-                StartCoroutine(MelDecrementTime(player.Abilities[i].AbilityParams.ActiveTime));
-            }
-        }
-       // StartCoroutine(MelDecrementTime(player.Abilities.AbilityParams.ActiveTime));
-    }
     
-    public void MelIncrement()
-    {
-        StopAllCoroutines();
-        for (int i = 0; i < player.Abilities.Count; i++)
-        {
-            if(player.Abilities[i] is Mel)
-            {
-                StartCoroutine(MelIncrementTime(player.Abilities[i].AbilityParams.CoolDownTime));
-            }
-        }
-       // StartCoroutine(MelIncrementTime(player.Abilities.AbilityParams.CoolDownTime));
-    }
-
-    private IEnumerator MelIncrementTime(float maxTime)
-    {
-        isMelReloading = true;
-        for (float i = 0; i < maxTime; i+= Time.deltaTime)
-        {
-            var startTime = i;
-            melFill.fillAmount = startTime / maxTime;
-            if(!isMelReloading)
-            {
-                startTime = 0f;
-            }
-            yield return new WaitForEndOfFrame();
-        }
-        isMelReloading = false;
-    }
-
-    private IEnumerator MelDecrementTime(float maxTime)
-    {
-        var startTime = 0f;
-        isMelReloading = true;
-        for (float i = maxTime; 0f <= startTime; i -= Time.deltaTime)
-        {
-            startTime = i;
-            melFill.fillAmount = i / maxTime;
-            if(!isMelReloading)
-            {
-                startTime = 0f;
-            }
-            yield return new WaitForEndOfFrame();
-        }
-        isMelReloading = false;
-    }
-
-    #endregion
 
     private void Player_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder curWeapon)
     {

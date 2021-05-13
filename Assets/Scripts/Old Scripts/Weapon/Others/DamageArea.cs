@@ -146,15 +146,6 @@ public class DamageArea : MonoBehaviour
     {
         for (int i = 0; i < damageLayersEvents.Count; i++)
         {
-            if(other != null)
-            {
-                if(other.gameObject.CompareTag(damageLayersEvents[i].TagName))
-                {
-                    damageLayersEvents[i].InvokeByTag();
-                }
-            }
-
-
             var unitLayer = other.GetComponent<DamageblePlace>();
             if (unitLayer != null)
             {
@@ -227,7 +218,6 @@ public class DamageArea : MonoBehaviour
 [System.Serializable]
 public class EventOnDamageLayer
 {
-    public string TagName;
     public LayerMask whoIsTarget;
     public UnityEvent OnDamaged;
 
@@ -238,9 +228,5 @@ public class EventOnDamageLayer
             OnDamaged?.Invoke();
         }
     }
-
-    public void InvokeByTag()
-    {
-         OnDamaged?.Invoke();
-    }
+  
 }

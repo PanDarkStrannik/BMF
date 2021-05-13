@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    private void StartSpawn()
+    public void StartSpawn()
     {
         if (spawnStages.Count > 0)
         {
