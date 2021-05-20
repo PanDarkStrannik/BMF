@@ -5,26 +5,24 @@ using DG.Tweening;
 public class DissolveBody : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer render;
-   // [SerializeField] private List<Material> dissolveMaterials = new List<Material>();
+    [SerializeField] private string dissolveVariable;
     [SerializeField] private float dissolveDuration = 5f;
     private bool isDissoleved = false;
     private float startDissolveAmount = -1.2f;
-    private float endDissolveAmount;
 
-    private void Start()
+   
+
+    public void SetDefaultDissolveAmount()
     {
         foreach (var m in render.materials)
         {
-           if(m.HasProperty("DissolveAmount"))
-           {
-               startDissolveAmount = m.GetFloat("DissolveAmount");
-           }
+            if (m.HasProperty(dissolveVariable))
+            {
+                m.SetFloat(dissolveVariable, startDissolveAmount);
+            }
         }
-
-       
     }
 
-    [ContextMenu("Dissolve")]
     public void Dissolve()
     {
         StartCoroutine(DissoloveTick());
@@ -39,11 +37,10 @@ public class DissolveBody : MonoBehaviour
             var startDissolveTime = i;
             foreach (var m in render.materials)
             {
-               if(m.HasProperty("DissolveAmount"))
+               if(m.HasProperty(dissolveVariable))
                {
-                  m.SetFloat("DissolveAmount", i);
+                  m.SetFloat(dissolveVariable, i);
                }
-
             }
             
 

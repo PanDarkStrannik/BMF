@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 public class PlayerUI : MonoBehaviour
 {
@@ -15,7 +14,6 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Text viyAwakingText;
     [SerializeField] private Transform scoreEndPos;
 
-    [SerializeField] private UnityEvent OnScoreReached;
 
     private bool alreadyDamaged = false;
     
@@ -27,7 +25,6 @@ public class PlayerUI : MonoBehaviour
         deathMenu.SetActive(false);
         damagedImage.enabled = false;
         blackScreen.DOFade(0f, 5f).OnComplete(() => blackScreen.enabled = false);
-        ScoreAnimate();
         PlayerUI_PointEvent(0);
 
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ViewHealth;
@@ -46,20 +43,19 @@ public class PlayerUI : MonoBehaviour
 
     private void PlayerUI_PointEvent(int value)
     {
-        score.text =  value + "/" + PointCounter.Instance.RequiermentPoints;
-        if(value >= PointCounter.Instance.RequiermentPoints)
+        score.text =  value + "/" + GlobalGameEvents.Instance.PointsToOver;
+        if(value >= GlobalGameEvents.Instance.PointsToOver)
         {
-            //for pitch
-            BlackFadeIn();
+            GameOverFade();
         }
     }
 
     //for pitch
-    private void BlackFadeIn()
+    public void GameOverFade()
     {
         blackScreen.enabled = true;
         var fadeInSeq = DOTween.Sequence();
-        fadeInSeq.Append(blackScreen.DOFade(1f, 3f).OnComplete(() => OnScoreReached?.Invoke()));
+        fadeInSeq.Append(blackScreen.DOFade(1f, 3f).OnComplete(() => GlobalGameEvents.Instance.SwitchState(GameState.Over)));
         fadeInSeq.Append(blackScreen.DOFade(0f, 5f));
         fadeInSeq.AppendInterval(10f);
         fadeInSeq.Append(blackScreen.DOFade(1f, 5f).OnComplete(() => DOTween.Clear(true)).OnComplete(() => SceneManager.LoadSceneAsync(0)));
@@ -67,7 +63,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     //for pitch
-    private void ScoreAnimate()
+    public void ScoreAnimate()
     {
         var scoreSeq = DOTween.Sequence();
         scoreSeq.AppendInterval(3f);
@@ -76,7 +72,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     //for pitch
-    public void TextAnimate()
+    public void GameOverText()
     {
         string text = "";
         DOTween.To(() => text, x => text = x, "Вий пробуждается", 8f).OnUpdate(() => viyAwakingText.text = text).OnComplete(() => viyAwakingText.DOFade(0f, 5f));
