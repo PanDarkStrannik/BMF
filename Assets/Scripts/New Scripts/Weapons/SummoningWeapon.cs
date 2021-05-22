@@ -16,9 +16,12 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
     [SerializeReference] private Transform spawnPoint;
 
     [SerializeField] private float timeToSpawn = 0f;
+    [SerializeField] private float reloadTime = 5f;
 
     [SerializeField] private UnityEvent<bool> attackStart;
     [SerializeField] private UnityEvent attack;
+
+    private bool isReadyToSummon;
 
     public override WeaponType WeaponType
     {
@@ -32,30 +35,27 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
     {
         enemyChances = enemyChances.OrderBy(enemyChances => enemyChances.Chance).ToList();
         spawner.CreateSpawner();
-
+        isReadyToSummon = true;
     }
 
     public override void UseWeapon()
     {
-        Debug.Log("Summon");
         Attack();
     }
 
     public void Attack()
     {
-        if (state == WeaponState.Serenity)
+        if (State == WeaponState.Serenity && isReadyToSummon)
         {
-            Debug.Log("Summon");
-            StartCoroutine(MultiplieSummonSpawn());
+            StartCoroutine(MultiplieSummonSpawn(timeToSpawn));
         }
     }
 
-    private IEnumerator MultiplieSummonSpawn()
+    private IEnumerator MultiplieSummonSpawn(float time)
     {
-        state = WeaponState.Attack;
+        State = WeaponState.Attack;
         attackStart?.Invoke(true);
-        yield return new WaitForSeconds(timeToSpawn);
-
+        yield return new WaitForSeconds(time);
         attack?.Invoke();
 
         var rand = Random.Range(0, 100);
@@ -63,7 +63,7 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
         {
             //SpawnByLayer(ReturnSomeLayer());
             SpawnGameObject(ReturnSomeGameObject());
-            MultiplieSummonSpawn();
+            MultiplieSummonSpawn(timeToSpawn);
         }
         else
         {
@@ -71,11 +71,32 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
             //SpawnByLayer(ReturnSomeLayer());
         }
 
-        state = WeaponState.Serenity;
+        StartCoroutine(Reload(reloadTime));
         attackStart?.Invoke(false);
-
     }
 
+    protected override IEnumerator Reload(float time)
+    {
+        State = WeaponState.Reload;
+
+        if(State == WeaponState.Reload)
+        {
+            isReadyToSummon = false;
+            yield return new WaitForSeconds(time);
+            StartCoroutine(Serenity(0));
+        }
+    }
+
+    protected override IEnumerator Serenity(float time)
+    {
+        if(State != WeaponState.Serenity)
+        {
+            yield return new WaitForSeconds(time);
+            State = WeaponState.Serenity;
+            isReadyToSummon = true;
+            StopAllCoroutines();
+        }
+    }
 
     #region Старые функции
     //private LayerMask ReturnSomeLayer()
@@ -148,17 +169,17 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
 
     private void SpawnGameObject(GameObject gameObject)
     {
-        //var tempSpawnedObjects = spawner.spawned_objects;
-        //foreach (var spawnObject in tempSpawnedObjects)
-        //{
-        //    //spawner.SpawnObjectFromQueue(spawnPoint.position, spawnPoint.rotation, spawnObject);
-        //    if (spawner.TryReturnFamiliarObject(gameObject))
-        //    {
-        //        spawner.SpawnObject(spawnPoint.position, spawnPoint.rotation, spawner.ReturnFamiliarObject(spawnObject));
-        //        //return true;
-        //        break;
-        //    }
-        //}
+        var tempSpawnedObjects = spawner.spawned_objects;
+        foreach (var spawnObject in tempSpawnedObjects)
+        {
+             spawner.SpawnFirstObjectInQueue(spawnPoint.position, spawnPoint.rotation);
+            if (spawner.TryReturnFamiliarObject(gameObject))
+            {
+                spawner.SpawnObject(spawnPoint.position, spawnPoint.rotation, spawner.ReturnFamiliarObject(spawnObject));
+                //return true;
+                break;
+            }
+        }
 
         if (spawner.TryReturnFamiliarObject(gameObject))
         {

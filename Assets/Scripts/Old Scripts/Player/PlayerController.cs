@@ -341,7 +341,6 @@ public class PlayerController : MonoBehaviour
                 if(isReadyToChangeWeapon)
                 {
                     var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
-                    Debug.Log(testValue);
                     if (testValue > 0)
                     {
                         weaponChanger.NextWeapon();
