@@ -60,13 +60,23 @@ public class EnemySpawner : MonoBehaviour
 
     private void Subscribe()
     {
-        GlobalGameEvents.Instance.OnEnemySpawnStart += StartSpawn;
+        if(GlobalGameEvents.Instance != null)
+        {
+          GlobalGameEvents.Instance.OnEnemySpawnStart += StartSpawn;
+        }
+        else
+        {
+            Debug.LogError("GlobalGameEvents is null");
+        }
         PointCounter.Instance.PointEvent += ChangeStage;
     }
 
     private void Unsubscribe()
     {
-        GlobalGameEvents.Instance.OnEnemySpawnStart -= StartSpawn;
+        if(GlobalGameEvents.Instance != null)
+        {
+          GlobalGameEvents.Instance.OnEnemySpawnStart -= StartSpawn;
+        }
         StopCoroutine(SpawnBetweenTime());
         PointCounter.Instance.PointEvent -= ChangeStage;
     }

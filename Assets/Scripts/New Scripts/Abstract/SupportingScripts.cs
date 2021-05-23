@@ -167,20 +167,11 @@ namespace Scripts.DevelopingSupporting
             {
                 get; private set;
             }
-
-            protected MonoBehSinglton()
-            {
-                if (Instance == null)
-                {
-                    Instance = this as T;
-                    Creating();
-                }
-            }
-
+       
 
             protected virtual void Creating()
             {
-
+               
             }
 
             private void OnEnable()

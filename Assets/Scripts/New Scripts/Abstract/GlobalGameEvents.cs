@@ -12,8 +12,11 @@ public enum GameState : int
 }
 
 
-public class GlobalGameEvents : SupportingScripts.MonoBehSinglton<GlobalGameEvents>
+public class GlobalGameEvents : MonoBehaviour
 {
+    public static GlobalGameEvents Instance;
+
+
     [SerializeField, Min(0)] private int pointsToOver;
     [SerializeField] private List<GameStateEvent> gameStateEvents = new List<GameStateEvent>();
 
@@ -45,6 +48,14 @@ public class GlobalGameEvents : SupportingScripts.MonoBehSinglton<GlobalGameEven
 
 
     #endregion
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     private void OnEnable()
     {

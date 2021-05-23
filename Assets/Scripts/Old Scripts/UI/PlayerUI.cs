@@ -20,19 +20,21 @@ public class PlayerUI : MonoBehaviour
     public delegate void OnPlayerDeathEventHelper();
     public event OnPlayerDeathEventHelper OnPlayerDeathEvent;
 
-    private void OnEnable()
+    private void Start()
     {
         deathMenu.SetActive(false);
         damagedImage.enabled = false;
         blackScreen.DOFade(0f, 5f).OnComplete(() => blackScreen.enabled = false);
         PlayerUI_PointEvent(0);
+    }
 
+    private void OnEnable()
+    {
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ViewHealth;
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamsDamaged += OnPlayerParamDamagedViewer;
         PointCounter.Instance.PointEvent += PlayerUI_PointEvent;
-
     }
-
+    
     private void OnDisable()
     {
         PointCounter.Instance.RefreshPoints();
