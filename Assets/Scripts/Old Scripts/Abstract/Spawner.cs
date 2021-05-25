@@ -183,27 +183,27 @@ public class Spawner
         {
             if (gameObject.GetComponent<SpawnedObject>() != null)
             {
-                //var objectFromQueue = _objects_queue.Peek();
-                //for (int i = 0; i < _objects_queue.Count; i++)
-                //{                   
-                //    if (gameObject.GetComponent<SpawnedObject>().ID == objectFromQueue.GetComponent<SpawnedObject>().ID)
-                //    {
-                //        Debug.Log("Можем заспавнить!");
-                //        return true;
-                //    }
-                //    objectFromQueue = _objects_queue.Peek();
-                //    //_objects_queue.Enqueue(objectFromQueue);
-                //}
-                //return false;
-                var tempQueueList = new List<GameObject>(_objects_queue);
-                for (int i = 0; i < tempQueueList.Count; i++)
-                {
-                    if (gameObject.GetComponent<SpawnedObject>().ID == tempQueueList[i].GetComponent<SpawnedObject>().ID)
+                var objectFromQueue = _objects_queue.Peek();
+                for (int i = 0; i < _objects_queue.Count; i++)
+                {                   
+                    if (gameObject.GetComponent<SpawnedObject>().ID == objectFromQueue.GetComponent<SpawnedObject>().ID)
                     {
+                        Debug.Log("Можем заспавнить!");
                         return true;
                     }
+                    objectFromQueue = _objects_queue.Peek();
+                    _objects_queue.Enqueue(objectFromQueue);
                 }
                 return false;
+                //var tempQueueList = new List<GameObject>(_objects_queue);
+                //for (int i = 0; i < tempQueueList.Count; i++)
+                //{
+                //    if (gameObject.GetComponent<SpawnedObject>().ID == tempQueueList[i].GetComponent<SpawnedObject>().ID)
+                //    {
+                //        return true;
+                //    }
+                //}
+                //return false;
             }
             else
             {

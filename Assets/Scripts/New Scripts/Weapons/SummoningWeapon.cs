@@ -169,27 +169,27 @@ public class SummoningWeapon : AWeapon, IDamagingWeapon
 
     private void SpawnGameObject(GameObject gameObject)
     {
-        var tempSpawnedObjects = spawner.spawned_objects;
-        foreach (var spawnObject in tempSpawnedObjects)
-        {
-             spawner.SpawnFirstObjectInQueue(spawnPoint.position, spawnPoint.rotation);
-            if (spawner.TryReturnFamiliarObject(gameObject))
-            {
-                spawner.SpawnObject(spawnPoint.position, spawnPoint.rotation, spawner.ReturnFamiliarObject(spawnObject));
+       List<GameObject> tempSpawnedObjects = spawner.spawned_objects;
+       foreach (var spawnObject in tempSpawnedObjects)
+       {
+            spawner.SpawnFirstObjectInQueue(spawnPoint.position, spawnPoint.rotation);
+           if (spawner.TryReturnFamiliarObject(gameObject))
+           {
+               spawner.SpawnObject(spawnPoint.position, spawnPoint.rotation, spawner.ReturnFamiliarObject(spawnObject));
                 //return true;
                 break;
-            }
-        }
+           }
+       }
 
-        if (spawner.TryReturnFamiliarObject(gameObject))
-        {
-            Debug.Log("Данный объект можно заспавнить!");
-            spawner.SpawnObject(spawnPoint.position, spawnPoint.rotation, spawner.ReturnFamiliarObject(gameObject));
-        }
-        else
-        {
-            Debug.Log("Что-то пошло не так!");
-        }
+      if (spawner.TryReturnFamiliarObject(gameObject))
+      {
+          Debug.Log("Данный объект можно заспавнить!");
+          spawner.SpawnObject(spawnPoint.position, spawnPoint.rotation, spawner.ReturnFamiliarObject(gameObject));
+      }
+      else
+      {
+          Debug.Log("Что-то пошло не так!");
+      }
     }
 
 

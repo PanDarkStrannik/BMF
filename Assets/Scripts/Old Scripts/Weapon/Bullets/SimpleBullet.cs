@@ -81,7 +81,7 @@ public class SimpleBullet : MonoBehaviour, IBullet
         {
             if ((layer.value & other.transform.GetComponent<ADamageble>().Layer.value) != 0)
             {
-                Debug.Log($"{layer.value} & {other.transform.GetComponent<ADamageble>().Layer.value}");
+              //  Debug.Log($"{layer.value} & {other.transform.GetComponent<ADamageble>().Layer.value}");
                 foreach (var data in bulletDatas)
                 {
                     other.gameObject.GetComponent<IDamageble>().ApplyDamage(data);
