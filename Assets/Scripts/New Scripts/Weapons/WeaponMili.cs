@@ -21,7 +21,7 @@ public class WeaponMili : AWeapon, IDamagingWeapon
 
     public void Attack()
     {
-        if (state == AWeapon.WeaponState.Serenity)
+        if (state == AWeapon.WeaponState.Serenity && this.gameObject.activeSelf)
         {
             StopAllCoroutines();
             StartCoroutine(Damaging(toAttackTime));

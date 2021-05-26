@@ -49,7 +49,10 @@ public class WeaponHealing : AWeapon, IHeallingWeapon
     {
         if (FindComponentInIerarhy<ParamController>(weaponObject, out ParamController finded))
         {
-            Heal(finded.gameObject);
+            if(finded.enabled)
+            {
+              Heal(finded.gameObject);
+            }
         }
     }
 

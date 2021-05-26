@@ -4061,6 +4061,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: InvokeAnimationEvent
+    data: StopAttackSwitchStartLA
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.41666666
     functionName: InvokeAnimationEvent
     data: CameraEndSwingA2
@@ -4078,6 +4085,13 @@ AnimationClip:
   - time: 1.1666666
     functionName: InvokeAnimationEvent
     data: CameraDefaultA2
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.3333334
+    functionName: InvokeAnimationEvent
+    data: StopAttackSwitchEndLA
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

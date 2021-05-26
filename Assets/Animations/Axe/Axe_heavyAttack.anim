@@ -2918,6 +2918,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: InvokeAnimationEvent
+    data: StopAttackSwitchStartHA
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.33333334
     functionName: InvokeAnimationEvent
     data: CameraStartSwingHA
@@ -2942,6 +2949,13 @@ AnimationClip:
   - time: 1.7
     functionName: InvokeAnimationEvent
     data: CameraDefaultHA
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2
+    functionName: InvokeAnimationEvent
+    data: StopAttackSwitchEndHA
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

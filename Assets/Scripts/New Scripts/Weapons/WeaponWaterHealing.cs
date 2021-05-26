@@ -9,28 +9,32 @@ public class WeaponWaterHealing : WeaponHealing
     public override void Heal(GameObject healingObject)
     {
         this.healingObject = healingObject;
-        if (resourcesUser.ParamController == null)
+
+        if(this.gameObject.activeSelf)
         {
-            if (state != WeaponState.ImposibleAttack && currentHealCount >= waterHealingData.HealCount)
-            {
-                StopCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
-                StartCoroutine(Reload(waterHealingData.ReloadTime));
-            }
-            else if (state == WeaponState.Serenity)
-            {
-                currentHealCount++;
-                StartCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
-            }
-        }
-        else
-        {
-            if(state == WeaponState.Serenity)
-            {
-                if(resourcesUser.TryUseResource())
-                {
-                    StartCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
-                }
-            }
+               if (resourcesUser.ParamController == null)
+               {
+                   if (state != WeaponState.ImposibleAttack && currentHealCount >= waterHealingData.HealCount)
+                   {
+                       StopCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
+                       StartCoroutine(Reload(waterHealingData.ReloadTime));
+                   }
+                   else if (state == WeaponState.Serenity)
+                   {
+                      currentHealCount++;
+                      StartCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
+                   }
+               }
+               else
+               {
+                   if(state == WeaponState.Serenity)
+                   {
+                       if(resourcesUser.TryUseResource())
+                       {
+                            StartCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
+                       }
+                   }
+               }
         }
     }
 

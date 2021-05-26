@@ -45,27 +45,31 @@ public class WeaponWater : WeaponRange
 
     public override void Attack()
     {
-        if (resourcesUser.ParamController == null)
+        if(this.gameObject.activeSelf)
         {
-            if (state != WeaponState.ImposibleAttack && attackCount >= attackParametres.AttackValues)
-            {
-                StartCoroutine(Reload(attackParametres.ReloadTime));
-            }
-            else if (state == WeaponState.Serenity)
-            {
-                StartCoroutine(Damaging(attackParametres.ToAttackTime));
-            }
+           if (resourcesUser.ParamController == null)
+           {
+               if (state != WeaponState.ImposibleAttack && attackCount >= attackParametres.AttackValues)
+               {
+                   StartCoroutine(Reload(attackParametres.ReloadTime));
+               }
+               else if (state == WeaponState.Serenity)
+               {
+                   StartCoroutine(Damaging(attackParametres.ToAttackTime));
+               }
+           }
+           else
+           {
+               if (state == WeaponState.Serenity)
+               {
+                   if (resourcesUser.TryUseResource())
+                   {
+                        StartCoroutine(Damaging(attackParametres.ToAttackTime));
+                   }
+               }
+           }
         }
-        else
-        {
-            if (state == WeaponState.Serenity)
-            {
-                if (resourcesUser.TryUseResource())
-                {
-                    StartCoroutine(Damaging(attackParametres.ToAttackTime));
-                }
-            }
-        }
+
     }
 
     //public void Reload()

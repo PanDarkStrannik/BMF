@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e0e3fb7e783974892c130675d4054b, type: 3}
+  m_Name: Karga
+  m_EditorClassIdentifier: 
+  music: []
+  sounds:
+  - Name: Attack
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips: []
+    AudioClip: {fileID: 8300000, guid: 3e4afadc9a1f95c4e99ef9b5451415ce, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    SpatialBlend: 1
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.8
+    MaxVolume: 1
+    MinPitch: 0.9
+    MaxPitch: 1.1
+    AudioSource: {fileID: 0}
+  - Name: Hurt
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips: []
+    AudioClip: {fileID: 8300000, guid: 327a7fec42e6da14a9f0c3278b786f1e, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    SpatialBlend: 1
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.4
+    MaxVolume: 0.5
+    MinPitch: 1
+    MaxPitch: 1.2
+    AudioSource: {fileID: 0}
+  - Name: Death
+    soundMixer: {fileID: 2565048883456428876, guid: 92ce80ea4c4c2464d8d406ee5ec66403, type: 2}
+    AudioClips: []
+    AudioClip: {fileID: 8300000, guid: 1ca49e87fe8378e42b1c4fd0f7929718, type: 3}
+    Volume: 0.5
+    Pitch: 0.8
+    SpatialBlend: 1
+    PlayOnAwake: 0
+    Looping: 0
+    MinVolume: 0.4
+    MaxVolume: 0.5
+    MinPitch: 0.7
+    MaxPitch: 0.8
+    AudioSource: {fileID: 0}
