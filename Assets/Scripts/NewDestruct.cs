@@ -28,7 +28,8 @@ public class NewDestruct : MonoBehaviour
 
         foreach (var destruct in destructs)
         {
-            destruct.OnDestruct.AddListener(DestructEventListener);
+            // null refernce \/
+          //  destruct.OnDestruct.AddListener(DestructEventListener);
         }
     }
 
