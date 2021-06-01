@@ -266,6 +266,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MainStrongAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb369a9d-a880-4e59-b828-4d1e88658b2b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -510,6 +518,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Ability1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35ad4953-eb14-4a76-a383-5006aa2e9d1c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold(duration=0.4)"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse And Keybord"",
+                    ""action"": ""MainStrongAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -553,6 +572,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ButtonInputs_ESC = m_ButtonInputs.FindAction("ESC", throwIfNotFound: true);
         m_ButtonInputs_MouseScroll = m_ButtonInputs.FindAction("MouseScroll", throwIfNotFound: true);
         m_ButtonInputs_Ability1 = m_ButtonInputs.FindAction("Ability1", throwIfNotFound: true);
+        m_ButtonInputs_MainStrongAttack = m_ButtonInputs.FindAction("MainStrongAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -687,6 +707,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_ButtonInputs_ESC;
     private readonly InputAction m_ButtonInputs_MouseScroll;
     private readonly InputAction m_ButtonInputs_Ability1;
+    private readonly InputAction m_ButtonInputs_MainStrongAttack;
     public struct ButtonInputsActions
     {
         private @PlayerInput m_Wrapper;
@@ -702,6 +723,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @ESC => m_Wrapper.m_ButtonInputs_ESC;
         public InputAction @MouseScroll => m_Wrapper.m_ButtonInputs_MouseScroll;
         public InputAction @Ability1 => m_Wrapper.m_ButtonInputs_Ability1;
+        public InputAction @MainStrongAttack => m_Wrapper.m_ButtonInputs_MainStrongAttack;
         public InputActionMap Get() { return m_Wrapper.m_ButtonInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -744,6 +766,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Ability1.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnAbility1;
                 @Ability1.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnAbility1;
                 @Ability1.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnAbility1;
+                @MainStrongAttack.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainStrongAttack;
+                @MainStrongAttack.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainStrongAttack;
+                @MainStrongAttack.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnMainStrongAttack;
             }
             m_Wrapper.m_ButtonInputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -781,6 +806,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Ability1.started += instance.OnAbility1;
                 @Ability1.performed += instance.OnAbility1;
                 @Ability1.canceled += instance.OnAbility1;
+                @MainStrongAttack.started += instance.OnMainStrongAttack;
+                @MainStrongAttack.performed += instance.OnMainStrongAttack;
+                @MainStrongAttack.canceled += instance.OnMainStrongAttack;
             }
         }
     }
@@ -816,5 +844,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnESC(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
         void OnAbility1(InputAction.CallbackContext context);
+        void OnMainStrongAttack(InputAction.CallbackContext context);
     }
 }

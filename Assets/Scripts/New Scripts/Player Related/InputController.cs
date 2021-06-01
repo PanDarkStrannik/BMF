@@ -7,45 +7,47 @@ public class InputController
 {
     private PlayerInput input;
 
+    private bool isLightAttackTriggered = false;
+    private bool isStrongAttackTriggered = false;
+
+    public InputController(PlayerInput input)
+    {
+        this.input = input;
+    }
    
 
-    public void InputSetup()
+    public void InputSetup(PlayerWeaponChanger weaponChanger)
     {
-        input = new PlayerInput();
+        MouseLeftClick(weaponChanger);
+        MouseLeftHold();
+    }
 
-        if(!PauseController.isPaused)
+
+    private void MouseLeftClick(PlayerWeaponChanger weaponChanger)
+    {
+        input.ButtonInputs.MainAttack.performed += _ =>
         {
-            MouseLeftClick();
+            isLightAttackTriggered = true;
+            Debug.Log("LightAttack");
+        };
+    }
+
+   private void MouseLeftHold()
+    {
+        input.ButtonInputs.MainStrongAttack.performed += _ =>
+        {
+            isStrongAttackTriggered = true;
+            Debug.Log("Holding..");
+        };
+
+        if(isStrongAttackTriggered)
+        {
+           input.ButtonInputs.MainStrongAttack.canceled += _ =>
+           {
+               Debug.Log("Release..");
+               isStrongAttackTriggered = false;
+           };
         }
-    }
-
-    public bool MouseLeftClick()
-    {
-       if(input.ButtonInputs.MainAttack.triggered)
-       {
-           return true;
-       }
-
-          return false;
-    }
-
-    private void MouseRightClick(PlayerWeaponChanger weaponChanger)
-    {
-
-    }
-
-    private void MouseLeftHold()
-    {
-
-    }
-
-    private void MouseRightHold()
-    {
-
-    }
-
-    private void ShiftHold()
-    {
 
     }
 }

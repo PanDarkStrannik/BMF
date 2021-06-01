@@ -91,7 +91,7 @@ public partial class PlayerController : MonoBehaviour
     public Vector3 MovementDirection { get => movementDirection; }
     #endregion
 
-
+    private InputController inputController;
 
 
     private PlayerController()
@@ -102,6 +102,7 @@ public partial class PlayerController : MonoBehaviour
     private void Awake()
     {
         input = new PlayerInput();
+        inputController = new InputController(input);
         PlayerInformation.GetInstance().Player = gameObject;
 
         playerMovement = GetComponentInChildren<PlayerMovement>();
@@ -111,18 +112,19 @@ public partial class PlayerController : MonoBehaviour
     void Start()
     {
         weaponChanger.ChangeWeapon(0);
-        ButtonsInput();
+       // ButtonsInput();
     }
 
     private void OnEnable()
     {
         input.Enable();
+        inputController.InputSetup(weaponChanger);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnDisable()
     {
-        input.Disable();
+         input.Disable();
     }
 
     private void OnDestroy()
@@ -151,26 +153,26 @@ public partial class PlayerController : MonoBehaviour
 
     private void PlayerVerticalMovement()
     {
-        var cameraRot = cameraOnPlayer.transform.forward;
+        //var cameraRot = cameraOnPlayer.transform.forward;
 
-        var moveDir = input.MovementInput.GetDirection.ReadValue<Vector2>();
-        var d = new Vector3(moveDir.x, moveDir.y, 0).normalized;
+        //var moveDir = input.MovementInput.GetDirection.ReadValue<Vector2>();
+        //var d = new Vector3(moveDir.x, moveDir.y, 0).normalized;
 
-        cameraRot = transform.InverseTransformDirection(cameraRot);
+        //cameraRot = transform.InverseTransformDirection(cameraRot);
 
-        arcSin = Mathf.Asin(cameraRot.y) * Mathf.Rad2Deg;
+        //arcSin = Mathf.Asin(cameraRot.y) * Mathf.Rad2Deg;
 
-        if (Math.Abs(arcSin) < angle)
-        {
-            d = new Vector3(d.x, 0, d.y);
-            VerticalJump(d, moveDir);
-        }
-        else
-        {
-            d = new Vector3(d.x, d.y * cameraRot.y, d.z * cameraRot.z);
-        }
+        //if (Math.Abs(arcSin) < angle)
+        //{
+        //    d = new Vector3(d.x, 0, d.y);
+        //    VerticalJump(d, moveDir);
+        //}
+        //else
+        //{
+        //    d = new Vector3(d.x, d.y * cameraRot.y, d.z * cameraRot.z);
+        //}
         
-        playerMovement.VerticalMove(d);
+        //playerMovement.VerticalMove(d);
     }
 
     private void VerticalJump(Vector3 d, Vector3 moveDir)
@@ -184,22 +186,21 @@ public partial class PlayerController : MonoBehaviour
 
     private void PlayerGroundMovement()
     {
-        movementDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
+        //movementDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
 
-        var correctMove = new Vector3(movementDirection.x, 0, movementDirection.y).normalized;
+        //var correctMove = new Vector3(movementDirection.x, 0, movementDirection.y).normalized;
 
-        correctMove = transform.TransformDirection(correctMove);
-        movement.Move(correctMove);
+        //correctMove = transform.TransformDirection(correctMove);
+        //movement.Move(correctMove);
         
-        OnPlayerMoved?.Invoke(movementDirection, isShiftNotInput);
+        //OnPlayerMoved?.Invoke(movementDirection, isShiftNotInput);
     }
 
 
 
     private void SlopeFriction()
     {
-        var inputValue = input.MovementInput.GetDirection.ReadValue<Vector2>();
-        if(inputValue == Vector2.zero && movement.Grounded)
+        if(movementDirection == Vector3.zero && movement.Grounded)
         {
             playerPhysMaterial.frictionCombine = PhysicMaterialCombine.Average;
         }
@@ -213,20 +214,20 @@ public partial class PlayerController : MonoBehaviour
 
     private void RotationInput()
     {
-        var rotationInput = input.RotationInput.GetRotation.ReadValue<Vector2>();
+        //var rotationInput = input.RotationInput.GetRotation.ReadValue<Vector2>();
 
-        mouseMoveY -= rotationInput.y * SensY * Time.deltaTime;
-        mouseMoveY = ClampAngle(mouseMoveY, MinMax_Y.x, MinMax_Y.y);
+        //mouseMoveY -= rotationInput.y * SensY * Time.deltaTime;
+        //mouseMoveY = ClampAngle(mouseMoveY, MinMax_Y.x, MinMax_Y.y);
 
-        mouseMoveX = transform.rotation.eulerAngles.y + rotationInput.x * SensX * Time.deltaTime;
+        //mouseMoveX = transform.rotation.eulerAngles.y + rotationInput.x * SensX * Time.deltaTime;
 
-        transform.rotation = Quaternion.Euler(0, mouseMoveX, 0);
+        //transform.rotation = Quaternion.Euler(0, mouseMoveX, 0);
 
-        if (cameraOnPlayer != null)
-        {
-            cameraOnPlayer.rotation = Quaternion.Euler(mouseMoveY, cameraOnPlayer.eulerAngles.y, 0);
-             CameraSideAngles();
-        }
+        //if (cameraOnPlayer != null)
+        //{
+        //    cameraOnPlayer.rotation = Quaternion.Euler(mouseMoveY, cameraOnPlayer.eulerAngles.y, 0);
+        //     CameraSideAngles();
+        //}
 
     }
 
