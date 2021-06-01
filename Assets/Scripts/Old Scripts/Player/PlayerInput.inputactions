@@ -199,7 +199,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Heal",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "cb226fdd-4f2f-4c63-9047-5b82e0c600ad",
                     "expectedControlType": "Button",
@@ -263,7 +263,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse And Keybord",
-                    "action": "Heal",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

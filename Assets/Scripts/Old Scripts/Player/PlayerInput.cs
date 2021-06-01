@@ -212,7 +212,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Heal"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""cb226fdd-4f2f-4c63-9047-5b82e0c600ad"",
                     ""expectedControlType"": ""Button"",
@@ -276,7 +276,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse And Keybord"",
-                    ""action"": ""Heal"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -546,7 +546,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ButtonInputs_SecondAttack = m_ButtonInputs.FindAction("SecondAttack", throwIfNotFound: true);
         m_ButtonInputs_Reload = m_ButtonInputs.FindAction("Reload", throwIfNotFound: true);
         m_ButtonInputs_ChangeSpeed = m_ButtonInputs.FindAction("ChangeSpeed", throwIfNotFound: true);
-        m_ButtonInputs_Heal = m_ButtonInputs.FindAction("Heal", throwIfNotFound: true);
+        m_ButtonInputs_Interact = m_ButtonInputs.FindAction("Interact", throwIfNotFound: true);
         m_ButtonInputs_ChangeWeaponByKeyboard = m_ButtonInputs.FindAction("ChangeWeaponByKeyboard", throwIfNotFound: true);
         m_ButtonInputs_Jump = m_ButtonInputs.FindAction("Jump", throwIfNotFound: true);
         m_ButtonInputs_Blink = m_ButtonInputs.FindAction("Blink", throwIfNotFound: true);
@@ -680,7 +680,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_ButtonInputs_SecondAttack;
     private readonly InputAction m_ButtonInputs_Reload;
     private readonly InputAction m_ButtonInputs_ChangeSpeed;
-    private readonly InputAction m_ButtonInputs_Heal;
+    private readonly InputAction m_ButtonInputs_Interact;
     private readonly InputAction m_ButtonInputs_ChangeWeaponByKeyboard;
     private readonly InputAction m_ButtonInputs_Jump;
     private readonly InputAction m_ButtonInputs_Blink;
@@ -695,7 +695,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @SecondAttack => m_Wrapper.m_ButtonInputs_SecondAttack;
         public InputAction @Reload => m_Wrapper.m_ButtonInputs_Reload;
         public InputAction @ChangeSpeed => m_Wrapper.m_ButtonInputs_ChangeSpeed;
-        public InputAction @Heal => m_Wrapper.m_ButtonInputs_Heal;
+        public InputAction @Interact => m_Wrapper.m_ButtonInputs_Interact;
         public InputAction @ChangeWeaponByKeyboard => m_Wrapper.m_ButtonInputs_ChangeWeaponByKeyboard;
         public InputAction @Jump => m_Wrapper.m_ButtonInputs_Jump;
         public InputAction @Blink => m_Wrapper.m_ButtonInputs_Blink;
@@ -723,9 +723,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @ChangeSpeed.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
                 @ChangeSpeed.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
                 @ChangeSpeed.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeSpeed;
-                @Heal.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnHeal;
-                @Heal.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnHeal;
-                @Heal.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnHeal;
+                @Interact.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnInteract;
                 @ChangeWeaponByKeyboard.started -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeaponByKeyboard;
                 @ChangeWeaponByKeyboard.performed -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeaponByKeyboard;
                 @ChangeWeaponByKeyboard.canceled -= m_Wrapper.m_ButtonInputsActionsCallbackInterface.OnChangeWeaponByKeyboard;
@@ -760,9 +760,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @ChangeSpeed.started += instance.OnChangeSpeed;
                 @ChangeSpeed.performed += instance.OnChangeSpeed;
                 @ChangeSpeed.canceled += instance.OnChangeSpeed;
-                @Heal.started += instance.OnHeal;
-                @Heal.performed += instance.OnHeal;
-                @Heal.canceled += instance.OnHeal;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
                 @ChangeWeaponByKeyboard.started += instance.OnChangeWeaponByKeyboard;
                 @ChangeWeaponByKeyboard.performed += instance.OnChangeWeaponByKeyboard;
                 @ChangeWeaponByKeyboard.canceled += instance.OnChangeWeaponByKeyboard;
@@ -809,7 +809,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnSecondAttack(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnChangeSpeed(InputAction.CallbackContext context);
-        void OnHeal(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnChangeWeaponByKeyboard(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnBlink(InputAction.CallbackContext context);

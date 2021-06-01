@@ -9,7 +9,7 @@ using DG.Tweening;
 [System.Serializable]
 public class UnityBoolEvent : UnityEvent<bool> { }
 
-public class PlayerController : MonoBehaviour
+public partial class PlayerController : MonoBehaviour
 {
     public enum ControlMoveType {Ground,Vertical }
     public ControlMoveType controlMoveType;
@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
     public float MouseMoveY { get => mouseMoveY; }
     public Vector3 MovementDirection { get => movementDirection; }
     #endregion
+
 
 
 
@@ -458,57 +459,6 @@ public class PlayerController : MonoBehaviour
         if (angle < -360F) angle -= 360F;
         if (angle > 360F) angle += 360F;
         return Mathf.Clamp(angle, min, max);
-    }
-
-    [System.Serializable]
-    public class GunPush
-    {
-        [SerializeField] private WeaponType weaponType;
-        [SerializeField] private Vector3 pushForce;
-        [SerializeField] private ForceMode forceMode;
-        [SerializeField] private float timeToPush;
-        [SerializeField] private ShakingParams shakingParams;
-
-        public WeaponType WeaponType
-        {
-            get
-            {
-                
-                return weaponType;
-            }
-        }
-
-        public Vector3 PushForce
-        {
-            get
-            {
-                return pushForce;
-            }
-        }
-
-        public ForceMode ForceMode
-        {
-            get
-            {
-                return forceMode;
-            }
-        }
-
-        public float TimeToPush
-        {
-            get
-            {
-                return timeToPush;
-            }
-        }
-
-        public ShakingParams ShakingParams
-        {
-            get
-            {
-                return shakingParams;
-            }
-        }
     }
 
 }
