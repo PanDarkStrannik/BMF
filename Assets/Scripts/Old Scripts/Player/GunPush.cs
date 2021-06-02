@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-public partial class PlayerController
-{
     [System.Serializable]
     public class GunPush
     {
@@ -53,4 +51,3 @@ public partial class PlayerController
         }
     }
 
-}

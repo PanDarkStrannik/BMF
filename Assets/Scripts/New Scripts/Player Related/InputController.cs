@@ -3,51 +3,206 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputController 
+public class InputController : MonoBehaviour
 {
     private PlayerInput input;
+    private PlayerController player;
 
-    private bool isLightAttackTriggered = false;
-    private bool isStrongAttackTriggered = false;
+    public PlayerController Player { get => player; set => player = value; }
 
-    public InputController(PlayerInput input)
+
+
+    private void Awake()
     {
-        this.input = input;
-    }
-   
-
-    public void InputSetup(PlayerWeaponChanger weaponChanger)
-    {
-        MouseLeftClick(weaponChanger);
-        MouseLeftHold();
+        input = new PlayerInput();
     }
 
-
-    private void MouseLeftClick(PlayerWeaponChanger weaponChanger)
+    private void OnEnable()
     {
-        input.ButtonInputs.MainAttack.performed += _ =>
-        {
-            isLightAttackTriggered = true;
-            Debug.Log("LightAttack");
-        };
+        input.Enable();
     }
 
-   private void MouseLeftHold()
+    private void OnDisable()
     {
-        input.ButtonInputs.MainStrongAttack.performed += _ =>
-        {
-            isStrongAttackTriggered = true;
-            Debug.Log("Holding..");
-        };
+        input.Disable();
+    }
 
-        if(isStrongAttackTriggered)
+
+    public void ButtonInputSetup()
+    {
+        if (!PauseController.isPaused)
         {
-           input.ButtonInputs.MainStrongAttack.canceled += _ =>
-           {
-               Debug.Log("Release..");
-               isStrongAttackTriggered = false;
-           };
+            HandleMainAttack();
+            HandleSecondAttack();
+            HandleWeaponChangeScroll();
+            HandleWeaponChangeKeyboard();
+            HandleJump();
+            HandleIntrecation();
+            HandleAbillity1();
+            HandleMoveSpeedChange();
         }
-
     }
+
+    #region VECTORS
+
+    public Vector3 MovementDirectionInput()
+    {
+        return input.MovementInput.GetDirection.ReadValue<Vector2>();
+    }
+
+    public  Vector3 RotationDirectionInput()
+    {
+        return input.RotationInput.GetRotation.ReadValue<Vector2>();
+    }
+
+    #endregion
+
+    #region MOUSE
+
+    private void HandleMainAttack()
+    {
+        input.ButtonInputs.MainAttack.performed += context =>
+        {
+            if (Player.WeaponChanger.CurrentWeapon.TryUseFirstWeapon())
+            {
+                foreach (var e in player.GunPush)
+                {
+                    if (player.WeaponChanger.CurrentWeapon.Weapon1.WeaponType == e.WeaponType)
+                    {
+                        var push = transform.TransformDirection(e.PushForce);
+                        e.ShakingParams.ShakeEventInvoke();
+                    }
+                }
+            }
+        };
+    }
+
+    private void HandleSecondAttack()
+    {
+        input.ButtonInputs.SecondAttack.performed += context =>
+        {
+            if (Player.WeaponChanger.CurrentWeapon.TryUseSecondWeapon())
+            {
+                foreach (var e in player.GunPush)
+                {
+                    if (player.WeaponChanger.CurrentWeapon.Weapon2.WeaponType == e.WeaponType)
+                    {
+                        var push = transform.TransformDirection(e.PushForce);
+                        StartCoroutine(player.Movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
+                        e.ShakingParams.ShakeEventInvoke();
+                    }
+                }
+            }
+        };
+    }
+
+
+    private void HandleWeaponChangeScroll()
+    {
+        input.ButtonInputs.MouseScroll.performed += context =>
+        {
+                if (player.IsReadyToChangeWeapon)
+                {
+                    var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
+                    if (testValue > 0)
+                    {
+                        player.WeaponChanger.NextWeapon();
+                    }
+                    else if (testValue < 0)
+                    {
+                        player.WeaponChanger.PrevWeapon();
+                    }
+                    else
+                    {
+                        throw new System.Exception("Почему-то при скролле выдало 0");
+                    }
+                    if (player.WeaponChanger.CurrentWeapon != null)
+                    {
+                        player.InvokeChangeWeaponEvent(player.WeaponChanger.CurrentWeapon);
+                        player.InvokeOnCurrentWeapon(player.WeaponChanger.CurrentWeaponNum);
+                    }
+                }
+        };
+    }
+
+
+
+    #endregion
+
+    #region KEYBOARD
+
+    private void HandleWeaponChangeKeyboard()
+    {
+        input.ButtonInputs.ChangeWeaponByKeyboard.performed += context =>
+        {
+                if (player.IsReadyToChangeWeapon)
+                {
+                    player.WeaponChanger.ChangeWeapon((int)input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
+
+                    if (player.WeaponChanger.CurrentWeapon != null)
+                    {
+                        player.InvokeChangeWeaponEvent(player.WeaponChanger.CurrentWeapon);
+                        player.InvokeOnCurrentWeapon(player.WeaponChanger.CurrentWeaponNum);
+                    }
+                }
+        };
+    }
+
+    private void HandleJump()
+    {
+        input.ButtonInputs.Jump.performed += context =>
+        {
+                if (player.Movement.Grounded)
+                {
+                    player.Movement.body.velocity = player.PlayerMovement.JumpForce * Vector3.up;
+                    player.AudioProvider.PlayOneShot("Jump");
+                }
+        };
+    }
+
+
+    private void HandleMoveSpeedChange()
+    {
+        input.ButtonInputs.ChangeSpeed.performed += context =>
+        {
+
+            if (player.IsShiftNotInput)
+            {
+                player.Movement.moveType = APlayerMovement.PlayerMoveType.Fast;
+                player.IsShiftNotInput = false;
+
+            }
+            else
+            {
+                player.Movement.moveType = APlayerMovement.PlayerMoveType.Slow;
+                player.IsShiftNotInput = true;
+
+            }
+        };
+    }
+
+    private void HandleAbillity1()
+    {
+        input.ButtonInputs.Ability1.performed += _ =>
+        {
+                if (player.Ability1.AbilityState == AbilityState.Enabled)
+                {
+                     player.Ability1.UseAbility();
+                }
+        };
+    }
+
+    private void HandleIntrecation()
+    {
+        input.ButtonInputs.Interact.performed += _ =>
+        {
+            if (player.Interactable != null)
+            {
+                player.Interactable.Use();
+            }
+        };
+    }
+
+    #endregion
+
 }

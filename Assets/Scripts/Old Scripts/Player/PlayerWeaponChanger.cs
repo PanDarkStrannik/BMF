@@ -147,7 +147,7 @@ public class PlayerWeaponChanger
             return false;
         }
 
-        public bool TryUseSecoundWeapon()
+        public bool TryUseSecondWeapon()
         {
             if (weapon2 != null)
             {

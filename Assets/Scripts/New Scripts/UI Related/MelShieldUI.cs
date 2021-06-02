@@ -25,25 +25,13 @@ public class MelShieldUI : MonoBehaviour
     public void MelDecrement()
     {
         StopAllCoroutines();
-        for (int i = 0; i < player.Abilities.Count; i++)
-        {
-            if (player.Abilities[i] is Mel)
-            {
-                StartCoroutine(MelDecrementTime(player.Abilities[i].AbilityParams.ActiveTime));
-            }
-        }
+        StartCoroutine(MelDecrementTime(player.Ability1.AbilityParams.ActiveTime));
     }
 
     public void MelIncrement()
     {
         StopAllCoroutines();
-        for (int i = 0; i < player.Abilities.Count; i++)
-        {
-            if (player.Abilities[i] is Mel)
-            {
-                StartCoroutine(MelIncrementTime(player.Abilities[i].AbilityParams.CoolDownTime));
-            }
-        }
+        StartCoroutine(MelDecrementTime(player.Ability1.AbilityParams.CoolDownTime));
     }
 
     private IEnumerator MelIncrementTime(float maxTime)

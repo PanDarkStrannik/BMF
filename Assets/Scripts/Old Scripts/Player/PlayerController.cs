@@ -24,14 +24,13 @@ public partial class PlayerController : MonoBehaviour
 
     [Header("Ref's to other Classes")]
     [SerializeField] private PlayerWeaponChanger weaponChanger;
-    [SerializeField] private PlayerUI playerUI;
     [SerializeReference] private APlayerMovement movement;
-    [SerializeField] private List<AAbility> abilities;
+    [SerializeField] private AAbility ability1;
     [SerializeField] private List<GunPush> gunPushes;
     private PlayerMovement playerMovement;
     private AudioProvider audioProvider;
-    private PlayerInput input;
     private AInteractable interactable = null;
+    private InputController inputController;
 
 
 
@@ -46,6 +45,7 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask whatIsReloadZone;
 
     private Vector3 movementDirection;
+    private Vector3 rotationDirection;
 
     #region EVENTS
     public delegate void PlayerWeaponControlHelper(AWeapon.WeaponState controlType);
@@ -84,14 +84,20 @@ public partial class PlayerController : MonoBehaviour
     }
 
     public AudioProvider AudioProvider { get => audioProvider; }
-    public List<AAbility> Abilities { get => abilities; }
+    public AAbility Ability1 { get => ability1; }
     public Transform CameraOnPlayer { get => cameraOnPlayer; }
     public float MouseMoveX { get => mouseMoveX; }
     public float MouseMoveY { get => mouseMoveY; }
     public Vector3 MovementDirection { get => movementDirection; }
+    public PlayerWeaponChanger WeaponChanger { get => weaponChanger; }
+    public List<GunPush> GunPush { get => gunPushes; }
+    public APlayerMovement Movement { get => movement; }
+    public bool IsReadyToChangeWeapon { get => isReadyToChangeWeapon; }
+    public bool IsShiftNotInput { get => isShiftNotInput; set => isShiftNotInput = value; }
+    public  PlayerMovement PlayerMovement { get => playerMovement; }
+
     #endregion
 
-    private InputController inputController;
 
 
     private PlayerController()
@@ -101,8 +107,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        input = new PlayerInput();
-        inputController = new InputController(input);
+        inputController = GetComponent<InputController>();
         PlayerInformation.GetInstance().Player = gameObject;
 
         playerMovement = GetComponentInChildren<PlayerMovement>();
@@ -112,21 +117,16 @@ public partial class PlayerController : MonoBehaviour
     void Start()
     {
         weaponChanger.ChangeWeapon(0);
-       // ButtonsInput();
+        inputController.ButtonInputSetup();
     }
 
     private void OnEnable()
     {
-        input.Enable();
-        inputController.InputSetup(weaponChanger);
+        inputController.Player = this;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-    private void OnDisable()
-    {
-         input.Disable();
-    }
-
+  
     private void OnDestroy()
     {
         Cursor.visible = true;
@@ -186,14 +186,14 @@ public partial class PlayerController : MonoBehaviour
 
     private void PlayerGroundMovement()
     {
-        //movementDirection = input.MovementInput.GetDirection.ReadValue<Vector2>();
+        movementDirection = inputController.MovementDirectionInput();
 
-        //var correctMove = new Vector3(movementDirection.x, 0, movementDirection.y).normalized;
+        var correctMove = new Vector3(movementDirection.x, 0, movementDirection.y).normalized;
 
-        //correctMove = transform.TransformDirection(correctMove);
-        //movement.Move(correctMove);
+        correctMove = transform.TransformDirection(correctMove);
+        movement.Move(correctMove);
         
-        //OnPlayerMoved?.Invoke(movementDirection, isShiftNotInput);
+        OnPlayerMoved?.Invoke(movementDirection, isShiftNotInput);
     }
 
 
@@ -214,20 +214,20 @@ public partial class PlayerController : MonoBehaviour
 
     private void RotationInput()
     {
-        //var rotationInput = input.RotationInput.GetRotation.ReadValue<Vector2>();
+        rotationDirection = inputController.RotationDirectionInput();
 
-        //mouseMoveY -= rotationInput.y * SensY * Time.deltaTime;
-        //mouseMoveY = ClampAngle(mouseMoveY, MinMax_Y.x, MinMax_Y.y);
+        mouseMoveY -= rotationDirection.y * SensY * Time.deltaTime;
+        mouseMoveY = ClampAngle(mouseMoveY, MinMax_Y.x, MinMax_Y.y);
 
-        //mouseMoveX = transform.rotation.eulerAngles.y + rotationInput.x * SensX * Time.deltaTime;
+        mouseMoveX = transform.rotation.eulerAngles.y + rotationDirection.x * SensX * Time.deltaTime;
 
-        //transform.rotation = Quaternion.Euler(0, mouseMoveX, 0);
+        transform.rotation = Quaternion.Euler(0, mouseMoveX, 0);
 
-        //if (cameraOnPlayer != null)
-        //{
-        //    cameraOnPlayer.rotation = Quaternion.Euler(mouseMoveY, cameraOnPlayer.eulerAngles.y, 0);
-        //     CameraSideAngles();
-        //}
+        if (cameraOnPlayer != null)
+        {
+            cameraOnPlayer.rotation = Quaternion.Euler(mouseMoveY, cameraOnPlayer.eulerAngles.y, 0);
+             CameraSideAngles();
+        }
 
     }
 
@@ -270,189 +270,15 @@ public partial class PlayerController : MonoBehaviour
         isReadyToChangeWeapon = true;
     }
 
-
-
-
-    private void ButtonsInput()
+    public void InvokeChangeWeaponEvent(PlayerWeaponChanger.WeaponSpellsHolder weapon)
     {
-        input.ButtonInputs.MainAttack.performed += context =>
-        {
-            if(!PauseController.isPaused)
-            {
-                if (weaponChanger.CurrentWeapon.TryUseFirstWeapon())
-                {
-                    foreach (var e in gunPushes)
-                    {
-                        if (weaponChanger.CurrentWeapon.Weapon1.WeaponType == e.WeaponType)
-                        {
-                            var push = transform.TransformDirection(e.PushForce);
-                           // StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
-                            e.ShakingParams.ShakeEventInvoke();
-                        }
-                    }
-                }
-            }
-            //if(weaponChanger.CurrentWeapon.TryReturnNeededWeaponType<IDamagingWeapon>(out IDamagingWeapon returnedWeapon))
-            //{
-            //    returnedWeapon.Attack();
-            //}
-         
-        };
-
-        input.ButtonInputs.SecondAttack.performed += context =>
-        {
-            if(!PauseController.isPaused)
-            {
-                if (weaponChanger.CurrentWeapon.TryUseSecoundWeapon())
-                {
-                    foreach (var e in gunPushes)
-                    {
-                        if (weaponChanger.CurrentWeapon.Weapon2.WeaponType == e.WeaponType)
-                        {
-                            var push = transform.TransformDirection(e.PushForce);
-                            StartCoroutine(movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
-                            e.ShakingParams.ShakeEventInvoke();
-                        }
-                    }
-                }
-            }
-        };
-
-
-
-        input.ButtonInputs.ChangeWeaponByKeyboard.performed += context =>
-        {
-            if(!PauseController.isPaused)
-            {
-               if(isReadyToChangeWeapon)
-               {
-                  weaponChanger.ChangeWeapon((int)input.ButtonInputs.ChangeWeaponByKeyboard.ReadValue<float>());
-                  if(weaponChanger.CurrentWeapon != null)
-                  {
-                      OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
-                      OnCurrentWeaponNumber?.Invoke(weaponChanger.CurrentWeaponNum);
-                  }
-               }
-            }
-        };
-
-        input.ButtonInputs.MouseScroll.performed += context =>
-        {
-            if(!PauseController.isPaused)
-            {
-                if(isReadyToChangeWeapon)
-                {
-                    var testValue = input.ButtonInputs.MouseScroll.ReadValue<float>();
-                    if (testValue > 0)
-                    {
-                        weaponChanger.NextWeapon();
-                    }
-                    else if (testValue < 0)
-                    {
-                        weaponChanger.PrevWeapon();
-                    }
-                    else
-                    {
-                        throw new System.Exception("Почему-то при скролле выдало 0");
-                    }
-                    if (weaponChanger.CurrentWeapon != null)
-                    {
-                        OnChangeWeapon?.Invoke(weaponChanger.CurrentWeapon);
-                        OnCurrentWeaponNumber?.Invoke(weaponChanger.CurrentWeaponNum);
-                    }
-                }
-            }
-        };
-
-        input.ButtonInputs.Jump.performed += context =>
-        {
-            if(!PauseController.isPaused)
-            {
-                if (movement.Grounded)
-                {
-                    movement.body.velocity = playerMovement.JumpForce * Vector3.up;
-                    audioProvider.PlayOneShot("Jump");
-                }
-            }
-        };
-
-        input.ButtonInputs.Ability1.performed += _ =>
-        {
-            if(!PauseController.isPaused)
-            {
-                foreach (var a in abilities)
-                {
-                    if(a is Mel)
-                    {
-                        if (a.AbilityState == AbilityState.Enabled)
-                            a.UseAbility();
-                    }
-                }
-            }
-        };
-
-
-        input.ButtonInputs.Reload.performed += _ =>
-        {
-            if(interactable != null)
-            {
-                interactable.Use();
-            }
-        };
-
-
-
-        input.ButtonInputs.ChangeSpeed.performed += context =>
-        {
-
-            if (isShiftNotInput)
-            {
-                movement.moveType = APlayerMovement.PlayerMoveType.Fast;
-                isShiftNotInput = false;
-
-            }
-            else
-            {
-                movement.moveType = APlayerMovement.PlayerMoveType.Slow;
-                isShiftNotInput = true;
-
-            }
-            // ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
-        };
-
-
-        //input.MovementInput.GetDirection.performed += context =>
-        //{
-        //   // ChangeAbilityBecauseWeapon(weaponChanger.CurrentWeapon.WeaponType);
-        //};
-
-        input.ButtonInputs.Blink.performed += context =>
-        {
-            //if (weaponHealing.State == AWeapon.WeaponState.Serenity)
-            //{
-            //    weaponHealing.TryReturnNeededWeaponType<IHeallingWeapon>(out IHeallingWeapon returnedObject);
-            //    returnedObject.Heal(gameObject);
-            //}
-        };
-
-       
-
+        OnChangeWeapon?.Invoke(weapon);
     }
 
-
-
-
-    //private bool ChangeAbilityBecauseWeapon(WeaponType type)
-    //{
-    //    switch(type)
-    //    {
-
-    //        case WeaponType.Range:
-    //            movement.moveType = APlayerMovement.PlayerMoveType.RangeMove;
-    //            return true;
-    //    }
-    //    return false;
-    //}
+    public void InvokeOnCurrentWeapon(int num)
+    {
+        OnCurrentWeaponNumber?.Invoke(num);
+    }
 
 
     private float ClampAngle(float angle, float min, float max)

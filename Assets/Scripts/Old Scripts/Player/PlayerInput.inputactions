@@ -253,14 +253,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "MainStrongAttack",
-                    "type": "Button",
-                    "id": "bb369a9d-a880-4e59-b828-4d1e88658b2b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -466,7 +458,7 @@
                     "name": "",
                     "id": "8e3c3ae8-f538-4306-a6c6-30953a5f8910",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.2)",
                     "processors": "",
                     "groups": "Mouse And Keybord",
                     "action": "SecondAttack",
@@ -503,17 +495,6 @@
                     "processors": "",
                     "groups": "Mouse And Keybord",
                     "action": "Ability1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "35ad4953-eb14-4a76-a383-5006aa2e9d1c",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Hold(duration=0.4)",
-                    "processors": "",
-                    "groups": "Mouse And Keybord",
-                    "action": "MainStrongAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
