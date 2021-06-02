@@ -8,7 +8,11 @@ public abstract class AWeapon : MonoBehaviour
     [SerializeField] protected GameObject weaponObject;
     [SerializeField] private List<EventOnAttackState> events;
 
+    protected bool isWeaponCharged = false;
+
     protected WeaponState state = WeaponState.Serenity;
+
+    #region PROPERTIES
 
     public abstract WeaponType WeaponType
     {
@@ -38,6 +42,9 @@ public abstract class AWeapon : MonoBehaviour
         }
     }
 
+    public bool IsWeaponCharged { get => isWeaponCharged; set => isWeaponCharged = value; }
+
+    #endregion
 
 
     public delegate void WeaponStateEventHelper(WeaponState state);
@@ -85,6 +92,13 @@ public abstract class AWeapon : MonoBehaviour
 
 
     #region Переопределяемые методы
+
+    protected virtual IEnumerator Charge(float time)
+    {
+        State = WeaponState.Charge;
+        isWeaponCharged = true;
+        yield return new WaitForSeconds(time);
+    }
 
     protected virtual IEnumerator Damaging(float time)
     {
@@ -137,7 +151,7 @@ public abstract class AWeapon : MonoBehaviour
 
     public enum WeaponState
     {
-        Attack, Reload, ImposibleAttack, Serenity, TransitionState
+        Charge,Attack, Reload, ImposibleAttack, Serenity, TransitionState
     }
 
 
@@ -232,5 +246,5 @@ public abstract class AWeapon : MonoBehaviour
 
 public enum WeaponType
 {
-    Mili, Range, Jump, Summon, Blink, Directional, Special
+    Melee, Range, Jump, Summon, Blink, Directional, Special
 }

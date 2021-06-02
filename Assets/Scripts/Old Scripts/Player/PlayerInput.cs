@@ -471,7 +471,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""8e3c3ae8-f538-4306-a6c6-30953a5f8910"",
                     ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""interactions"": ""Press(pressPoint=0.2,behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Mouse And Keybord"",
                     ""action"": ""SecondAttack"",

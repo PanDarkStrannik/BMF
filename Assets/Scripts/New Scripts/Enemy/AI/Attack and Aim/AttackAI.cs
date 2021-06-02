@@ -74,7 +74,7 @@ public class AttackAI : AEnemyAI
     {
         [SerializeField] private string stageName = "None";
         [SerializeField] private float during = 1f;
-        [SerializeField] private WeaponType weapon = WeaponType.Mili;
+        [SerializeField] private WeaponType weapon = WeaponType.Melee;
         [SerializeField] private AttackStopVariants stopVariant = AttackStopVariants.None;
         [SerializeField] private bool aim = false;
         [SerializeField] private bool damaging = false;

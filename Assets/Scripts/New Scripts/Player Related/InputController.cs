@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
+
 
 public class InputController : MonoBehaviour
 {
@@ -81,18 +83,17 @@ public class InputController : MonoBehaviour
     {
         input.ButtonInputs.SecondAttack.performed += context =>
         {
-            if (Player.WeaponChanger.CurrentWeapon.TryUseSecondWeapon())
+            if(!player.WeaponChanger.CurrentWeapon.Weapon2.IsWeaponCharged)
             {
-                foreach (var e in player.GunPush)
-                {
-                    if (player.WeaponChanger.CurrentWeapon.Weapon2.WeaponType == e.WeaponType)
-                    {
-                        var push = transform.TransformDirection(e.PushForce);
-                        StartCoroutine(player.Movement.ImpulseMove(push, e.ForceMode, e.TimeToPush));
-                        e.ShakingParams.ShakeEventInvoke();
-                    }
-                }
+                player.WeaponChanger.CurrentWeapon.TryUseSecondWeapon();
+                player.WeaponChanger.CurrentWeapon.Weapon2.IsWeaponCharged = true;
             }
+            else
+            {
+                player.WeaponChanger.CurrentWeapon.Weapon2.IsWeaponCharged = false;
+            }
+               
+
         };
     }
 
