@@ -81,19 +81,14 @@ public class InputController : MonoBehaviour
 
     private void HandleSecondAttack()
     {
-        input.ButtonInputs.SecondAttack.performed += context =>
-        {
-            if(!player.WeaponChanger.CurrentWeapon.Weapon2.IsWeaponCharged)
-            {
-                player.WeaponChanger.CurrentWeapon.TryUseSecondWeapon();
-                player.WeaponChanger.CurrentWeapon.Weapon2.IsWeaponCharged = true;
-            }
-            else
-            {
-                player.WeaponChanger.CurrentWeapon.Weapon2.IsWeaponCharged = false;
-            }
-               
 
+        input.ButtonInputs.SecondAttack.performed += i => player.WeaponChanger.CurrentWeapon.Weapon2.IsWeaponCharged = true;
+        input.ButtonInputs.SecondAttack.canceled += i => player.WeaponChanger.CurrentWeapon.Weapon2.IsWeaponCharged = false;
+
+
+        input.ButtonInputs.SecondAttack.performed += _ =>
+        {
+            player.WeaponChanger.CurrentWeapon.TryUseSecondWeapon();
         };
     }
 

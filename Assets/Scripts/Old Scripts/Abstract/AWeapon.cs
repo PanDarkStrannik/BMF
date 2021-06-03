@@ -93,11 +93,11 @@ public abstract class AWeapon : MonoBehaviour
 
     #region Переопределяемые методы
 
-    protected virtual IEnumerator Charge(float time)
+    protected virtual IEnumerator Charge()
     {
         State = WeaponState.Charge;
         isWeaponCharged = true;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(0);
     }
 
     protected virtual IEnumerator Damaging(float time)

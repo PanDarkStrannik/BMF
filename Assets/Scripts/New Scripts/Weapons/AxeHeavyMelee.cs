@@ -4,20 +4,32 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class AxeHeavyMelee : AWeapon, IDamagingWeapon
-{
-    [SerializeField] private float toAttackTime = 1f;
-    [SerializeField] private float damagingTime = 0.3f;
-    [SerializeField] private float reloadAttack = 0.7f;
+{                                              
+    [SerializeField] private float toAttackTime;
+    [SerializeField] private float damagingTime;
+    [SerializeField] private float reloadAttack;
     [SerializeReference] private DamageArea damageArea;
 
+    [SerializeField] private float chargeTime = 3f;
+    [SerializeField] private float chargeDamageBonus;
+
+    private float startChargeTime;
+
     public override WeaponType WeaponType => WeaponType.Special;
+
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        state = WeaponState.Serenity;
+    }
 
     public void Attack()
     {
         if(state == WeaponState.Serenity && this.gameObject.activeSelf)
         {
           StopAllCoroutines();
-          StartCoroutine(Charge(0));
+          StartCoroutine(Charge());
 
         }
     }
@@ -27,27 +39,21 @@ public class AxeHeavyMelee : AWeapon, IDamagingWeapon
         Attack();
     }
 
-    protected override IEnumerator Charge(float time)
+    protected override IEnumerator Charge()
     {
-        if(state != WeaponState.Charge)
+        State = WeaponState.Charge;
+        if(state == WeaponState.Charge)
         {
-           while(true)
-           {
-                if(isWeaponCharged)
-                {
-                    State = WeaponState.Charge;
-                    Debug.Log("Charge");
-                }
-                else
-                {
-                    StartCoroutine(Damaging(damagingTime));
-                    Debug.Log("Release");
-                   
-                }
-                yield return new WaitForEndOfFrame();
-           }
+            //while(startChargeTime < chargeTime)
+            //{
+                //startChargeTime += Time.deltaTime;
+                //Debug.Log(startChargeTime);
+            //}
+
+           yield return new WaitWhile(()=> IsWeaponCharged);
+            startChargeTime = 0;
+           StartCoroutine(Damaging(damagingTime));
         }
-       
     }
 
     protected override IEnumerator Damaging(float time)
