@@ -6,7 +6,9 @@ using UnityEngine.Events;
 public class WeaponAnimations : MonoBehaviour
 {
     [SerializeField] private Animator weaponAnimator;
-    [SerializeField] private string blendTreeFloat;
+    [SerializeField] private string inputFloat;
+    [SerializeField] private string xInputFloat;
+
     [SerializeField] private string shiftBool;
     [SerializeField] private bool usedByPlayer = true;
     [SerializeField] private WAnimationRandomizer randomAnimation;
@@ -26,7 +28,7 @@ public class WeaponAnimations : MonoBehaviour
     {
         if(usedByPlayer)
         {
-           weaponAnimator.SetFloat(blendTreeFloat, obj.magnitude, 0.1f, Time.deltaTime);
+            weaponAnimator.SetFloat(inputFloat, obj.magnitude, 0.1f, Time.deltaTime);
            if(obj != Vector3.zero && shiftBool != null)
            {
                weaponAnimator.SetBool(shiftBool, !shifting);
@@ -35,6 +37,9 @@ public class WeaponAnimations : MonoBehaviour
            {
                weaponAnimator.SetBool(shiftBool, false);
            }
+
+
+            weaponAnimator.SetFloat(xInputFloat, obj.x, 0.1f, Time.deltaTime);
         }
     }
 
