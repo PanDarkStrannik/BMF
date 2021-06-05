@@ -7,7 +7,6 @@ public class WeaponAnimations : MonoBehaviour
 {
     [SerializeField] private Animator weaponAnimator;
     [SerializeField] private string inputFloat;
-    [SerializeField] private string xInputFloat;
 
     [SerializeField] private string shiftBool;
     [SerializeField] private bool usedByPlayer = true;
@@ -37,9 +36,6 @@ public class WeaponAnimations : MonoBehaviour
            {
                weaponAnimator.SetBool(shiftBool, false);
            }
-
-
-            weaponAnimator.SetFloat(xInputFloat, obj.x, 0.1f, Time.deltaTime);
         }
     }
 
