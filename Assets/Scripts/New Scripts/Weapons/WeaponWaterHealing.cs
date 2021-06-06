@@ -61,7 +61,7 @@ public class WeaponWaterHealing : WeaponHealing
                 }
             }
 
-            yield return new WaitForSecondsRealtime(time);
+            yield return new WaitWhile(() => IsWeaponCharged);
             StartCoroutine(Serenity(0f));
         }
     }

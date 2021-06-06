@@ -11,8 +11,6 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Image blackScreen;
     [SerializeField] private float timeToGameOver = 3f;
     [SerializeField] private Text score;
-    [SerializeField] private Text viyAwakingText;
-    [SerializeField] private Transform scoreEndPos;
 
 
     private bool alreadyDamaged = false;
@@ -45,40 +43,40 @@ public class PlayerUI : MonoBehaviour
 
     private void PlayerUI_PointEvent(int value)
     {
-        score.text =  value + "/" + GlobalGameEvents.Instance.PointsToOver;
-        if(value >= GlobalGameEvents.Instance.PointsToOver)
-        {
-            GameOverFade();
-        }
+        //score.text =  value + "/" + GlobalGameEvents.Instance.PointsToOver;
+        //if(value >= GlobalGameEvents.Instance.PointsToOver)
+        //{
+        //    GameOverFade();
+        //}
     }
 
     //for pitch
     public void GameOverFade()
     {
-        blackScreen.enabled = true;
-        var fadeInSeq = DOTween.Sequence();
-        fadeInSeq.Append(blackScreen.DOFade(1f, 3f).OnComplete(() => GlobalGameEvents.Instance.SwitchState(GameState.Over)));
-        fadeInSeq.Append(blackScreen.DOFade(0f, 5f));
-        fadeInSeq.AppendInterval(10f);
-        fadeInSeq.Append(blackScreen.DOFade(1f, 5f).OnComplete(() => DOTween.Clear(true)).OnComplete(() => SceneManager.LoadSceneAsync(0)));
+        //blackScreen.enabled = true;
+        //var fadeInSeq = DOTween.Sequence();
+        //fadeInSeq.Append(blackScreen.DOFade(1f, 3f).OnComplete(() => GlobalGameEvents.Instance.SwitchState(GameState.Over)));
+        //fadeInSeq.Append(blackScreen.DOFade(0f, 5f));
+        //fadeInSeq.AppendInterval(10f);
+        //fadeInSeq.Append(blackScreen.DOFade(1f, 5f).OnComplete(() => DOTween.Clear(true)).OnComplete(() => SceneManager.LoadSceneAsync(0)));
 
     }
 
-    //for pitch
-    public void ScoreAnimate()
-    {
-        var scoreSeq = DOTween.Sequence();
-        scoreSeq.AppendInterval(3f);
-        scoreSeq.Append(score.DOFade(1f, 4f).From(0f));
-        scoreSeq.Append(score.transform.DOMove(scoreEndPos.position, 3f));
-    }
+    ////for pitch
+    //public void ScoreAnimate()
+    //{
+    //    var scoreSeq = DOTween.Sequence();
+    //    scoreSeq.AppendInterval(3f);
+    //    scoreSeq.Append(score.DOFade(1f, 4f).From(0f));
+    //    scoreSeq.Append(score.transform.DOMove(scoreEndPos.position, 3f));
+    //}
 
-    //for pitch
-    public void GameOverText()
-    {
-        string text = "";
-        DOTween.To(() => text, x => text = x, "Вий пробуждается", 8f).OnUpdate(() => viyAwakingText.text = text).OnComplete(() => viyAwakingText.DOFade(0f, 5f));
-    }
+    ////for pitch
+    //public void GameOverText()
+    //{
+    //    string text = "";
+    //    DOTween.To(() => text, x => text = x, "Вий пробуждается", 8f).OnUpdate(() => viyAwakingText.text = text).OnComplete(() => viyAwakingText.DOFade(0f, 5f));
+    //}
 
     private void ViewHealth(DamagebleParam.ParamType paramType, float value, float maxValue)
     {

@@ -9,6 +9,11 @@ using DG.Tweening;
 
 public class WeaponUI : MonoBehaviour
 {
+    [Header("Axe")]
+    [SerializeField] private Image axeHeavyAttackCoolDownImage;
+    private bool isReloading = false;
+
+
     [Header("Holy Water")]
     [SerializeField] private Image waterReloadTimerImage;
     [SerializeField] private TMP_Text waterReloadDescriptionText;
@@ -36,7 +41,6 @@ public class WeaponUI : MonoBehaviour
     {
         player = PlayerInformation.GetInstance().PlayerController;
         player.OnPlayerInteractedSet += Player_OnPlayerInteractedSet;
-        player.OnChangeWeapon += Player_OnChangeWeapon;
         player.OnCurrentWeaponNumber += Player_OnCurrentWeaponNumber;
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged += ChangeAmmo;
     }
@@ -46,9 +50,33 @@ public class WeaponUI : MonoBehaviour
     private void OnDestroy()
     {
         player.OnPlayerInteractedSet -= Player_OnPlayerInteractedSet;
-        player.OnChangeWeapon -= Player_OnChangeWeapon;
         player.OnCurrentWeaponNumber -= Player_OnCurrentWeaponNumber;
         PlayerInformation.GetInstance().PlayerParamController.DamagebleParams.OnParamChanged -= ChangeAmmo;
+    }
+
+
+
+    public void ShowAxeReloadTime()
+    {
+        StartCoroutine(AxeReloadTick(1));
+    }
+
+
+    private IEnumerator AxeReloadTick(float maxTime)
+    {
+        isReloading = true;
+
+        for (float i = 0; i < maxTime; i+= Time.deltaTime)
+        {
+            float startTime = i;
+            axeHeavyAttackCoolDownImage.fillAmount = startTime / maxTime;
+            if(!isReloading)
+            {
+                startTime = 0;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        isReloading = false;
     }
 
     private void Player_OnCurrentWeaponNumber(int weaponNum)
@@ -60,13 +88,6 @@ public class WeaponUI : MonoBehaviour
                 w.Invoke();
             }
         }
-    }
-
-    
-
-    private void Player_OnChangeWeapon(PlayerWeaponChanger.WeaponSpellsHolder curWeapon)
-    {
-        // перекати-поле...
     }
 
     private void ChangeAmmo(DamagebleParam.ParamType paramType, float value, float maxValue)

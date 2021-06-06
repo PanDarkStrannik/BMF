@@ -80,12 +80,8 @@ public class AxeHeavyMelee : AWeapon, IDamagingWeapon
 
     protected override IEnumerator Serenity(float time)
     {
-        if (state != WeaponState.Serenity)
-        {
-            yield return new WaitForSecondsRealtime(time);
-            State = WeaponState.Serenity;
-            StopAllCoroutines();
-        }
+          yield return new WaitForSecondsRealtime(time);
+          State = WeaponState.Serenity;
     }
 
 }
