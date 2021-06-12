@@ -13,7 +13,9 @@ public class EnemyParamController : ParamController
 
     //public delegate void OnEnemyDieEventHelper();
     //public event OnEnemyDieEventHelper OnEnemyDie;
+
     public UnityEvent OnEnemyDie;
+    
 
 
     protected override void CheckTypeAndValues(DamagebleParam.ParamType type, float value, float maxValue)
