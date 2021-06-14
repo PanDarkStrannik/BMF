@@ -100,7 +100,7 @@ public abstract class AWeapon : MonoBehaviour
         yield return new WaitForSeconds(0);
     }
 
-    protected virtual IEnumerator Damaging(float time)
+    protected virtual IEnumerator Attacking(float time)
     {
         State = WeaponState.Attack;
         Debug.Log("Нанесение урона начали");
@@ -108,7 +108,7 @@ public abstract class AWeapon : MonoBehaviour
         Debug.Log("Нанесение урона окончено");
     }
 
-    protected virtual IEnumerator Damaging(float time, GameObject damagingObject)
+    protected virtual IEnumerator Attacking(float time, GameObject damagingObject)
     {
         State = WeaponState.Attack;
         Debug.Log("Нанесение урона начали");
@@ -246,5 +246,5 @@ public abstract class AWeapon : MonoBehaviour
 
 public enum WeaponType
 {
-    Melee, Range, Jump, Summon, Blink, Directional, Special
+    Melee, Range, Jump, Summon, Blink, Directional, Heavy, Telekinesis
 }

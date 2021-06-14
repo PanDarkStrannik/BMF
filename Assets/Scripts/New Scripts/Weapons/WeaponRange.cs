@@ -60,7 +60,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
         }
         else if (state == WeaponState.Serenity)
         {
-            StartCoroutine(Damaging(attackParametres.ToAttackTime));
+            StartCoroutine(Attacking(attackParametres.ToAttackTime));
         }
     }
 
@@ -72,7 +72,7 @@ public class WeaponRange : AWeapon, IDamagingWeapon
 
 
 
-    protected override IEnumerator Damaging(float time)
+    protected override IEnumerator Attacking(float time)
     {
         State = WeaponState.Attack;
         if (state == WeaponState.Attack)

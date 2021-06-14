@@ -24,7 +24,7 @@ public class WeaponMili : AWeapon, IDamagingWeapon
         if (state == AWeapon.WeaponState.Serenity && this.gameObject.activeSelf)
         {
             StopAllCoroutines();
-            StartCoroutine(Damaging(toAttackTime));
+            StartCoroutine(Attacking(toAttackTime));
         }        
     }
 
@@ -33,7 +33,7 @@ public class WeaponMili : AWeapon, IDamagingWeapon
         Attack();
     }
 
-    protected override IEnumerator Damaging(float time)
+    protected override IEnumerator Attacking(float time)
     {
         State = WeaponState.Attack;
         if (state == WeaponState.Attack)

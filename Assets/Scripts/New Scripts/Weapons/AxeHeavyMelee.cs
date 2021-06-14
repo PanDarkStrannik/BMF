@@ -15,7 +15,7 @@ public class AxeHeavyMelee : AWeapon, IDamagingWeapon
 
     private float startChargeTime;
 
-    public override WeaponType WeaponType => WeaponType.Special;
+    public override WeaponType WeaponType => WeaponType.Heavy;
 
 
     private void OnDisable()
@@ -52,11 +52,11 @@ public class AxeHeavyMelee : AWeapon, IDamagingWeapon
 
            yield return new WaitWhile(()=> IsWeaponCharged);
             startChargeTime = 0;
-           StartCoroutine(Damaging(damagingTime));
+           StartCoroutine(Attacking(damagingTime));
         }
     }
 
-    protected override IEnumerator Damaging(float time)
+    protected override IEnumerator Attacking(float time)
     {
         State = WeaponState.Attack;
         if (state == WeaponState.Attack)

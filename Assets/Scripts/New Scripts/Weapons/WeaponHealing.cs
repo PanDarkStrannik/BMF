@@ -61,17 +61,17 @@ public class WeaponHealing : AWeapon, IHeallingWeapon
         this.healingObject = healingObject;
         if (state != WeaponState.ImposibleAttack && currentHealCount >= waterHealingData.HealCount)
         {
-            StopCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
+            StopCoroutine(Attacking(waterHealingData.TimeBetweeenUse));
             StartCoroutine(Reload(waterHealingData.ReloadTime));
         }
         else if (state == WeaponState.Serenity)
         {
             currentHealCount++;
-            StartCoroutine(Damaging(waterHealingData.TimeBetweeenUse));
+            StartCoroutine(Attacking(waterHealingData.TimeBetweeenUse));
         }
     }
 
-    protected override IEnumerator Damaging(float time)
+    protected override IEnumerator Attacking(float time)
     {
         State = WeaponState.Attack;
         if (state == WeaponState.Attack)

@@ -55,7 +55,7 @@ public class WeaponWater : WeaponRange
                }
                else if (state == WeaponState.Serenity)
                {
-                   StartCoroutine(Damaging(attackParametres.ToAttackTime));
+                   StartCoroutine(Attacking(attackParametres.ToAttackTime));
                }
            }
            else
@@ -64,7 +64,7 @@ public class WeaponWater : WeaponRange
                {
                    if (resourcesUser.TryUseResource())
                    {
-                        StartCoroutine(Damaging(attackParametres.ToAttackTime));
+                        StartCoroutine(Attacking(attackParametres.ToAttackTime));
                    }
                }
            }

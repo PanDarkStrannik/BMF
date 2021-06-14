@@ -48,11 +48,11 @@ public class WeaponBlink : AWeapon, IDamagingWeapon
     {
         if (state == WeaponState.Serenity)
         {
-            StartCoroutine(Damaging(0f));
+            StartCoroutine(Attacking(0f));
         }
     }
 
-    protected override IEnumerator Damaging(float time)
+    protected override IEnumerator Attacking(float time)
     {
         if(Teleport(out Vector3 blinkPos))
         {
