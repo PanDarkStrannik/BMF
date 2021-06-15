@@ -2,45 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
+
+public enum PropState
+{
+    Serenity, Telekinesis
+}
 
 public class Prop : MonoBehaviour
 {
-    [SerializeField] private Rigidbody body;
-    [SerializeField] private List<PropVelocityEvent> propEvents = new List<PropVelocityEvent>();
 
-    private void FixedUpdate()
+    [SerializeField] private List<PropStateEvent> propEvent = new List<PropStateEvent>();
+
+    private event Action<PropState> OnStateChanged;
+
+    private PropState propState = PropState.Serenity;
+
+    private void OnEnable()
     {
-        OnVelocityChanged();
+        OnStateChanged += Prop_OnStateChanged;
     }
 
-    private void OnVelocityChanged()
+
+    private void OnDisable()
     {
-        for (int i = 0; i < propEvents.Count; i++)
+        OnStateChanged -= Prop_OnStateChanged;
+    }
+
+    public void ChangePropState(PropState newState)
+    {
+        propState = newState;
+        OnStateChanged?.Invoke(propState);
+    }
+
+    private void Prop_OnStateChanged(PropState state)
+    {
+        for (int i = 0; i < propEvent.Count; i++)
         {
-            if(propEvents[i].Velocity == body.velocity.sqrMagnitude)
+            if(propEvent[i].currentPropState == state)
             {
-                propEvents[i].Invoke();
+                StartCoroutine(propEvent[i].Invoke());
             }
         }
     }
+
+
 }
 
-[System.Serializable]
-public class PropVelocityEvent
+[Serializable]
+public class PropStateEvent
 {
-    [SerializeField] private float velocity;
+    public PropState currentPropState;
+
+    [SerializeField] private UnityEvent OnNewStateSet;
     [SerializeField] private float timeToInvoke;
-    [SerializeField] private UnityEvent OnVelocityChanged;
-
-    #region PROPERITES
-    public float Velocity { get => velocity; }
-
-    #endregion
 
     public IEnumerator Invoke()
     {
         yield return new WaitForSeconds(timeToInvoke);
-        OnVelocityChanged?.Invoke();
+        OnNewStateSet?.Invoke();
     }
 }

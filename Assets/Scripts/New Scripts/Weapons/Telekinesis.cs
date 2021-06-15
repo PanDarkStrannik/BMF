@@ -16,8 +16,8 @@ public class Telekinesis : AWeapon, IDamagingWeapon
     [SerializeField] private float toReloadTime;
     [SerializeField] private float coolDown;
 
-    private GameObject prop = null;
     private Rigidbody propBody = null;
+    private Prop prop;
 
     private bool isItemFound = false;
 
@@ -43,6 +43,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         if(state == WeaponState.Charge)
         {
             yield return new WaitUntil(() => ReadyToThrow());
+            prop.ChangePropState(PropState.Serenity);
             StartCoroutine(Attacking(toAttackTime));
         }
     }
@@ -53,8 +54,8 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         if(state == WeaponState.Attack)
         {
             yield return new WaitForSeconds(time);
+            propBody.isKinematic = false;
             propBody.AddForce(firePoint.forward * throwForce * Time.deltaTime, forceMode);
-            propBody.useGravity = true;
             StartCoroutine(Reload(toReloadTime));
         }
 
@@ -65,7 +66,6 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         State = WeaponState.Reload;
         if(state == WeaponState.Reload)
         {
-            ResetProp();
             yield return new WaitForSeconds(time);
             StartCoroutine(Serenity(coolDown));
         }
@@ -82,12 +82,10 @@ public class Telekinesis : AWeapon, IDamagingWeapon
     {
         if(prop != null)
         {
-            propBody.useGravity = false;
+            propBody.isKinematic = true;
             prop.transform.position = Vector3.MoveTowards(prop.transform.position, firePoint.position, Time.deltaTime * setForce);
             if(Vector3.Distance(firePoint.position, prop.transform.position) < 0.1f)
             {
-                prop.transform.parent = firePoint;
- 
                 return true;
             }
             else
@@ -102,27 +100,52 @@ public class Telekinesis : AWeapon, IDamagingWeapon
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Prop") && !isItemFound)
+        //if(other.gameObject.CompareTag("Prop") && !isItemFound)
+        //{
+        //    isItemFound = true;
+        //    GetPropComponents(other);
+        //    Debug.Log(prop.name);
+        //}
+
+        prop = other.GetComponent<Prop>();
+        if(prop == null)
+        {
+             prop = other.GetComponentInParent<Prop>();
+             if(prop == null)
+             {
+                 prop = other.GetComponentInChildren<Prop>();
+             }
+        }
+
+        if(prop != null && !isItemFound)
         {
             isItemFound = true;
-            GetPropComponents(other);
+            GetPropComponents();
+            prop.ChangePropState(PropState.Telekinesis);
             Debug.Log(prop.name);
+
         }
+
     }
 
-    private void GetPropComponents(Collider other)
+    private void GetPropComponents()
     {
-        prop = other.gameObject;
-        propBody = other.GetComponent<Rigidbody>();
-        if(propBody == null)
+        if(prop != null)
         {
-            propBody = other.GetComponentInChildren<Rigidbody>();
+            propBody = prop.GetComponent<Rigidbody>();
+            if(propBody == null)
+            {
+                propBody = prop.GetComponentInParent<Rigidbody>();
+                if(propBody == null)
+                {
+                    propBody = prop.GetComponentInChildren<Rigidbody>();
+                }
+            }
         }
     }
 
     private void ResetProp()
     {
-        prop.transform.parent = null;
         prop = null;
         propBody = null;
         isItemFound = false;

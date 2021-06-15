@@ -75,12 +75,12 @@ MonoBehaviour:
   interestingObjects: []
   attackStages:
   - stageName: Attack
-    during: 1
+    during: 4
     weapon: 7
     stopVariant: 0
     aim: 1
     damaging: 1
-    isRigidBodyKinematick: 0
+    isRigidBodyKinematick: 1
     isNavMeshAgentActive: 0
     attackAnyway: 1
 --- !u!1107 &-3793753297631850627
