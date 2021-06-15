@@ -7,7 +7,10 @@ public class Telekinesis : AWeapon, IDamagingWeapon
     public override WeaponType WeaponType => WeaponType.Telekinesis;
 
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float propForce;
+    [SerializeField] private ForceMode forceMode;
+    [SerializeField] private float throwForce;
+    [SerializeField] private float setForce;
+
 
     [SerializeField] private float toAttackTime;
     [SerializeField] private float toReloadTime;
@@ -26,7 +29,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
 
     public void Attack()
     {
-        if (State == WeaponState.Serenity)
+        if (state == WeaponState.Serenity)
         {
             StopAllCoroutines();
             StartCoroutine(Charge());
@@ -49,10 +52,10 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         State = WeaponState.Attack;
         if(state == WeaponState.Attack)
         {
-            propBody.AddForce(firePoint.forward * propForce * Time.deltaTime, ForceMode.Impulse);
-            yield return new WaitForSeconds(toReloadTime);
-            ResetProp();
-            StartCoroutine(Reload(toAttackTime));
+            yield return new WaitForSeconds(time);
+            propBody.AddForce(firePoint.forward * throwForce * Time.deltaTime, forceMode);
+            propBody.useGravity = true;
+            StartCoroutine(Reload(toReloadTime));
         }
 
     }
@@ -62,8 +65,9 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         State = WeaponState.Reload;
         if(state == WeaponState.Reload)
         {
+            ResetProp();
             yield return new WaitForSeconds(time);
-            StartCoroutine(Serenity(toReloadTime));
+            StartCoroutine(Serenity(coolDown));
         }
     }
 
@@ -78,17 +82,19 @@ public class Telekinesis : AWeapon, IDamagingWeapon
     {
         if(prop != null)
         {
-            prop.transform.position = Vector3.Lerp(prop.transform.position, firePoint.position, Time.deltaTime);
+            propBody.useGravity = false;
+            prop.transform.position = Vector3.MoveTowards(prop.transform.position, firePoint.position, Time.deltaTime * setForce);
             if(Vector3.Distance(firePoint.position, prop.transform.position) < 0.1f)
             {
-              return true;
+                prop.transform.parent = firePoint;
+ 
+                return true;
             }
             else
             {
                 return false;
             }
         }
-        Debug.Log("Вокруг нет предметов для броска");
         return false;
     }
 
@@ -99,14 +105,14 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         if(other.gameObject.CompareTag("Prop") && !isItemFound)
         {
             isItemFound = true;
-            prop = other.gameObject;
-            GetPropBody(other);
+            GetPropComponents(other);
             Debug.Log(prop.name);
         }
     }
 
-    private void GetPropBody(Collider other)
+    private void GetPropComponents(Collider other)
     {
+        prop = other.gameObject;
         propBody = other.GetComponent<Rigidbody>();
         if(propBody == null)
         {
@@ -116,9 +122,16 @@ public class Telekinesis : AWeapon, IDamagingWeapon
 
     private void ResetProp()
     {
+        prop.transform.parent = null;
         prop = null;
         propBody = null;
         isItemFound = false;
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        State = WeaponState.Serenity;
     }
 
 }

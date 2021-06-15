@@ -81,7 +81,7 @@ public class DamageArea : MonoBehaviour
         {
             damageCollider.transform.parent = parent;
         }
-        damageCollider.isTrigger = true;
+       // damageCollider.isTrigger = true;
     }
 
 
