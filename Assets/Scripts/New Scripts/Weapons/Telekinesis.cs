@@ -132,10 +132,10 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         {
             if(!prop.isTaken)
             {
-               isItemFound = true; 
-               GetPropBody();
-               prop.ChangePropState(PropState.Telekinesis);
-               Debug.Log(prop.name);
+                isItemFound = true; 
+                GetPropBody();
+                prop.ChangePropState(PropState.Telekinesis);
+                Debug.Log(prop.name);
             }
             else
             {
