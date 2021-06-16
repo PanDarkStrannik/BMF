@@ -17,7 +17,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
     [SerializeField] private float coolDown;
 
     private Rigidbody propBody = null;
-    private Prop prop;
+    private Prop prop = null;
 
     private bool isItemFound = false;
 
@@ -43,7 +43,6 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         if(state == WeaponState.Charge)
         {
             yield return new WaitUntil(() => ReadyToThrow());
-            prop.ChangePropState(PropState.Serenity);
             StartCoroutine(Attacking(toAttackTime));
         }
     }
@@ -54,8 +53,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         if(state == WeaponState.Attack)
         {
             yield return new WaitForSeconds(time);
-            propBody.isKinematic = false;
-            propBody.AddForce(firePoint.forward * throwForce * Time.deltaTime, forceMode);
+            Throw();
             StartCoroutine(Reload(toReloadTime));
         }
 
@@ -66,7 +64,9 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         State = WeaponState.Reload;
         if(state == WeaponState.Reload)
         {
+            prop.ChangePropState(PropState.Serenity);
             yield return new WaitForSeconds(time);
+            ResetProp();
             StartCoroutine(Serenity(coolDown));
         }
     }
@@ -80,12 +80,13 @@ public class Telekinesis : AWeapon, IDamagingWeapon
 
     private bool ReadyToThrow()
     {
-        if(prop != null)
+        if(propBody != null)
         {
             propBody.isKinematic = true;
             prop.transform.position = Vector3.MoveTowards(prop.transform.position, firePoint.position, Time.deltaTime * setForce);
             if(Vector3.Distance(firePoint.position, prop.transform.position) < 0.1f)
             {
+                prop.transform.parent = firePoint;
                 return true;
             }
             else
@@ -96,7 +97,14 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         return false;
     }
 
-
+    private void Throw()
+    {
+        if(propBody != null)
+        {
+            propBody.isKinematic = false;
+            propBody.AddForce(firePoint.forward * throwForce * Time.deltaTime, forceMode);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -107,28 +115,38 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         //    Debug.Log(prop.name);
         //}
 
-        prop = other.GetComponent<Prop>();
         if(prop == null)
         {
-             prop = other.GetComponentInParent<Prop>();
-             if(prop == null)
-             {
-                 prop = other.GetComponentInChildren<Prop>();
-             }
+            prop = other.GetComponent<Prop>();
+            if(prop == null)
+            {
+                 prop = other.GetComponentInParent<Prop>();
+                 if(prop == null)
+                 {
+                     prop = other.GetComponentInChildren<Prop>();
+                 }
+            }
         }
 
         if(prop != null && !isItemFound)
         {
-            isItemFound = true;
-            GetPropComponents();
-            prop.ChangePropState(PropState.Telekinesis);
-            Debug.Log(prop.name);
+            if(!prop.isTaken)
+            {
+               isItemFound = true; 
+               GetPropBody();
+               prop.ChangePropState(PropState.Telekinesis);
+               Debug.Log(prop.name);
+            }
+            else
+            {
+                ResetProp();
+            }
 
         }
 
     }
 
-    private void GetPropComponents()
+    private void GetPropBody()
     {
         if(prop != null)
         {
@@ -146,6 +164,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
 
     private void ResetProp()
     {
+        prop.transform.parent = null;
         prop = null;
         propBody = null;
         isItemFound = false;
