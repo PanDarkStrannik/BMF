@@ -12,7 +12,7 @@ public enum PropState
 
 public class Prop : MonoBehaviour
 {
-    public bool isTaken = false;
+    public bool isTaken { get; private set; }
 
     [SerializeField] private List<PropStateEvent> propEvent = new List<PropStateEvent>();
 

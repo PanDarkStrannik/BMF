@@ -52,6 +52,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         State = WeaponState.Attack;
         if(state == WeaponState.Attack)
         {
+           
             yield return new WaitForSeconds(time);
             Throw();
             StartCoroutine(Reload(toReloadTime));
@@ -83,6 +84,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         if(propBody != null)
         {
             propBody.isKinematic = true;
+            RotateProp();
             prop.transform.position = Vector3.MoveTowards(prop.transform.position, firePoint.position, Time.deltaTime * setForce);
             if(Vector3.Distance(firePoint.position, prop.transform.position) < 0.1f)
             {
@@ -108,15 +110,8 @@ public class Telekinesis : AWeapon, IDamagingWeapon
 
     private void OnTriggerEnter(Collider other)
     {
-        //if(other.gameObject.CompareTag("Prop") && !isItemFound)
-        //{
-        //    isItemFound = true;
-        //    GetPropComponents(other);
-        //    Debug.Log(prop.name);
-        //}
-
-        if(prop == null)
-        {
+       if(prop == null)
+       {
             prop = other.GetComponent<Prop>();
             if(prop == null)
             {
@@ -126,7 +121,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
                      prop = other.GetComponentInChildren<Prop>();
                  }
             }
-        }
+       }
 
         if(prop != null && !isItemFound)
         {
@@ -162,6 +157,16 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         }
     }
 
+
+    private void RotateProp()
+    {
+        if(prop != null)
+        {
+            float rotateSpeed = 100f;
+             prop.transform.Rotate(Vector3.right * Time.deltaTime * rotateSpeed);
+        }
+    }
+
     private void ResetProp()
     {
         prop.transform.parent = null;
@@ -172,7 +177,6 @@ public class Telekinesis : AWeapon, IDamagingWeapon
 
     private void OnDisable()
     {
-        StopAllCoroutines();
         State = WeaponState.Serenity;
     }
 
