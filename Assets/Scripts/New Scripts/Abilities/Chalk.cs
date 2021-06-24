@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mel : ActiveAbility
+public class Chalk : ActiveAbility
 {
     [SerializeField] private Spawner spawner;
     [SerializeField] private SpawnedObject spawnShield;
@@ -58,4 +58,6 @@ public class Mel : ActiveAbility
             AbilityState = AbilityState.Enabled;
         }
     }
+
+    
 }

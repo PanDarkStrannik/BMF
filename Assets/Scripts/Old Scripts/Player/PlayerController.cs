@@ -25,8 +25,10 @@ public partial class PlayerController : MonoBehaviour
     [Header("Ref's to other Classes")]
     [SerializeField] private PlayerWeaponChanger weaponChanger;
     [SerializeReference] private APlayerMovement movement;
-    [SerializeField] private AAbility ability1;
+    [SerializeField] private AAbility ability;
     [SerializeField] private List<GunPush> gunPushes;
+
+
     private PlayerMovement playerMovement;
     private AudioProvider audioProvider;
     private AInteractable interactable = null;
@@ -54,6 +56,8 @@ public partial class PlayerController : MonoBehaviour
     public event Action<int> OnCurrentWeaponNumber;
     public event Action<Vector3, bool> OnPlayerMoved;
     public event Action OnPlayerInteractedSet;
+    public event Action<AAbility> OnAbilityTook;
+    public event Action OnAbilityNull;
     #endregion
 
     private bool isShiftNotInput = true;
@@ -69,7 +73,7 @@ public partial class PlayerController : MonoBehaviour
             interactable = value;
             if(interactable != null)
             {
-             OnPlayerInteractedSet?.Invoke();
+                OnPlayerInteractedSet?.Invoke();
             }
         }
 
@@ -84,19 +88,21 @@ public partial class PlayerController : MonoBehaviour
     }
 
     public AudioProvider AudioProvider { get => audioProvider; }
-    public AAbility Ability1 { get => ability1; }
+    public AAbility Ability { get => ability; }
     public Transform CameraOnPlayer { get => cameraOnPlayer; }
     public float MouseMoveX { get => mouseMoveX; }
     public float MouseMoveY { get => mouseMoveY; }
-    public Vector3 MovementDirection { get => movementDirection; }
+    public Vector3 MovementDirection { get => movementDirection; set => movementDirection = value; }
     public PlayerWeaponChanger WeaponChanger { get => weaponChanger; }
     public List<GunPush> GunPush { get => gunPushes; }
     public APlayerMovement Movement { get => movement; }
     public bool IsReadyToChangeWeapon { get => isReadyToChangeWeapon; }
     public bool IsShiftNotInput { get => isShiftNotInput; set => isShiftNotInput = value; }
     public  PlayerMovement PlayerMovement { get => playerMovement; }
-
+    public float MinTransformYToJump { get => minTransformYToJump; }
+    public float RopeJumpForce { get => minTransformYToJump; }
     #endregion
+
 
 
 
@@ -123,12 +129,16 @@ public partial class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputController.Player = this;
+        inputController.OnNullAbility += InputController_OnNullAbility;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-  
-    private void OnDestroy()
+
+
+    private void OnDisable()
     {
+        inputController.OnNullAbility -= InputController_OnNullAbility;
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -280,6 +290,28 @@ public partial class PlayerController : MonoBehaviour
         OnCurrentWeaponNumber?.Invoke(num);
     }
 
+    #region Перенести куда-нибудь в будущем
+    public void SetAbility(AAbility newAbility)
+    {
+        if (ability != null) return;
+
+        ability = newAbility;
+        OnAbilityTook?.Invoke(newAbility);
+    }
+
+    
+    public void NullAbility()
+    {
+        ability = null;
+        OnAbilityNull?.Invoke();
+    }
+
+    private void InputController_OnNullAbility()
+    {
+        OnAbilityNull?.Invoke();
+    }
+
+    #endregion
 
     private float ClampAngle(float angle, float min, float max)
     {

@@ -16,6 +16,7 @@ public enum AbilityState
 
 public abstract class AAbility : MonoBehaviour
 {
+    [SerializeField] protected string description;
 
     [SerializeField] protected AbilityState abilityState = AbilityState.Enabled;
     [SerializeField] protected AbilityParams abilityParams;
@@ -25,6 +26,9 @@ public abstract class AAbility : MonoBehaviour
 
 
     #region PROPERITES
+
+    public string Description { get => description; }
+
     protected abstract AbilityType AbilityType
     {
         get;

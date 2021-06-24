@@ -1,14 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-
+using System;
 
 public class InputController : MonoBehaviour
 {
+    #region EVENTS
+
+    public event Action OnNullAbility;
+
+    #endregion
+
     private PlayerInput input;
     private PlayerController player;
+
 
     public PlayerController Player { get => player; set => player = value; }
 
@@ -40,7 +45,7 @@ public class InputController : MonoBehaviour
             HandleWeaponChangeKeyboard();
             HandleJump();
             HandleIntrecation();
-            HandleAbillity1();
+            HandleAbility();
             HandleMoveSpeedChange();
         }
     }
@@ -177,14 +182,22 @@ public class InputController : MonoBehaviour
         };
     }
 
-    private void HandleAbillity1()
+    private void HandleAbility()
     {
         input.ButtonInputs.Ability1.performed += _ =>
         {
-                if (player.Ability1.AbilityState == AbilityState.Enabled)
+            if(player.Ability != null)
+            {
+                if (player.Ability.AbilityState == AbilityState.Enabled)
                 {
-                     player.Ability1.UseAbility();
+                     player.Ability.UseAbility();
                 }
+            }
+            else
+            {
+                OnNullAbility?.Invoke();
+                throw new Exception("You don't have any ability at the moment!");
+            }
         };
     }
 
