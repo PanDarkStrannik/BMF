@@ -205,6 +205,9 @@ public class InputController : MonoBehaviour
     {
         input.ButtonInputs.Interact.performed += _ =>
         {
+            if (player.Ability != null)
+                return;
+
             if (player.Interactable != null)
             {
                 player.Interactable.Use();

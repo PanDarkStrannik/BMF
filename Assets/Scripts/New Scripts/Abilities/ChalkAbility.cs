@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chalk : ActiveAbility
+public class ChalkAbility : ActiveAbility
 {
     [SerializeField] private Spawner spawner;
     [SerializeField] private SpawnedObject spawnShield;

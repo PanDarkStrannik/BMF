@@ -20,14 +20,14 @@ public class ReloadZone : AInteractable
     private Coroutine reloadCoroutine = null;
 
     [SerializeField, Min (0)]
-    private float reloadTime;
+    private float timeToReloadGun;
 
     
 
     #region PROPERTIES
 
     public float CurrentReloadTime { get; private set; }
-    public float ReloadTime { get => reloadTime; }
+    public float ReloadTime { get => timeToReloadGun; }
 
 
     #endregion
@@ -48,11 +48,17 @@ public class ReloadZone : AInteractable
 
     public override void Use()
     {
-        if (isInRange && reloadCoroutine == null)
+        if(State == InteractableState.Ready)
         {
-          reloadCoroutine = StartCoroutine(Reload());
+           if (isInRange && reloadCoroutine == null)
+           {
+             reloadCoroutine = StartCoroutine(Reloading());
+           }
         }
+
     }
+
+    #region PLAYER TRIGGERS
 
     private void OnTriggerEnter(Collider other)
     {
@@ -81,6 +87,7 @@ public class ReloadZone : AInteractable
         }
     }
 
+    #endregion
 
     public override void Unsubsribe(List<UnityAction> actions)
     {
@@ -101,32 +108,46 @@ public class ReloadZone : AInteractable
         OnReloadFailed.RemoveAllListeners();
     }
 
-    private IEnumerator Reload()
+    protected override IEnumerator Reloading()
     {
-        OnReloadStart?.Invoke();
-        isReload = true;
+        State = InteractableState.Reloading;
+        if(state == InteractableState.Reloading)
+        {
 
-        for (float i = 0; i < reloadTime; i += Time.deltaTime)
-        {
-            CurrentReloadTime = i;
-            OnReloading?.Invoke();
-            if(!isReload)
-            {
-                CurrentReloadTime = 0f;
-                break;
-            }
-            yield return new WaitForEndOfFrame();
+           OnReloadStart?.Invoke();
+           isReload = true;
+          
+           for (float i = 0; i < timeToReloadGun; i += Time.deltaTime)
+           {
+               CurrentReloadTime = i;
+               OnReloading?.Invoke();
+               if(!isReload)
+               {
+                   CurrentReloadTime = 0f;
+                   break;
+               }
+               yield return new WaitForEndOfFrame();
+           }
+           if(isReload)
+           {
+             OnReloadComplete?.Invoke();
+           }
+           else
+           {
+               OnReloadFailed?.Invoke();
+           }
+           isReload = false;
+           reloadCoroutine = null;
+
+            StartCoroutine(Serenity(coolDownTime));
         }
-        if(isReload)
-        {
-          OnReloadComplete?.Invoke();
-        }
-        else
-        {
-            OnReloadFailed?.Invoke();
-        }
-        isReload = false;
-        reloadCoroutine = null;
     }
+
+    protected override IEnumerator Serenity(float time)
+    {
+        yield return new WaitForSeconds(time);
+        State = InteractableState.Ready;
+    }
+
 
 }
