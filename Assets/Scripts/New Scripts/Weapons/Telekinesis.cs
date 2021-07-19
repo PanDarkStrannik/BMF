@@ -84,7 +84,7 @@ public class Telekinesis : AWeapon, IDamagingWeapon
         if(propBody != null)
         {
             propBody.isKinematic = true;
-            RotateProp();
+           // RotateProp();
             prop.transform.position = Vector3.MoveTowards(prop.transform.position, firePoint.position, Time.deltaTime * setForce);
             if(Vector3.Distance(firePoint.position, prop.transform.position) < 0.1f)
             {

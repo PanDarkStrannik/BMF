@@ -61,10 +61,27 @@ public class Prop : MonoBehaviour
             {
                 StartCoroutine(propEvent[i].Invoke());
             }
+
+            if(propEvent[i].currentPropState == PropState.Telekinesis)
+            {
+                StartCoroutine(RotateRoutine(10));
+            }
+
         }
     }
 
+    private IEnumerator RotateRoutine(float maxTime)
+    {
+        var rotateSpeed = 30f;
 
+        for (float i = 0; i < maxTime; i+= Time.deltaTime)
+        {
+            float currentTime = i;
+            transform.Rotate(Vector3.left * rotateSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+        
+    }
 }
 
 [Serializable]
