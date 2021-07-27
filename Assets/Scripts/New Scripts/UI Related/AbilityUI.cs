@@ -26,6 +26,7 @@ public class AbilityUI : MonoBehaviour
     {
         player.OnAbilityTook += Player_OnAbilityTook;
         player.OnAbilityNull += Player_OnAbilityNull;
+        ShieldParamController.OnShieldDestroyed += ShieldDestroy;
     }
 
 
@@ -33,6 +34,7 @@ public class AbilityUI : MonoBehaviour
     {
         player.OnAbilityTook -= Player_OnAbilityTook;
         player.OnAbilityNull -= Player_OnAbilityNull;
+        ShieldParamController.OnShieldDestroyed -= ShieldDestroy;
     }
 
     private void Player_OnAbilityTook(AAbility ability)
@@ -59,6 +61,11 @@ public class AbilityUI : MonoBehaviour
 
 
     #region CHALK
+    private void ShieldDestroy()
+    {
+        Player_OnAbilityNull();
+        StopAllCoroutines();
+    }
 
     public void ChalkTimer()
     {

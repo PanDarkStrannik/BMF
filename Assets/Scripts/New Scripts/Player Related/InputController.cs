@@ -196,7 +196,7 @@ public class InputController : MonoBehaviour
             else
             {
                 OnNullAbility?.Invoke();
-                throw new Exception("You don't have any ability at the moment!");
+               // throw new Exception("You don't have any ability at the moment!");
             }
         };
     }

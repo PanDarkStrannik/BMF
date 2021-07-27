@@ -11,7 +11,6 @@ public class Shield : MonoBehaviour
     [SerializeField] private string setShieldWhenPlayerOut;
 
     [SerializeField] private DamageblePlace shieldDamagePlace;
-    [SerializeField] private ParamController shieldParams;
    
 
     private void OnDisable()

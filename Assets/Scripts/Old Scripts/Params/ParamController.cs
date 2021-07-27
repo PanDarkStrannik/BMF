@@ -42,7 +42,11 @@ public class ParamController : MonoBehaviour
         heigthsAndDamages.Reverse();
         paramSum.OnParamNull += CheckType;
         paramSum.OnParamChanged += CheckTypeAndValues;
-        faling.FallEvent += FallingDamage;
+
+        if(faling != null)
+        {
+          faling.FallEvent += FallingDamage;
+        }
 
         var tempADamagebles = paramSum.Damagebles;
         foreach (var damageble in tempADamagebles)
@@ -81,7 +85,10 @@ public class ParamController : MonoBehaviour
         paramSum.OnParamNull -= CheckType;
         paramSum.OnParamChanged -= CheckTypeAndValues;
 
-        faling.FallEvent -= FallingDamage;
+        if(faling != null)
+        {
+          faling.FallEvent -= FallingDamage;
+        }
 
         var tempADamagebles = paramSum.Damagebles;
         foreach (var damageble in tempADamagebles)
@@ -96,6 +103,7 @@ public class ParamController : MonoBehaviour
         {
             case DamagebleParam.ParamType.Health:
 
+                Debug.Log("NullHealth");
                 StartCoroutine(NullHealth());
                 break;
         }

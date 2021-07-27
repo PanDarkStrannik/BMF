@@ -17,6 +17,18 @@ public class ChalkAbility : ActiveAbility
         }
     }
 
+    private void OnEnable()
+    {
+        ShieldParamController.OnShieldDestroyed += ShieldDestroyedByDamage;
+    }
+
+
+    private void OnDisable()
+    {
+        ShieldParamController.OnShieldDestroyed -= ShieldDestroyedByDamage;
+    }
+
+
     public override void UseAbility()
     {
         if(abilityState == AbilityState.Enabled)
@@ -42,6 +54,7 @@ public class ChalkAbility : ActiveAbility
         AbilityState = AbilityState.Using;
         if(abilityState == AbilityState.Using)
         {
+            //check if shield is dead already
             yield return new WaitForSeconds(time);
             spawnShield.Die();
             StartCoroutine(CoolDown(abilityParams.CoolDownTime));
@@ -57,6 +70,12 @@ public class ChalkAbility : ActiveAbility
             StopAllCoroutines();
             AbilityState = AbilityState.Enabled;
         }
+    }
+
+    private void ShieldDestroyedByDamage()
+    {
+        StopAllCoroutines();
+        StartCoroutine(CoolDown(1));
     }
 
     
