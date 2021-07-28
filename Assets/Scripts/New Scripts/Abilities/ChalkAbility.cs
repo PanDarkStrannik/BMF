@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ChalkAbility : ActiveAbility
 {
     [SerializeField] private Spawner spawner;
     [SerializeField] private SpawnedObject spawnShield;
+
+    public static event Action<SpawnedObject> OnShieldGet;
 
     protected override void Awake()
     {
@@ -14,6 +17,10 @@ public class ChalkAbility : ActiveAbility
         foreach (var s in spawner.spawned_objects)
         {
             spawnShield = s.GetComponent<SpawnedObject>();
+            if(spawnShield != null)
+            {
+                OnShieldGet?.Invoke(spawnShield);
+            }
         }
     }
 

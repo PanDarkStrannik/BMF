@@ -11,10 +11,12 @@ public class AbilityUI : MonoBehaviour
     [SerializeField] private TMP_Text onAbilityNullText;
 
     [Header("Chalk")]
-    [SerializeField] private Image melFill;
+    [SerializeField] private Image ChalkTimeFill;
+    [SerializeField] private Image ChalkHealthFiil;
     private bool isMelReloading = false;
 
     private PlayerController player;
+    private ShieldParamController shieldParamController;
 
 
     private void Awake()
@@ -27,6 +29,7 @@ public class AbilityUI : MonoBehaviour
         player.OnAbilityTook += Player_OnAbilityTook;
         player.OnAbilityNull += Player_OnAbilityNull;
         ShieldParamController.OnShieldDestroyed += ShieldDestroy;
+        ChalkAbility.OnShieldGet += GetShield;
     }
 
 
@@ -35,6 +38,26 @@ public class AbilityUI : MonoBehaviour
         player.OnAbilityTook -= Player_OnAbilityTook;
         player.OnAbilityNull -= Player_OnAbilityNull;
         ShieldParamController.OnShieldDestroyed -= ShieldDestroy;
+        ChalkAbility.OnShieldGet -= GetShield;
+        shieldParamController.DamagebleParams.OnParamChanged -= DamagebleParams_OnParamChanged;
+    }
+
+    
+
+    private void Start()
+    {
+        if(shieldParamController != null)
+        {
+            shieldParamController.DamagebleParams.OnParamChanged += DamagebleParams_OnParamChanged;
+        }
+    }
+
+    private void DamagebleParams_OnParamChanged(DamagebleParam.ParamType paramType, float value, float maxValue)
+    {
+        if(paramType == DamagebleParam.ParamType.Health)
+        {
+            ChalkHealthFiil.fillAmount = value / maxValue;
+        }
     }
 
     private void Player_OnAbilityTook(AAbility ability)
@@ -61,6 +84,21 @@ public class AbilityUI : MonoBehaviour
 
 
     #region CHALK
+
+    private void GetShield(SpawnedObject obj)
+    {
+        shieldParamController = obj.gameObject.GetComponent<ShieldParamController>();
+        if(shieldParamController == null)
+        {
+            shieldParamController = obj.gameObject.GetComponentInParent<ShieldParamController>();
+            if(shieldParamController == null)
+            {
+                shieldParamController = obj.gameObject.GetComponentInChildren<ShieldParamController>();
+            }
+        }
+    }
+    
+
     private void ShieldDestroy()
     {
         Player_OnAbilityNull();
@@ -75,7 +113,7 @@ public class AbilityUI : MonoBehaviour
 
     private IEnumerator ChalkDecrementTime(float maxTime)
     {
-        melFill.DOFade(1f, 2f).From(0.3f).SetLoops(-1, LoopType.Yoyo);
+        ChalkTimeFill.DOFade(1f, 2f).From(0.3f).SetLoops(-1, LoopType.Yoyo);
 
 
         var startTime = 0f;
@@ -83,7 +121,7 @@ public class AbilityUI : MonoBehaviour
         for (float i = maxTime; 0f <= startTime; i -= Time.deltaTime)
         {
             startTime = i;
-            melFill.fillAmount = i / maxTime;
+            ChalkTimeFill.fillAmount = i / maxTime;
             if (!isMelReloading)
             {
                 startTime = 0f;
