@@ -68,7 +68,7 @@ public abstract class AWeapon : MonoBehaviour
     }
 
 
-    public IEnumerator EventStarter(AWeapon.WeaponState weaponState)
+    public IEnumerator EventStarter(WeaponState weaponState)
     {
         for (int i = 0; i < events.Count; i++)
         {
@@ -79,16 +79,6 @@ public abstract class AWeapon : MonoBehaviour
             }
         }
     }
-
-    //public virtual void Attack()
-    //{
-    //   throw new System.Exception("Ненаправленная атака нереализована");      
-    //}
-
-    //public virtual void Attack(GameObject attackedObject)
-    //{
-    //    throw new System.Exception("Направленная атака нереализована");
-    //}
 
 
     #region Переопределяемые методы
@@ -205,7 +195,7 @@ public abstract class AWeapon : MonoBehaviour
 
 
 
-        public AWeapon.WeaponState WeaponState
+        public WeaponState WeaponState
         {
             get
             {

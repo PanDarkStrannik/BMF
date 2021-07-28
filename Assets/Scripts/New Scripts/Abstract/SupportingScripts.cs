@@ -42,6 +42,33 @@ namespace Scripts.DevelopingSupporting
 
         }
 
+        public static class FindHelper
+        {
+            public static bool SearchInIerarhiy<T>(GameObject gameObject, out T searchingObject)
+            {
+                searchingObject = default;
+                var componentOnGameObject = gameObject.GetComponent<T>();
+                var componentOnChildren = gameObject.GetComponentInChildren<T>();
+                var componentOnParent = gameObject.GetComponentInParent<T>();
+                if(componentOnGameObject != null)
+                {
+                    searchingObject = componentOnGameObject;
+                    return true;
+                }
+                else if (componentOnChildren != null)
+                {
+                    searchingObject = componentOnChildren;
+                    return true;
+                }
+                else if (componentOnParent != null)
+                {
+                    searchingObject = componentOnParent;
+                    return true;
+                }
+                return false;
+            }
+        }
+
         public static class MathHelper
         {
             public static Vector3 ClampVector(Vector3 currentVector, Vector3 clampingMin, Vector3 clampingMax)
