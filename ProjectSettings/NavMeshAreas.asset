@@ -69,7 +69,7 @@ NavMeshProjectSettings:
     cost: 1
   - name: 
     cost: 1
-  m_LastAgentTypeID: -1923039037
+  m_LastAgentTypeID: -902729914
   m_Settings:
   - serializedVersion: 2
     agentTypeID: 0
@@ -111,8 +111,8 @@ NavMeshProjectSettings:
     agentTypeID: 1479372276
     agentRadius: 1
     agentHeight: 11
-    agentSlope: 60
-    agentClimb: 10
+    agentSlope: 31.3
+    agentClimb: 2.21
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -146,5 +146,5 @@ NavMeshProjectSettings:
   m_SettingNames:
   - Humanoid
   - Ogr
-  - Flyable
+  - Ghost
   - New Agent
