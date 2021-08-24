@@ -50,7 +50,7 @@ namespace Scripts.DevelopingSupporting
                 var componentOnGameObject = gameObject.GetComponent<T>();
                 var componentOnChildren = gameObject.GetComponentInChildren<T>();
                 var componentOnParent = gameObject.GetComponentInParent<T>();
-                if(componentOnGameObject != null)
+                if (componentOnGameObject != null)
                 {
                     searchingObject = componentOnGameObject;
                     return true;
@@ -88,8 +88,15 @@ namespace Scripts.DevelopingSupporting
                 return Mathf.Clamp(angle, min, max);
             }
 
+            public static bool CheckLayer(LayerMask checkingLayer, GameObject checkingObject)
+            {
+                if ((checkingLayer.value & 1 << checkingObject.layer) != 0)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
-
 
 
         public static class PauseController
@@ -146,7 +153,6 @@ namespace Scripts.DevelopingSupporting
             {
                 Time.timeScale = value;
             }
-
         }
 
 
@@ -173,7 +179,7 @@ namespace Scripts.DevelopingSupporting
                     instance = value;
                 }
             }
-               
+
 
             protected Singlton()
             {
@@ -194,11 +200,11 @@ namespace Scripts.DevelopingSupporting
             {
                 get; private set;
             }
-       
+
 
             protected virtual void Creating()
             {
-               
+
             }
 
             private void OnEnable()
@@ -394,3 +400,5 @@ namespace Scripts.DevelopingSupporting
 
     }
 }
+
+
