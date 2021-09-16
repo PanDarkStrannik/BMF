@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 using DG.Tweening;
-
+using CharacterStateMechanic;
 
 [System.Serializable]
 public class UnityBoolEvent : UnityEvent<bool> { }
 
-public partial class PlayerController : MonoBehaviour
+public partial class PlayerController : AController
 {
     public enum ControlMoveType {Ground,Vertical }
     public ControlMoveType controlMoveType;

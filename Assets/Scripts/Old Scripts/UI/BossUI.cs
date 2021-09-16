@@ -11,7 +11,7 @@ public class BossUI : MonoBehaviour
     [SerializeField] private Text textBossMaxHP;
     [SerializeField] private Text textBossCurrentHP;
     [SerializeField] private Image bossBar;
-    [SerializeField] private EnemyDetection detection;
+    [SerializeField] private EnemyDetectionController detection;
 
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject winMenu;

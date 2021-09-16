@@ -209,7 +209,9 @@ public class DamageArea : MonoBehaviour
     {
         ChangeArea(colliderScale);
         Gizmos.color = gizmosColor;
-        Gizmos.DrawCube(damageCollider.transform.position, damageCollider.transform.lossyScale);
+        var positsion = damageCollider.transform.position;
+        var size = transform.InverseTransformDirection(damageCollider.transform.lossyScale);
+        Gizmos.DrawCube(positsion, size);
     }
 
 

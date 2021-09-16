@@ -36,6 +36,8 @@ public class EnemyMovementController : AFaling
     private void OnDisable()
     {
         UnSubscribeOnEvents();
+        navAgent.enabled = false;
+        moving.StartEvent(false);
     }
 
 

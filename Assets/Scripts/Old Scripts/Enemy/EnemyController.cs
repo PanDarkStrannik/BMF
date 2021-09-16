@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float attackDelay = 1f;
 
     [SerializeReference] private OldEnemyMovementController movement;
-    [SerializeReference] private EnemyDetection detection;
+    [SerializeReference] private EnemyDetectionController detection;
     [SerializeReference] private EnemyWeaponLogic weapon;
     [SerializeReference] private MainEvents mainEvents;
 

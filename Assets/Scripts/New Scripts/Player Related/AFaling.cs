@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-public class AFaling : MonoBehaviour
+﻿using UnityEngine;
+using CharacterStateMechanic;
+
+public class AFaling : AController
 {
     [SerializeReference] public Rigidbody body;
     [SerializeField] protected SphereCollider groundCheckSphere;

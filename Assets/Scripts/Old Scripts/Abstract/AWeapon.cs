@@ -68,7 +68,7 @@ public abstract class AWeapon : MonoBehaviour
     }
 
 
-    public IEnumerator EventStarter(AWeapon.WeaponState weaponState)
+    public IEnumerator EventStarter(WeaponState weaponState)
     {
         for (int i = 0; i < events.Count; i++)
         {
@@ -79,16 +79,6 @@ public abstract class AWeapon : MonoBehaviour
             }
         }
     }
-
-    //public virtual void Attack()
-    //{
-    //   throw new System.Exception("Ненаправленная атака нереализована");      
-    //}
-
-    //public virtual void Attack(GameObject attackedObject)
-    //{
-    //    throw new System.Exception("Направленная атака нереализована");
-    //}
 
 
     #region Переопределяемые методы
@@ -132,12 +122,12 @@ public abstract class AWeapon : MonoBehaviour
         Debug.Log("Перезарядка окончена");
     }
 
-    public virtual IEnumerator StopAttack(float stopTime)
+    public virtual void StopAttack()
     {
         Debug.Log("Остановили Атаку!");
         StopAllCoroutines();
         State = WeaponState.ImposibleAttack;
-        yield return new WaitForSeconds(stopTime);
+        //yield return new WaitForSeconds(stopTime);
         State = WeaponState.Serenity;
         Debug.Log("Разрешили Атаку!");
     }
@@ -175,7 +165,7 @@ public abstract class AWeapon : MonoBehaviour
     [System.Serializable]
     public class EventOnAttackState
     {
-        [SerializeField] private AWeapon.WeaponState weaponState;
+        [SerializeField] private WeaponState weaponState;
         [SerializeField] private float toEventStart;
         [SerializeField] private UnityEvent weaponEvent;
 
@@ -205,7 +195,7 @@ public abstract class AWeapon : MonoBehaviour
 
 
 
-        public AWeapon.WeaponState WeaponState
+        public WeaponState WeaponState
         {
             get
             {

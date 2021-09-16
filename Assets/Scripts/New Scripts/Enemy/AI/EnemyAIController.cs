@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
+using CharacterStateMechanic;
 
-public class EnemyAIController : MonoBehaviour
+public class EnemyAIController : AController
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private EnemyDetection detection;
+    [SerializeField] private EnemyDetectionController detection;
     [SerializeField] private GameObject enemyObject;
 
     [SerializeField] private CustomEventValue<bool> PlayerDetectedEvent;

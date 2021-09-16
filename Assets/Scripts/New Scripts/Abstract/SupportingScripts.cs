@@ -42,6 +42,33 @@ namespace Scripts.DevelopingSupporting
 
         }
 
+        public static class FindHelper
+        {
+            public static bool SearchInIerarhiy<T>(GameObject gameObject, out T searchingObject)
+            {
+                searchingObject = default;
+                var componentOnGameObject = gameObject.GetComponent<T>();
+                var componentOnChildren = gameObject.GetComponentInChildren<T>();
+                var componentOnParent = gameObject.GetComponentInParent<T>();
+                if (componentOnGameObject != null)
+                {
+                    searchingObject = componentOnGameObject;
+                    return true;
+                }
+                else if (componentOnChildren != null)
+                {
+                    searchingObject = componentOnChildren;
+                    return true;
+                }
+                else if (componentOnParent != null)
+                {
+                    searchingObject = componentOnParent;
+                    return true;
+                }
+                return false;
+            }
+        }
+
         public static class MathHelper
         {
             public static Vector3 ClampVector(Vector3 currentVector, Vector3 clampingMin, Vector3 clampingMax)
@@ -61,8 +88,15 @@ namespace Scripts.DevelopingSupporting
                 return Mathf.Clamp(angle, min, max);
             }
 
+            public static bool CheckLayer(LayerMask checkingLayer, GameObject checkingObject)
+            {
+                if ((checkingLayer.value & 1 << checkingObject.layer) != 0)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
-
 
 
         public static class PauseController
@@ -119,7 +153,6 @@ namespace Scripts.DevelopingSupporting
             {
                 Time.timeScale = value;
             }
-
         }
 
 
@@ -146,7 +179,7 @@ namespace Scripts.DevelopingSupporting
                     instance = value;
                 }
             }
-               
+
 
             protected Singlton()
             {
@@ -167,11 +200,11 @@ namespace Scripts.DevelopingSupporting
             {
                 get; private set;
             }
-       
+
 
             protected virtual void Creating()
             {
-               
+
             }
 
             private void OnEnable()
@@ -367,3 +400,5 @@ namespace Scripts.DevelopingSupporting
 
     }
 }
+
+
