@@ -400,7 +400,122 @@ MonoBehaviour:
   assetList:
   - Assets/Bakery/examples/content/sponza/bush.FBX
   - Assets/Bakery/examples/content/floor_lamp.FBX
-  uvOverlapAssetList: 00000000ffffffff
+  - Assets/Animations/PlayerAnimations/hands_with_axe_idle4.fbx
+  - Assets/OldProject/Archway.fbx
+  - Assets/OldProject/bridge.fbx
+  - Assets/OldProject/Carriage.fbx
+  - Assets/OldProject/catapult.fbx
+  - Assets/OldProject/Chest.fbx
+  - Assets/OldProject/church_viy.obj
+  - Assets/OldProject/Old Bridge.fbx
+  - Assets/OldProject/partition/partition lp.obj
+  - Assets/OldProject/Peregorodka/lp 1.obj
+  - Assets/OldProject/Rocks/DestructedRocks/Rock Type1 04.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock Type2 03.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock Type2 04.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock Type4 01.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock Type4 02.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock Type4 03.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock Type4 04.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock Type6 04.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type1_01.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type1_02.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type1_03.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type2_01.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type2_02.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type3_01.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type3_02.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type3_03.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type3_04.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type5_01.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type5_02.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type5_03.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type5_04.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type6_01.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type6_02.dae
+  - Assets/OldProject/Rocks/DestructedRocks/Rock_Type6_03.dae
+  - Assets/OldProject/Skelet.fbx
+  - Assets/OldProject/Skull.FBX
+  - Assets/Prefabs/Axe2/Axe2/lp.obj
+  - Assets/Prefabs/Bosses/Boss2.fbx
+  - Assets/Prefabs/Bosses/HAM.fbx
+  - Assets/Prefabs/Enemy/Aspid/Aspid/animation/aspid_anim_flight.FBX
+  - Assets/Prefabs/Enemy/Aspid/Aspid/aspid_rig.FBX
+  - Assets/Prefabs/Enemy/Aspid/aspid_anim3.FBX
+  - Assets/Prefabs/Enemy/Aspid/aspid_rig_pr2.FBX
+  - Assets/Prefabs/Enemy/Chert/Animations/FBXAnimations/New/chert_casting.FBX
+  - Assets/Prefabs/Enemy/Chert/Animations/FBXAnimations/New/chert_gethit.FBX
+  - Assets/Prefabs/Enemy/Chert/Animations/FBXAnimations/New/chert_idle.FBX
+  - Assets/Prefabs/Enemy/Chert/Animations/FBXAnimations/New/chert_run.FBX
+  - Assets/Prefabs/Enemy/Chert/Animations/FBXAnimations/New/chert_run2.FBX
+  - Assets/Prefabs/Enemy/Chert/Animations/FBXAnimations/New/chert_slash.FBX
+  - Assets/Prefabs/Enemy/Chert/chert_rig.FBX
+  - Assets/Prefabs/Enemy/Chert/chertilo_d.FBX
+  - Assets/Prefabs/Enemy/Ded/Model/ded_finale_rig.FBX
+  - Assets/Prefabs/Enemy/Drekavec/drevkovetc_t-pose.FBX
+  - Assets/Prefabs/Enemy/Drekavec/Nervously Look Around.fbx
+  - Assets/Prefabs/Enemy/Drekavec/Standing Taunt Battlecry.fbx
+  - Assets/Prefabs/Enemy/Drekavec/Zombie Idle.fbx
+  - Assets/Prefabs/Enemy/Drekavec/Zombie Running.fbx
+  - Assets/Prefabs/Enemy/Drekavec/Zombie Scream.fbx
+  - Assets/Prefabs/Enemy/Ghost/ghost_rig1.FBX
+  - Assets/Prefabs/Enemy/Ghost/New/ghost/ghost_rig1.FBX
+  - Assets/Prefabs/Enemy/Ghost/New/ghost/no_dress/ghost_dress.FBX
+  - Assets/Prefabs/Enemy/Ghost/New/ghost/no_dress/ghost_rig_no_dress.FBX
+  - Assets/Prefabs/Enemy/Karga/Karga_Bez_Poncho/no_cape/karga_cape2.FBX
+  - Assets/Prefabs/Enemy/Karga/Karga_Bez_Poncho/no_cape/karga_rig_no_cape.FBX
+  - Assets/Prefabs/Enemy/YBOT/ybot.fbx
+  - Assets/Prefabs/Environment/bag/bag blood.obj
+  - Assets/Prefabs/Environment/bag/bag L.obj
+  - Assets/Prefabs/Environment/bag/Bag m.obj
+  - Assets/Prefabs/Environment/bag/Bag s.obj
+  - Assets/Prefabs/Environment/church/analoy/LP.obj
+  - Assets/Prefabs/Environment/church/angle/lp.obj
+  - Assets/Prefabs/Environment/church/box/lp.obj
+  - Assets/Prefabs/Environment/church/bucket/lp.obj
+  - Assets/Prefabs/Environment/church.obj
+  - Assets/Prefabs/Environment/column/column down.obj
+  - Assets/Prefabs/Environment/column/column up.obj
+  - Assets/Prefabs/Environment/column/rope 1.obj
+  - Assets/Prefabs/Environment/column/rope 2.obj
+  - Assets/Prefabs/Environment/column/rope 3.obj
+  - Assets/Prefabs/Environment/Cupboard/Models/1.obj
+  - Assets/Prefabs/Environment/Cupboard/Models/2.obj
+  - Assets/Prefabs/Environment/Cupboard/Models/3.obj
+  - Assets/Prefabs/Environment/decal/1.obj
+  - Assets/Prefabs/Environment/FBX.FBX
+  - Assets/Prefabs/Environment/postament/lp.obj
+  - Assets/Prefabs/Environment/skeleton.obj
+  - Assets/Prefabs/Environment/stairs 2/stairs 2.obj
+  - Assets/Prefabs/kropilo/LP.obj
+  - Assets/Prefabs/MainCharacter/hands_with_axe_2.FBX
+  - Assets/Prefabs/MainCharacter/hands_with_axe_3.FBX
+  - Assets/Prefabs/MainCharacter/main_character/gg_hands_rig.FBX
+  - Assets/Prefabs/PlayerWeapon/axe/LP.obj
+  - Assets/Prefabs/Sword/Swords/BIGsword.fbx
+  - Assets/Prefabs/Sword/Swords/Broadsword.fbx
+  - Assets/Prefabs/Sword/Swords/Sword.fbx
+  - Assets/VFX/AreaAttack/untitled 1.fbx
+  - Assets/VFX/Bes/Idk what/Bite.fbx
+  - Assets/VFX/Bes/Idk what/swipe.fbx
+  - Assets/VFX/Bes/Idk what/untitled 1.fbx
+  - Assets/VFX/Buff/crater.fbx
+  - Assets/VFX/Buff/cylinder.fbx
+  - Assets/VFX/DebuffArea/mesh 1.fbx
+  - Assets/VFX/DebuffArea/mesh.fbx
+  - Assets/VFX/Drekavc/Cone.fbx
+  - Assets/VFX/Drekavc/Twist_box.obj
+  - Assets/VFX/Drekavc/Twisted (1).obj
+  - Assets/VFX/Drekavc/Twisted_fuck_box.obj
+  - Assets/VFX/Drekavc/untitled 1.fbx
+  - Assets/VFX/Dust/sphere.fbx
+  - Assets/VFX/Karga's/cylinderHole.fbx
+  - Assets/VFX/Light/light.fbx
+  - Assets/VFX/slash 1.fbx
+  - Assets/VFX/Spawn/floor new/lp.obj
+  - Assets/VFX/Spawn/wall/lp.obj
+  - Assets/VFX/Twisted_fuck_box.obj
+  uvOverlapAssetList: 00000000ffffffff01010000010100000101000001010000010100000101000001010000010100000000000000000000010100000101000001010000010100000101000001010000010100000101000001010000010100000101000001010000010100000101000001010000010100000101000001010000010100000101000001010000010100000101000001010000000000000101000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000010100000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000101000001010000010100000000000001010000000000000000000000000000000000000000000000000000000000000101000000000000010100000000000000000000000000000000000000000000010100000101000001010000
   xatlasWarningShown: 0
   foundCompatibleSetup: 0
   gpuName: 
