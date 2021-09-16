@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using CharacterStateMechanic;
 
-public class EnemyDetection : MonoBehaviour
+public class EnemyDetectionController : AController
 {
     [SerializeField] private List<ColliderChance> colliderChances;
     [Range(0.1f,30f)]
@@ -27,6 +28,8 @@ public class EnemyDetection : MonoBehaviour
 
     private bool isForgoting = false;
     private bool alreadyDetect = false;
+    private Coroutine _detectionCoroutine = null;
+
     public bool AlreadyDetect
     {
         get
@@ -98,8 +101,23 @@ public class EnemyDetection : MonoBehaviour
 
         colliderChances = colliderChances.OrderBy(colliderChances=>colliderChances.Radius).ToList();
 
-        StartCoroutine(Detection());
+        _detectionCoroutine = StartCoroutine(Detection());
  
+    }
+
+    private void OnEnable()
+    {
+        if (_detectionCoroutine == null)
+            _detectionCoroutine = StartCoroutine(Detection());
+    }
+
+    private void OnDisable()
+    {
+        if(_detectionCoroutine != null)
+        {
+            StopCoroutine(_detectionCoroutine);
+            _detectionCoroutine = null;
+        }
     }
 
     public IEnumerator Detection()

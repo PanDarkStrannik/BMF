@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Events;
 using System;
+using CharacterStateMechanic;
 
-public class InputController : MonoBehaviour
+public class InputController : AController
 {
     #region EVENTS
 

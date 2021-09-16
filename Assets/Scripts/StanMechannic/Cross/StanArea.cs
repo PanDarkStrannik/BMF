@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts.DevelopingSupporting;
+using StanMechannic;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class StanArea : MonoBehaviour
@@ -38,17 +39,18 @@ public class StanArea : MonoBehaviour
     {
         if (other.gameObject != null)
         {
-            if (SupportingScripts.FindHelper.SearchInIerarhiy(other.gameObject, out IStanable searchingObject))
+            if (SupportingScripts.MathHelper.CheckLayer(_stanLayer, other.gameObject))
             {
-                Debug.Log("Нашли объект для стана!");
-                if(searchingObject.CanStan == false)
+                Debug.Log("Слой подходит!");
+                if (SupportingScripts.FindHelper.SearchInIerarhiy(other.gameObject, out IStanableObject searchingObject))
                 {
-                    Debug.Log("Можем застанить!");
-                    if (SupportingScripts.MathHelper.CheckLayer(_stanLayer, other.gameObject))
-                    {
-                        Debug.Log("Слой подходит!");
-                        searchingObject.Stan(_stanData);
-                    }
+                    Debug.Log("Нашли объект для стана!");
+                    //if(searchingObject.CanStan == false)
+                    //{
+                    //    Debug.Log("Можем застанить!");
+                        searchingObject.StanObject(_stanData);
+
+                    //}
                 }
             }
         }

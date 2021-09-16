@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using CharacterStateMechanic;
 
-public class AttackController : MonoBehaviour
+public class AttackController : AController
 {
     [SerializeField] private List<WeaponAiData> weapons;
     [SerializeField] private List<AimSpheres> aimSpheres;
@@ -10,8 +10,6 @@ public class AttackController : MonoBehaviour
     private AWeapon equipWeapon = null;
 
     private AttackAI.AttackStopVariants stopVariant = AttackAI.AttackStopVariants.None;
-
-    private Transform currentTarget;
 
     private List<AttackAI> attackAIs=null;
 
@@ -25,6 +23,8 @@ public class AttackController : MonoBehaviour
     private void OnDisable()
     {
         UnSubscribeOnEvents();
+        foreach (var weapon in weapons)
+            weapon.Weapon.StopAttack();
     }
 
     public void Initialize(List<AttackAI> enemyAIs)
@@ -82,13 +82,13 @@ public class AttackController : MonoBehaviour
     }
 
 
-    public void StopAttack(AttackAI.AttackStopVariants stopVariant, float stopTime)
-    {
-        if (this.stopVariant == stopVariant)
-        {
-            StartCoroutine(equipWeapon.StopAttack(stopTime));
-        }
-    }
+    //public void StopAttack(AttackAI.AttackStopVariants stopVariant, float stopTime)
+    //{
+    //    if (this.stopVariant == stopVariant)
+    //    {
+    //        StartCoroutine(equipWeapon.StopAttack(stopTime));
+    //    }
+    //}
 
     private void AttackOnStage(LayerMask mask, AttackAI.AttackStage stage)
     {
@@ -106,30 +106,17 @@ public class AttackController : MonoBehaviour
             {
                 if (stage.Aim)
                 {
-                    //if (currentTarget != null)
-                    //{
-                    //    Aim();
-                    //}
                     foreach (var aimSphere in aimSpheres)
                     {
-                        // RaycastHit[] hits = Physics.SphereCastAll(weapon.Point.position, weapon.Radius, weapon.Point.forward, weapon.Distance, mask);
                         RaycastHit[] hits = Physics.SphereCastAll(aimSphere.Point.position, aimSphere.Radius, aimSphere.Point.forward, aimSphere.Distance, mask);
                         if (hits.Length > 0)
                         {
                             foreach (var hit in hits)
                             {
-                                if (hit.transform != null /* && hit.collider.gameObject != null && hit.transform != null*/)
+                                if (hit.transform != null)
                                 {
-                                    currentTarget = hit.transform;
 
                                     Aim(hit.transform);
-                                    //Debug.Log("Местоположения отслеживаемого" + hit.collider.transform.position);
-
-                                    //foreach (var aim in weapon.ObjectAim)
-                                    //{
-
-                                    //    //NewAim.Aim(hit.transform, aim);
-                                    //}
 
                                     break;
                                 }
@@ -166,7 +153,6 @@ public class AttackController : MonoBehaviour
         {
             foreach (var aim in weapon.ObjectAim)
             {
-               // NewAim.Aim(target, aim);
                 NewAim.NormalAim(target, aim);
             }
         }
@@ -374,16 +360,5 @@ public class AttackController : MonoBehaviour
             distance = 1;
             gizmosColor = Color.black;
         }
-
-        //public bool TryReturnNeededWeaponType<T>(out T neededWeaponType) where T : class
-        //{
-        //    neededWeaponType = null;
-        //    if(weapon is T)
-        //    {
-        //        neededWeaponType = weapon as T;
-        //        return true;
-        //    }
-        //    return false;
-        //}
     }
 }
