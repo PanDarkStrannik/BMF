@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 
 public class WeaponAnimations : MonoBehaviour
 {
-    [SerializeField] private Animator weaponAnimator;
-    [SerializeField] private string inputFloat;
-
-    [SerializeField] private string shiftBool;
     [SerializeField] private bool usedByPlayer = true;
+
+    [SerializeField] private Animator weaponAnimator;
+
+    [ShowIf("usedByPlayer")]
+    [SerializeField] private string inputFloat;
+    [ShowIf("usedByPlayer")]
+    [SerializeField] private string shiftBool;
+
     [SerializeField] private WAnimationRandomizer randomAnimation;
     [SerializeField] private List<AnimationEvents> animationEvents;
 
@@ -23,12 +28,12 @@ public class WeaponAnimations : MonoBehaviour
     }
 
 
-    private void OnPlayerMove(Vector3 obj, bool shifting)
+    private void OnPlayerMove(Vector3 moveDirection, bool shifting)
     {
         if(usedByPlayer)
         {
-            weaponAnimator.SetFloat(inputFloat, obj.magnitude, 0.1f, Time.deltaTime);
-           if(obj != Vector3.zero && shiftBool != null)
+            weaponAnimator.SetFloat(inputFloat, moveDirection.magnitude, 0.1f, Time.deltaTime);
+           if(moveDirection != Vector3.zero && shiftBool != null)
            {
                weaponAnimator.SetBool(shiftBool, !shifting);
            }
