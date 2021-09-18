@@ -7,7 +7,7 @@ public class WeaponMili : AWeapon, IDamagingWeapon
     [SerializeField] private float toAttackTime = 1f;
     [SerializeField] private float damagingTime = 0.3f;
     [SerializeField] private float reloadAttack = 0.7f;
-    [SerializeReference] private DamageArea damageArea;
+    [SerializeReference] private AttackArea damageArea;
     [SerializeField] private WeaponType weaponType;
 
     public override WeaponType WeaponType

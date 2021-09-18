@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SimpleCrossWeapon : AWeapon, IDamagingWeapon//, IMoonLigthUser
 {
-    [SerializeField] private DamageArea _damageArea;
+    [SerializeField] private AttackArea _damageArea;
     [SerializeField] private StanArea _stanArea;
     [SerializeField,Min(0f)] private float _attackDuration;
     [SerializeField, Min(0f)] private float _reloadTime;

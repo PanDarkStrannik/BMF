@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace CharacterStateMechanic
+namespace StateMechanic
 {
     public sealed class TranzitionToWantedStartStates : AStateTranzition
     {

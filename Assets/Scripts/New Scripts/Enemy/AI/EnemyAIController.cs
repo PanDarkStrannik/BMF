@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
-using CharacterStateMechanic;
+using StateMechanic;
 
 public class EnemyAIController : AController
 {

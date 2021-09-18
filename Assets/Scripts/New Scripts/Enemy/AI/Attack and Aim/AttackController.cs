@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using CharacterStateMechanic;
+using StateMechanic;
 
 public class AttackController : AController
 {

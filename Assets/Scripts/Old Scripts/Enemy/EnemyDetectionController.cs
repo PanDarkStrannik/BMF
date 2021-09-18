@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using CharacterStateMechanic;
+using StateMechanic;
 
 public class EnemyDetectionController : AController
 {

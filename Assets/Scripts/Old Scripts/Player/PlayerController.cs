@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 using DG.Tweening;
-using CharacterStateMechanic;
+using StateMechanic;
 
 [System.Serializable]
 public class UnityBoolEvent : UnityEvent<bool> { }

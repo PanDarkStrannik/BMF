@@ -1,5 +1,5 @@
 ﻿
-namespace CharacterStateMechanic
+namespace StateMechanic
 {
     public sealed class TranzitionFromStopedStates : AStateTranzition
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using StanMechannic;
 
-namespace CharacterStateMechanic
+namespace StateMechanic
 {
     public class StanState : ACharacterState, IStanableObject
     {
@@ -15,7 +15,7 @@ namespace CharacterStateMechanic
         public void StanObject(IStanData stanData)
         {
             _stanData = stanData;
-            StartStateByConnections();
+            TryStartStateByConnections();
         }
 
         protected override void StartStateInternal()

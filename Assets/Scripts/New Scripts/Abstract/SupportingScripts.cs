@@ -47,14 +47,19 @@ namespace Scripts.DevelopingSupporting
             public static bool SearchInIerarhiy<T>(GameObject gameObject, out T searchingObject)
             {
                 searchingObject = default;
-                var componentOnGameObject = gameObject.GetComponent<T>();
                 var componentOnChildren = gameObject.GetComponentInChildren<T>();
                 var componentOnParent = gameObject.GetComponentInParent<T>();
-                if (componentOnGameObject != null)
+
+                if(gameObject.TryGetComponent(out T componentOnGameObject))
                 {
                     searchingObject = componentOnGameObject;
                     return true;
                 }
+                //if (componentOnGameObject != null)
+                //{
+                //    searchingObject = componentOnGameObject;
+                //    return true;
+                //}
                 else if (componentOnChildren != null)
                 {
                     searchingObject = componentOnChildren;
@@ -66,6 +71,18 @@ namespace Scripts.DevelopingSupporting
                     return true;
                 }
                 return false;
+            }
+            public static bool TryFindAllComponentsFromIerarhy<T>(GameObject gameObject, out List<T> searchinObjects)
+            {
+                searchinObjects = new List<T>();
+                searchinObjects.AddRange(gameObject.GetComponents<T>());
+                searchinObjects.AddRange(gameObject.GetComponentsInChildren<T>());
+                searchinObjects.AddRange(gameObject.GetComponentsInParent<T>());
+
+                if (searchinObjects.Count > 0)
+                    return true;
+                else
+                    return false;
             }
         }
 

@@ -10,7 +10,7 @@ public class JumpAttack : AWeapon, IDamagingWeapon
     [SerializeField] private float forceValue=3f;
     [SerializeField] private float damageTime = 3f;
     [SerializeField] private float reloadTime = 3f;
-    [SerializeField] private DamageArea damageArea;
+    [SerializeField] private AttackArea damageArea;
     [SerializeField] private UnityEvent<bool> damaging;
     [SerializeField] private ForceMode forceMode;
 

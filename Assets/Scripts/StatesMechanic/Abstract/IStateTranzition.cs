@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CharacterStateMechanic
+namespace StateMechanic
 {
     public interface IStateTranzition : IStateStarter
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using CharacterStateMechanic;
+using StateMechanic;
 
 public class InputController : AController
 {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CharacterStateMechanic
+namespace StateMechanic
 {
     public class BaseState : ACharacterState
     {

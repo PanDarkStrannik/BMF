@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CharacterStateMechanic
+namespace StateMechanic
 {
     public abstract class ACharacterState : MonoBehaviour, IState
     {
@@ -29,12 +29,14 @@ namespace CharacterStateMechanic
         }
 
         [ContextMenu("StartStateByConnections()")]
-        public void StartStateByConnections()
+        public bool TryStartStateByConnections()
         {
             if(_stateStarterByConnections.TryStartState(this) == false)
             {
                 OnStateStartFailed?.Invoke(this);
+                return false;
             }
+            return true;
         }
 
         public void StartState(IStateStarter stateStarter)

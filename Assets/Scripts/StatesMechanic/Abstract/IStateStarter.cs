@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CharacterStateMechanic
+namespace StateMechanic
 {
     public interface IStateStarter
     {

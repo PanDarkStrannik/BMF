@@ -8,7 +8,7 @@ public class AxeHeavyMelee : AWeapon, IDamagingWeapon
     [SerializeField] private float toAttackTime;
     [SerializeField] private float damagingTime;
     [SerializeField] private float reloadAttack;
-    [SerializeReference] private DamageArea damageArea;
+    [SerializeReference] private AttackArea damageArea;
 
     [SerializeField] private float chargeTime = 3f;
     [SerializeField] private float chargeDamageBonus;
