@@ -4,7 +4,7 @@ using PushMechannic;
 
 namespace StateMechanic
 {
-    public class RepulsedState : ACharacterState, IPushable
+    public class RepulsedState : AState, IPushable
     {
         [SerializeField] private List<Rigidbody> _rigidbodysForPush;
 
@@ -23,7 +23,7 @@ namespace StateMechanic
         {
             pusher.OnPushingComplete -= OnPushingComplete;
             foreach (var rigidbody in _rigidbodysForPush)
-                rigidbody.Sleep();
+                rigidbody.velocity = Vector3.zero;
             StopState();
         }
 

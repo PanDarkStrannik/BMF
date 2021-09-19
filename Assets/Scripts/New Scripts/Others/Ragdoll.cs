@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Ragdoll : MonoBehaviour
 {
-    private Rigidbody[] rigidBodies;
-    private Collider[] cols;
-
-    [SerializeField] private Vector3 forceTorque;
+    [SerializeField] private Joint _jointForConnect;
+    [SerializeField] private Rigidbody _rigidbodyForConnect;
     [SerializeField] private Vector3 force;
     [SerializeField] private ForceMode forceMode;
-    [SerializeReference] private Rigidbody centralBody;
+    [SerializeField] private Rigidbody centralBody;
+    [SerializeField] private Animator _animator;
+
+    private Rigidbody[] rigidBodies;
+    private Collider[] cols;
 
     private void Awake()
     {
@@ -34,18 +36,29 @@ public class Ragdoll : MonoBehaviour
         Vector3 forceDir = playerPos.position - centralBody.transform.position;
         forceDir.Normalize();
 
+        ChangeRagdoll(isKinematic);
+
+        if (!isKinematic)
+        {
+            centralBody.AddForceAtPosition(-forceDir * force.z + Vector3.up * force.y, centralBody.transform.position, forceMode);
+        }
+    }
+
+    public void ChangeRagdoll(bool isKinematic)
+    {
+        _animator.enabled = isKinematic;
         foreach (var rb in rigidBodies)
         {
             rb.isKinematic = isKinematic;
-            
+
         }
         foreach (var col in cols)
         {
             col.enabled = !isKinematic;
         }
-        if(!isKinematic)
-        {
-         centralBody.AddForceAtPosition(-forceDir * force.z + Vector3.up * force.y, centralBody.transform.position, forceMode);
-        }
+        if (isKinematic == false)
+            _jointForConnect.connectedBody = _rigidbodyForConnect;
+        else
+            _jointForConnect.connectedBody = null;
     }
 }

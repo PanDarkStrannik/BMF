@@ -5,10 +5,10 @@ namespace StateMechanic
 {
     public class AController : MonoBehaviour
     {
-       [SerializeField] private List<ACharacterState> _statesWantsDisableUs = new List<ACharacterState>();
-       [SerializeField] private List<ACharacterState> _statesWantsEnableUs = new List<ACharacterState>();
+       [SerializeField] private List<AState> _statesWantsDisableUs = new List<AState>();
+       [SerializeField] private List<AState> _statesWantsEnableUs = new List<AState>();
 
-        public bool TryEnable(ACharacterState stateToEnable)
+        public bool TryEnable(AState stateToEnable)
         {
             AddState(stateToEnable, _statesWantsEnableUs);
             if (TryChangeActive(true))
@@ -17,7 +17,7 @@ namespace StateMechanic
         }
 
 
-        public bool TryDisable(ACharacterState stateToDisable)
+        public bool TryDisable(AState stateToDisable)
         {
             AddState(stateToDisable, _statesWantsDisableUs);
             if (TryChangeActive(false))
@@ -25,7 +25,7 @@ namespace StateMechanic
             return false;
         }
 
-        public void RemoveState(ACharacterState characterState)
+        public void RemoveState(AState characterState)
         {
             if (_statesWantsEnableUs.Contains(characterState) == true)
             {
@@ -44,14 +44,14 @@ namespace StateMechanic
             if (_statesWantsDisableUs.Count != 0 || _statesWantsEnableUs.Count != 0)
             {
 
-                List<ACharacterState> controllingStates;
+                List<AState> controllingStates;
                 if (isActive == true)
                 {
-                    controllingStates = new List<ACharacterState>(_statesWantsDisableUs);
+                    controllingStates = new List<AState>(_statesWantsDisableUs);
                 }
                 else
                 {
-                    controllingStates = new List<ACharacterState>(_statesWantsEnableUs);
+                    controllingStates = new List<AState>(_statesWantsEnableUs);
                 }
 
                 if (enabled == !isActive)
@@ -66,7 +66,7 @@ namespace StateMechanic
             return false;
         }
 
-        private void AddState(ACharacterState characterState, List<ACharacterState> characterStates)
+        private void AddState(AState characterState, List<AState> characterStates)
         {
             if (characterStates.Contains(characterState) == false)
                 characterStates.Add(characterState);

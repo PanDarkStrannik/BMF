@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using StateMechanic;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class EnemyMovementController : AFaling
+public class EnemyMovementController : AController
 {
     [SerializeReference] private NavMeshAgent navAgent;
     [SerializeField] private List<ObjectAimMod> objectAim;
@@ -13,23 +14,24 @@ public class EnemyMovementController : AFaling
     private bool alreadySubscribe = false;
     private List<AEnemyMovement> enemyMovements = null;
 
-    private void Update()
-    {
-        Falling();
-        if(grounded==false)
-        {
-            navAgent.enabled = false;
-            body.AddForce(new Vector3(0, -9.8f, 0) * Time.deltaTime);
-        }
-        else
-        {
-            //navAgent.enabled = true;
-        }
-    }
+    //private void Update()
+    //{
+    //    Falling();
+    //    if(grounded==false)
+    //    {
+    //        navAgent.enabled = false;
+    //        body.AddForce(new Vector3(0, -9.8f, 0) * Time.deltaTime);
+    //    }
+    //    else
+    //    {
+    //        //navAgent.enabled = true;
+    //    }
+    //}
 
 
     private void OnEnable()
     {
+        navAgent.enabled = true;
         SubscribeOnEvents();
     }
 

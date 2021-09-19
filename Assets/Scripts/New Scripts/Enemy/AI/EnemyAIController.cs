@@ -50,32 +50,32 @@ public class EnemyAIController : AController
         //    }
         //};
 
-        foreach (var beh in behaviours)
-        {
-            beh.AIAgent = enemyObject;
-            beh.RigidbodyActiveEvent += delegate (bool value)
-            {
-                if (faling)
-                {
-                    rb.isKinematic = false;
-                }
-                else
-                {
-                    rb.isKinematic = value;
-                }
-            };
-            beh.NavMeshAgentActiveEvent += delegate (bool value)
-            {
-                if (faling)
-                {
-                    navMeshAgent.enabled = false;
-                }
-                else
-                {
-                    navMeshAgent.enabled = value;
-                }
-            };
-        }
+        //foreach (var beh in behaviours)
+        //{
+        //    beh.AIAgent = enemyObject;
+        //    beh.RigidbodyActiveEvent += delegate (bool value)
+        //    {
+        //        if (faling)
+        //        {
+        //            rb.isKinematic = false;
+        //        }
+        //        else
+        //        {
+        //            rb.isKinematic = value;
+        //        }
+        //    };
+        //    beh.NavMeshAgentActiveEvent += delegate (bool value)
+        //    {
+        //        if (faling)
+        //        {
+        //            navMeshAgent.enabled = false;
+        //        }
+        //        else
+        //        {
+        //            navMeshAgent.enabled = value;
+        //        }
+        //    };
+        //}
 
         detection.DetectedObjectsEvent += ChangeInterestingAIObjects;
         // GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayerWeaponControlEvent += PlayerWeaponControllerEventListener;
@@ -99,11 +99,11 @@ public class EnemyAIController : AController
         attackController.Deinitialize(attackAIs);
         movementController.Deinitialize(movementsAIs);
 
-        foreach (var beh in behaviours)
-        {
-            beh.RigidbodyActiveEvent -= delegate (bool value) { rb.isKinematic = value; };
-            beh.NavMeshAgentActiveEvent -= delegate (bool value) { navMeshAgent.enabled = value; };
-        }
+        //foreach (var beh in behaviours)
+        //{
+        //    beh.RigidbodyActiveEvent -= delegate (bool value) { rb.isKinematic = value; };
+        //    beh.NavMeshAgentActiveEvent -= delegate (bool value) { navMeshAgent.enabled = value; };
+        //}
 
     }
 

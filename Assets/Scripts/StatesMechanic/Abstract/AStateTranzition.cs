@@ -5,8 +5,8 @@ namespace StateMechanic
 {
     public abstract class AStateTranzition : MonoBehaviour, IStateTranzition
     {
-        [SerializeField] private List<ACharacterState> _fromStates;
-        [SerializeField] private List<ACharacterState> _toStates;
+        [SerializeField] private List<AState> _fromStates;
+        [SerializeField] private List<AState> _toStates;
 
         public List<IState> FromStates
         { get; private set; }

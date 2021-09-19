@@ -2,7 +2,7 @@
 
 namespace StateMechanic
 {
-    public class BaseState : ACharacterState
+    public class BaseState : AState
     {
         private void Start()
         {

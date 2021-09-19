@@ -5,7 +5,7 @@ namespace StateMechanic
 {
     public sealed class StateConnection : MonoBehaviour, IStateConnection
     {
-        [SerializeField] private List<ACharacterState> _connectedStates;
+        [SerializeField] private List<AState> _connectedStates;
         [SerializeField] private List<StateConnection> _connectionsForBan;
         [SerializeField] private bool _isConnectionReady = false;
         [SerializeField] private bool _isConnectionBanned = false;

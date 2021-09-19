@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StateMechanic
 {
-    public abstract class ACharacterState : MonoBehaviour, IState
+    public abstract class AState : MonoBehaviour, IState
     {
         [SerializeField] private List<AController> _controllersToEnable;
         [SerializeField] private List<AController> _controllersToDisable;

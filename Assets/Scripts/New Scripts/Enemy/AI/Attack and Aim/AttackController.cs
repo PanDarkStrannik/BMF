@@ -173,6 +173,7 @@ public class AttackController : AController
         if(weapon.Weapon.TryReturnNeededWeaponType<IDamagingWeapon>(out IDamagingWeapon returnedWeapon))
         {
             returnedWeapon.Attack();
+
         }
     }
 

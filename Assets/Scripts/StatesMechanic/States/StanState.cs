@@ -4,7 +4,7 @@ using StanMechannic;
 
 namespace StateMechanic
 {
-    public class StanState : ACharacterState, IStanableObject
+    public class StanState : AState, IStanableObject
     {
         [SerializeField, Min(0f)] private float _stanTime=1f;
 
