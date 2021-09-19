@@ -23,15 +23,6 @@ namespace AttackModifier
                 {
                     foreach (var pushable in pushables)
                         pushable.TryPush(this);
-                    //if (objectForAttack.TryGetComponent(out Rigidbody objectRigidbody) == true)
-                    //{
-                    //Debug.Log("Риджид боди найден!");
-                    //foreach(var rigidBody in objectsRigidbody)
-                    //{
-                    //    Vector3 directionFromCenter = rigidBody.transform.position - _forceCenter.position;
-                    //    rigidBody.AddForce(directionFromCenter * _forceValue, _forceMode);
-                    //}
-                    //}
                 }
             }
         }
@@ -40,7 +31,7 @@ namespace AttackModifier
         {
             foreach (var rigidBody in rigidbodies)
             {
-                Vector3 directionFromCenter = rigidBody.transform.position - _forceCenter.position;
+                Vector3 directionFromCenter = _forceCenter.forward;
                 rigidBody.AddForce(directionFromCenter * _forceValue, _forceMode);
             }     
         }
