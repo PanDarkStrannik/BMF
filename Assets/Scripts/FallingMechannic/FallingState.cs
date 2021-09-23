@@ -5,8 +5,6 @@ namespace StateMechanic
 {
     public class FallingState : AState
     {
-        [SerializeField] private List<Rigidbody> _rigidbodysToDeactive;
-        [SerializeField] private List<Collider> _collidersToDeactive;
         [SerializeField] private Ragdoll _ragdoll;
         [SerializeField] private FallingDetector _fallingDetector;
 
@@ -37,17 +35,6 @@ namespace StateMechanic
 
         protected override void StartStateInternal()
         {
-            foreach (var rigidbody in _rigidbodysToDeactive)
-            {
-                _rigidbodyIsKinematicComparers.Add(rigidbody, rigidbody.isKinematic);
-                rigidbody.isKinematic = true;
-            }
-
-            foreach (var collider in _collidersToDeactive)
-            {
-                _colliderIsDeactiveComparers.Add(collider, collider.enabled);
-                collider.enabled = false;
-            }
 
             if (_ragdoll != null)
                 _ragdoll.ChangeRagdoll(false);
@@ -57,14 +44,6 @@ namespace StateMechanic
         {
             if (_ragdoll != null)
                 _ragdoll.ChangeRagdoll(true);
-            foreach (var rigidbody in _rigidbodysToDeactive)
-            {
-                rigidbody.isKinematic = _rigidbodyIsKinematicComparers[rigidbody];
-            }
-            foreach (var collider in _collidersToDeactive)
-            {
-                collider.enabled = _colliderIsDeactiveComparers[collider];
-            }
             _colliderIsDeactiveComparers.Clear();
             _rigidbodyIsKinematicComparers.Clear();
         }

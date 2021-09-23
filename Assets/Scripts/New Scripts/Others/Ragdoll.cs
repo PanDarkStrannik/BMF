@@ -57,8 +57,20 @@ public class Ragdoll : MonoBehaviour
             col.enabled = !isKinematic;
         }
         if (isKinematic == false)
+        {
+            //_rigidbodyForConnect.isKinematic = false;
             _jointForConnect.connectedBody = _rigidbodyForConnect;
+        }
         else
+        {
+            //_rigidbodyForConnect.isKinematic = true;
             _jointForConnect.connectedBody = null;
+            _rigidbodyForConnect.velocity = Vector3.zero;
+            foreach (var rb in rigidBodies)
+            {
+                rb.velocity = Vector3.zero;
+
+            }
+        }
     }
 }
