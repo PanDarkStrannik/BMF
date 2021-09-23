@@ -87,8 +87,10 @@ public class EventOnAttackLayer
 
     public void InvokeByLayer(LayerMask layer)
     {
-        if((whoIsTarget.value & 1 << layer)!= 0)
+        if(whoIsTarget == layer)
+        {
             OnDamaged?.Invoke();
+        }
     }
   
 }
